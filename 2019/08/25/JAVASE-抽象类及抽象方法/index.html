@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png">
-<meta property="og:updated_time" content="2019-08-25T15:17:23.429Z">
+<meta property="og:updated_time" content="2019-08-25T15:47:16.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVASE-抽象类及抽象方法">
 <meta name="twitter:description" content="抽象类特点  用abstract关键字修饰 无法直接创建对象，原因：调用抽象方法没有意义 只有覆盖了抽象类中的所有抽象方法，其子类才可以创建对象，否则该子类依然是一个抽象类 之所以继承抽象类，更多的是在思想，面对共性类型操作更简洁。   与抽象类不可并存的关键字  private：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。 final ：final关键字修饰在类上表示这是一个">
@@ -416,11 +416,13 @@
 </blockquote>
 <h3 id="与抽象类不可并存的关键字"><a href="#与抽象类不可并存的关键字" class="headerlink" title="与抽象类不可并存的关键字"></a>与抽象类不可并存的关键字</h3><blockquote>
 <ol>
-<li>private：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。</li>
-<li>final ：final关键字修饰在类上表示这是一个最终类，无法被继承，与abstract关键字共存会互相矛盾。</li>
-<li>static ：因为static修饰的方法是静态方法，其可以直接被类所调用。而abstract修饰的方法为抽象方法，即无方法体的方法，不能够被直接调用，需要在子类或实现类中去编写完整的方法处理逻辑后才能使用。互相矛盾。</li>
+<li><strong>private</strong>：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。</li>
+<li><strong>final</strong> ：final关键字修饰在类上表示这是一个最终类，无法被继承，与abstract关键字共存会互相矛盾。</li>
+<li><strong>static</strong> ：因为static修饰的方法是静态方法，其可以直接被类所调用。而abstract修饰的方法为抽象方法，即无方法体的方法，不能够被直接调用，需要在子类或实现类中去编写完整的方法处理逻辑后才能使用。互相矛盾。</li>
 </ol>
 </blockquote>
+<a id="more"></a>
+
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="抽象类-1"><a href="#抽象类-1" class="headerlink" title="抽象类"></a>抽象类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png" alt="1566746163348"></p>
 <h4 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png" alt="1566746167567"></p>
 
