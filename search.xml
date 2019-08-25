@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>JAVASE-多态</title>
+      <link href="/2019/08/26/JAVASE-%E5%A4%9A%E6%80%81/"/>
+      <url>/2019/08/26/JAVASE-%E5%A4%9A%E6%80%81/</url>
+      
+        <content type="html"><![CDATA[<h2 id="对象的多态性"><a href="#对象的多态性" class="headerlink" title="对象的多态性"></a>对象的多态性</h2><blockquote><p>体现为<strong>父类引用变量可以指向子类对象</strong></p><p>多态的前提<strong>是必须有子父类关系或者类实现接口关系，否则无法完成多态</strong></p><p><strong>在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法</strong></p></blockquote><h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类类型或接口类型 引用变量 = <span class="keyword">new</span> 子类对象();</span><br></pre></td></tr></table></figure><h2 id="成员变量的特点"><a href="#成员变量的特点" class="headerlink" title="成员变量的特点"></a>成员变量的特点</h2><p>编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败</p><p>运行时：运行的是父类的变量值</p><blockquote><p>编译和运行都是参考父类中的成员变量</p></blockquote><h2 id="成员方法的特点"><a href="#成员方法的特点" class="headerlink" title="成员方法的特点"></a>成员方法的特点</h2><p>编译时：参考父类是否有该成员方法</p><p>运行时：运行的是子类的重写方法</p><blockquote><p>编译看父类有没有此成员方法，运行参考子类的成员方法。</p><a id="more"></a></blockquote><h2 id="多态中的关键字-instanceof"><a href="#多态中的关键字-instanceof" class="headerlink" title="多态中的关键字 instanceof"></a>多态中的关键字 instanceof</h2><p>多态中的关键字： instanceof 比较运算符，返回真假值，可以用于比较引用数据类型</p><p><img src="//smallpineapp1e.github.io/2019/08/26/JAVASE-多态/1566752079430.png" alt="1566752079430"></p><h2 id="多态中的转型"><a href="#多态中的转型" class="headerlink" title="多态中的转型"></a>多态中的转型</h2><p><img src="//smallpineapp1e.github.io/2019/08/26/JAVASE-多态/1566752289001.png" alt="1566752289001"></p><blockquote><p><strong>父类的引用   变量名  =  new  子类的对象();</strong></p><p>JAVA强制数据类型的语言，参与运算的数据要<strong>保证类型的统一性！</strong></p><p><strong>向上转型：可以调用父类的共有成员方法，无法调用子类的特有成员方法！</strong></p><p>若要调用子类特有成员方法，则需<strong>向下转型</strong> ！</p><p><strong>子类数据类型  变量名 = (子类数据类型)  父类数据类型变量</strong></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVASE </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JAVASE </tag>
+            
+            <tag> 多态 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JAVASE-接口</title>
       <link href="/2019/08/25/JAVASE-%E6%8E%A5%E5%8F%A3/"/>
       <url>/2019/08/25/JAVASE-%E6%8E%A5%E5%8F%A3/</url>
