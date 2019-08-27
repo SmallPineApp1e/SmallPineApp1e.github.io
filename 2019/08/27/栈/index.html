@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="JAVASE,抽象,">
+  <meta name="keywords" content="数据结构,栈,">
 
 
 
@@ -94,21 +94,27 @@
 
 
 
-<meta name="description" content="抽象类特点  用abstract关键字修饰 无法直接创建对象，原因：调用抽象方法没有意义 只有覆盖了抽象类中的所有抽象方法，其子类才可以创建对象，否则该子类依然是一个抽象类 之所以继承抽象类，更多的是在思想，面对共性类型操作更简洁。   与抽象类不可并存的关键字  private：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。 final ：final关键字修饰在类上表示这是一个">
-<meta name="keywords" content="JAVASE,抽象">
+<meta name="description" content="栈简单介绍栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：后进先出。">
+<meta name="keywords" content="数据结构,栈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVASE-抽象类及抽象方法">
-<meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/index.html">
+<meta property="og:title" content="栈">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/27/栈/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="抽象类特点  用abstract关键字修饰 无法直接创建对象，原因：调用抽象方法没有意义 只有覆盖了抽象类中的所有抽象方法，其子类才可以创建对象，否则该子类依然是一个抽象类 之所以继承抽象类，更多的是在思想，面对共性类型操作更简洁。   与抽象类不可并存的关键字  private：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。 final ：final关键字修饰在类上表示这是一个">
+<meta property="og:description" content="栈简单介绍栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：后进先出。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png">
-<meta property="og:updated_time" content="2019-08-25T15:47:16.322Z">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/1566915182316.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/1566913946943.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/1566913971716.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/1566914577849.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%85%A5%E6%A0%88.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%87%BA%E6%A0%88.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%85%A5%E6%A0%88.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%87%BA%E6%A0%88.png">
+<meta property="og:updated_time" content="2019-08-27T14:57:36.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVASE-抽象类及抽象方法">
-<meta name="twitter:description" content="抽象类特点  用abstract关键字修饰 无法直接创建对象，原因：调用抽象方法没有意义 只有覆盖了抽象类中的所有抽象方法，其子类才可以创建对象，否则该子类依然是一个抽象类 之所以继承抽象类，更多的是在思想，面对共性类型操作更简洁。   与抽象类不可并存的关键字  private：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。 final ：final关键字修饰在类上表示这是一个">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png">
+<meta name="twitter:title" content="栈">
+<meta name="twitter:description" content="栈简单介绍栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：后进先出。">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/27/栈/1566915182316.png">
 
 
 
@@ -137,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2019/08/27/栈/">
 
 
 
 
 
-  <title>JAVASE-抽象类及抽象方法 | 程序员小菠萝Blog🍍</title>
+  <title>栈 | 程序员小菠萝Blog🍍</title>
   
 
 
@@ -286,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/27/栈/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SmallPineApple">
@@ -303,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JAVASE-抽象类及抽象方法</h1>
+          <h1 class="post-title" itemprop="name headline">栈</h1>
         
 
         <div class="post-meta">
@@ -315,8 +321,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T23:03:47+08:00">
-                2019-08-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T21:24:56+08:00">
+                2019-08-27
               </time>
             
 
@@ -338,8 +344,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVASE/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVASE</span>
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
                   </a>
                 </span>
 
@@ -369,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  272字
+                  1,182字
                 </span>
               
 
@@ -385,7 +391,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  5分钟
                 </span>
               
             </div>
@@ -406,25 +412,109 @@
       
 
       
-        <h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><blockquote>
-<ol>
-<li>用<strong>abstract</strong>关键字修饰</li>
-<li>无法直接创建对象，原因：调用抽象方法没有意义</li>
-<li>只有覆盖了抽象类中的所有抽象方法，其子类才可以创建对象，否则该子类依然是一个抽象类</li>
-<li>之所以继承抽象类，更多的是在思想，面对共性类型操作更简洁。</li>
-</ol>
-</blockquote>
-<h3 id="与抽象类不可并存的关键字"><a href="#与抽象类不可并存的关键字" class="headerlink" title="与抽象类不可并存的关键字"></a>与抽象类不可并存的关键字</h3><blockquote>
-<ol>
-<li><strong>private</strong>：私有方法子类无法继承，所以更不存在覆盖，与实现抽象方法相互矛盾。</li>
-<li><strong>final</strong> ：final关键字修饰在类上表示这是一个最终类，无法被继承，与abstract关键字共存会互相矛盾。</li>
-<li><strong>static</strong> ：因为static修饰的方法是静态方法，其可以直接被类所调用。而abstract修饰的方法为抽象方法，即无方法体的方法，不能够被直接调用，需要在子类或实现类中去编写完整的方法处理逻辑后才能使用。互相矛盾。</li>
-</ol>
-</blockquote>
+        <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：<strong>后进先出</strong>。</p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566915182316.png" alt="1566915182316"></p>
 <a id="more"></a>
 
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="抽象类-1"><a href="#抽象类-1" class="headerlink" title="抽象类"></a>抽象类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png" alt="1566746163348"></p>
-<h4 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png" alt="1566746167567"></p>
+<h2 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h2><blockquote>
+<ul>
+<li>后进先出(Last In First Out)</li>
+<li>有序列表</li>
+<li>限制插入和删除只能在<strong>一端执行</strong> , 允许插入的一端称为<strong>栈顶</strong>, 另一端固定的称为<strong>栈底</strong></li>
+<li>最先放入栈的元素存在于<strong>栈底</strong> , 最后放入的元素存在于<strong>栈顶</strong> , 而<strong>删除元素正好相反</strong></li>
+</ul>
+</blockquote>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566913946943.png" alt="1566913946943"></p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ol>
+<li><p>数组</p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566913971716.png" alt="1566913971716"></p>
+<p>其中top是栈顶指针，也就是数组最后一个元素的下标。</p>
+</li>
+<li><p>链表</p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566914577849.png" alt="1566914577849"></p>
+</li>
+</ol>
+<h2 id="操作方式"><a href="#操作方式" class="headerlink" title="操作方式"></a>操作方式</h2><blockquote>
+<ul>
+<li>入栈操作(push)</li>
+<li>出栈操作(pop)</li>
+</ul>
+</blockquote>
+<ul>
+<li>数组栈元素入栈过程</li>
+</ul>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%85%A5%E6%A0%88.png" alt="数组入栈"></p>
+<blockquote>
+<p>将栈顶元素对应的下标+1，并将元素放入当前位置</p>
+</blockquote>
+<ul>
+<li>数组栈元素出栈过程</li>
+</ul>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%87%BA%E6%A0%88.png" alt="数组出栈"></p>
+<blockquote>
+<p>将栈顶元素对应的下标-1</p>
+</blockquote>
+<ul>
+<li>链表栈元素入栈过程</li>
+</ul>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%85%A5%E6%A0%88.png" alt="链表入栈"></p>
+<blockquote>
+<ol>
+<li>将链表最后一个节点的next指针域指向待放入栈的元素</li>
+<li>将新的节点的prev指针域指向当前的top指针指向的节点</li>
+<li>将top指针指向新的元素</li>
+</ol>
+</blockquote>
+<ul>
+<li>链表栈元素出栈过程</li>
+</ul>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%87%BA%E6%A0%88.png" alt="数组出栈"></p>
+<blockquote>
+<ol>
+<li>将链表的尾节点的前一个节点的next指针域指向null</li>
+<li>将top指针(表尾指针)指向倒数第二个节点(通过尾节点的prev指针域)</li>
+<li>将原尾节点的prev域指向空，值清空</li>
+</ol>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>了解了栈的实现方式和基本操作的过程以及栈的特点以后，我们可以用它来应付在生活中的问题，接下来为大家讲解一道比较经典的关于使用栈这种数据结构的题目。</p>
+<h2 id="题目描述（leetcode-682）"><a href="#题目描述（leetcode-682）" class="headerlink" title="题目描述（leetcode-682）:"></a>题目描述（leetcode-682）:</h2><p>你现在是棒球比赛记录员。</p>
+<p>给定一个字符串列表，每个字符串可以是以下四种类型之一：</p>
+<blockquote>
+<ol>
+<li><p>整数（一轮的得分）：直接表示您在本轮中获得的积分数。</p>
+</li>
+<li><p>“+”（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。</p>
+</li>
+<li><p>“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。</p>
+</li>
+<li><p>“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。</p>
+</li>
+</ol>
+<p>每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。</p>
+<p>你需要返回你在所有回合中得分的总和。</p>
+</blockquote>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>输入：[“5”,”2”,”C”,”D”,”+”]<br>        输出：30</p>
+<blockquote>
+<p>第1轮：你可以得到5分。总和是：5。</p>
+<p>第2轮：你可以得到2分。总和是：7。</p>
+<p>操作1：第2轮的数据无效。总和是：5。</p>
+<p>第3轮：你可以得到10分（第2轮的数据已被删除）。总数是：15。</p>
+<p>第4轮：你可以得到5 + 10 = 15分。总数是：30。</p>
+</blockquote>
+<p><strong>前提要求：</strong></p>
+<ul>
+<li>输入列表的大小将介于1和1000之间。</li>
+<li>列表中的每个整数都将介于-30000和30000之间。</li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><blockquote>
+<ol>
+<li>首先输入一个数组 , 如果不满足前提要求则直接返回0 , 如果满足 , 则继续进行判断</li>
+<li>用一个栈去表示数组中每一个位置的分数 , 如果遇到字母”D”, 则访问栈顶元素并乘2后放入栈中 , <strong>注意原来的元素没有弹栈!</strong></li>
+<li>如果遇到”+”时则访问<strong>(注意是访问而没有弹栈)</strong>栈的最上2个元素进行加操作后再放入栈顶 , 只有在遇到字母 “C”时, 则弹出栈顶元素 , 最后对栈内所有元素进行求和.</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; numStack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calPoints</span><span class="params">(String[] ops)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断长度是否超出题目要求</span></span><br><span class="line">        <span class="keyword">if</span>(ops.length &gt; <span class="number">1000</span> || ops.length &lt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;=ops.length-<span class="number">1</span> ; i++)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> number = Integer.parseInt(ops[i]);</span><br><span class="line">                <span class="comment">//判断数字大小是否超出题目要求</span></span><br><span class="line">                <span class="keyword">if</span>(number &gt; <span class="number">30000</span> || number &lt; -<span class="number">30000</span>)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    numStack.push(number);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">                <span class="comment">//栈判空, 若为空, 则此次操作没有任何意义</span></span><br><span class="line">                <span class="keyword">if</span>(numStack.empty())&#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//不是数字, 会抛出异常, 此时不抛出, 作操作判断</span></span><br><span class="line">                <span class="keyword">switch</span> (ops[i])&#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"C"</span>:</span><br><span class="line">                        numStack.pop();</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"D"</span>:</span><br><span class="line">                        Integer peek = numStack.peek();</span><br><span class="line">                        numStack.push(peek*<span class="number">2</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"+"</span>:</span><br><span class="line">                        <span class="keyword">if</span>(numStack.size() &lt; <span class="number">2</span>)&#123;</span><br><span class="line">                            numStack.push(numStack.peek());</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            Integer top = numStack.peek();</span><br><span class="line">                            Integer second = numStack.get(numStack.size() - <span class="number">2</span>);</span><br><span class="line">                            numStack.push(top+second);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//求和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : numStack) &#123;</span><br><span class="line">            sum += integer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -442,9 +532,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JAVASE/" rel="tag"># JAVASE</a>
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
-            <a href="/tags/抽象/" rel="tag"># 抽象</a>
+            <a href="/tags/栈/" rel="tag"># 栈</a>
           
         </div>
       
@@ -457,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/25/稀疏数组/" rel="next" title="稀疏数组">
-                <i class="fa fa-chevron-left"></i> 稀疏数组
+              <a href="/2019/08/26/JAVASE-多态/" rel="next" title="JAVASE-多态">
+                <i class="fa fa-chevron-left"></i> JAVASE-多态
               </a>
             
           </div>
@@ -466,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/25/JAVASE-接口/" rel="prev" title="JAVASE-接口">
-                JAVASE-接口 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -646,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">1.</span> <span class="nav-text">抽象类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与抽象类不可并存的关键字"><span class="nav-number">1.2.</span> <span class="nav-text">与抽象类不可并存的关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.3.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象类-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子类"><span class="nav-number">1.3.2.</span> <span class="nav-text">子类</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单介绍"><span class="nav-number">1.1.</span> <span class="nav-text">简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈的特点"><span class="nav-number">1.2.</span> <span class="nav-text">栈的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方式"><span class="nav-number">1.3.</span> <span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作方式"><span class="nav-number">1.4.</span> <span class="nav-text">操作方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述（leetcode-682）"><span class="nav-number">1.6.</span> <span class="nav-text">题目描述（leetcode-682）:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.6.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.6.2.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
