@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Springboot,静态资源,">
 
 
 
@@ -94,16 +94,23 @@
 
 
 
-<meta name="description" content="爱学习,爱生活,不停下前进的脚步!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="程序员小菠萝Blog🍍">
-<meta property="og:url" content="https://smallpineapp1e.github.io/archives/2019/page/2/index.html">
+<meta name="description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
+<meta name="keywords" content="Springboot,静态资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Springboot静态资源访问">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta property="og:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349808974.png">
+<meta property="og:updated_time" content="2019-09-01T15:09:37.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="程序员小菠萝Blog🍍">
-<meta name="twitter:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta name="twitter:title" content="Springboot静态资源访问">
+<meta name="twitter:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png">
 
 
 
@@ -132,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/archives/2019/page/2/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/">
 
 
 
 
 
-  <title>归档 | 程序员小菠萝Blog🍍</title>
+  <title>Springboot静态资源访问 | 程序员小菠萝Blog🍍</title>
   
 
 
@@ -163,7 +170,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,146 +306,239 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SmallPineApple">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员小菠萝Blog🍍">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Springboot静态资源访问</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-01T22:22:34+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Springboot/" itemprop="url" rel="index">
+                    <span itemprop="name">Springboot</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/24/SpringDataJPA入门/" itemprop="url">
+          
+			<br>
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">SpringDataJPA入门</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  338字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-24T00:12:01+08:00" content="2019-08-24">
-          08-24
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>	
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/23/如何在hexo博客插入图片/" itemprop="url">
-              
-                <span itemprop="name">如何在hexo博客插入图片</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-23T00:41:43+08:00" content="2019-08-23">
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h1 id="默认的静态资源访问"><a href="#默认的静态资源访问" class="headerlink" title="默认的静态资源访问"></a>默认的静态资源访问</h1><p>当我们构建好Springboot项目后会发现项目路径下会有<strong>resources/static</strong>文件夹，它就是默认存放静态资源的文件夹。</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="WebMvcAutoConfiguration"><a href="#WebMvcAutoConfiguration" class="headerlink" title="WebMvcAutoConfiguration"></a>WebMvcAutoConfiguration</h3><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png" alt="1567349010895"></p>
+<p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png" alt="1567348849650"></p>
+<p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png" alt="1567349316180"></p>
+<p> 所以，静态资源的路径默认一共是有五个(优先级由上到下)</p>
+<blockquote>
+<ul>
+<li><p><strong>classpath:/META-INF/resources/</strong></p>
+</li>
+<li><p><strong>classpath:/resources/</strong></p>
+</li>
+<li><p><strong>classpath:/static/</strong></p>
+</li>
+<li><p><strong>classpath:/public/</strong></p>
+</li>
+<li><p><strong>/</strong>：斜杠表示的是/webapp目录</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="自定义静态资源访问路径"><a href="#自定义静态资源访问路径" class="headerlink" title="自定义静态资源访问路径"></a>自定义静态资源访问路径</h1><h2 id="源码分析-1"><a href="#源码分析-1" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349808974.png" alt="1567349808974"></p>
+<p>由此我们可以分析：</p>
+<blockquote>
+<p>可以通过配置文件中匹配其前缀名规则，即可自定义静态资源的访问路径与匹配规则。</p>
+</blockquote>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span> </span><br><span class="line"><span class="attr">  resources:</span> </span><br><span class="line"><span class="attr">    static-locations:</span> <span class="attr">classpath:/smallpineapple/</span></span><br><span class="line"><span class="attr">  mvc:</span> </span><br><span class="line"><span class="attr">    static-path-pattern:</span> <span class="string">/**</span></span><br></pre></td></tr></table></figure>
 
-        
-        
+<h1 id="通过类添加自定义静态资源配置"><a href="#通过类添加自定义静态资源配置" class="headerlink" title="通过类添加自定义静态资源配置"></a>通过类添加自定义静态资源配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"classpath:/smallpineapple/"</span>);</span><br><span class="line">        </span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"file:///"</span>+uploadDir);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/23/数学真的可以救命之约瑟夫问题/" itemprop="url">
-              
-                <span itemprop="name">数学真的可以救命之约瑟夫问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-23T00:00:24+08:00" content="2019-08-23">
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<h2 id="最后补充"><a href="#最后补充" class="headerlink" title="最后补充"></a>最后补充</h2><p>问：<code>/**</code>和<code>/*</code>有什么区别？</p>
+<blockquote>
+<p>由于这是一种Ant风格的路径匹配符，<code>/**</code> 表示可以匹配任意层级的路径，而<code>/*</code>表示匹配当前层级下的任何路径。</p>
+</blockquote>
+<p>例子：通过类进行自定义静态资源配置</p>
+<blockquote>
+<p><a href="http://localhost:8080/project/smallpineapple/1.img" target="_blank" rel="noopener">http://localhost:8080/project/smallpineapple/1.img</a></p>
+<p><a href="http://localhost:8080/project/smallpineapple/img/1.img" target="_blank" rel="noopener">http://localhost:8080/project/smallpineapple/img/1.img</a></p>
+<p><strong>上面这两个路径对访问1.img图片来说都是生效的，而如果<code>/*</code>则第二种无法访问。</strong></p>
+</blockquote>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
+          
+            <a href="/tags/静态资源/" rel="tag"># 静态资源</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/29/Spring属性注入/" rel="next" title="Spring属性注入">
+                <i class="fa fa-chevron-left"></i> Spring属性注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -446,6 +546,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -466,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="SmallPineApple">
           <p class="site-author-name" itemprop="name">SmallPineApple</p>
@@ -572,6 +685,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#默认的静态资源访问"><span class="nav-number">1.</span> <span class="nav-text">默认的静态资源访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析"><span class="nav-number">1.1.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebMvcAutoConfiguration"><span class="nav-number">1.1.1.</span> <span class="nav-text">WebMvcAutoConfiguration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义静态资源访问路径"><span class="nav-number">2.</span> <span class="nav-text">自定义静态资源访问路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码分析-1"><span class="nav-number">2.1.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">2.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过类添加自定义静态资源配置"><span class="nav-number">3.</span> <span class="nav-text">通过类添加自定义静态资源配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最后补充"><span class="nav-number">3.1.</span> <span class="nav-text">最后补充</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -727,11 +856,9 @@ setInterval("createtime()",250);
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
