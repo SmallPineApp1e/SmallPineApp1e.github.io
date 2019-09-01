@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
+<meta name="description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
 <meta name="keywords" content="SpringData JPA,JAVA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringDataJPA入门">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
+<meta property="og:description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/1560576092811.png">
 <meta property="og:updated_time" content="2019-08-23T16:30:05.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringDataJPA入门">
-<meta name="twitter:description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
+<meta name="twitter:description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/1560576092811.png">
 
 
@@ -405,14 +405,16 @@
       
 
       
-        <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><table>
+        <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@Entity</td>
 <td>告诉Spring这是一个实体类</td>
 </tr>
@@ -440,17 +442,20 @@
 <td>@Temporal</td>
 <td>指定日期类型(DATE,DATETIME, TIMESTAMP)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <a id="more"></a>
-
-<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><table>
+<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@JoinColumn(name= “外键列的列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
@@ -458,15 +463,19 @@
 <td>@ManyToOne</td>
 <td>映射多对一的关联关系</td>
 </tr>
-</tbody></table>
-<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><table>
+</tbody>
+</table>
+</div>
+<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@OneToMany</td>
 <td>映射一对多的关联关系</td>
 </tr>
@@ -474,7 +483,9 @@
 <td>@JoinColum(name=”外键列列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>单向 1-n 关联关系执行保存时, 一定回多出UPDATE语句, 因为多的一端在插入时不会同时插入外键列</p>
 <blockquote>
 <p>默认情况下, 若删除1的一端, 则<strong>会先把关联的n的一端的外键置空</strong>, 然后进行删除, <strong>注意这在实际意义当中并不有利</strong></p>
@@ -493,14 +504,16 @@
 <blockquote>
 <p>设置@OneToMany的mappedBy属性, 可以让维护权交给多的一方维护 ，因为在多的一方没有完全删除完时，与其有关联关系的一的一方无法删除，所以由多的一方维护关联关系</p>
 </blockquote>
-<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><table>
+<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@OneToOne(mappedBy=”对方的属性”)</td>
 <td>映射一对一的关联关系, 对于不维护关联关系, 没有外键的一方, 使用@OneToOne来映射, 建议设置mappedBy=true</td>
 </tr>
@@ -508,7 +521,9 @@
 <td>@JoinColumn(name=”外键列列名”, unique=true)</td>
 <td>1 - 1关联关系, 需要添加unique=true</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>双向一对一的关联关系, 建议先保存<strong>不维护关联关系的一方</strong>, 即没有外键的一方, 这样不会多出update语句, <strong>因为维护关系的一方先保存, 则外键列一开始为空, 后面再用update将外键列填补上</strong></p>
 <ol>
 <li><p>默认情况下, 若获取维护关联关系的一方, 则会通过左外连接获取其关联的对象</p>
@@ -521,39 +536,49 @@
 <blockquote>
 <p>这说明在不维护关联关系的一方, 不建议修改fetch属性</p>
 </blockquote>
-<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><table>
+<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@ManyToMany</td>
 </tr>
 <tr>
 <td>@JoinTable(name=”表的名字”,joinColumns={@JoinColumn(name=”外键列名字”,referencedColumnName=”当前表的主键列列名”)},inverseJoinColumns={@JoinColumn(name=”关联的对象的外键列列命”, referencedColumnName=”关联的对方表的主键列列名”)})</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>映射多对多关联关系</td>
 </tr>
 <tr>
 <td>映射中间表</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th><strong>@JoinTable</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>属性 :</strong></td>
 </tr>
 <tr>
@@ -571,28 +596,36 @@
 <tr>
 <td>3.1 name : 指定外键列的列名 ; referencedColumnName : 指定外键列关联当前表的哪一列的列名</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>使用维护关联关系或不维护关联关系的一方获取数据, SQL语句均相同.</p>
-<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><table>
+<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@Cachable(true)</td>
 <td>被标注的实体类才会使用缓存</td>
 </tr>
-</tbody></table>
-<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><table>
+</tbody>
+</table>
+</div>
+<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@NamedQuery(name=””, query=””)</td>
 <td>标注在类上, 用于查询</td>
 </tr>
@@ -608,7 +641,10 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -616,7 +652,8 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>entityManager.createNativeQuery(sql)</td>
 <td>用于执行sql语句</td>
 </tr>
@@ -624,7 +661,9 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="JPQL的ORDER-BY-和-GROUP-BY"><a href="#JPQL的ORDER-BY-和-GROUP-BY" class="headerlink" title="JPQL的ORDER BY 和 GROUP BY"></a>JPQL的ORDER BY 和 GROUP BY</h2><p>在JPQL里支持使用ORDER BY和GROUP BY语法</p>
 <h2 id="JPQL关联查询"><a href="#JPQL关联查询" class="headerlink" title="JPQL关联查询"></a>JPQL关联查询</h2><p>JPQL的关联查询同HQL的关联查询, 注意要加FETCH, 则得到的是一个对象, 而且对象的集合已经初始化成功了</p>
 <h2 id="JPQL子查询"><a href="#JPQL子查询" class="headerlink" title="JPQL子查询"></a>JPQL子查询</h2><p>和HQL的子查询一样</p>
@@ -749,7 +788,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -760,7 +799,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -771,7 +810,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -867,7 +906,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>

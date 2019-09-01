@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);   接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但">
+<meta name="description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);  接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但仍">
 <meta name="keywords" content="JAVASE,接口">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVASE-接口">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);   接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但">
+<meta property="og:description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);  接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但仍">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/1566749558884.png">
 <meta property="og:updated_time" content="2019-08-25T16:21:59.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVASE-接口">
-<meta name="twitter:description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);   接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但">
+<meta name="twitter:description" content="接口的概念 接口是功能的集合，同样是一种数据类型，是比抽象类更为抽象的“类”。 接口只描述所应该具备的方法，并没有具体实现，具体的实现由接口的实现类（相当于接口的子类）来完成。这样将功能的定义与实现分离，优化了程序设计。  接口的定义抽象方法1public abstract 返回值类型 方法名字(参数列表);  接口中的成员方法全部都为抽象方法！ 可以省略修饰符public abstract，但仍">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/1566749558884.png">
 
 
@@ -410,21 +410,17 @@
 <p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
 </blockquote>
 <h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
 <p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
 </blockquote>
 <a id="more"></a>
-
 <h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> 数据类型 变量名 = 值</span><br></pre></td></tr></table></figure>
-
 <h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><blockquote>
 <p>接口中的成员变量都为<strong>常量</strong>！！</p>
 <p>在接口中定义常量，可省略修饰符public static final，但<strong>仍然存在</strong>！</p>
 </blockquote>
 <h4 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">接口.成员变量</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>常量被<strong>静态修饰</strong>，可以被类名直接调用，被接口的名字直接调用</p>
 </blockquote>
@@ -586,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -597,7 +593,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -608,7 +604,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -704,7 +700,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
