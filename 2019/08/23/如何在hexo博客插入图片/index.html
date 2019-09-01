@@ -94,23 +94,23 @@
 
 
 
-<meta name="description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save 2. 修改_config.xml文件的内容1post_asset_folder: true">
+<meta name="description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save  2. 修改_config.xml文件的内容1post_asset_folder: true">
 <meta name="keywords" content="插入图片的步骤">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在hexo博客插入图片">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save 2. 修改_config.xml文件的内容1post_asset_folder: true">
+<meta property="og:description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save  2. 修改_config.xml文件的内容1post_asset_folder: true">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/新建md.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/放入图片.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/在md中引入图片.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/上传成功.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%96%B0%E5%BB%BAmd.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E5%9C%A8md%E4%B8%AD%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F.jpg">
 <meta property="og:updated_time" content="2019-08-23T13:16:54.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在hexo博客插入图片">
-<meta name="twitter:description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save 2. 修改_config.xml文件的内容1post_asset_folder: true">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/新建md.jpg">
+<meta name="twitter:description" content="1. 在hexo根目录安装第三方插件1npm install https://github.com/7ym0n/hexo-asset-image --save  2. 修改_config.xml文件的内容1post_asset_folder: true">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%96%B0%E5%BB%BAmd.jpg">
 
 
 
@@ -257,9 +257,41 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -387,15 +419,21 @@
 
       
         <h2 id="1-在hexo根目录安装第三方插件"><a href="#1-在hexo根目录安装第三方插件" class="headerlink" title="1. 在hexo根目录安装第三方插件"></a>1. 在hexo根目录安装第三方插件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-修改-config-xml文件的内容"><a href="#2-修改-config-xml文件的内容" class="headerlink" title="2. 修改_config.xml文件的内容"></a>2. 修改_config.xml文件的内容</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h2 id="3-插入md图片"><a href="#3-插入md图片" class="headerlink" title="3. 插入md图片"></a>3. 插入md图片</h2><h3 id="3-1-新建一个md文件"><a href="#3-1-新建一个md文件" class="headerlink" title="3.1 新建一个md文件"></a>3.1 新建一个md文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n "<span class="built_in">title</span>"</span><br></pre></td></tr></table></figure>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/新建md.jpg" alt="新建md"></p>
-<h3 id="3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title"><a href="#3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title" class="headerlink" title="3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title"></a>3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/放入图片.jpg" alt="新建md"></p>
+
+<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%96%B0%E5%BB%BAmd.jpg" alt="新建md"></p>
+<h3 id="3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title"><a href="#3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title" class="headerlink" title="3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title"></a>3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87.jpg" alt="新建md"></p>
 <h3 id="3-3-在title-md中引入图片"><a href="#3-3-在title-md中引入图片" class="headerlink" title="3.3 在title.md中引入图片"></a>3.3 在title.md中引入图片</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">爱宠大机密</span>](<span class="link">title/46ro0003sn14n066p757.jpg</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/在md中引入图片.png" alt="在md中引入图片"></p>
+
+<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E5%9C%A8md%E4%B8%AD%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87.png" alt="在md中引入图片"></p>
 <h3 id="3-4-编译并运行"><a href="#3-4-编译并运行" class="headerlink" title="3.4 编译并运行"></a>3.4 编译并运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h3 id="3-5-成功"><a href="#3-5-成功" class="headerlink" title="3.5 成功"></a>3.5 成功</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/上传成功.jpg" alt="上传成功"></p>
+
+<h3 id="3-5-成功"><a href="#3-5-成功" class="headerlink" title="3.5 成功"></a>3.5 成功</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F.jpg" alt="上传成功"></p>
 
       
     </div>
@@ -816,6 +854,323 @@ setInterval("createtime()",250);
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 

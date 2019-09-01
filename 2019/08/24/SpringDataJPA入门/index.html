@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
+<meta name="description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
 <meta name="keywords" content="SpringData JPA,JAVA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringDataJPA入门">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
+<meta property="og:description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/1560576092811.png">
 <meta property="og:updated_time" content="2019-08-23T16:30:05.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringDataJPA入门">
-<meta name="twitter:description" content="SpringData JPA创建数据库表    注解 解释     @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性">
+<meta name="twitter:description" content="SpringData JPA创建数据库表   注解 解释    @Entity 告诉Spring这是一个实体类   @Table(name = “表名”) 指定生成的数据表表名   @Column(name = “列名”) 指定生成的数据列的列名, 一般加在get方法上   @Id 指定主键列   @GeneratedValue 指定主键生成策略   @Transient 实体类中的某一个属性不映">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/24/SpringDataJPA入门/1560576092811.png">
 
 
@@ -254,9 +254,41 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -405,16 +437,14 @@
       
 
       
-        <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><div class="table-container">
-<table>
+        <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@Entity</td>
 <td>告诉Spring这是一个实体类</td>
 </tr>
@@ -442,20 +472,17 @@
 <td>@Temporal</td>
 <td>指定日期类型(DATE,DATETIME, TIMESTAMP)</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <a id="more"></a>
-<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><div class="table-container">
-<table>
+
+<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@JoinColumn(name= “外键列的列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
@@ -463,19 +490,15 @@
 <td>@ManyToOne</td>
 <td>映射多对一的关联关系</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><div class="table-container">
-<table>
+</tbody></table>
+<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@OneToMany</td>
 <td>映射一对多的关联关系</td>
 </tr>
@@ -483,9 +506,7 @@
 <td>@JoinColum(name=”外键列列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>单向 1-n 关联关系执行保存时, 一定回多出UPDATE语句, 因为多的一端在插入时不会同时插入外键列</p>
 <blockquote>
 <p>默认情况下, 若删除1的一端, 则<strong>会先把关联的n的一端的外键置空</strong>, 然后进行删除, <strong>注意这在实际意义当中并不有利</strong></p>
@@ -504,16 +525,14 @@
 <blockquote>
 <p>设置@OneToMany的mappedBy属性, 可以让维护权交给多的一方维护 ，因为在多的一方没有完全删除完时，与其有关联关系的一的一方无法删除，所以由多的一方维护关联关系</p>
 </blockquote>
-<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><div class="table-container">
-<table>
+<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@OneToOne(mappedBy=”对方的属性”)</td>
 <td>映射一对一的关联关系, 对于不维护关联关系, 没有外键的一方, 使用@OneToOne来映射, 建议设置mappedBy=true</td>
 </tr>
@@ -521,9 +540,7 @@
 <td>@JoinColumn(name=”外键列列名”, unique=true)</td>
 <td>1 - 1关联关系, 需要添加unique=true</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>双向一对一的关联关系, 建议先保存<strong>不维护关联关系的一方</strong>, 即没有外键的一方, 这样不会多出update语句, <strong>因为维护关系的一方先保存, 则外键列一开始为空, 后面再用update将外键列填补上</strong></p>
 <ol>
 <li><p>默认情况下, 若获取维护关联关系的一方, 则会通过左外连接获取其关联的对象</p>
@@ -536,49 +553,39 @@
 <blockquote>
 <p>这说明在不维护关联关系的一方, 不建议修改fetch属性</p>
 </blockquote>
-<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><div class="table-container">
-<table>
+<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@ManyToMany</td>
 </tr>
 <tr>
 <td>@JoinTable(name=”表的名字”,joinColumns={@JoinColumn(name=”外键列名字”,referencedColumnName=”当前表的主键列列名”)},inverseJoinColumns={@JoinColumn(name=”关联的对象的外键列列命”, referencedColumnName=”关联的对方表的主键列列名”)})</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>映射多对多关联关系</td>
 </tr>
 <tr>
 <td>映射中间表</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><strong>@JoinTable</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>属性 :</strong></td>
 </tr>
 <tr>
@@ -596,36 +603,28 @@
 <tr>
 <td>3.1 name : 指定外键列的列名 ; referencedColumnName : 指定外键列关联当前表的哪一列的列名</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>使用维护关联关系或不维护关联关系的一方获取数据, SQL语句均相同.</p>
-<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><div class="table-container">
-<table>
+<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@Cachable(true)</td>
 <td>被标注的实体类才会使用缓存</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><div class="table-container">
-<table>
+</tbody></table>
+<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@NamedQuery(name=””, query=””)</td>
 <td>标注在类上, 用于查询</td>
 </tr>
@@ -641,10 +640,7 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -652,8 +648,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>entityManager.createNativeQuery(sql)</td>
 <td>用于执行sql语句</td>
 </tr>
@@ -661,9 +656,7 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="JPQL的ORDER-BY-和-GROUP-BY"><a href="#JPQL的ORDER-BY-和-GROUP-BY" class="headerlink" title="JPQL的ORDER BY 和 GROUP BY"></a>JPQL的ORDER BY 和 GROUP BY</h2><p>在JPQL里支持使用ORDER BY和GROUP BY语法</p>
 <h2 id="JPQL关联查询"><a href="#JPQL关联查询" class="headerlink" title="JPQL关联查询"></a>JPQL关联查询</h2><p>JPQL的关联查询同HQL的关联查询, 注意要加FETCH, 则得到的是一个对象, 而且对象的集合已经初始化成功了</p>
 <h2 id="JPQL子查询"><a href="#JPQL子查询" class="headerlink" title="JPQL子查询"></a>JPQL子查询</h2><p>和HQL的子查询一样</p>
@@ -1091,6 +1084,323 @@ setInterval("createtime()",250);
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
