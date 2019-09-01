@@ -94,22 +94,22 @@
 
 
 
-<meta name="description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
+<meta name="description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration">
 <meta name="keywords" content="Springboot,静态资源">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot静态资源访问">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
+<meta property="og:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349808974.png">
-<meta property="og:updated_time" content="2019-09-01T15:09:37.652Z">
+<meta property="og:updated_time" content="2019-09-01T15:17:10.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot静态资源访问">
-<meta name="twitter:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration    所以，静态资源的路径默认一共是有五个(优先级由上到下)   classpath:/META-INF/resources/  classpath:/resources/  classpath">
+<meta name="twitter:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png">
 
 
@@ -442,6 +442,8 @@
       
         <h1 id="默认的静态资源访问"><a href="#默认的静态资源访问" class="headerlink" title="默认的静态资源访问"></a>默认的静态资源访问</h1><p>当我们构建好Springboot项目后会发现项目路径下会有<strong>resources/static</strong>文件夹，它就是默认存放静态资源的文件夹。</p>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="WebMvcAutoConfiguration"><a href="#WebMvcAutoConfiguration" class="headerlink" title="WebMvcAutoConfiguration"></a>WebMvcAutoConfiguration</h3><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png" alt="1567349010895"></p>
+<a id="more"></a>
+
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png" alt="1567348849650"></p>
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png" alt="1567349316180"></p>
 <p> 所以，静态资源的路径默认一共是有五个(优先级由上到下)</p>
