@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Springboot,静态资源,">
+  <meta name="keywords" content="静态资源,">
 
 
 
@@ -95,7 +95,7 @@
 
 
 <meta name="description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration">
-<meta name="keywords" content="Springboot,静态资源">
+<meta name="keywords" content="静态资源">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot静态资源访问">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/index.html">
@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349808974.png">
-<meta property="og:updated_time" content="2019-09-01T15:17:10.433Z">
+<meta property="og:updated_time" content="2019-09-02T13:47:48.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot静态资源访问">
 <meta name="twitter:description" content="默认的静态资源访问当我们构建好Springboot项目后会发现项目路径下会有resources/static文件夹，它就是默认存放静态资源的文件夹。 源码分析WebMvcAutoConfiguration">
@@ -443,6 +443,7 @@
         <h1 id="默认的静态资源访问"><a href="#默认的静态资源访问" class="headerlink" title="默认的静态资源访问"></a>默认的静态资源访问</h1><p>当我们构建好Springboot项目后会发现项目路径下会有<strong>resources/static</strong>文件夹，它就是默认存放静态资源的文件夹。</p>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="WebMvcAutoConfiguration"><a href="#WebMvcAutoConfiguration" class="headerlink" title="WebMvcAutoConfiguration"></a>WebMvcAutoConfiguration</h3><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png" alt="1567349010895"></p>
 <a id="more"></a>
+
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png" alt="1567348849650"></p>
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png" alt="1567349316180"></p>
 <p> 所以，静态资源的路径默认一共是有五个(优先级由上到下)</p>
@@ -466,7 +467,9 @@
 <p>可以通过配置文件中匹配其前缀名规则，即可自定义静态资源的访问路径与匹配规则。</p>
 </blockquote>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span> </span><br><span class="line"><span class="attr">  resources:</span> </span><br><span class="line"><span class="attr">    static-locations:</span> <span class="attr">classpath:/smallpineapple/</span></span><br><span class="line"><span class="attr">  mvc:</span> </span><br><span class="line"><span class="attr">    static-path-pattern:</span> <span class="string">/**</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="通过类添加自定义静态资源配置"><a href="#通过类添加自定义静态资源配置" class="headerlink" title="通过类添加自定义静态资源配置"></a>通过类添加自定义静态资源配置</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"classpath:/smallpineapple/"</span>);</span><br><span class="line">        </span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"file:///"</span>+uploadDir);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="最后补充"><a href="#最后补充" class="headerlink" title="最后补充"></a>最后补充</h2><p>问：<code>/**</code>和<code>/*</code>有什么区别？</p>
 <blockquote>
 <p>由于这是一种Ant风格的路径匹配符，<code>/**</code> 表示可以匹配任意层级的路径，而<code>/*</code>表示匹配当前层级下的任何路径。</p>
@@ -493,8 +496,6 @@
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/Springboot/" rel="tag"># Springboot</a>
           
             <a href="/tags/静态资源/" rel="tag"># 静态资源</a>
           
@@ -596,7 +597,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -714,7 +715,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS解决跨域/">CORS解决跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统启动任务/">系统启动任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态资源/">静态资源</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS解决跨域/">CORS解决跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVASE/">JAVASE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多态/">多态</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用类详解/">常用类详解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/抽象/">抽象</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口/">接口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/插入图片的步骤/">插入图片的步骤</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统启动任务/">系统启动任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径映射/">路径映射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态资源/">静态资源</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
