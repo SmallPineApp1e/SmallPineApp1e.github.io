@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Springboot整合JdbcTemplate多数据源]]></title>
+    <url>%2F2019%2F09%2F04%2FSpringboot%E6%95%B4%E5%90%88JdbcTemplate%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[Springboot整合JdbcTemplate多数据源数据库准备 依赖配置 多数据源配置 这样加上前缀名one和two配置以后会导致默认的datasource属性无法自动注入值，需要手动注入 DataSourceConfig1234567891011121314151617181920/** * @author Jack * @date 2019-09-04-15:56 */@Configurationpublic class DatasourceConfig &#123; @Bean @ConfigurationProperties(value = "spring.datasource.one") DataSource dataSource1()&#123; return new DruidDataSourceBuilder().build(); &#125; @Bean @ConfigurationProperties(value = "spring.datasource.two") DataSource dataSource2()&#123; return new DruidDataSourceBuilder().build(); &#125;&#125; 手动注入yaml文件中的数据库信息配置 JdbcTemplateConfig123456789101112131415161718/** * @author Jack * @date 2019-09-04-16:02 */@Configurationpublic class JdbcTemplateConfig &#123; @Bean JdbcTemplate jdbcTemplate1(@Qualifier("dataSource1") DataSource dataSource1)&#123; return new JdbcTemplate(dataSource1); &#125; @Bean JdbcTemplate jdbcTemplate2(@Qualifier("dataSource2") DataSource dataSource2)&#123; return new JdbcTemplate(dataSource2); &#125;&#125; 测试1234567@Testpublic void test1()&#123; List&lt;User&gt; users01 = jdbcTemplate1.query("select * from user", new BeanPropertyRowMapper&lt;&gt;(User.class)); System.out.println(users01); List&lt;User&gt; users02 = jdbcTemplate2.query("select * from user", new BeanPropertyRowMapper&lt;&gt;(User.class)); System.out.println(users02);&#125; 测试结果]]></content>
+      <categories>
+        <category>Springboot</category>
+      </categories>
+      <tags>
+        <tag>多数据源</tag>
+        <tag>JdbcTemplate</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[计算机网络概述]]></title>
+    <url>%2F2019%2F09%2F04%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0%2F</url>
+    <content type="text"><![CDATA[计算机网络概述1. 因特网概述网络是由若干个结点(Node)和连接这些结点的链路(Link)组成的。网络中的结点可以是计算机、集线器、交换机和路由器等。]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Springboot整合JDBCTemplate]]></title>
     <url>%2F2019%2F09%2F03%2FSpringboot%E6%95%B4%E5%90%88JDBCTemplate%2F</url>
     <content type="text"><![CDATA[Springboot整合JDBCTemplate创建项目 修改POM.XML文件 保证环境与我配置的相同 application.yml配置数据库信息 实体类123456789101112131415package com.smallpineapple.jdbctemplate.entity;/** * @author Jack * @date 2019-09-03-18:12 */public class User &#123; private Integer id; private String username; private String address; /*getter and setter*/ &#125; JdbcTemplate中，无论是添加、删除还是修改操作，都是调用update()方法 添加操作123456789101112131415/** * @author Jack * @date 2019-09-03-18:14 */@Servicepublic class UserService &#123; @Autowired JdbcTemplate jdbcTemplate; public Integer addUser(User user)&#123; return jdbcTemplate.update("insert into user (username, address) values (?, ?)",user.getUsername(),user.getAddress()); &#125;&#125; 更新操作123public Integer updateUsernameById(User user)&#123; return jdbcTemplate.update("update user set username=? where id=?", user.getUsername(), user.getId());&#125; 删除操作123public Integer deleteUserById(Integer id)&#123; return jdbcTemplate.update("delete from user where id=?", id);&#125; 查询操作较为复杂的写法123456789101112131415public List&lt;User&gt; getAllUsers()&#123; return jdbcTemplate.query("select * from user", new RowMapper&lt;User&gt;() &#123; @Override public User mapRow(ResultSet resultSet, int i) throws SQLException &#123; User user = new User(); int id = resultSet.getInt("id"); String username = resultSet.getString("username"); String address = resultSet.getString("address"); user.setUsername(username); user.setId(id); user.setAddress(address); return user; &#125; &#125;); &#125; 简单的写法前提条件： 实体类中的属性名与数据库中的列名一一对应时才可以使用该写法。 1234public List&lt;User&gt; getAllUsers()&#123; return jdbcTemplate.query("select * from user", new BeanPropertyRowMapper&lt;&gt;(User.class));&#125; 注意如果有条件查询则在最后一个参数加上各个条件的值即可。]]></content>
