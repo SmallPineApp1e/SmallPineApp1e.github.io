@@ -462,7 +462,7 @@
 <blockquote>
 <p>实体类中的属性名与数据库中的列名一一对应时才可以使用该写法。 </p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getAllUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> jdbcTemplate.query(<span class="string">"select * from user"</span>,</span><br><span class="line">                    <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(User.class));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getAllUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> jdbcTemplate.query(<span class="string">"select * from user"</span>,</span><br><span class="line">                    <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(User<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>如果有条件查询则在最后一个参数加上各个条件的值即可。</p>
 
@@ -582,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -718,7 +718,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

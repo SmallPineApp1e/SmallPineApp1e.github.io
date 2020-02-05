@@ -94,13 +94,13 @@
 
 
 
-<meta name="description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource  UserMapper接口1234">
+<meta name="description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource">
 <meta name="keywords" content="Mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot整合MyBatis">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/index.html">
 <meta property="og:site_name" content="程序员小菠萝Blog🍍">
-<meta property="og:description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource  UserMapper接口1234">
+<meta property="og:description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567591642141.png">
@@ -110,10 +110,10 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592694489.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592801574.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592866650.png">
-<meta property="og:updated_time" content="2019-09-04T10:28:52.908Z">
+<meta property="og:updated_time" content="2019-09-04T10:49:31.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot整合MyBatis">
-<meta name="twitter:description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource  UserMapper接口1234">
+<meta name="twitter:description" content="Springboot整合MyBatis依赖配置 yml文件配置123456spring:  datasource:    url: jdbc:mysql://localhost:3306/test    username: root    password: root    type: com.alibaba.druid.pool.DruidDataSource">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png">
 
 
@@ -445,7 +445,9 @@
 
       
         <h1 id="Springboot整合MyBatis"><a href="#Springboot整合MyBatis" class="headerlink" title="Springboot整合MyBatis"></a>Springboot整合MyBatis</h1><h2 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png" alt="1567590619140"></p>
-<h2 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/test</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br></pre></td></tr></table></figure>
+<h2 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/test</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h2 id="UserMapper接口"><a href="#UserMapper接口" class="headerlink" title="UserMapper接口"></a>UserMapper接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	  * 获取所有用户</span></span><br><span class="line"><span class="comment">	  */</span></span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">getAllUser</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -455,10 +457,10 @@
 <li>在启动类上表明Mapper接口所在的路径，扫描该路径下所有的接口(推荐)</li>
 </ol>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = <span class="string">"com.smallpineapple.mybatis.mapper"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MybatisApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = <span class="string">"com.smallpineapple.mybatis.mapper"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MybatisApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Mapper接口映射文件-xml"><a href="#Mapper接口映射文件-xml" class="headerlink" title="Mapper接口映射文件(*.xml)"></a>Mapper接口映射文件(*.xml)</h2><h3 id="两种位置"><a href="#两种位置" class="headerlink" title="两种位置"></a>两种位置</h3><h4 id="在mapper接口所在路径下"><a href="#在mapper接口所在路径下" class="headerlink" title="在mapper接口所在路径下"></a>在mapper接口所在路径下</h4><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567591642141.png" alt="1567591642141"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.smallpineapple.mybatis.mapper.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getAllUser"</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">resultType</span>=<span class="string">"com.smallpineapple.mybatis.bean.User"</span>&gt;</span></span><br><span class="line">        SELECT * FROM user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org/DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.smallpineapple.mybatis.mapper.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getAllUser"</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">resultType</span>=<span class="string">"com.smallpineapple.mybatis.bean.User"</span>&gt;</span></span><br><span class="line">        SELECT * FROM user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; allUser = userMapper.getAllUser();</span><br><span class="line">    System.out.println(allUser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -490,7 +492,7 @@
 <blockquote>
 <p>在yaml配置文件中表明mapper映射文件的位置。</p>
 </blockquote>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line"><span class="attr">  mapper-locations:</span> <span class="attr">classpath:/mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:/mapper/*.xml</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592801574.png" alt="1567592801574"></p>
 <blockquote>
@@ -536,6 +538,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/27/JVM的四种垃圾回收算法/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -610,7 +616,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -746,7 +752,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
