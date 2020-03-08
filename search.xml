@@ -4,7 +4,7 @@
     <title></title>
     <url>/2019/09/27/JVM%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<hr>
-<p>title: JVM的四种垃圾回收算法<br>date: 2019-08-26 00:45:31<br>tags: </p>
+<p>title: 入门JVM-四种垃圾回收算法<br>date: 2019-08-26 00:45:31<br>tags: </p>
 <ul>
 <li>Java<br>categories: Java</li>
 </ul>
@@ -34,6 +34,8 @@
 <p>Java规范并不推荐对象在Finalize()中重新建立引用关系，因为由于优先级的不稳定性导致执行的无序性，而且JVM不允许此方法执行的时间过长，以免队列后面的对象等待过长时间，导致队列内存溢出。</p>
 </blockquote>
 <p><img src="//smallpineapp1e.github.io/2019/09/27/JVM的四种垃圾回收算法/timg.jpg" alt="img"></p>
+<a id="more"></a>
+
 <p>上图为此算法的执行过程及结果，当对象被回收后，<code>内存的可利用空间得到提升</code>，但是这个算法<code>并不是百利无害</code>的。</p>
 <blockquote>
 <p>“标记-清除”算法的<strong>弊端</strong>：</p>
@@ -91,7 +93,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Springboot整合MyBatis</title>
+    <title>SpringBoot整合MyBatis</title>
     <url>/2019/09/04/Springboot%E6%95%B4%E5%90%88MyBatis/</url>
     <content><![CDATA[<h1 id="Springboot整合MyBatis"><a href="#Springboot整合MyBatis" class="headerlink" title="Springboot整合MyBatis"></a>Springboot整合MyBatis</h1><h2 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png" alt="1567590619140"></p>
 <h2 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/test</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br></pre></td></tr></table></figure>
@@ -150,117 +152,14 @@
 <h5 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h5><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592866650.png" alt="1567592866650"></p>
 ]]></content>
       <categories>
-        <category>Springboot整合MyBatis</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>Mybatis</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
-    <title>Springboot整合JdbcTemplate多数据源</title>
-    <url>/2019/09/04/Springboot%E6%95%B4%E5%90%88JdbcTemplate%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</url>
-    <content><![CDATA[<h1 id="Springboot整合JdbcTemplate多数据源"><a href="#Springboot整合JdbcTemplate多数据源" class="headerlink" title="Springboot整合JdbcTemplate多数据源"></a>Springboot整合JdbcTemplate多数据源</h1><h2 id="数据库准备"><a href="#数据库准备" class="headerlink" title="数据库准备"></a>数据库准备</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合JdbcTemplate多数据源/1567583344014.png" alt="数据库准备"></p>
-<h2 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合JdbcTemplate多数据源/1567583486918.png" alt="1567583486918"></p>
-<a id="more"></a>
-
-<h2 id="多数据源配置"><a href="#多数据源配置" class="headerlink" title="多数据源配置"></a>多数据源配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合JdbcTemplate多数据源/1567583643364.png" alt="1567583643364"></p>
-<blockquote>
-<p> 这样加上前缀名<code>one</code>和<code>two</code>配置以后会导致默认的datasource属性无法自动注入值，需要手动注入</p>
-</blockquote>
-<h3 id="DataSourceConfig"><a href="#DataSourceConfig" class="headerlink" title="DataSourceConfig"></a>DataSourceConfig</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Jack</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-09-04-15:56</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatasourceConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(value = <span class="string">"spring.datasource.one"</span>)</span><br><span class="line">    <span class="function">DataSource <span class="title">dataSource1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DruidDataSourceBuilder().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(value = <span class="string">"spring.datasource.two"</span>)</span><br><span class="line">    <span class="function">DataSource <span class="title">dataSource2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DruidDataSourceBuilder().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>手动注入yaml文件中的数据库信息配置</p>
-</blockquote>
-<h3 id="JdbcTemplateConfig"><a href="#JdbcTemplateConfig" class="headerlink" title="JdbcTemplateConfig"></a>JdbcTemplateConfig</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Jack</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-09-04-16:02</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcTemplateConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">JdbcTemplate <span class="title">jdbcTemplate1</span><span class="params">(@Qualifier(<span class="string">"dataSource1"</span>)</span> DataSource dataSource1)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JdbcTemplate(dataSource1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">JdbcTemplate <span class="title">jdbcTemplate2</span><span class="params">(@Qualifier(<span class="string">"dataSource2"</span>)</span> DataSource dataSource2)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JdbcTemplate(dataSource2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; users01 = jdbcTemplate1.query(<span class="string">"select * from user"</span>, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(User<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">    System.out.println(users01);</span><br><span class="line">    List&lt;User&gt; users02 = jdbcTemplate2.query(<span class="string">"select * from user"</span>, <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(User<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">    System.out.println(users02);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试结果</p>
-<p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合JdbcTemplate多数据源/1567585490021.png" alt="1567585490021"></p>
-]]></content>
-      <categories>
-        <category>Springboot</category>
-      </categories>
-      <tags>
-        <tag>多数据源</tag>
-        <tag>JdbcTemplate</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算机网络概述</title>
-    <url>/2019/09/04/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h1 id="计算机网络概述"><a href="#计算机网络概述" class="headerlink" title="计算机网络概述"></a>计算机网络概述</h1><h2 id="1-因特网概述"><a href="#1-因特网概述" class="headerlink" title="1. 因特网概述"></a>1. 因特网概述</h2><p><strong>网络</strong>是由若干个<strong>结点(Node)</strong>和连接这些结点的<strong>链路</strong>(Link)组成的。网络中的结点可以是计算机、集线器、交换机和路由器等。</p>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Springboot整合JDBCTemplate</title>
-    <url>/2019/09/03/Springboot%E6%95%B4%E5%90%88JDBCTemplate/</url>
-    <content><![CDATA[<h1 id="Springboot整合JDBCTemplate"><a href="#Springboot整合JDBCTemplate" class="headerlink" title="Springboot整合JDBCTemplate"></a>Springboot整合JDBCTemplate</h1><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p><img src="//smallpineapp1e.github.io/2019/09/03/Springboot整合JDBCTemplate/1567505228976.png" alt="1567505228976"></p>
-<a id="more"></a>
-
-<h2 id="修改POM-XML文件"><a href="#修改POM-XML文件" class="headerlink" title="修改POM.XML文件"></a>修改POM.XML文件</h2><p><img src="//smallpineapp1e.github.io/2019/09/03/Springboot整合JDBCTemplate/1567505355700.png" alt="1567505355700"></p>
-<blockquote>
-<p>保证环境与我配置的相同</p>
-</blockquote>
-<h2 id="application-yml配置数据库信息"><a href="#application-yml配置数据库信息" class="headerlink" title="application.yml配置数据库信息"></a>application.yml配置数据库信息</h2><p><img src="//smallpineapp1e.github.io/2019/09/03/Springboot整合JDBCTemplate/1567505545230.png" alt="1567505545230"></p>
-<h2 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.smallpineapple.jdbctemplate.entity;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Jack</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-09-03-18:12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">/*getter and setter*/</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>JdbcTemplate中，无论是添加、删除还是修改操作，都是调用<code>update()</code>方法</p>
-<h2 id="添加操作"><a href="#添加操作" class="headerlink" title="添加操作"></a>添加操作</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Jack</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019-09-03-18:14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">addUser</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"insert into user (username, address) 					values (?, ?)"</span>,user.getUsername(),user.getAddress());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">updateUsernameById</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"update user set username=? where id=?"</span>, 						user.getUsername(), user.getId());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">deleteUserById</span><span class="params">(Integer id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> jdbcTemplate.update(<span class="string">"delete from user where id=?"</span>, id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h2><h3 id="较为复杂的写法"><a href="#较为复杂的写法" class="headerlink" title="较为复杂的写法"></a>较为复杂的写法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getAllUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> jdbcTemplate.query(<span class="string">"select * from user"</span>, <span class="keyword">new</span> RowMapper&lt;User&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> User <span class="title">mapRow</span><span class="params">(ResultSet resultSet, <span class="keyword">int</span> i)</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">                User user = <span class="keyword">new</span> User();</span><br><span class="line">                <span class="keyword">int</span> id = resultSet.getInt(<span class="string">"id"</span>);</span><br><span class="line">                String username = resultSet.getString(<span class="string">"username"</span>);</span><br><span class="line">                String address = resultSet.getString(<span class="string">"address"</span>);</span><br><span class="line">                user.setUsername(username);</span><br><span class="line">                user.setId(id);</span><br><span class="line">                user.setAddress(address);</span><br><span class="line">                <span class="keyword">return</span> user;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="简单的写法"><a href="#简单的写法" class="headerlink" title="简单的写法"></a>简单的写法</h3><p>前提条件：</p>
-<blockquote>
-<p>实体类中的属性名与数据库中的列名一一对应时才可以使用该写法。 </p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getAllUsers</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> jdbcTemplate.query(<span class="string">"select * from user"</span>,</span><br><span class="line">                    <span class="keyword">new</span> BeanPropertyRowMapper&lt;&gt;(User<span class="class">.<span class="keyword">class</span>))</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>如果有条件查询则在最后一个参数加上各个条件的值即可。</p>
-]]></content>
-      <categories>
-        <category>Springboot</category>
-      </categories>
-      <tags>
-        <tag>JDBCTemplate</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Springboot路径映射</title>
-    <url>/2019/09/02/Springboot%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84/</url>
-    <content><![CDATA[<h1 id="Springboot实现路径映射"><a href="#Springboot实现路径映射" class="headerlink" title="Springboot实现路径映射"></a>Springboot实现路径映射</h1><h2 id="页面跳转的弊端"><a href="#页面跳转的弊端" class="headerlink" title="页面跳转的弊端"></a>页面跳转的弊端</h2><p>我们常常在开发时跳转各个页面，但是<strong>有的页面不需要数据渲染</strong>，却必须要通过一个Controller层帮助我们去映射页面，显得有些<strong>多此一举</strong>了</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/index"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">pageIndex</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>路径映射实际上不是专属于Spring Boot的模块，它是<strong>属于SpringMVC中的一个功能</strong></p>
-<blockquote>
-<p>专门用于映射<strong>不需要渲染数据的页面</strong>，实现页面的快速跳转，<strong>减少代码冗余度</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span></span>&#123;</span><br><span class="line">        registry.addViewController(<span class="string">"/index"</span>).setViewName(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此时访问<code>/index</code>可以快速跳转到<code>index.htm</code>页面。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Springboot</category>
-      </categories>
-      <tags>
-        <tag>路径映射</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Springboot实现系统启动任务</title>
+    <title>SpringBoot实现系统启动任务</title>
     <url>/2019/09/02/Springboot%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1/</url>
     <content><![CDATA[<h1 id="Spring-Boot实现系统启动任务"><a href="#Spring-Boot实现系统启动任务" class="headerlink" title="Spring Boot实现系统启动任务"></a>Spring Boot实现系统启动任务</h1><h2 id="CommandLineRunner"><a href="#CommandLineRunner" class="headerlink" title="CommandLineRunner"></a>CommandLineRunner</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">99</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCommandLineRunner1</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"MyCommandLineRunner1&gt;&gt;&gt;"</span>+Arrays.toString(args))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -305,77 +204,14 @@
 <h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot实现系统启动任务/3-4.png" alt="执行结果"></p>
 ]]></content>
       <categories>
-        <category>Springboot</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>系统启动任务</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
-    <title>Springboot通过CORS解决跨域问题</title>
-    <url>/2019/09/02/Springboot%E9%80%9A%E8%BF%87CORS%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="Springboot通过CORS解决跨域问题"><a href="#Springboot通过CORS解决跨域问题" class="headerlink" title="Springboot通过CORS解决跨域问题"></a>Springboot通过CORS解决跨域问题</h1><h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>同源策略是由 Netscape 提出的一个著名的安全策略，它是浏览器最核心也最基本的安全功能，现在所有支持 JavaScript 的浏览器都会使用这个策略。</p>
-<p>所谓同源是<strong>指协议、域名以及端口要相同</strong>。</p>
-<p>同源策略是基于安全方面的考虑提出来的，这个策略本身没问题，但是我们在实际开发中，由于各种原因又经常有跨域的需求。</p>
-<p>传统的跨域方案是 JSONP，JSONP 虽然能解决跨域但是有一个很大的局限性，<strong>那就是只支持 GET 请求</strong>。</p>
-<p>而今天我们说的 CORS（跨域源资源共享）（CORS，Cross-origin resource sharing）是一个 W3C 标准，它是一份浏览器技术的规范，<strong>提供了 Web 服务从不同网域传来沙盒脚本的方法，以避开浏览器的同源策略，这是 JSONP 模式的现代版</strong></p>
-<a id="more"></a>
-
-<h2 id="代码演示跨域失败"><a href="#代码演示跨域失败" class="headerlink" title="代码演示跨域失败"></a>代码演示跨域失败</h2><ol>
-<li>创建两个项目分别是CORS1和CORS2，端口分别为8080和8081</li>
-<li>在CORS1中提供两个接口，分别是<code>/hello</code>，<code>/byebye</code></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cors1Controller</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"post---hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/byebye"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">byebye</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"get---byebye"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在COR2中的<code>resources/static</code>目录下创建HTML文件</li>
-<li>编写AJAX向<code>http://localhost:8080/hello</code>发送请求</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"btnClick()"</span> <span class="attr">value</span>=<span class="string">"get_button"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"btnClick2()"</span> <span class="attr">value</span>=<span class="string">"post_button"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">btnClick</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        $.get(<span class="string">'http://localhost:8080/hello'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(msg)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#app"</span>).html(msg);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">btnClick2</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $.post(<span class="string">'http://localhost:8080/byebye'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">"#app"</span>).html(msg);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>分别启动两个项目，并点击按钮，观察开发者工具的控制台：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Access to XMLHttpRequest at &apos;http://localhost:8080/hello&apos; from origin &apos;http://localhost:8081&apos; has been blocked by CORS policy: No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource.</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>由于同源策略的限制，由8081端口发送的请求无法向8080端口发送。</strong></p>
-</blockquote>
-<h2 id="添加-CrossOrigin注解"><a href="#添加-CrossOrigin注解" class="headerlink" title="添加@CrossOrigin注解"></a>添加@CrossOrigin注解</h2><blockquote>
-<p>在暴露接口的一方加上@CrossOrigin注解，避开同源策略。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这个注解表示这两个接口接受来自 http://localhost:8081 地址的请求</span></span><br><span class="line">    <span class="meta">@CrossOrigin</span>(origins = <span class="string">"http://localhost:8081"</span>)</span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"post---hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CrossOrigin</span>(origins = <span class="string">"http://localhost:8081"</span>)</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/byebye"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"get---byebye"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="CrossOrigin注解源码解析"><a href="#CrossOrigin注解源码解析" class="headerlink" title="@CrossOrigin注解源码解析"></a>@CrossOrigin注解源码解析</h2><p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot通过CORS解决跨域问题/1567424138894.png" alt="1567424138894"></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个表示服务端愿意接收来自<code>http://localhost:8081/</code>的请求，拿到这个信息后，浏览器就不会再去限制本次请求的跨域了。</p>
-<p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot通过CORS解决跨域问题/cors.png" alt="cors"></p>
-<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>如果每个Controller上都加这样一个注解，岂不是非常麻烦？</p>
-<blockquote>
-<p>在 Spring Boot 中，还可以通过全局配置一次性解决这个问题，全局配置只需要在<strong>SpringMVC配置类中重写 addCorsMappings 方法即可</strong></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">"/**"</span>)</span><br><span class="line">        .allowedOrigins(<span class="string">"http://localhost:8081"</span>)</span><br><span class="line">        .allowedMethods(<span class="string">"*"</span>)</span><br><span class="line">        .allowedHeaders(<span class="string">"*"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>/**</code> 表示本应用的所有方法都会去处理跨域请求</p>
-<p><code>*</code>表示所有请求方式(<code>GET/POST/PUT/DELETE···</code>)和请求头可以支持跨域提交， allowedMethods 表示允许通过的请求方式，allowedHeaders 则表示允许的请求头。</p>
-<blockquote>
-<p><strong>经过这样的配置之后，就不必在每个方法上单独配置跨域了。</strong></p>
-</blockquote>
-<h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><p>了解了整个 CORS 的工作过程之后，我们通过 Ajax 发送跨域请求，虽然用户体验提高了，但是也有潜在的威胁存在，常见的就是 CSRF（Cross-site request forgery）跨站请求伪造。跨站请求伪造也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF ，是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法，举个例子：</p>
-<blockquote>
-<p>假如一家银行用以运行转账操作的 URL 地址如下： <code>http://icbc.com/aa?bb=cc</code> ，那么，一个恶意攻击者可以在另一个网站上放置如下代码： <code>&lt;img src=&quot;http://icbc.com/aa?bb=cc&quot;&gt;</code> ，如果用户访问了恶意站点，而她之前刚访问过银行不久，登录信息尚未过期，那么她就会遭受损失。</p>
-</blockquote>
-<p>基于此，浏览器在实际操作中，会对请求进行分类，分为简单请求，预先请求，带凭证的请求等，预先请求会首先发送一个 options 探测请求，和浏览器进行协商是否接受请求。默认情况下跨域请求是不需要凭证的，但是服务端可以配置要求客户端提供凭证，这样就可以有效避免 csrf 攻击。</p>
-<p><a href="https://www.javaboy.org/2019/0613/springboot-cors.html" target="_blank" rel="noopener">参考博客</a></p>
-]]></content>
-      <categories>
-        <category>Springboot</category>
-      </categories>
-      <tags>
-        <tag>CORS解决跨域</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Springboot静态资源访问</title>
+    <title>SpringBoot静态资源访问</title>
     <url>/2019/09/01/Springboot%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE/</url>
     <content><![CDATA[<h1 id="默认的静态资源访问"><a href="#默认的静态资源访问" class="headerlink" title="默认的静态资源访问"></a>默认的静态资源访问</h1><p>当我们构建好Springboot项目后会发现项目路径下会有<code>resources/static</code>文件夹，它就是默认存放静态资源的文件夹<strong>之一</strong>。</p>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="WebMvcAutoConfiguration"><a href="#WebMvcAutoConfiguration" class="headerlink" title="WebMvcAutoConfiguration"></a>WebMvcAutoConfiguration</h3><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png" alt="1567349010895"></p>
@@ -419,10 +255,10 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>Springboot</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>静态资源</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -449,7 +285,7 @@
       </tags>
   </entry>
   <entry>
-    <title>常用类详解</title>
+    <title>三分钟Java基础-常用类详解</title>
     <url>/2019/08/28/%E5%B8%B8%E7%94%A8%E7%B1%BB%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h1><blockquote>
 <p>Object类是<strong>所有类的父类</strong>！它本身没有父类，它已经是<strong>顶层类</strong>。</p>
@@ -721,12 +557,11 @@
 </tbody></table>
 ]]></content>
       <tags>
-        <tag>JAVASE</tag>
-        <tag>常用类详解</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>栈</title>
+    <title>三分钟数据结构-栈</title>
     <url>/2019/08/27/%E6%A0%88/</url>
     <content><![CDATA[<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：<strong>后进先出</strong>。</p>
 <p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566915182316.png" alt="1566915182316"></p>
@@ -841,15 +676,14 @@
 
 ]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>算法与数据结构</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
         <tag>栈</tag>
       </tags>
   </entry>
   <entry>
-    <title>JAVASE-多态</title>
+    <title>三分钟Java基础-多态</title>
     <url>/2019/08/26/JAVASE-%E5%A4%9A%E6%80%81/</url>
     <content><![CDATA[<h2 id="对象的多态性"><a href="#对象的多态性" class="headerlink" title="对象的多态性"></a>对象的多态性</h2><blockquote>
 <p>体现为<strong>父类引用变量可以指向子类对象</strong></p>
@@ -881,15 +715,14 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>JAVASE</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>JAVASE</tag>
-        <tag>多态</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>JAVASE-接口</title>
+    <title>三分钟Java基础-接口</title>
     <url>/2019/08/25/JAVASE-%E6%8E%A5%E5%8F%A3/</url>
     <content><![CDATA[<h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><blockquote>
 <p><strong>接口是功能的集合</strong>，同样是一种数据类型，是比抽象类更为抽象的“类”。</p>
@@ -955,15 +788,14 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>JAVASE</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>JAVASE</tag>
-        <tag>接口</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>JAVASE-抽象类及抽象方法</title>
+    <title>三分钟Java基础-抽象类及抽象方法</title>
     <url>/2019/08/25/JAVASE-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%8F%8A%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><blockquote>
 <ol>
@@ -986,15 +818,14 @@
 <h4 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png" alt="1566746167567"></p>
 ]]></content>
       <categories>
-        <category>JAVASE</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>JAVASE</tag>
-        <tag>抽象</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
-    <title>稀疏数组</title>
+    <title>三分钟数据结构-稀疏数组</title>
     <url>/2019/08/25/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h2 id="1-稀疏数组-sparsearray"><a href="#1-稀疏数组-sparsearray" class="headerlink" title="1.稀疏数组(sparsearray)"></a>1.稀疏数组(sparsearray)</h2><h3 id="1-1-应用场景"><a href="#1-1-应用场景" class="headerlink" title="1.1 应用场景 :"></a>1.1 应用场景 :</h3><p>当一个数组中大部分为0或者为同一个数值时可转化为稀疏数组进行存储</p>
 <p>例子 : <strong>五子棋棋盘</strong></p>
@@ -1025,15 +856,14 @@
 
 ]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>算法与数据结构</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
         <tag>稀疏数组</tag>
       </tags>
   </entry>
   <entry>
-    <title>浅析HTTP协议</title>
+    <title>三分钟网络协议-浅析HTTP协议</title>
     <url>/2019/08/24/%E6%B5%85%E6%9E%90HTTP%E5%8D%8F%E8%AE%AE/</url>
     <content><![CDATA[<h1 id="浅析HTTP协议"><a href="#浅析HTTP协议" class="headerlink" title="浅析HTTP协议!"></a><strong>浅析HTTP协议!</strong></h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><h3 id="1-1-HTTP是什么？"><a href="#1-1-HTTP是什么？" class="headerlink" title="1.1 HTTP是什么？"></a>1.1 HTTP是什么？</h3><p>HTTP(超文本传输协议)是一个应用层的、基于请求和响应模式的、无状态的面向对象的协议，常基于TCP协议，由于其简洁、快速而适用于分布式超媒体系统，绝大多数WEB开发，都是构建在HTTP协议之上的WEB应用。</p>
 <h3 id="1-2-HTTP的主要特点"><a href="#1-2-HTTP的主要特点" class="headerlink" title="1.2 HTTP的主要特点"></a>1.2 HTTP的主要特点</h3><ol>
@@ -1375,8 +1205,8 @@
 </tr>
 </tbody></table>
 <hr>
+此时, 假设输入整数 : 159, 倒序输出结果应为951
 
-<p>此时, 假设输入整数 : 159, 倒序输出结果应为951</p>
 <p>question1 : 那么我们该如何判断它溢出呢 ? </p>
 <blockquote>
 <p>首先确定范围为$[-256, 255] $, 我们打算从最低位开始一位一位地反转, 将每一位取出后存储到一个变量$(ans)$中, 判断该变量是否已经超出了最大值的前$(n-1)$位……</p>
@@ -1404,7 +1234,7 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringDataJPA入门</title>
+    <title>SpringDataJpa入门指南</title>
     <url>/2019/08/24/SpringDataJPA%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><table>
 <thead>
@@ -1633,11 +1463,10 @@
 <h2 id="JPQL的UPDATE和DELETE语句"><a href="#JPQL的UPDATE和DELETE语句" class="headerlink" title="JPQL的UPDATE和DELETE语句"></a>JPQL的UPDATE和DELETE语句</h2><p>与HQL编写语句相同</p>
 ]]></content>
       <categories>
-        <category>JAVA</category>
+        <category>SpringData JPA</category>
       </categories>
       <tags>
         <tag>SpringData JPA</tag>
-        <tag>JAVA</tag>
       </tags>
   </entry>
   <entry>
@@ -1660,12 +1489,9 @@
 
 <h3 id="3-5-成功"><a href="#3-5-成功" class="headerlink" title="3.5 成功"></a>3.5 成功</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F.jpg" alt="上传成功"></p>
 ]]></content>
-      <tags>
-        <tag>插入图片的步骤</tag>
-      </tags>
   </entry>
   <entry>
-    <title>数学真的可以救命之约瑟夫问题</title>
+    <title>三分钟数据结构-链表</title>
     <url>/2019/08/23/%E6%95%B0%E5%AD%A6%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E6%95%91%E5%91%BD%E4%B9%8B%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="数学真的可以救命"><a href="#数学真的可以救命" class="headerlink" title="数学真的可以救命"></a>数学真的可以救命</h1><h2 id="今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东"><a href="#今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东" class="headerlink" title="今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东"></a>今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东</h2><h3 id="1-链表的基本概念"><a href="#1-链表的基本概念" class="headerlink" title="1 .链表的基本概念"></a>1 .链表的基本概念</h3><h4 id="1-1-什么是链表"><a href="#1-1-什么是链表" class="headerlink" title="1.1 什么是链表 ?"></a>1.1 什么是链表 ?</h4><p>如下图所示  : </p>
 <p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/%E5%8D%95%E5%8F%8C%E9%93%BE%E8%A1%A8.png" alt="“单向链表”"></p>
@@ -1708,5 +1534,11 @@
 <h4 id="3-代码运行"><a href="#3-代码运行" class="headerlink" title="3. 代码运行"></a>3. 代码运行</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JosephuSolution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		CircleLinkedList circleLinkedList = <span class="keyword">new</span> CircleLinkedList();</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> n = <span class="number">41</span>;</span><br><span class="line">        <span class="comment">//生成小孩</span></span><br><span class="line">		<span class="keyword">while</span>(i&lt;=n)&#123;</span><br><span class="line">			Child child = <span class="keyword">new</span> Child(i);</span><br><span class="line">			circleLinkedList.add(child);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// k=1, m=3, n=41</span></span><br><span class="line">		circleLinkedList.play(<span class="number">1</span>, <span class="number">3</span>, n);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">输出结果:</span><br><span class="line">被淘汰的小孩的编号为:</span><br><span class="line"><span class="number">3</span> <span class="number">6</span> <span class="number">9</span> <span class="number">12</span> <span class="number">15</span> <span class="number">18</span> <span class="number">21</span> <span class="number">24</span> <span class="number">27</span> <span class="number">30</span> <span class="number">33</span> <span class="number">36</span> <span class="number">39</span> <span class="number">1</span> <span class="number">5</span> <span class="number">10</span> <span class="number">14</span> <span class="number">19</span> <span class="number">23</span> </span><br><span class="line"><span class="number">28</span> <span class="number">32</span> <span class="number">37</span> <span class="number">41</span> <span class="number">7</span> <span class="number">13</span> <span class="number">20</span> <span class="number">26</span> <span class="number">34</span> <span class="number">40</span> <span class="number">8</span> <span class="number">17</span> <span class="number">29</span> <span class="number">38</span> <span class="number">11</span> <span class="number">25</span> <span class="number">2</span> <span class="number">22</span> <span class="number">4</span> <span class="number">35</span> <span class="number">16</span> </span><br><span class="line">存活的玩家是:<span class="number">31</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
   </entry>
 </search>
