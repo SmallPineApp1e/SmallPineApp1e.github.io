@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟Java基础-常用类详解">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/27/常用类详解/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-09T01:21:45.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟Java基础-常用类详解">
+<meta name="twitter:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2019/08/27/常用类详解/">
+
+
+
+
+
+  <title>三分钟Java基础-常用类详解 | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/27/常用类详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟Java基础-常用类详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T23:56:53+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,159字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><blockquote>
+<p>Object类是<strong>所有类的父类</strong>！它本身没有父类，它已经是<strong>顶层类</strong>。</p>
+</blockquote>
+<h2 id="equals-Object-obj-方法"><a href="#equals-Object-obj-方法" class="headerlink" title="equals(Object obj)方法"></a>equals(Object obj)方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> == obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回值是布尔类型，方法参数为Object类型，即<strong>任何类型</strong>的参数都可以传递进去。</p>
+<p>用于比较<strong>其它对象与本对象的内存地址</strong>是否相等。</p>
+<p><strong>引用</strong>数据类型 “==” 用于<strong>比较两个对象的内存地址</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//Person类继承Object类，继承了Object类的equals方法</span></span><br><span class="line">    Person p1 = <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">25</span>);</span><br><span class="line">    Person p2 = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//Person的对象p1，调用父类的方法equals，进行对象的内存地址比较</span></span><br><span class="line">    <span class="keyword">boolean</span> b = p1.equals(p2);</span><br><span class="line">    System.out.println(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>Question：</p>
+<ol>
+<li>this指的是谁？</li>
+</ol>
+<blockquote>
+<p>谁调用的，就是谁，p1对象调用equals方法，所以this指的是p1对象</p>
+</blockquote>
+<ol start="2">
+<li>obj指的是谁？</li>
+</ol>
+<blockquote>
+<p>传递的参数对象，示例中的obj就是p2</p>
+</blockquote>
+<p>两个对象比较地址没有意义！</p>
+<p>为使equals方法有意义，则在子类中重写equals()方法，可以比较两个对象中的成员变量，由于Object能传递任何类型的变量，所以存在安全隐患，所以<strong>应该在重写方法中判断传递过来的参数到底是什么。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person)&#123;</span><br><span class="line">        <span class="comment">//参数obj接受到的是Person对象，才能进行转型</span></span><br><span class="line">        <span class="comment">//对obj参数进行向下转型,obj转成Person类型</span></span><br><span class="line">        Person p = (Person) obj;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.age == p.age);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传递参数时会发生多态中的向上转型Person引用数据类型<strong>变量被提升为Object类型</strong>多态中的弊端：<strong>无法调用子类的特有内容！</strong></p>
+<p>所以要向下转型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">子类数据类型 变量名 = (子类数据类型)   父类数据类型变量名</span><br><span class="line">Person p = (Person) obj；</span><br></pre></td></tr></table></figure>
+
+<p>若传过来的参数为null,直接返回false；</p>
+<p>若传过来的参数是自己本身，自己与自己比较，则直接返回true；增加上述判断情况可提高程序的执行效率！！！考虑更加周全！！！</p>
+<h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><p>输出语句中，输出一个对象，则对象自动调用自身的toString()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//调用Person类的方法toString()</span></span><br><span class="line">    <span class="comment">//输出语句中，写的是一个对象，默认调用的toString方法</span></span><br><span class="line">    Person p = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    String s = p.toString();</span><br><span class="line">    System.out.println(p);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Output：</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br></pre></td></tr></table></figure>
+
+<p>重写方法toString()，因为没有必要让调用者看到内存地址</p>
+<blockquote>
+<p>在开发中重写toString方法的一般要求：在方法中返回所有成员变量的值</p>
+</blockquote>
+<h1 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h1><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><blockquote>
+<p>描述字符串对象的类，所有<strong>双引号内的内容</strong>都是String类的对象。</p>
+</blockquote>
+<p>Question：String类打印它的对象，为什么不是对象地址？</p>
+<p>​    因为它重写过toString方法。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>字符串是常量， 它的值在创建后不能更改！</strong></p>
+<p>但<strong>引用类型本身所指向的地址可以改变</strong>，每一个双引号都是String类型的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//引起变量str执行内存变化</span></span><br><span class="line">    <span class="comment">//定义好的字符串对象，不变</span></span><br><span class="line">    String str = <span class="string">"smallpineapple"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">    str = <span class="string">"pig"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>str对象<strong>可以指向不同的地址</strong>，但是<strong>双引号内的值是永远不变的。</strong></p>
+<p>因为String类源码本身定义了一个<strong>字符数组常量进行存储字符</strong>。</p>
+<h2 id="equal-Object-obj-方法"><a href="#equal-Object-obj-方法" class="headerlink" title="equal(Object obj)方法"></a>equal(Object obj)方法</h2><blockquote>
+<p>方法传递字符串，判断字符串内的字符是否完全相同，若是则返回true</p>
+</blockquote>
+<h2 id="equalsIgnoreCase-String-s"><a href="#equalsIgnoreCase-String-s" class="headerlink" title="equalsIgnoreCase(String s)"></a>equalsIgnoreCase(String s)</h2><blockquote>
+<p>传递字符串，判断字符串中的字符是否相同，并且忽略大小写</p>
+</blockquote>
+<h2 id="int-length"><a href="#int-length" class="headerlink" title="int length()"></a>int length()</h2><blockquote>
+<p>返回字符串的长度</p>
+</blockquote>
+<h2 id="String-subString-int-beginIndex"><a href="#String-subString-int-beginIndex" class="headerlink" title="String subString(int beginIndex)"></a>String subString(int beginIndex)</h2><blockquote>
+<p>获取字符串的一部分，返回一个新的字符串</p>
+<p>获取部分是[beginIndex, lastIndex - 1]</p>
+</blockquote>
+<h2 id="boolean-startsWith-String-prefix"><a href="#boolean-startsWith-String-prefix" class="headerlink" title="boolean startsWith(String prefix)"></a>boolean startsWith(String prefix)</h2><blockquote>
+<p>判断一个字符串是否另一个字符串的前缀</p>
+</blockquote>
+<h2 id="boolean-endsWith-String-suffix"><a href="#boolean-endsWith-String-suffix" class="headerlink" title="boolean endsWith(String suffix)"></a>boolean endsWith(String suffix)</h2><blockquote>
+<p>判断一个字符串是否另一个字符串的后缀</p>
+</blockquote>
+<h2 id="char-charAt-int-index"><a href="#char-charAt-int-index" class="headerlink" title="char charAt(int index)"></a>char charAt(int index)</h2><blockquote>
+<p>用于遍历字符串的每个字符，返回索引上的字符</p>
+</blockquote>
+<h1 id="StringBuffer类"><a href="#StringBuffer类" class="headerlink" title="StringBuffer类"></a>StringBuffer类</h1><p><strong>提高字符串的操作效率！！</strong>内部采用了<strong>可变数组</strong>的方式实现，数组的默认容量为16个字符！StringBuffer内部<strong>只有一个数组</strong>，String类只要有一个双引号就会创建一个新的数组。</p>
+<h2 id="StringBuffer-append-String-str"><a href="#StringBuffer-append-String-str" class="headerlink" title="StringBuffer append(String str)"></a>StringBuffer append(String str)</h2><blockquote>
+<p>append(String str)方法的返回值是this，调用者是谁，返回值就是谁</p>
+</blockquote>
+<h2 id="delete-int-start-int-end"><a href="#delete-int-start-int-end" class="headerlink" title="delete(int start, int end)"></a>delete(int start, int end)</h2><blockquote>
+<p>删除缓冲区中的字符</p>
+<p>包括开始索引上的字符，不包括结束索引上的字符</p>
+<p><strong>99%都是包含开始索引，不包含结束索引</strong></p>
+</blockquote>
+<h2 id="insert-int-index-任意类型"><a href="#insert-int-index-任意类型" class="headerlink" title="insert(int index, 任意类型)"></a>insert(int index, 任意类型)</h2><blockquote>
+<p>将任意类型的数据，插入到缓冲区的指定索引上</p>
+</blockquote>
+<h2 id="replace-int-start-int-end"><a href="#replace-int-start-int-end" class="headerlink" title="replace(int start, int end)"></a>replace(int start, int end)</h2><blockquote>
+<p>将指定索引范围内的所有字符，替换成新的字符串</p>
+</blockquote>
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h2><blockquote>
+<p>将缓冲区中的字符全部反转</p>
+</blockquote>
+<h1 id="StringBuilder类"><a href="#StringBuilder类" class="headerlink" title="StringBuilder类"></a>StringBuilder类</h1><blockquote>
+<p>StringBuilder里边的方法与StringBuffer里边的方法<strong>完全相同</strong>！！</p>
+<p><strong>但是StringBuffer是线程安全的类，意味着运行速度慢；</strong></p>
+<p><strong>StringBuilder类是线程不安全的类，意味着运行速度快；</strong></p>
+<p>所以以后我们<strong>优先选用Builder类而不选用Buffer类</strong>。</p>
+</blockquote>
+<h1 id="Date类"><a href="#Date类" class="headerlink" title="Date类"></a>Date类</h1><h2 id="System-currentTimeMillis"><a href="#System-currentTimeMillis" class="headerlink" title="System.currentTimeMillis()"></a>System.currentTimeMillis()</h2><blockquote>
+<p>返回long类型参数</p>
+<p>获取当前日期的毫秒值</p>
+<p>时间原点：公元1970年1月1日，00:00:00 毫秒值就是0</p>
+<p><strong>时间与日期的计算都是以毫秒值来计算</strong></p>
+</blockquote>
+<h2 id="构造方法Date-Long-millis"><a href="#构造方法Date-Long-millis" class="headerlink" title="构造方法Date(Long millis)"></a>构造方法Date(Long millis)</h2><blockquote>
+<p>传递毫秒值，将毫秒值转成对应的日期对象</p>
+</blockquote>
+<h2 id="空参构造方法"><a href="#空参构造方法" class="headerlink" title="空参构造方法"></a>空参构造方法</h2><blockquote>
+<p>获取操作系统中的时间与日期</p>
+</blockquote>
+<h2 id="long-getTime"><a href="#long-getTime" class="headerlink" title="long getTime()"></a>long getTime()</h2><blockquote>
+<p>返回毫秒值，将Date表示的<strong>日期转换为毫秒值</strong></p>
+<p><strong>日期和毫秒值的转换</strong></p>
+</blockquote>
+<h2 id="Date-setTime-Long-millis"><a href="#Date-setTime-Long-millis" class="headerlink" title="Date setTime(Long millis)"></a>Date setTime(Long millis)</h2><blockquote>
+<p>传递毫秒值，将日期对象，设置到指定毫秒值上</p>
+<p><strong>毫秒值转换成日期对象</strong></p>
+</blockquote>
+<h1 id="SimpleDateFormat类"><a href="#SimpleDateFormat类" class="headerlink" title="SimpleDateFormat类"></a>SimpleDateFormat类</h1><blockquote>
+<p><strong>对日期的格式化(自定义)</strong></p>
+</blockquote>
+<h2 id="日期格式化步骤"><a href="#日期格式化步骤" class="headerlink" title="日期格式化步骤"></a>日期格式化步骤</h2><blockquote>
+<ol>
+<li>创建SimpleDateFormat类对象，在构造方法中写入字符串的日期格式(自定义)</li>
+<li>SimpleDateFormat调用方法format对日期进行格式化，String format(Date date)    传递日期对象，返回字符串</li>
+</ol>
+</blockquote>
+<h2 id="日期模式："><a href="#日期模式：" class="headerlink" title="日期模式："></a>日期模式：</h2><table>
+<thead>
+<tr>
+<th align="center">日期格式</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">yyyy</td>
+<td align="center">年份</td>
+</tr>
+<tr>
+<td align="center">MM</td>
+<td align="center">月份</td>
+</tr>
+<tr>
+<td align="center">dd</td>
+<td align="center">天数</td>
+</tr>
+<tr>
+<td align="center">HH</td>
+<td align="center">0-23小时</td>
+</tr>
+<tr>
+<td align="center">mm</td>
+<td align="center">小时当中的分钟数</td>
+</tr>
+<tr>
+<td align="center">ss</td>
+<td align="center">分钟当中的秒数</td>
+</tr>
+</tbody></table>
+<h2 id="format-Date-date"><a href="#format-Date-date" class="headerlink" title="format(Date date)"></a>format(Date date)</h2><blockquote>
+<p>将日期对象转换为字符串后进行时间的输出，可以自定义日期格式</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">    String date = sdf.format(<span class="keyword">new</span> Date());</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="parse-String-date"><a href="#parse-String-date" class="headerlink" title="parse(String date)"></a>parse(String date)</h2><p>parse()步骤：</p>
+<blockquote>
+<p>1.创建SimpleDateFormat对象，构造方法中指定日期模式</p>
+<p>2.子类对象，调用方法parse传递String，返回Date</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">    Date date = sdf.parse(<span class="string">"1995-5-6"</span>);</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h1><h2 id="getInstance"><a href="#getInstance" class="headerlink" title="getInstance()"></a>getInstance()</h2><blockquote>
+<p>返回了子类的对象，不需要直接new，而是通过调用静态方法</p>
+</blockquote>
+<h2 id="int-get-int-number"><a href="#int-get-int-number" class="headerlink" title="int get(int number)"></a>int get(int number)</h2><blockquote>
+<p>获取某个日历字段的值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Calendar c = Calendar.getInstance();</span><br><span class="line">    <span class="comment">//获取年份</span></span><br><span class="line">    <span class="keyword">int</span> year = c.get(Calendar.YEAR);</span><br><span class="line">    <span class="comment">//获取月份,默认是0-11,所以需要+1</span></span><br><span class="line">    <span class="keyword">int</span> month = c.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//获取日期</span></span><br><span class="line">    <span class="keyword">int</span> day = c.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">    System.out.println(year+<span class="string">"-"</span>+month+<span class="string">"-"</span>+day);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="set-int-field-int-value-设置日历"><a href="#set-int-field-int-value-设置日历" class="headerlink" title="set(int field, int value)设置日历"></a>set(int field, int value)设置日历</h2><blockquote>
+<p>field表示日历的字段</p>
+<p>value表示设置后的具体数值</p>
+</blockquote>
+<h2 id="set-int-year-int-month-int-day"><a href="#set-int-year-int-month-int-day" class="headerlink" title="set(int year, int month, int day)"></a>set(int year, int month, int day)</h2><blockquote>
+<p>设置三个整数的年，月，日</p>
+</blockquote>
+<h2 id="add-int-field-int-value"><a href="#add-int-field-int-value" class="headerlink" title="add(int field, int value)"></a>add(int field, int value)</h2><blockquote>
+<p>日历的偏移量，可以指定一个日历中的字段，进行整数的偏移</p>
+</blockquote>
+<h1 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h1><h2 id="static-long-currentTimeMillis"><a href="#static-long-currentTimeMillis" class="headerlink" title="static long currentTimeMillis()"></a>static long currentTimeMillis()</h2><blockquote>
+<p>获取系统当前的毫秒值</p>
+<p>一般用于程序执行时间测试</p>
+</blockquote>
+<h2 id="static-void-exit"><a href="#static-void-exit" class="headerlink" title="static void exit()"></a>static void exit()</h2><blockquote>
+<p>退出虚拟机，所有程序全部停止</p>
+</blockquote>
+<h2 id="static-void-gc"><a href="#static-void-gc" class="headerlink" title="static void gc()"></a>static void gc()</h2><blockquote>
+<p>JVM在内存中，收取对象的垃圾</p>
+</blockquote>
+<h2 id="static-Properties-getProperties"><a href="#static-Properties-getProperties" class="headerlink" title="static Properties getProperties()"></a>static Properties getProperties()</h2><blockquote>
+<p>获取当前操作系统的属性</p>
+</blockquote>
+<h2 id="static-void-arrayCopy"><a href="#static-void-arrayCopy" class="headerlink" title="static void arrayCopy(~)"></a>static void arrayCopy(<del>~</del>)</h2><p>参数列表：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object src</td>
+<td>要复制的源数组</td>
+</tr>
+<tr>
+<td>int srcPos</td>
+<td>数组源的起始索引</td>
+</tr>
+<tr>
+<td>Object dest</td>
+<td>复制后的目标数组</td>
+</tr>
+<tr>
+<td>int destPos</td>
+<td>目标数组起始索引</td>
+</tr>
+<tr>
+<td>int length</td>
+<td>复制几个</td>
+</tr>
+</tbody></table>
+<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static int abs(int i)</td>
+<td>返回参数的绝对值</td>
+</tr>
+<tr>
+<td>static double ceil(double d)</td>
+<td>返回大于或等于d的最小整数(向上取整)</td>
+</tr>
+<tr>
+<td>static double floor(double d)</td>
+<td>返回小于或等于d的最大整数(向下取整)</td>
+</tr>
+<tr>
+<td>static double pow(double a,double b)</td>
+<td>返回a的b次方</td>
+</tr>
+<tr>
+<td>static double sqrt(double d)</td>
+<td>返回参数的平方根</td>
+</tr>
+<tr>
+<td>static double random()</td>
+<td>返回随机数0.0-1.0之间</td>
+</tr>
+<tr>
+<td>static double round(double d)</td>
+<td>获取参数的四舍五入值，取整数</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/27/栈/" rel="next" title="三分钟数据结构-栈">
+                <i class="fa fa-chevron-left"></i> 三分钟数据结构-栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/29/Spring属性注入/" rel="prev" title="Spring属性注入">
+                Spring属性注入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类"><span class="nav-number">1.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-Object-obj-方法"><span class="nav-number">2.</span> <span class="nav-text">equals(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toString-方法"><span class="nav-number">3.</span> <span class="nav-text">toString()方法</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#String类"><span class="nav-number"></span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal-Object-obj-方法"><span class="nav-number">3.</span> <span class="nav-text">equal(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equalsIgnoreCase-String-s"><span class="nav-number">4.</span> <span class="nav-text">equalsIgnoreCase(String s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-length"><span class="nav-number">5.</span> <span class="nav-text">int length()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-subString-int-beginIndex"><span class="nav-number">6.</span> <span class="nav-text">String subString(int beginIndex)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-startsWith-String-prefix"><span class="nav-number">7.</span> <span class="nav-text">boolean startsWith(String prefix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-endsWith-String-suffix"><span class="nav-number">8.</span> <span class="nav-text">boolean endsWith(String suffix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-charAt-int-index"><span class="nav-number">9.</span> <span class="nav-text">char charAt(int index)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuffer类"><span class="nav-number"></span> <span class="nav-text">StringBuffer类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer-append-String-str"><span class="nav-number">1.</span> <span class="nav-text">StringBuffer append(String str)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-int-start-int-end"><span class="nav-number">2.</span> <span class="nav-text">delete(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-int-index-任意类型"><span class="nav-number">3.</span> <span class="nav-text">insert(int index, 任意类型)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-int-start-int-end"><span class="nav-number">4.</span> <span class="nav-text">replace(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">5.</span> <span class="nav-text">reverse()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuilder类"><span class="nav-number"></span> <span class="nav-text">StringBuilder类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date类"><span class="nav-number"></span> <span class="nav-text">Date类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">System.currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法Date-Long-millis"><span class="nav-number">2.</span> <span class="nav-text">构造方法Date(Long millis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空参构造方法"><span class="nav-number">3.</span> <span class="nav-text">空参构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#long-getTime"><span class="nav-number">4.</span> <span class="nav-text">long getTime()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-setTime-Long-millis"><span class="nav-number">5.</span> <span class="nav-text">Date setTime(Long millis)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleDateFormat类"><span class="nav-number"></span> <span class="nav-text">SimpleDateFormat类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日期格式化步骤"><span class="nav-number">1.</span> <span class="nav-text">日期格式化步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期模式："><span class="nav-number">2.</span> <span class="nav-text">日期模式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#format-Date-date"><span class="nav-number">3.</span> <span class="nav-text">format(Date date)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-String-date"><span class="nav-number">4.</span> <span class="nav-text">parse(String date)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Calendar类"><span class="nav-number"></span> <span class="nav-text">Calendar类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#getInstance"><span class="nav-number">1.</span> <span class="nav-text">getInstance()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-get-int-number"><span class="nav-number">2.</span> <span class="nav-text">int get(int number)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-field-int-value-设置日历"><span class="nav-number">3.</span> <span class="nav-text">set(int field, int value)设置日历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-year-int-month-int-day"><span class="nav-number">4.</span> <span class="nav-text">set(int year, int month, int day)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-int-field-int-value"><span class="nav-number">5.</span> <span class="nav-text">add(int field, int value)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System类"><span class="nav-number"></span> <span class="nav-text">System类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#static-long-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">static long currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-exit"><span class="nav-number">2.</span> <span class="nav-text">static void exit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-gc"><span class="nav-number">3.</span> <span class="nav-text">static void gc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-Properties-getProperties"><span class="nav-number">4.</span> <span class="nav-text">static Properties getProperties()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-arrayCopy"><span class="nav-number">5.</span> <span class="nav-text">static void arrayCopy(~)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math类"><span class="nav-number"></span> <span class="nav-text">Math类</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+
