@@ -5,8 +5,11 @@
     <url>/2019/09/04/Springboot%E6%95%B4%E5%90%88MyBatis/</url>
     <content><![CDATA[<h1 id="Springboot整合MyBatis"><a href="#Springboot整合MyBatis" class="headerlink" title="Springboot整合MyBatis"></a>Springboot整合MyBatis</h1><h2 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png" alt="1567590619140"></p>
 <h2 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/test</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h2 id="UserMapper接口"><a href="#UserMapper接口" class="headerlink" title="UserMapper接口"></a>UserMapper接口</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	  * 获取所有用户</span></span><br><span class="line"><span class="comment">	  */</span></span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">getAllUser</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="如何标识Mapper接口-两种做法"><a href="#如何标识Mapper接口-两种做法" class="headerlink" title="如何标识Mapper接口(两种做法)"></a>如何标识Mapper接口(两种做法)</h3><blockquote>
 <ol>
 <li>每个类上都添加上<code>@Mapper</code>注解(不推荐，重复性大)</li>
@@ -14,10 +17,14 @@
 </ol>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = <span class="string">"com.smallpineapple.mybatis.mapper"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MybatisApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="Mapper接口映射文件-xml"><a href="#Mapper接口映射文件-xml" class="headerlink" title="Mapper接口映射文件(*.xml)"></a>Mapper接口映射文件(*.xml)</h2><h3 id="两种位置"><a href="#两种位置" class="headerlink" title="两种位置"></a>两种位置</h3><h4 id="在mapper接口所在路径下"><a href="#在mapper接口所在路径下" class="headerlink" title="在mapper接口所在路径下"></a>在mapper接口所在路径下</h4><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567591642141.png" alt="1567591642141"></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org/DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.smallpineapple.mybatis.mapper.UserMapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getAllUser"</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">resultType</span>=<span class="string">"com.smallpineapple.mybatis.bean.User"</span>&gt;</span></span><br><span class="line">        SELECT * FROM user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">    List&lt;User&gt; allUser = userMapper.getAllUser();</span><br><span class="line">    System.out.println(allUser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h5 id="报错-消失的xml"><a href="#报错-消失的xml" class="headerlink" title="报错(消失的xml)"></a>报错(消失的xml)</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.smallpineapple.mybatis.mapper.UserMapper.getAllUser</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>显示没有找到UserMapper的getAllUser()方法</p>
 </blockquote>
@@ -32,9 +39,10 @@
 <li>将xml文件移动到resources目录下，但是要保证包名和java包下的包名保持一致</li>
 </ol>
 <p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592268603.png" alt="1567592268603"></p>
-<ol>
+<ol start="2">
 <li><p>告诉maven打包时，包下的xml文件不要忽略，也一起打包，在pom文件里加入配置</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--告诉maven：src/main/java和src/main/resources都是resources目录--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <p>正确结果</p>
@@ -44,6 +52,7 @@
 <p>在yaml配置文件中表明mapper映射文件的位置。</p>
 </blockquote>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span> <span class="string">classpath:/mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567592801574.png" alt="1567592801574"></p>
 <blockquote>
 <p>可以看到打包后的目录，类路径下的mapper目录被打包了，没有被忽略。</p>
@@ -61,7 +70,9 @@
     <title>SpringBoot实现系统启动任务</title>
     <url>/2019/09/02/Springboot%E5%AE%9E%E7%8E%B0%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1/</url>
     <content><![CDATA[<h1 id="Spring-Boot实现系统启动任务"><a href="#Spring-Boot实现系统启动任务" class="headerlink" title="Spring Boot实现系统启动任务"></a>Spring Boot实现系统启动任务</h1><h2 id="CommandLineRunner"><a href="#CommandLineRunner" class="headerlink" title="CommandLineRunner"></a>CommandLineRunner</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">99</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCommandLineRunner1</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"MyCommandLineRunner1&gt;&gt;&gt;"</span>+Arrays.toString(args))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">98</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCommandLineRunner2</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"MyCommandLineRunner2&gt;&gt;&gt;"</span>+Arrays.toString(args))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>注意：</p>
 <ol>
 <li><p>将系统启动类注册到容器当中去，使用<code>@Component</code></p>
@@ -73,15 +84,19 @@
 </li>
 </ol>
 <a id="more"></a>
+
 <h3 id="args参数配置"><a href="#args参数配置" class="headerlink" title="args参数配置"></a><code>args</code>参数配置</h3><p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot实现系统启动任务/1567427825805.png" alt="参数配置"></p>
 <p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot实现系统启动任务/1567427863917.png" alt="参数配置"></p>
 <h4 id="命令行启动传入args参数"><a href="#命令行启动传入args参数" class="headerlink" title="命令行启动传入args参数"></a>命令行启动传入args参数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar commandlinerunner-0.0.1-SHAPSHOT.jar smallpineapple smallpineapple.github.io</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>参数跟在后面，多个参数用空格隔开</p>
 </blockquote>
 <h3 id="执行结果"><a href="#执行结果" class="headerlink" title="执行结果"></a>执行结果</h3><p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot实现系统启动任务/3-2.png" alt="执行结果"></p>
 <h2 id="ApplicationRunner"><a href="#ApplicationRunner" class="headerlink" title="ApplicationRunner"></a>ApplicationRunner</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">99</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplicationRunner01</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//获取启动的所有参数</span></span><br><span class="line">        String[] sourceArgs = args.getSourceArgs();</span><br><span class="line">        System.out.println(<span class="string">"sourceArgs:"</span>+Arrays.toString(sourceArgs));</span><br><span class="line">        <span class="comment">//获取所有的无key参数</span></span><br><span class="line">        List&lt;String&gt; nonSourceArgs = args.getNonOptionArgs();</span><br><span class="line">        System.out.println(<span class="string">"nonSourceArgs:"</span></span><br><span class="line">                         +Arrays.toString(nonSourceArgs));</span><br><span class="line">        Set&lt;String&gt; optionNames = args.getOptionNames();</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">        <span class="keyword">for</span>(String optionName : optionNames)&#123;</span><br><span class="line">            System.out.println(optionName+<span class="string">":"</span>+</span><br><span class="line">                                	args.getOptionValues(optionName));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;MyApplicationRunner01结束&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">98</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplicationRunner02</span> <span class="keyword">implements</span> <span class="title">ApplicationRunner</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(ApplicationArguments args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">       <span class="comment">//获取启动的所有参数</span></span><br><span class="line">        String[] sourceArgs = args.getSourceArgs();</span><br><span class="line">        System.out.println(<span class="string">"sourceArgs:"</span>+Arrays.toString(sourceArgs));</span><br><span class="line">        <span class="comment">//获取所有的无key参数</span></span><br><span class="line">        List&lt;String&gt; nonSourceArgs = args.getNonOptionArgs();</span><br><span class="line">        System.out.println(<span class="string">"nonSourceArgs:"</span></span><br><span class="line">                         +Arrays.toString(nonSourceArgs));</span><br><span class="line">        Set&lt;String&gt; optionNames = args.getOptionNames();</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">        <span class="keyword">for</span>(String optionName : optionNames)&#123;</span><br><span class="line">            System.out.println(optionName+<span class="string">":"</span>+</span><br><span class="line">                                	args.getOptionValues(optionName));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;MyApplicationRunner02结束&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>当项目启动时，这里的 run 方法就会被自动执行</p>
 <h3 id="关于-run-方法的参数-args"><a href="#关于-run-方法的参数-args" class="headerlink" title="关于 run 方法的参数 args"></a>关于 run 方法的参数 args</h3><ol>
 <li><code>getSourceArgs()</code>获取所有的参数，包括key-value键值对和无key的值</li>
@@ -93,6 +108,7 @@
 <p>ApplicationRunner 定义完成后，传启动参数也是两种方式，参数类型也有两种，第一种和 CommandLineRunner 一致，<strong>第二种则是 –key=value 的形式</strong></p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar devtools-0.0.1-SNAPSHOT.jar 三国演义 西游记 --age=99</span><br></pre></td></tr></table></figure>
+
 <h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p><img src="//smallpineapp1e.github.io/2019/09/02/Springboot实现系统启动任务/3-4.png" alt="执行结果"></p>
 ]]></content>
       <categories>
@@ -108,6 +124,7 @@
     <content><![CDATA[<h1 id="默认的静态资源访问"><a href="#默认的静态资源访问" class="headerlink" title="默认的静态资源访问"></a>默认的静态资源访问</h1><p>当我们构建好Springboot项目后会发现项目路径下会有<code>resources/static</code>文件夹，它就是默认存放静态资源的文件夹<strong>之一</strong>。</p>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="WebMvcAutoConfiguration"><a href="#WebMvcAutoConfiguration" class="headerlink" title="WebMvcAutoConfiguration"></a>WebMvcAutoConfiguration</h3><p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349010895.png" alt="1567349010895"></p>
 <a id="more"></a>
+
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567348849650.png" alt="1567348849650"></p>
 <p><img src="//smallpineapp1e.github.io/2019/09/01/Springboot静态资源访问/1567349316180.png" alt="1567349316180"></p>
 <p> 所以，静态资源的路径默认一共是有五个(优先级由上到下)</p>
@@ -131,7 +148,9 @@
 <p>可以通过配置文件中匹配其前缀名规则，即可自定义静态资源的访问路径与匹配规则。</p>
 </blockquote>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span> </span><br><span class="line">  <span class="attr">resources:</span> </span><br><span class="line">    <span class="attr">static-locations:</span> <span class="string">classpath:/smallpineapple/</span></span><br><span class="line">  <span class="attr">mvc:</span> </span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/**</span></span><br><span class="line"><span class="attr">file:</span> </span><br><span class="line">  <span class="attr">uploadDir:</span> <span class="string">/usr/static/img/</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="通过类添加自定义静态资源配置"><a href="#通过类添加自定义静态资源配置" class="headerlink" title="通过类添加自定义静态资源配置"></a>通过类添加自定义静态资源配置</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"file.uploadDir"</span>)</span><br><span class="line">    String uploadDir;</span><br><span class="line">    </span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//匹配类路径下的smallpineapple目录下的所有静态资源</span></span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"classpath:/smallpineapple/"</span>);</span><br><span class="line">     	<span class="comment">//匹配指定目录的静态文件</span></span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">"file:///"</span>+uploadDir);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="最后补充"><a href="#最后补充" class="headerlink" title="最后补充"></a>最后补充</h2><p>问：<code>/**</code>和<code>/*</code>有什么区别？</p>
 <blockquote>
 <p>由于这是一种Ant风格的路径匹配符，<code>/**</code> 表示可以匹配任意层级的路径，而<code>/*</code>表示匹配当前层级下的任何路径。</p>
@@ -154,13 +173,17 @@
     <title>Spring属性注入</title>
     <url>/2019/08/29/Spring%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h2 id="book-properties"><a href="#book-properties" class="headerlink" title="book.properties"></a>book.properties</h2><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">book.id</span>=<span class="string">19</span></span><br><span class="line"><span class="meta">book.name</span>=<span class="string">三国演义</span></span><br><span class="line"><span class="meta">book.author</span>=<span class="string">罗贯中</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="Book实体类"><a href="#Book实体类" class="headerlink" title="Book实体类"></a>Book实体类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注册到Spring容器</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//加入classpath路径下的对应配置文件</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:book.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span></span>&#123;</span><br><span class="line">    <span class="comment">//注入属性的值,$&#123;&#125;动态获取配置文件中的值</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.id&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.name&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.author&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*getter and setter*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h2 id="Springboot的属性注入"><a href="#Springboot的属性注入" class="headerlink" title="Springboot的属性注入"></a>Springboot的属性注入</h2><h2 id="类型安全的属性注入"><a href="#类型安全的属性注入" class="headerlink" title="类型安全的属性注入"></a>类型安全的属性注入</h2><p>Spring的属性注入存在的问题</p>
 <blockquote>
 <p>若属性较多，属性名较长较复杂，挨个输入的错误率大大提高，非常地不友好</p>
 </blockquote>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注册到Spring容器</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//加入classpath路径下的对应配置文件</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:book.properties"</span>)</span><br><span class="line"><span class="comment">//将配置文件中符文的所有前缀的属性的值一一注入</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix=<span class="string">"book"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*getter and setter*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>Spring</category>
@@ -176,11 +199,14 @@
 <p>Object类是<strong>所有类的父类</strong>！它本身没有父类，它已经是<strong>顶层类</strong>。</p>
 </blockquote>
 <h2 id="equals-Object-obj-方法"><a href="#equals-Object-obj-方法" class="headerlink" title="equals(Object obj)方法"></a>equals(Object obj)方法</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> == obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>返回值是布尔类型，方法参数为Object类型，即<strong>任何类型</strong>的参数都可以传递进去。</p>
 <p>用于比较<strong>其它对象与本对象的内存地址</strong>是否相等。</p>
 <p><strong>引用</strong>数据类型 “==” 用于<strong>比较两个对象的内存地址</strong>。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//Person类继承Object类，继承了Object类的equals方法</span></span><br><span class="line">    Person p1 = <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">25</span>);</span><br><span class="line">    Person p2 = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//Person的对象p1，调用父类的方法equals，进行对象的内存地址比较</span></span><br><span class="line">    <span class="keyword">boolean</span> b = p1.equals(p2);</span><br><span class="line">    System.out.println(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <p>Question：</p>
 <ol>
 <li>this指的是谁？</li>
@@ -188,7 +214,7 @@
 <blockquote>
 <p>谁调用的，就是谁，p1对象调用equals方法，所以this指的是p1对象</p>
 </blockquote>
-<ol>
+<ol start="2">
 <li>obj指的是谁？</li>
 </ol>
 <blockquote>
@@ -197,13 +223,16 @@
 <p>两个对象比较地址没有意义！</p>
 <p>为使equals方法有意义，则在子类中重写equals()方法，可以比较两个对象中的成员变量，由于Object能传递任何类型的变量，所以存在安全隐患，所以<strong>应该在重写方法中判断传递过来的参数到底是什么。</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person)&#123;</span><br><span class="line">        <span class="comment">//参数obj接受到的是Person对象，才能进行转型</span></span><br><span class="line">        <span class="comment">//对obj参数进行向下转型,obj转成Person类型</span></span><br><span class="line">        Person p = (Person) obj;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.age == p.age);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>传递参数时会发生多态中的向上转型Person引用数据类型<strong>变量被提升为Object类型</strong>多态中的弊端：<strong>无法调用子类的特有内容！</strong></p>
 <p>所以要向下转型：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">子类数据类型 变量名 = (子类数据类型)   父类数据类型变量名</span><br><span class="line">Person p = (Person) obj；</span><br></pre></td></tr></table></figure>
+
 <p>若传过来的参数为null,直接返回false；</p>
 <p>若传过来的参数是自己本身，自己与自己比较，则直接返回true；增加上述判断情况可提高程序的执行效率！！！考虑更加周全！！！</p>
 <h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><p>输出语句中，输出一个对象，则对象自动调用自身的toString()方法。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//调用Person类的方法toString()</span></span><br><span class="line">    <span class="comment">//输出语句中，写的是一个对象，默认调用的toString方法</span></span><br><span class="line">    Person p = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    String s = p.toString();</span><br><span class="line">    System.out.println(p);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Output：</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br></pre></td></tr></table></figure>
+
 <p>重写方法toString()，因为没有必要让调用者看到内存地址</p>
 <blockquote>
 <p>在开发中重写toString方法的一般要求：在方法中返回所有成员变量的值</p>
@@ -216,6 +245,7 @@
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>字符串是常量， 它的值在创建后不能更改！</strong></p>
 <p>但<strong>引用类型本身所指向的地址可以改变</strong>，每一个双引号都是String类型的对象。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//引起变量str执行内存变化</span></span><br><span class="line">    <span class="comment">//定义好的字符串对象，不变</span></span><br><span class="line">    String str = <span class="string">"smallpineapple"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">    str = <span class="string">"pig"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>str对象<strong>可以指向不同的地址</strong>，但是<strong>双引号内的值是永远不变的。</strong></p>
 <p>因为String类源码本身定义了一个<strong>字符数组常量进行存储字符</strong>。</p>
 <h2 id="equal-Object-obj-方法"><a href="#equal-Object-obj-方法" class="headerlink" title="equal(Object obj)方法"></a>equal(Object obj)方法</h2><blockquote>
@@ -293,52 +323,50 @@
 <li>SimpleDateFormat调用方法format对日期进行格式化，String format(Date date)    传递日期对象，返回字符串</li>
 </ol>
 </blockquote>
-<h2 id="日期模式："><a href="#日期模式：" class="headerlink" title="日期模式："></a>日期模式：</h2><div class="table-container">
-<table>
+<h2 id="日期模式："><a href="#日期模式：" class="headerlink" title="日期模式："></a>日期模式：</h2><table>
 <thead>
 <tr>
-<th style="text-align:center">日期格式</th>
-<th style="text-align:center">含义</th>
+<th align="center">日期格式</th>
+<th align="center">含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">yyyy</td>
-<td style="text-align:center">年份</td>
+<tbody><tr>
+<td align="center">yyyy</td>
+<td align="center">年份</td>
 </tr>
 <tr>
-<td style="text-align:center">MM</td>
-<td style="text-align:center">月份</td>
+<td align="center">MM</td>
+<td align="center">月份</td>
 </tr>
 <tr>
-<td style="text-align:center">dd</td>
-<td style="text-align:center">天数</td>
+<td align="center">dd</td>
+<td align="center">天数</td>
 </tr>
 <tr>
-<td style="text-align:center">HH</td>
-<td style="text-align:center">0-23小时</td>
+<td align="center">HH</td>
+<td align="center">0-23小时</td>
 </tr>
 <tr>
-<td style="text-align:center">mm</td>
-<td style="text-align:center">小时当中的分钟数</td>
+<td align="center">mm</td>
+<td align="center">小时当中的分钟数</td>
 </tr>
 <tr>
-<td style="text-align:center">ss</td>
-<td style="text-align:center">分钟当中的秒数</td>
+<td align="center">ss</td>
+<td align="center">分钟当中的秒数</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="format-Date-date"><a href="#format-Date-date" class="headerlink" title="format(Date date)"></a>format(Date date)</h2><blockquote>
 <p>将日期对象转换为字符串后进行时间的输出，可以自定义日期格式</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">    String date = sdf.format(<span class="keyword">new</span> Date());</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="parse-String-date"><a href="#parse-String-date" class="headerlink" title="parse(String date)"></a>parse(String date)</h2><p>parse()步骤：</p>
 <blockquote>
 <p>1.创建SimpleDateFormat对象，构造方法中指定日期模式</p>
 <p>2.子类对象，调用方法parse传递String，返回Date</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">    Date date = sdf.parse(<span class="string">"1995-5-6"</span>);</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h1><h2 id="getInstance"><a href="#getInstance" class="headerlink" title="getInstance()"></a>getInstance()</h2><blockquote>
 <p>返回了子类的对象，不需要直接new，而是通过调用静态方法</p>
 </blockquote>
@@ -346,6 +374,7 @@
 <p>获取某个日历字段的值</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Calendar c = Calendar.getInstance();</span><br><span class="line">    <span class="comment">//获取年份</span></span><br><span class="line">    <span class="keyword">int</span> year = c.get(Calendar.YEAR);</span><br><span class="line">    <span class="comment">//获取月份,默认是0-11,所以需要+1</span></span><br><span class="line">    <span class="keyword">int</span> month = c.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//获取日期</span></span><br><span class="line">    <span class="keyword">int</span> day = c.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">    System.out.println(year+<span class="string">"-"</span>+month+<span class="string">"-"</span>+day);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="set-int-field-int-value-设置日历"><a href="#set-int-field-int-value-设置日历" class="headerlink" title="set(int field, int value)设置日历"></a>set(int field, int value)设置日历</h2><blockquote>
 <p>field表示日历的字段</p>
 <p>value表示设置后的具体数值</p>
@@ -369,8 +398,7 @@
 <h2 id="static-Properties-getProperties"><a href="#static-Properties-getProperties" class="headerlink" title="static Properties getProperties()"></a>static Properties getProperties()</h2><blockquote>
 <p>获取当前操作系统的属性</p>
 </blockquote>
-<h2 id="static-void-arrayCopy"><a href="#static-void-arrayCopy" class="headerlink" title="static void arrayCopy(~~~)"></a>static void arrayCopy(~~~)</h2><p>参数列表：</p>
-<div class="table-container">
+<h2 id="static-void-arrayCopy"><a href="#static-void-arrayCopy" class="headerlink" title="static void arrayCopy(~)"></a>static void arrayCopy(<del>~</del>)</h2><p>参数列表：</p>
 <table>
 <thead>
 <tr>
@@ -378,8 +406,7 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Object src</td>
 <td>要复制的源数组</td>
 </tr>
@@ -399,19 +426,15 @@
 <td>int length</td>
 <td>复制几个</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><div class="table-container">
-<table>
+</tbody></table>
+<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><table>
 <thead>
 <tr>
 <th>方法</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>static int abs(int i)</td>
 <td>返回参数的绝对值</td>
 </tr>
@@ -439,9 +462,7 @@
 <td>static double round(double d)</td>
 <td>获取参数的四舍五入值，取整数</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 ]]></content>
       <tags>
         <tag>Java</tag>
@@ -453,6 +474,7 @@
     <content><![CDATA[<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>栈就像一个乒乓球盒子，我们只能从其中的一个口放和取，而最后放进去的乒乓球总会是第一个被取出，这就是栈的最显著的特点：<strong>后进先出</strong>。</p>
 <p><img src="//smallpineapp1e.github.io/2019/08/27/栈/1566915182316.png" alt="1566915182316"></p>
 <a id="more"></a>
+
 <h2 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h2><blockquote>
 <ul>
 <li>后进先出(Last In First Out)</li>
@@ -487,21 +509,21 @@
 <ul>
 <li>数组栈元素入栈过程</li>
 </ul>
-<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/数组入栈.png" alt="数组入栈"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%85%A5%E6%A0%88.png" alt="数组入栈"></p>
 <blockquote>
 <p>将<strong>栈顶元素对应的下标+1</strong>，使得栈顶的位置发生改变，并将元素放入当前栈顶位置下标所指向的数组位置。</p>
 </blockquote>
 <ul>
 <li>数组栈元素出栈过程</li>
 </ul>
-<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/数组出栈.png" alt="数组出栈"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E6%95%B0%E7%BB%84%E5%87%BA%E6%A0%88.png" alt="数组出栈"></p>
 <blockquote>
 <p>将栈顶元素对应的下标-1，使栈顶位置往前移动一位，并把原来栈顶的值<strong>“删除掉”</strong>，由于是数组，无法真正地删除一个已经分配的内存空间，所以我们只需要默认它不存在就好了。</p>
 </blockquote>
 <ul>
 <li>链表栈元素入栈过程</li>
 </ul>
-<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/链表入栈.png" alt="链表入栈"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%85%A5%E6%A0%88.png" alt="链表入栈"></p>
 <blockquote>
 <ol>
 <li>将链表最后一个节点的next指针域指向待放入栈的元素</li>
@@ -512,7 +534,7 @@
 <ul>
 <li>链表栈元素出栈过程</li>
 </ul>
-<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/链表出栈.png" alt="数组出栈"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/27/栈/%E9%93%BE%E8%A1%A8%E5%87%BA%E6%A0%88.png" alt="数组出栈"></p>
 <p>啊啊啊</p>
 <blockquote>
 <ol>
@@ -530,8 +552,10 @@
 </li>
 <li><p>“+”（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。</p>
 </li>
-<li>“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。</li>
-<li>“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。</li>
+<li><p>“D”（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。</p>
+</li>
+<li><p>“C”（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。</p>
+</li>
 </ol>
 <p>每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。</p>
 <p>你需要返回你在所有回合中得分的总和。</p>
@@ -557,6 +581,7 @@
 </ol>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; numStack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calPoints</span><span class="params">(String[] ops)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断长度是否超出题目要求</span></span><br><span class="line">        <span class="keyword">if</span>(ops.length &gt; <span class="number">1000</span> || ops.length &lt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;=ops.length-<span class="number">1</span> ; i++)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> number = Integer.parseInt(ops[i]);</span><br><span class="line">                <span class="comment">//判断数字大小是否超出题目要求</span></span><br><span class="line">                <span class="keyword">if</span>(number &gt; <span class="number">30000</span> || number &lt; -<span class="number">30000</span>)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    numStack.push(number);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">                <span class="comment">//栈判空, 若为空, 则此次操作没有任何意义</span></span><br><span class="line">                <span class="keyword">if</span>(numStack.empty())&#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//不是数字, 会抛出异常, 此时不抛出, 作操作判断</span></span><br><span class="line">                <span class="keyword">switch</span> (ops[i])&#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"C"</span>:</span><br><span class="line">                        numStack.pop();</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"D"</span>:</span><br><span class="line">                        Integer peek = numStack.peek();</span><br><span class="line">                        numStack.push(peek*<span class="number">2</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"+"</span>:</span><br><span class="line">                        <span class="keyword">if</span>(numStack.size() &lt; <span class="number">2</span>)&#123;</span><br><span class="line">                            numStack.push(numStack.peek());</span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            Integer top = numStack.peek();</span><br><span class="line">                            Integer second = numStack.get(numStack.size() - <span class="number">2</span>);</span><br><span class="line">                            numStack.push(top+second);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//求和</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (Integer integer : numStack) &#123;</span><br><span class="line">            sum += integer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>算法与数据结构</category>
@@ -574,6 +599,7 @@
 <p><strong>在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法</strong></p>
 </blockquote>
 <h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">父类类型或接口类型 引用变量 = <span class="keyword">new</span> 子类对象();</span><br></pre></td></tr></table></figure>
+
 <h2 id="成员变量的特点"><a href="#成员变量的特点" class="headerlink" title="成员变量的特点"></a>成员变量的特点</h2><p>编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败</p>
 <p>运行时：运行的是父类的变量值</p>
 <blockquote>
@@ -611,17 +637,21 @@
 <p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
 </blockquote>
 <h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
 <p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
 </blockquote>
 <a id="more"></a>
+
 <h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> 数据类型 变量名 = 值</span><br></pre></td></tr></table></figure>
+
 <h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><blockquote>
 <p>接口中的成员变量都为<strong>常量</strong>！！</p>
 <p>在接口中定义常量，可省略修饰符public static final，但<strong>仍然存在</strong>！</p>
 </blockquote>
 <h4 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">接口.成员变量</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>常量被<strong>静态修饰</strong>，可以被类名直接调用，被接口的名字直接调用</p>
 </blockquote>
@@ -701,6 +731,7 @@
 </blockquote>
 <p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/timg.jpg" alt="img"></p>
 <a id="more"></a>
+
 <p>上图为此算法的执行过程及结果，当对象被回收后，<code>内存的可利用空间得到提升</code>，但是这个算法<code>并不是百利无害</code>的。</p>
 <blockquote>
 <p>“标记-清除”算法的<strong>弊端</strong>：</p>
@@ -782,6 +813,7 @@
 </ol>
 </blockquote>
 <a id="more"></a>
+
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="抽象类-1"><a href="#抽象类-1" class="headerlink" title="抽象类"></a>抽象类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746163348.png" alt="1566746163348"></p>
 <h4 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h4><p><img src="//smallpineapp1e.github.io/2019/08/25/JAVASE-抽象类及抽象方法/1566746167567.png" alt="1566746167567"></p>
 ]]></content>
@@ -802,6 +834,7 @@
 <p><img src="//smallpineapp1e.github.io/2019/08/25/稀疏数组/2019-08-25_110340.jpg" alt></p>
 <p>如果我要保存当前棋盘的状态 , 保存没有放置棋子的地方是毫无意义而且浪费内存空间的 , 所以此时稀疏数组可以起到非常大的作用.</p>
 <a id="more"></a>
+
 <h3 id="1-2什么是稀疏数组"><a href="#1-2什么是稀疏数组" class="headerlink" title="1.2什么是稀疏数组"></a>1.2什么是稀疏数组</h3><blockquote>
 <p>稀疏数组共有3列 , 第1列表示行, 第2列表示列, 第三列表示值.</p>
 <p>稀疏数组的第1行保存原数组中共有多少行, 多少列与多少个有效值</p>
@@ -820,6 +853,7 @@
 <p>②从稀疏数组的第二行开始读取数据存放到原始数组中</p>
 </blockquote>
 <h3 id="1-6-代码实现"><a href="#1-6-代码实现" class="headerlink" title="1.6 代码实现"></a>1.6 代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.smallpineapple.sparseArray;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SparseArray</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		<span class="comment">//构建原二维数组</span></span><br><span class="line">		<span class="keyword">int</span> chessArr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">		chessArr[<span class="number">3</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">		chessArr[<span class="number">3</span>][<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">		chessArr[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">2</span>;</span><br><span class="line">		chessArr[<span class="number">3</span>][<span class="number">4</span>] = <span class="number">2</span>;</span><br><span class="line">		chessArr[<span class="number">3</span>][<span class="number">5</span>] = <span class="number">2</span>;</span><br><span class="line">		chessArr[<span class="number">4</span>][<span class="number">5</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//输出原始二维数组</span></span><br><span class="line">		System.out.println(<span class="string">"原始的二维数组:"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> item : row) &#123;</span><br><span class="line">				System.out.print(item+<span class="string">" "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//遍历原始二维数组的有效数据</span></span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span>[] row : chessArr) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> item : row) &#123;</span><br><span class="line">				<span class="keyword">if</span>(item!=<span class="number">0</span>)&#123;</span><br><span class="line">					count++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"有效数据个数为:"</span>+count);</span><br><span class="line">		<span class="comment">//创建稀疏数组</span></span><br><span class="line">		<span class="keyword">int</span> sparsearray[][] = <span class="keyword">new</span> <span class="keyword">int</span>[count+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">		sparsearray[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">11</span>;</span><br><span class="line">		sparsearray[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">11</span>;</span><br><span class="line">		sparsearray[<span class="number">0</span>][<span class="number">2</span>] = count;</span><br><span class="line">		<span class="comment">//遍历二维数组, 将非0数据存放到数组当中去 </span></span><br><span class="line">		<span class="keyword">int</span> row = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">9</span>;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(chessArr[i][j]!=<span class="number">0</span>)&#123;</span><br><span class="line">					sparsearray[row][<span class="number">0</span>] = i;</span><br><span class="line">					sparsearray[row][<span class="number">1</span>] = j;</span><br><span class="line">					sparsearray[row][<span class="number">2</span>] = chessArr[i][j];</span><br><span class="line">					<span class="comment">//下一个数据存放到下一行</span></span><br><span class="line">					row++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//输出稀疏数组</span></span><br><span class="line">		System.out.println(<span class="string">"稀疏数组:"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sparsearray.length; i++) &#123;</span><br><span class="line">			System.out.printf(<span class="string">"%d\t%d\t%d\t"</span>, sparsearray[i][<span class="number">0</span>],sparsearray[i][<span class="number">1</span>],sparsearray[i][<span class="number">2</span>]);</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//稀疏数组转换成原始数组</span></span><br><span class="line">		<span class="keyword">int</span>[][] transferArray = <span class="keyword">new</span> <span class="keyword">int</span>[sparsearray[<span class="number">0</span>][<span class="number">0</span>]][sparsearray[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sparsearray.length; i++) &#123;</span><br><span class="line">			transferArray[sparsearray[i][<span class="number">0</span>]][sparsearray[i][<span class="number">1</span>]] = sparsearray[i][<span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//输出原始数组</span></span><br><span class="line">		System.out.println(<span class="string">"原始数组形式:"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span>[] a : transferArray) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i : a) &#123;</span><br><span class="line">				System.out.print(i+<span class="string">" "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果 : </span><br><span class="line"></span><br><span class="line">原始的二维数组:</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line">有效数据个数为:<span class="number">6</span></span><br><span class="line">稀疏数组:</span><br><span class="line"><span class="number">11</span>	<span class="number">11</span>	<span class="number">6</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">1</span>	<span class="number">1</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">2</span>	<span class="number">2</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">3</span>	<span class="number">2</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">4</span>	<span class="number">2</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">5</span>	<span class="number">2</span>	</span><br><span class="line"><span class="number">4</span>	<span class="number">5</span>	<span class="number">1</span>	</span><br><span class="line">原始数组形式:</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>算法与数据结构</category>
@@ -855,6 +889,7 @@
 </ol>
 <h2 id="2-HTTP协议之URL篇"><a href="#2-HTTP协议之URL篇" class="headerlink" title="2. HTTP协议之URL篇"></a>2. HTTP协议之URL篇</h2><p>HTTP URL(URL是一种特殊类型的URI，包含了用户查找某个资源的足够的信息)的格式如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://host[":"port][abs_path]</span><br></pre></td></tr></table></figure>
+
 <p>HTTP要通过HTTP协议来定位网络资源</p>
 <h3 id="2-1-名词解释"><a href="#2-1-名词解释" class="headerlink" title="2.1 名词解释"></a>2.1 名词解释</h3><blockquote>
 <p><strong>host：</strong>表示合法的Internet主机域名或IP地址；</p>
@@ -863,7 +898,7 @@
 </blockquote>
 <p>这个工作通常由浏览器为我们完成。</p>
 <h3 id="2-2-例子"><a href="#2-2-例子" class="headerlink" title="2.2 例子"></a>2.2 例子</h3><ol>
-<li><p>www.gdou.edu.cn</p>
+<li><p><a href="http://www.gdou.edu.cn" target="_blank" rel="noopener">www.gdou.edu.cn</a></p>
 <p>浏览器会自动转换为：<a href="http://www.gdou.edu.cn" target="_blank" rel="noopener">http://www.gdou.edu.cn</a></p>
 </li>
 <li><p><a href="http://192.168.0.112:8080/index.jsp" target="_blank" rel="noopener">http://192.168.0.112:8080/index.jsp</a></p>
@@ -875,7 +910,7 @@
 <li>消息报头(请求头)；</li>
 <li>请求正文(请求体)。</li>
 </ol>
-<p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/请求报文.jpg" alt="请求报文"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt="请求报文"></p>
 <h4 id="3-1-1-请求行"><a href="#3-1-1-请求行" class="headerlink" title="3.1.1 请求行"></a>3.1.1 请求行</h4><p>请求行以一个方法符号开头，以空格隔开，后面跟的是请求的URL和协议的版本</p>
 <p>格式如下：</p>
 <p>Method        Request-URI        HTTP-Version CRLF(回车和换行)</p>
@@ -891,17 +926,24 @@
 </ol>
 </blockquote>
 <p><strong>应用举例：</strong></p>
-<p>​    <strong>GET： </strong>在浏览器的地址栏输入网址的方式访问网页时，浏览器会以GET方法的形式向服务器请求资源。</p>
+<p>​    *<em>GET： *</em>在浏览器的地址栏输入网址的方式访问网页时，浏览器会以GET方法的形式向服务器请求资源。</p>
 <p>​        GET        /index        HTTP/1.1(CLRLF)</p>
 <p>​    <strong>POST：</strong>在向服务器发送请求时附加上自己需要携带的信息，不会显示在URI后面而会保存在请求正文(请求体)中</p>
 <p>​                  如上图所示，提交了三个信息并保存在请求正文中，浏览器会以键值对形式将信息进行存储并进行信息的利用。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;<span class="string">"name"</span>,<span class="string">"tom"</span>&gt;</span><br><span class="line">&lt;<span class="string">"password"</span>,<span class="string">"1234"</span>&gt;</span><br><span class="line">&lt;<span class="string">"realName"</span>,<span class="string">"tomson"</span>&gt;</span><br></pre></td></tr></table></figure>
+
 <p>​    <strong>PUT：</strong>常用于向服务器发送请求时更新一个资源，并携带上希望更新的信息标识及更新的内容。</p>
 <p>​    <strong>DELETE：</strong>常用于向服务器发送请求时删除一个资源，并鞋带上希望删除的信息标识。</p>
-<p><hr></p>
-<h4 id="3-1-2-请求报头稍后详述"><a href="#3-1-2-请求报头稍后详述" class="headerlink" title="3.1.2 请求报头稍后详述"></a>3.1.2 请求报头稍后详述</h4><p><hr></p>
-<h4 id="3-1-3-请求正文-略"><a href="#3-1-3-请求正文-略" class="headerlink" title="3.1.3 请求正文(略)"></a>3.1.3 请求正文(略)</h4><p><hr></p>
-<h2 id="4-HTTP协议之响应篇"><a href="#4-HTTP协议之响应篇" class="headerlink" title="4.HTTP协议之响应篇"></a>4.HTTP协议之响应篇</h2><p>在接收到请求信息并处理完毕后，服务器会返回一个HTTP响应信息给客户端。</p>
+<hr>
+#### 3.1.2 请求报头稍后详述
+
+<hr>
+#### 3.1.3 请求正文(略)
+
+<hr>
+## 4.HTTP协议之响应篇
+
+<p>在接收到请求信息并处理完毕后，服务器会返回一个HTTP响应信息给客户端。</p>
 <h3 id="4-1-HTTP响应的组成部分"><a href="#4-1-HTTP响应的组成部分" class="headerlink" title="4.1 HTTP响应的组成部分"></a>4.1 HTTP响应的组成部分</h3><ol>
 <li>状态行(响应行)</li>
 <li>消息报头(响应头)</li>
@@ -916,64 +958,66 @@
 <h5 id="状态码-Status-code-介绍"><a href="#状态码-Status-code-介绍" class="headerlink" title="状态码(Status-code)介绍"></a>状态码(Status-code)介绍</h5><p>状态代码由3位数字组成，第1个数字定义了响应的类别，有5种可能取值：</p>
 <ol>
 <li><strong>1xx：</strong>表示消息已被服务器接收到，继续处理。</li>
-<li><strong>2xx</strong>：成功——表示请求已被成功接收、解析并接受</li>
-<li><strong>3xx：</strong>重定向——表示此次请求将被转换成另一个请求继续下一步的操作</li>
-<li><strong>4xx：</strong>客户端错误——表示请求无法被服务器接收</li>
-<li><strong>5xx</strong>：服务器端错误——服务器端未能正确处理客户端发送的请求。</li>
+<li><strong>2xx</strong>：成功—-表示请求已被成功接收、解析并接受</li>
+<li><strong>3xx：</strong>重定向—-表示此次请求将被转换成另一个请求继续下一步的操作</li>
+<li><strong>4xx：</strong>客户端错误—-表示请求无法被服务器接收</li>
+<li><strong>5xx</strong>：服务器端错误—-服务器端未能正确处理客户端发送的请求。</li>
 </ol>
 <p><strong>常见状态码：</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">状态码</th>
-<th style="text-align:center">状态描述</th>
-<th style="text-align:center">说明</th>
+<th align="center">状态码</th>
+<th align="center">状态描述</th>
+<th align="center">说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">200</td>
-<td style="text-align:center">OK</td>
-<td style="text-align:center">客户端请求成功</td>
+<tbody><tr>
+<td align="center">200</td>
+<td align="center">OK</td>
+<td align="center">客户端请求成功</td>
 </tr>
 <tr>
-<td style="text-align:center">400</td>
-<td style="text-align:center">Bad Request</td>
-<td style="text-align:center">客户端请求有语法错误，不能被服务器所理解</td>
+<td align="center">400</td>
+<td align="center">Bad Request</td>
+<td align="center">客户端请求有语法错误，不能被服务器所理解</td>
 </tr>
 <tr>
-<td style="text-align:center">401</td>
-<td style="text-align:center">Unauthorized</td>
-<td style="text-align:center">请求未经授权，此状态码必须与WWW-Authenticate报头一起食用</td>
+<td align="center">401</td>
+<td align="center">Unauthorized</td>
+<td align="center">请求未经授权，此状态码必须与WWW-Authenticate报头一起食用</td>
 </tr>
 <tr>
-<td style="text-align:center">403</td>
-<td style="text-align:center">Forbidden</td>
-<td style="text-align:center">服务器收到请求，但是拒绝提供服务</td>
+<td align="center">403</td>
+<td align="center">Forbidden</td>
+<td align="center">服务器收到请求，但是拒绝提供服务</td>
 </tr>
 <tr>
-<td style="text-align:center">404</td>
-<td style="text-align:center">Not Found</td>
-<td style="text-align:center">请求的资源不存在 eg：输入了错误的URL</td>
+<td align="center">404</td>
+<td align="center">Not Found</td>
+<td align="center">请求的资源不存在 eg：输入了错误的URL</td>
 </tr>
 <tr>
-<td style="text-align:center">500</td>
-<td style="text-align:center">Internal Server Error</td>
-<td style="text-align:center">服务器发生了不可预期的错误 eg：信息解析异常</td>
+<td align="center">500</td>
+<td align="center">Internal Server Error</td>
+<td align="center">服务器发生了不可预期的错误 eg：信息解析异常</td>
 </tr>
 <tr>
-<td style="text-align:center">503</td>
-<td style="text-align:center">Server Unavailable</td>
-<td style="text-align:center">服务器当前不能处理科幻段的请求，一段时间后可能恢复正常</td>
+<td align="center">503</td>
+<td align="center">Server Unavailable</td>
+<td align="center">服务器当前不能处理科幻段的请求，一段时间后可能恢复正常</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><hr></p>
-<h4 id="4-1-2-响应报头-响应头-稍后详述"><a href="#4-1-2-响应报头-响应头-稍后详述" class="headerlink" title="4.1.2 响应报头(响应头)稍后详述"></a>4.1.2 响应报头(响应头)稍后详述</h4><p><hr></p>
-<h4 id="4-1-3-响应正文-响应体-就是服务器返回的资源的内容"><a href="#4-1-3-响应正文-响应体-就是服务器返回的资源的内容" class="headerlink" title="4.1.3 响应正文(响应体)就是服务器返回的资源的内容"></a>4.1.3 响应正文(响应体)就是服务器返回的资源的内容</h4><p><hr></p>
-<h2 id="5-HTTP协议之消息报头篇"><a href="#5-HTTP协议之消息报头篇" class="headerlink" title="5. HTTP协议之消息报头篇"></a>5. HTTP协议之消息报头篇</h2><h3 id="5-1-HTTP消息组成部分"><a href="#5-1-HTTP消息组成部分" class="headerlink" title="5.1 HTTP消息组成部分"></a>5.1 HTTP消息组成部分</h3><p>HTTP消息由客户端到服务器的请求及服务器到客户端的响应组成。请求消息和响应消息都是由下列四项组成：</p>
+</tbody></table>
+<hr>
+#### 4.1.2 响应报头(响应头)稍后详述
+
+<hr>
+#### 4.1.3 响应正文(响应体)就是服务器返回的资源的内容
+
+<hr>
+## 5. HTTP协议之消息报头篇
+
+<h3 id="5-1-HTTP消息组成部分"><a href="#5-1-HTTP消息组成部分" class="headerlink" title="5.1 HTTP消息组成部分"></a>5.1 HTTP消息组成部分</h3><p>HTTP消息由客户端到服务器的请求及服务器到客户端的响应组成。请求消息和响应消息都是由下列四项组成：</p>
 <ol>
 <li>开始行(对于请求消息，开始行就是请求行；对于响应消息，开始行就是状态行)；</li>
 <li>[消息报头](请求头/响应头)；</li>
@@ -1000,6 +1044,7 @@
 </ol>
 <h5 id="应用示例-eg"><a href="#应用示例-eg" class="headerlink" title="应用示例(eg)"></a>应用示例(eg)</h5><p>为了指示IE浏览器(客户端)不要使用缓存页面，服务器端的JSP程序可以编写如下代码：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">response.setHeader(<span class="string">"Cache-Control"</span>,<span class="string">"no-cache"</span>);</span><br><span class="line"><span class="comment">//response.setHeader("Pragma","no-cache");作用和上述代码相同，通常二者合用</span></span><br></pre></td></tr></table></figure>
+
 <p>这句代码将在发送的响应信息中设置普通报头域：Cache-Control : no-cache</p>
 <p>Date普通报头域表示消息产生的日期和时间</p>
 <p>Connection普通报头域允许发送指定连接的选项。例如指定连接是连续，或者指定”close”选项，通知服务器，在响应完成后，关闭连接。</p>
@@ -1008,7 +1053,7 @@
 <p><strong>Accept</strong></p>
 </blockquote>
 <p>​    Accept请求报头域用于指定客户端接收哪种类型的信息。</p>
-<p>​     <strong>eg:  </strong></p>
+<p>​     *<em>eg:  *</em></p>
 <p>​        Accept:    image/gif</p>
 <p>​        表示客户端希望接收GIF图像格式的资源；</p>
 <p>​        Accept:    text/html</p>
@@ -1045,15 +1090,17 @@
 <p>​    <strong>eg：</strong></p>
 <p>​        输入：<a href="http://www.gdou.edu.cn" target="_blank" rel="noopener">http://www.gdou.edu.cn</a>    </p>
 <p>​        浏览器发送的请求信息中，就会包含Host请求报头域，如下所示：</p>
-<p>​        Host：www.gdou.edu.cn</p>
-<p>​        此处使用了缺省端口号80，若指定了端口号则会变为 www.gdou.edu.cn:port(端口号)</p>
+<p>​        Host：<a href="http://www.gdou.edu.cn" target="_blank" rel="noopener">www.gdou.edu.cn</a></p>
+<p>​        此处使用了缺省端口号80，若指定了端口号则会变为 <a href="http://www.gdou.edu.cn:port(端口号)" target="_blank" rel="noopener">www.gdou.edu.cn:port(端口号)</a></p>
 <blockquote>
 <p><strong>User-Agent</strong></p>
 </blockquote>
 <p>​        我们上网登陆论坛时，往往会看到一些欢迎信息，其中列出了自己正在使用的浏览器版本，操作系统等        等的个人可公开信息，这会让我们觉得很神奇，其实原因是在客户端向服务器发送请求时使用了User-Agent        这个报头域，它可以获取到你电脑中的一些信息，并发送给服务器，这就理所当然为什么服务器端知道你的        这些“隐私”啦。不过这个报头域不是必需的，不适用User-Agent这个报头域，那么服务器端就无法得知我们的        信息了。</p>
-<h5 id="应用示例"><a href="#应用示例" class="headerlink" title="应用示例"></a>应用示例</h5><p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/请求报文.jpg" alt="请求报文"></p>
-<p><hr></p>
-<h4 id="5-2-3-响应报头-响应头"><a href="#5-2-3-响应报头-响应头" class="headerlink" title="5.2.3 响应报头(响应头)"></a>5.2.3 响应报头(响应头)</h4><p>响应报头允许服务器传递不能放在状态行(响应行)中的附加响应信息，以及关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。</p>
+<h5 id="应用示例"><a href="#应用示例" class="headerlink" title="应用示例"></a>应用示例</h5><p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt="请求报文"></p>
+<hr>
+#### 5.2.3 响应报头(响应头)
+
+<p>响应报头允许服务器传递不能放在状态行(响应行)中的附加响应信息，以及关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。</p>
 <h5 id="常用的响应报头"><a href="#常用的响应报头" class="headerlink" title="常用的响应报头"></a>常用的响应报头</h5><blockquote>
 <p><strong>Location</strong></p>
 </blockquote>
@@ -1062,9 +1109,11 @@
 <p><strong>Server</strong></p>
 </blockquote>
 <p>Server响应报头域包含了服务器用来处理请求的软件信息。与User-Agent请求报头域是相对应的。</p>
-<h5 id="应用示例-1"><a href="#应用示例-1" class="headerlink" title="应用示例"></a>应用示例</h5><p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/响应报文.jpg" alt="响应报文"></p>
-<p>   <hr></p>
-<h4 id="5-2-4-实体报头"><a href="#5-2-4-实体报头" class="headerlink" title="5.2.4 实体报头"></a>5.2.4 实体报头</h4><p>请求和响应信息都可以传递一个实体。一个实体由实体报头域和实体正文组成，但并不是说实体报头域和实体正文要在一起发送。实体报头定义了关于实体正文(<strong>eg:</strong>有无实体正文)和请求所标识的资源的元信息。</p>
+<h5 id="应用示例-1"><a href="#应用示例-1" class="headerlink" title="应用示例"></a>应用示例</h5><p><img src="//smallpineapp1e.github.io/2019/08/24/浅析HTTP协议/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg" alt="响应报文"></p>
+   <hr>
+#### 5.2.4 实体报头
+
+<p>请求和响应信息都可以传递一个实体。一个实体由实体报头域和实体正文组成，但并不是说实体报头域和实体正文要在一起发送。实体报头定义了关于实体正文(<strong>eg:</strong>有无实体正文)和请求所标识的资源的元信息。</p>
 <h5 id="常用的实体报头"><a href="#常用的实体报头" class="headerlink" title="常用的实体报头"></a>常用的实体报头</h5><blockquote>
 <p><strong>Content-Encoding</strong></p>
 </blockquote>
@@ -1084,97 +1133,80 @@
     <title>leetcode-7.整数反转</title>
     <url>/2019/08/24/leetcode-7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/</url>
     <content><![CDATA[<h2 id="leetcode-7-整数反转"><a href="#leetcode-7-整数反转" class="headerlink" title="leetcode-7. 整数反转"></a>leetcode-7. 整数反转</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>示例 1:</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>输入: 123</td>
 </tr>
 <tr>
 <td>输出: 321</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th>示例 2:</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>输入: -123</td>
 </tr>
 <tr>
 <td>输出: -321</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th>示例 3:</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>输入: 120</td>
 </tr>
 <tr>
 <td>输出: 21</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 $[-2^{31}, 2^{31}-1] $。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
 <a id="more"></a>
+
 <h3 id="重点难点-判断溢出"><a href="#重点难点-判断溢出" class="headerlink" title="重点难点 : 判断溢出"></a>重点难点 : 判断溢出</h3><p>例子 : </p>
 <p>假设输入一个数,并将其数字倒序输出,  如果超出范围为$[-2^{8}, 2^{8}-1]$则判断为溢出.</p>
 <p>例如 : </p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>示例 1:</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>输入 : 59</td>
 </tr>
 <tr>
 <td>输出 : 95</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th>示例 2:</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>输入 : 159</td>
 </tr>
 <tr>
 <td>输出 : 0</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p><hr><br>此时, 假设输入整数 : 159, 倒序输出结果应为951</p>
+</tbody></table>
+<hr>
+此时, 假设输入整数 : 159, 倒序输出结果应为951
+
 <p>question1 : 那么我们该如何判断它溢出呢 ? </p>
 <blockquote>
 <p>首先确定范围为$[-256, 255] $, 我们打算从最低位开始一位一位地反转, 将每一位取出后存储到一个变量$(ans)$中, 判断该变量是否已经超出了最大值的前$(n-1)$位……</p>
@@ -1192,6 +1224,7 @@
 <p>question3 : 如果反转后的数值和边界值的前$(n-1)$位都相同, 那该怎么办 ? </p>
 <p>这就是”强强对碰”了 , 胜负决定在第$n$位, 如果原来的数值的第n位数值比边界值小或比边界值大, 那么这个数就溢出, 因为第n位必定会跟在反转数值的最后一位</p>
 <h3 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (x != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//取末位数字</span></span><br><span class="line">            <span class="keyword">int</span> pop = x % <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//如果反转的数字大于整型的前n-1位, 则溢出</span></span><br><span class="line">            <span class="comment">//或者反转后的数字刚好等于整型最大值的前n-1位, 但最后一位大于整型的最后一位, 也溢出</span></span><br><span class="line">            <span class="keyword">if</span> (ans &gt; Integer.MAX_VALUE / <span class="number">10</span> || ans == Integer.MAX_VALUE / <span class="number">10</span> &amp;&amp;  pop &gt; Integer.MAX_VALUE % <span class="number">10</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (ans &lt; Integer.MIN_VALUE / <span class="number">10</span> || ans == Integer.MIN_VALUE / <span class="number">10</span> &amp;&amp; pop &lt; Integer.MIN_VALUE % <span class="number">10</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                ans = ans * <span class="number">10</span> + pop;</span><br><span class="line">                x /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>leetcode</category>
@@ -1203,16 +1236,14 @@
   <entry>
     <title>SpringDataJpa入门指南</title>
     <url>/2019/08/24/SpringDataJPA%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><div class="table-container">
-<table>
+    <content><![CDATA[<h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@Entity</td>
 <td>告诉Spring这是一个实体类</td>
 </tr>
@@ -1240,20 +1271,17 @@
 <td>@Temporal</td>
 <td>指定日期类型(DATE,DATETIME, TIMESTAMP)</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <a id="more"></a>
-<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><div class="table-container">
-<table>
+
+<h2 id="单向多对一关系"><a href="#单向多对一关系" class="headerlink" title="单向多对一关系"></a>单向多对一关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@JoinColumn(name= “外键列的列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
@@ -1261,19 +1289,15 @@
 <td>@ManyToOne</td>
 <td>映射多对一的关联关系</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><div class="table-container">
-<table>
+</tbody></table>
+<h2 id="单向一对多关系"><a href="#单向一对多关系" class="headerlink" title="单向一对多关系"></a>单向一对多关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@OneToMany</td>
 <td>映射一对多的关联关系</td>
 </tr>
@@ -1281,9 +1305,7 @@
 <td>@JoinColum(name=”外键列列名”)</td>
 <td>映射外键列的名称</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>单向 1-n 关联关系执行保存时, 一定回多出UPDATE语句, 因为多的一端在插入时不会同时插入外键列</p>
 <blockquote>
 <p>默认情况下, 若删除1的一端, 则<strong>会先把关联的n的一端的外键置空</strong>, 然后进行删除, <strong>注意这在实际意义当中并不有利</strong></p>
@@ -1302,16 +1324,14 @@
 <blockquote>
 <p>设置@OneToMany的mappedBy属性, 可以让维护权交给多的一方维护 ，因为在多的一方没有完全删除完时，与其有关联关系的一的一方无法删除，所以由多的一方维护关联关系</p>
 </blockquote>
-<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><div class="table-container">
-<table>
+<h2 id="双向一对一关系"><a href="#双向一对一关系" class="headerlink" title="双向一对一关系"></a>双向一对一关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@OneToOne(mappedBy=”对方的属性”)</td>
 <td>映射一对一的关联关系, 对于不维护关联关系, 没有外键的一方, 使用@OneToOne来映射, 建议设置mappedBy=true</td>
 </tr>
@@ -1319,9 +1339,7 @@
 <td>@JoinColumn(name=”外键列列名”, unique=true)</td>
 <td>1 - 1关联关系, 需要添加unique=true</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>双向一对一的关联关系, 建议先保存<strong>不维护关联关系的一方</strong>, 即没有外键的一方, 这样不会多出update语句, <strong>因为维护关系的一方先保存, 则外键列一开始为空, 后面再用update将外键列填补上</strong></p>
 <ol>
 <li><p>默认情况下, 若获取维护关联关系的一方, 则会通过左外连接获取其关联的对象</p>
@@ -1334,49 +1352,39 @@
 <blockquote>
 <p>这说明在不维护关联关系的一方, 不建议修改fetch属性</p>
 </blockquote>
-<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><div class="table-container">
-<table>
+<h2 id="双向多对多关系"><a href="#双向多对多关系" class="headerlink" title="双向多对多关系"></a>双向多对多关系</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@ManyToMany</td>
 </tr>
 <tr>
 <td>@JoinTable(name=”表的名字”,joinColumns={@JoinColumn(name=”外键列名字”,referencedColumnName=”当前表的主键列列名”)},inverseJoinColumns={@JoinColumn(name=”关联的对象的外键列列命”, referencedColumnName=”关联的对方表的主键列列名”)})</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>映射多对多关联关系</td>
 </tr>
 <tr>
 <td>映射中间表</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
 <th><strong>@JoinTable</strong></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><strong>属性 :</strong></td>
 </tr>
 <tr>
@@ -1394,36 +1402,28 @@
 <tr>
 <td>3.1 name : 指定外键列的列名 ; referencedColumnName : 指定外键列关联当前表的哪一列的列名</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>使用维护关联关系或不维护关联关系的一方获取数据, SQL语句均相同.</p>
-<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><div class="table-container">
-<table>
+<h2 id="二级缓存-Ehcache"><a href="#二级缓存-Ehcache" class="headerlink" title="二级缓存(Ehcache)"></a>二级缓存(Ehcache)</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@Cachable(true)</td>
 <td>被标注的实体类才会使用缓存</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><div class="table-container">
-<table>
+</tbody></table>
+<h2 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h2><table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@NamedQuery(name=””, query=””)</td>
 <td>标注在类上, 用于查询</td>
 </tr>
@@ -1439,10 +1439,7 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
+</tbody></table>
 <table>
 <thead>
 <tr>
@@ -1450,8 +1447,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>entityManager.createNativeQuery(sql)</td>
 <td>用于执行sql语句</td>
 </tr>
@@ -1459,9 +1455,7 @@
 <td>setParameter(location, value)</td>
 <td>location代表占位符的位置, value代表值</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="JPQL的ORDER-BY-和-GROUP-BY"><a href="#JPQL的ORDER-BY-和-GROUP-BY" class="headerlink" title="JPQL的ORDER BY 和 GROUP BY"></a>JPQL的ORDER BY 和 GROUP BY</h2><p>在JPQL里支持使用ORDER BY和GROUP BY语法</p>
 <h2 id="JPQL关联查询"><a href="#JPQL关联查询" class="headerlink" title="JPQL关联查询"></a>JPQL关联查询</h2><p>JPQL的关联查询同HQL的关联查询, 注意要加FETCH, 则得到的是一个对象, 而且对象的集合已经初始化成功了</p>
 <h2 id="JPQL子查询"><a href="#JPQL子查询" class="headerlink" title="JPQL子查询"></a>JPQL子查询</h2><p>和HQL的子查询一样</p>
@@ -1479,23 +1473,36 @@
     <title>如何在hexo博客插入图片</title>
     <url>/2019/08/23/%E5%A6%82%E4%BD%95%E5%9C%A8hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</url>
     <content><![CDATA[<h2 id="1-在hexo根目录安装第三方插件"><a href="#1-在hexo根目录安装第三方插件" class="headerlink" title="1. 在hexo根目录安装第三方插件"></a>1. 在hexo根目录安装第三方插件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-修改-config-xml文件的内容"><a href="#2-修改-config-xml文件的内容" class="headerlink" title="2. 修改_config.xml文件的内容"></a>2. 修改_config.xml文件的内容</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h2 id="3-插入md图片"><a href="#3-插入md图片" class="headerlink" title="3. 插入md图片"></a>3. 插入md图片</h2><h3 id="3-1-新建一个md文件"><a href="#3-1-新建一个md文件" class="headerlink" title="3.1 新建一个md文件"></a>3.1 新建一个md文件</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hexo n "<span class="built_in">title</span>"</span><br></pre></td></tr></table></figure>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/新建md.jpg" alt="新建md"></p>
-<h3 id="3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title"><a href="#3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title" class="headerlink" title="3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title"></a>3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/放入图片.jpg" alt="新建md"></p>
+
+<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%96%B0%E5%BB%BAmd.jpg" alt="新建md"></p>
+<h3 id="3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title"><a href="#3-2-把待图片放入-posts文件夹下与title-md同名的文件夹title" class="headerlink" title="3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title"></a>3.2 把待图片放入_posts文件夹下与title.md同名的文件夹title</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E6%94%BE%E5%85%A5%E5%9B%BE%E7%89%87.jpg" alt="新建md"></p>
 <h3 id="3-3-在title-md中引入图片"><a href="#3-3-在title-md中引入图片" class="headerlink" title="3.3 在title.md中引入图片"></a>3.3 在title.md中引入图片</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">![<span class="string">爱宠大机密</span>](<span class="link">title/46ro0003sn14n066p757.jpg</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/在md中引入图片.png" alt="在md中引入图片"></p>
+
+<p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E5%9C%A8md%E4%B8%AD%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87.png" alt="在md中引入图片"></p>
 <h3 id="3-4-编译并运行"><a href="#3-4-编译并运行" class="headerlink" title="3.4 编译并运行"></a>3.4 编译并运行</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h3 id="3-5-成功"><a href="#3-5-成功" class="headerlink" title="3.5 成功"></a>3.5 成功</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/上传成功.jpg" alt="上传成功"></p>
+
+<h3 id="3-5-成功"><a href="#3-5-成功" class="headerlink" title="3.5 成功"></a>3.5 成功</h3><p><img src="//smallpineapp1e.github.io/2019/08/23/如何在hexo博客插入图片/%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F.jpg" alt="上传成功"></p>
 ]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>三分钟数据结构-链表</title>
     <url>/2019/08/23/%E6%95%B0%E5%AD%A6%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E6%95%91%E5%91%BD%E4%B9%8B%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="数学真的可以救命"><a href="#数学真的可以救命" class="headerlink" title="数学真的可以救命"></a>数学真的可以救命</h1><h2 id="今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东"><a href="#今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东" class="headerlink" title="今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东"></a>今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东</h2><h3 id="1-链表的基本概念"><a href="#1-链表的基本概念" class="headerlink" title="1 .链表的基本概念"></a>1 .链表的基本概念</h3><h4 id="1-1-什么是链表"><a href="#1-1-什么是链表" class="headerlink" title="1.1 什么是链表 ?"></a>1.1 什么是链表 ?</h4><p>如下图所示  : </p>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/单双链表.png" alt="“单向链表”"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/%E5%8D%95%E5%8F%8C%E9%93%BE%E8%A1%A8.png" alt="“单向链表”"></p>
 <a id="more"></a>
+
 <p><strong>SingleLinkedList代表单向链表</strong> , 每一个结点含有 : </p>
 <ol>
 <li>data域 : 用于保存数据</li>
@@ -1512,7 +1519,10 @@
 <p>​    使用头结点方便在第一个位置进行插入, 删除操作时和其它位置的插入删除操作的代码保持一致性 , 因为带上头结点之后 , 头指针永远不需要移动 , 而不带上头结点时 , 在第一个位置进行插入或删除操作时, 头指针需要移动 , 较为麻烦 , 有兴趣的读者可以尝试一下 , 这里不再详述……</p>
 <h4 id="1-3-单向循环链表-不带头结点"><a href="#1-3-单向循环链表-不带头结点" class="headerlink" title="1.3 单向循环链表(不带头结点)"></a>1.3 单向循环链表(不带头结点)</h4><p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/1562764751561.png" alt="1562764751561"></p>
 <p>单向循环链表就是单向链表的升级版 , 尾结点的指针不再指向空 , 而是指向<strong>第一个结点</strong></p>
-<h2 id="约瑟夫问题-也称”丢手帕问题”"><a href="#约瑟夫问题-也称”丢手帕问题”" class="headerlink" title="约瑟夫问题(也称”丢手帕问题”)"></a>约瑟夫问题(也称”丢手帕问题”)</h2><p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562775796416&di=a7bc151dd485871bda13d88f36f0c95e&imgtype=0&src=http%3A%2F%2Ftxt15.book118.com%2F2016%2F1231%2Fbook78535%2F78534873.jpg" style="width:500px;height:300px"></p>
+<h2 id="约瑟夫问题-也称”丢手帕问题”"><a href="#约瑟夫问题-也称”丢手帕问题”" class="headerlink" title="约瑟夫问题(也称”丢手帕问题”)"></a>约瑟夫问题(也称”丢手帕问题”)</h2><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562775796416&di=a7bc151dd485871bda13d88f36f0c95e&imgtype=0&src=http%3A%2F%2Ftxt15.book118.com%2F2016%2F1231%2Fbook78535%2F78534873.jpg" style="width:500px;height:300px">
+
+
+
 <h3 id="约瑟夫问题起源"><a href="#约瑟夫问题起源" class="headerlink" title="约瑟夫问题起源 :"></a>约瑟夫问题起源 :</h3><p>在罗马人占领乔塔帕特后，39 个犹太人与Josephus及他的朋友躲到一个洞中，39个犹太人决定宁愿死也不要被敌人抓到，于是决定了一个自杀方式，41个人排成一个圆圈，由第1个人开始报数，每报数到第3人该人就必须自杀，然后再由下一个重新报数，直到所有人都自杀身亡为止。<strong>然而Josephus 和他的朋友并不想遵从</strong>。这个过程沿着圆圈一直进行，直到最终只剩下一个人留下，这个人就可以继续活着。Josephus要他的朋友先假装遵从，他将朋友与自己安排在第16个与第31个位置，于是逃过了这场死亡游戏。</p>
 <p>为什么约瑟夫一开始就知道站在16和31就一定能躲过自杀呢?<strong>这就是数学的魅力所在, 真香~</strong></p>
 <p><img src="http://www.cplusplus.me/wp-content/uploads/2014/08/ysf.png" alt="点击查看源网页"></p>
@@ -1524,8 +1534,11 @@
 <p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/1562767630166.png" alt="1562767630166"></p>
 <p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/1562767901463.png" alt="1562767901463"></p>
 <h3 id="代码实现-JAVA版"><a href="#代码实现-JAVA版" class="headerlink" title="代码实现(JAVA版) :"></a>代码实现(JAVA版) :</h3><h4 id="1-定义小孩的结点"><a href="#1-定义小孩的结点" class="headerlink" title="1.定义小孩的结点"></a>1.定义小孩的结点</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个Child结点, 每一个Child对象就是一个结点</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Child</span></span>&#123;</span><br><span class="line">	<span class="comment">//编号</span></span><br><span class="line">	<span class="keyword">public</span> Integer no;</span><br><span class="line">	<span class="comment">//指向下一个结点</span></span><br><span class="line">	<span class="keyword">public</span> Child next;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Child</span><span class="params">(Integer no)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.no = no;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getNo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> no;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNo</span><span class="params">(Integer no)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.no = no;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Node [no="</span> + no + <span class="string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h4 id="2-定义单向循环链表"><a href="#2-定义单向循环链表" class="headerlink" title="2.定义单向循环链表"></a>2.定义单向循环链表</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义SingleLinkedList来管理我们的Child结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CircleLinkedList</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//第一个结点</span></span><br><span class="line">	<span class="keyword">private</span> Child first = <span class="keyword">null</span>;</span><br><span class="line">	<span class="comment">//当前的最后一个结点</span></span><br><span class="line">	<span class="keyword">private</span> Child rear = <span class="keyword">null</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//添加结点到单向链表</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Child child)</span></span>&#123;</span><br><span class="line">        <span class="comment">//判断当前链表是否为空</span></span><br><span class="line">		<span class="keyword">if</span>(first == <span class="keyword">null</span>)&#123;</span><br><span class="line">			first = child;</span><br><span class="line">			child.next = first;</span><br><span class="line">			rear = child;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			rear.next = child;</span><br><span class="line">			child.next = first;</span><br><span class="line">			rear = child;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 核心代码</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> m 数到几出圈</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> n 共有n个孩子玩游戏</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> k 从第k个孩子开始报数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="comment">//开始游戏, 小孩出圈</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;	</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//使first指针和deleteNode指针指向第k个孩子和(k-1)个孩子</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;=n; i++)&#123;	</span><br><span class="line">			<span class="keyword">if</span>(i==k)&#123;<span class="keyword">break</span>;&#125;</span><br><span class="line">			first = first.next;</span><br><span class="line">			rear = rear.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//辅助删除指针, 需要删除元素时使用, 所以初始化时应该指向最后一个结点</span></span><br><span class="line">		<span class="comment">//因为一开始第一个结点开始报数, 有可能报的是1, num也为1, 则首结点被淘汰</span></span><br><span class="line">		Child deleteNode = rear;</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"你自己一个人玩, 你逃不掉了, 人数过少,无法开始游戏"</span>);</span><br><span class="line">			<span class="keyword">return</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"被淘汰的小孩的编号为:"</span>);</span><br><span class="line">		count = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			<span class="comment">//只剩下一个人了</span></span><br><span class="line">			<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">				System.out.println();</span><br><span class="line">                System.out.println(<span class="string">"存活的玩家是:"</span>+first.getNo());</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//判断是否数到m, 如果是则删除该结点</span></span><br><span class="line">			<span class="keyword">if</span>(count == m)&#123;</span><br><span class="line">				System.out.print(deleteNode.next.getNo()+<span class="string">" "</span>);</span><br><span class="line">				first = first.next;</span><br><span class="line">				deleteNode.next = first;</span><br><span class="line">				count = <span class="number">1</span>;</span><br><span class="line">                <span class="comment">//人数减少</span></span><br><span class="line">				n--;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//头指针与辅助删除指针都往后移一位</span></span><br><span class="line">			deleteNode = deleteNode.next;</span><br><span class="line">			first = first.next;</span><br><span class="line">			count++;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h4 id="3-代码运行"><a href="#3-代码运行" class="headerlink" title="3. 代码运行"></a>3. 代码运行</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JosephuSolution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		CircleLinkedList circleLinkedList = <span class="keyword">new</span> CircleLinkedList();</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> n = <span class="number">41</span>;</span><br><span class="line">        <span class="comment">//生成小孩</span></span><br><span class="line">		<span class="keyword">while</span>(i&lt;=n)&#123;</span><br><span class="line">			Child child = <span class="keyword">new</span> Child(i);</span><br><span class="line">			circleLinkedList.add(child);</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// k=1, m=3, n=41</span></span><br><span class="line">		circleLinkedList.play(<span class="number">1</span>, <span class="number">3</span>, n);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">输出结果:</span><br><span class="line">被淘汰的小孩的编号为:</span><br><span class="line"><span class="number">3</span> <span class="number">6</span> <span class="number">9</span> <span class="number">12</span> <span class="number">15</span> <span class="number">18</span> <span class="number">21</span> <span class="number">24</span> <span class="number">27</span> <span class="number">30</span> <span class="number">33</span> <span class="number">36</span> <span class="number">39</span> <span class="number">1</span> <span class="number">5</span> <span class="number">10</span> <span class="number">14</span> <span class="number">19</span> <span class="number">23</span> </span><br><span class="line"><span class="number">28</span> <span class="number">32</span> <span class="number">37</span> <span class="number">41</span> <span class="number">7</span> <span class="number">13</span> <span class="number">20</span> <span class="number">26</span> <span class="number">34</span> <span class="number">40</span> <span class="number">8</span> <span class="number">17</span> <span class="number">29</span> <span class="number">38</span> <span class="number">11</span> <span class="number">25</span> <span class="number">2</span> <span class="number">22</span> <span class="number">4</span> <span class="number">35</span> <span class="number">16</span> </span><br><span class="line">存活的玩家是:<span class="number">31</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>算法与数据结构</category>
