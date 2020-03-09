@@ -102,15 +102,15 @@
 <meta property="og:site_name" content="傻曾🍍">
 <meta property="og:description" content="小白学习动态规划：0-1背包（经典例题）前言背包问题只是动态规划问题下的一个分类，求解0-1背包问题的思路本质上与求解动态规划的一般思路是一致的，我们经常遇到新的题目做不出来，并不是因为没有掌握动态规划的思想，而有可能是因为没有遇到这类具有显著特征的题目，无法将一般动态规划的解题思路应用在实战中。 动态规划的原理： ① 最优子结构性质：问题的最优解可以转化为求子问题的最优解，也就是说问题的最优解可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%871.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E6%83%85%E5%86%B5I.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E6%83%85%E5%86%B5II.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片1.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/情况I.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/情况II.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片2.png">
 <meta property="og:updated_time" content="2020-03-09T00:57:48.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划之01背包">
 <meta name="twitter:description" content="小白学习动态规划：0-1背包（经典例题）前言背包问题只是动态规划问题下的一个分类，求解0-1背包问题的思路本质上与求解动态规划的一般思路是一致的，我们经常遇到新的题目做不出来，并不是因为没有掌握动态规划的思想，而有可能是因为没有遇到这类具有显著特征的题目，无法将一般动态规划的解题思路应用在实战中。 动态规划的原理： ① 最优子结构性质：问题的最优解可以转化为求子问题的最优解，也就是说问题的最优解可">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%871.png">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片1.png">
 
 
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,332字
+                  991字
                 </span>
               
 
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  4分钟
                 </span>
               
             </div>
@@ -444,43 +444,47 @@
 <p>动态规划的原理：</p>
 <p>① <strong>最优子结构性质</strong>：问题的最优解可以转化为求子问题的最优解，也就是说问题的最优解可以从子问题的最优解中得出。</p>
 <p>② <strong>子问题重叠性质</strong>：问题的解由子问题的解组成，所以先构造子问题的解，才能求出最终问题的解。而求问题的解时，由于已经记录子问题的解，所以不必重新求子问题的解，只需取出来使用即可。</p>
-<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><p>$$<br>有N件物品和一个容量为V 的背包。放入第i件物品耗费的空间是Ci，得到 的价值是Wi。<br>\求解将哪些物品装入背包可使价值总和最大。<br>$$</p>
-<p>$$<br>例：N = 5，V=10<br>$$</p>
+<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><script type="math/tex; mode=display">
+有N件物品和一个容量为V 的背包。放入第i件物品耗费的空间是Ci，得到 的价值是Wi。
+\\求解将哪些物品装入背包可使价值总和最大。</script><script type="math/tex; mode=display">
+例：N = 5，V=10</script><div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">物品</th>
-<th align="center">A</th>
-<th align="center">B</th>
-<th align="center">C</th>
-<th align="center">D</th>
-<th align="center">E</th>
+<th style="text-align:center">物品</th>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+<th style="text-align:center">E</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Wealth</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="center">6</td>
-<td align="center">7</td>
+<tbody>
+<tr>
+<td style="text-align:center">Wealth</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
 </tr>
 <tr>
-<td align="center">Cost</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">5</td>
-<td align="center">6</td>
-<td align="center">8</td>
+<td style="text-align:center">Cost</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">8</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <blockquote>
 <p>这是最基础的0-1背包问题</p>
 </blockquote>
 <p>先看下图，是在求出问题的解后整个动态规划表呈现的结果。下面就来看看这张表是如何一步步填上去并求出最终问题解的。</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片1.png" alt="图片1"></p>
 <a id="more"></a>
-
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>① 确定子问题</p>
 <blockquote>
 <p>求容量为V的背包装入物品的价值总和最大，则考虑第i件物品是否放入背包，使得背包的价值保持最大。</p>
@@ -496,22 +500,35 @@
 </blockquote>
 <p>④ 确定状态转移方程</p>
 <blockquote>
-<p>Ⅰ：若第i件物品<strong>无法放入</strong>容量为j的背包中<br>$$<br>\则前i件物品放入容量为j的背包中的最大价值等于前i-1件物品放入容量为j的背包中的最大价值，\即：F[i][j] = F[i-1][j]<br>$$<br>Ⅱ：若第i件物品<strong>可以放入</strong>容量为j的背包中，则分两种情况：<br>$$<br>第i件物品放入容量为j的背包中，得到前i件物品的最大价值：F_1[i][j] = F[i-1][j-C_i] + W_i<br>\第i件物品不放入容量为j的背包中，得到前i件物品的最大价值：F_2[i][j] = F[i-1][j]<br>\取F_1还是F_2取决于谁的价值更大，即：F[i][j] = max(F_1[i][j], F_2[i][j])<br>$$</p>
-</blockquote>
+<p>Ⅰ：若第i件物品<strong>无法放入</strong>容量为j的背包中</p>
+<script type="math/tex; mode=display">
+\\则前i件物品放入容量为j的背包中的最大价值等于前i-1件物品放入容量为j的背包中的最大价值，\\即：F[i][j] = F[i-1][j]</script><p>Ⅱ：若第i件物品<strong>可以放入</strong>容量为j的背包中，则分两种情况：</p>
+<script type="math/tex; mode=display">
+第i件物品放入容量为j的背包中，得到前i件物品的最大价值：F_1[i][j] = F[i-1][j-C_i] + W_i
+\\第i件物品不放入容量为j的背包中，得到前i件物品的最大价值：F_2[i][j] = F[i-1][j]
+\\取F_1还是F_2取决于谁的价值更大，即：F[i][j] = max(F_1[i][j], F_2[i][j])</script></blockquote>
 <p>例：</p>
 <p><strong>第Ⅰ种情况：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E6%83%85%E5%86%B5I.png" alt="情况I"></p>
-<p>当[i，j] = [2，1]时，物品B的耗费空间Cost=2，而背包的体积 j=1，很明显物品B无法放入背包中，所以<br>$$<br>F[2][1] = F[1][1] = 3<br>$$<br><strong>第Ⅱ种情况：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E6%83%85%E5%86%B5II.png" alt="情况II"></p>
-<p>当[i，j] = [2，3]时，物品B的耗费空间Cost = 2，而背包的体积 j=3，物品B可以放入背包中，所以<br>$$<br>F[2][3] = max(F[1][3], F[1][3-2] + 4)=max(3,3+4)=max(3,7)=7<br>$$</p>
-<hr>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/情况I.png" alt="情况I"></p>
+<p>当[i，j] = [2，1]时，物品B的耗费空间Cost=2，而背包的体积 j=1，很明显物品B无法放入背包中，所以</p>
+<script type="math/tex; mode=display">
+F[2][1] = F[1][1] = 3</script><p><strong>第Ⅱ种情况：</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/情况II.png" alt="情况II"></p>
+<p>当[i，j] = [2，3]时，物品B的耗费空间Cost = 2，而背包的体积 j=3，物品B可以放入背包中，所以</p>
+<script type="math/tex; mode=display">
+F[2][3] = max(F[1][3], F[1][3-2] + 4)=max(3,3+4)=max(3,7)=7</script><hr>
 
 <p>作者在理解Ⅱ时有一个困惑：<strong>为什么第i件物品可以放入容量为j的背包中还需要比较不放入的情况？</strong></p>
 <p><strong>这是本文的重点</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%872.png" alt="图片2.png"><br>$$<br>当[i，j] = [5，9]时，物品E需要占用Cost=8，而背包容量j=9 &gt; Cost,所以背包可以放入E这件物品\<br>如果放入E，那么就要腾出E的空间，所以F_1[5][9] = F[5-1][9-Cost_E] + Wealth_E = 10\<br>如果不放入E，那么不需要腾出E的空间，所以F_e[5][9] = F[4][9]=13，可以看到不放入E反而让背包的总价值更大\<br>$$<br>所以并不是说物品E可以放入就马上放入，因为每放入一件物品都要腾出相应的空间<br>$$<br>V_{腾出的空间} = Cost_i<br>$$<br>而腾出的空间可以放入其它物品，而<strong>有可能放入其它的物品价值总和大于物品E的价值</strong>。</p>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片2.png" alt="图片2.png"></p>
+<script type="math/tex; mode=display">
+当[i，j] = [5，9]时，物品E需要占用Cost=8，而背包容量j=9 > Cost,所以背包可以放入E这件物品\\
+如果放入E，那么就要腾出E的空间，所以F_1[5][9] = F[5-1][9-Cost_E] + Wealth_E = 10\\
+如果不放入E，那么不需要腾出E的空间，所以F_e[5][9] = F[4][9]=13，可以看到不放入E反而让背包的总价值更大\\</script><p>所以并不是说物品E可以放入就马上放入，因为每放入一件物品都要腾出相应的空间</p>
+<script type="math/tex; mode=display">
+V_{腾出的空间} = Cost_i</script><p>而腾出的空间可以放入其它物品，而<strong>有可能放入其它的物品价值总和大于物品E的价值</strong>。</p>
 <p>⑤ 代码实现</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span>[] wealth, <span class="keyword">int</span>[] cost, <span class="keyword">int</span> V, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="comment">//特殊状态处理</span></span><br><span class="line">        <span class="keyword">if</span>(wealth.length != cost.length)&#123;<span class="keyword">return</span> -<span class="number">1</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(wealth.length == <span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(wealth.length == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cost[<span class="number">0</span>] &gt; V)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> wealth[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[][] F = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>][V+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//边界值处理</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N + <span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V + <span class="number">1</span>; j++)&#123;</span><br><span class="line">                <span class="comment">//先假设不能放入容量为j的背包</span></span><br><span class="line">                F[i][j] = F[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="comment">//判断能不能放入背包</span></span><br><span class="line">                <span class="keyword">if</span>(j &gt; cost[i-<span class="number">1</span>])&#123;</span><br><span class="line">                    F[i][j] = Math.max(F[i-<span class="number">1</span>][j], F[i-<span class="number">1</span>][j-cost[i-<span class="number">1</span>]] + wealth[i-<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> F[N][V];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>时间有限，能力有限，若有误希望能够指出，乐意与大家交流！</strong></p>
 
       

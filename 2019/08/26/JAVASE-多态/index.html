@@ -94,20 +94,20 @@
 
 
 
-<meta name="description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象();  成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量">
+<meta name="description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象(); 成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量  成">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三分钟Java基础-多态">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/26/JAVASE-多态/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象();  成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量">
+<meta property="og:description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象(); 成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量  成">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/26/JAVASE-多态/1566752079430.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2019/08/26/JAVASE-多态/1566752289001.png">
 <meta property="og:updated_time" content="2020-03-09T00:43:47.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟Java基础-多态">
-<meta name="twitter:description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象();  成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量">
+<meta name="twitter:description" content="对象的多态性 体现为父类引用变量可以指向子类对象 多态的前提是必须有子父类关系或者类实现接口关系，否则无法完成多态 在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法  定义格式1父类类型或接口类型 引用变量 = new 子类对象(); 成员变量的特点编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败 运行时：运行的是父类的变量值  编译和运行都是参考父类中的成员变量  成">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2019/08/26/JAVASE-多态/1566752079430.png">
 
 
@@ -444,7 +444,6 @@
 <p><strong>在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法</strong></p>
 </blockquote>
 <h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类类型或接口类型 引用变量 = <span class="keyword">new</span> 子类对象();</span><br></pre></td></tr></table></figure>
-
 <h2 id="成员变量的特点"><a href="#成员变量的特点" class="headerlink" title="成员变量的特点"></a>成员变量的特点</h2><p>编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败</p>
 <p>运行时：运行的是父类的变量值</p>
 <blockquote>
