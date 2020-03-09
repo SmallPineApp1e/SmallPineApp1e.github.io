@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="数据库,">
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="爱学习,爱生活,不停下前进的脚步!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="傻曾🍍">
-<meta property="og:url" content="https://smallpineapp1e.github.io/tags/稀疏数组/index.html">
+<meta name="description" content="一、数据库事务的四大特性（ACID）1. 原子性（Atomicity）概念回答：事务所包含的所有操作要么全部执行，要么全部都不执行（称为失败回滚），即某一事务所包含的操作若成功执行，必须全部应用到数据库，若失败回滚，则不能对数据库有任何改变。 通俗易懂的回答：假设张三去找李四借100￥，那么借钱的事务包含2个操作：张三+100￥，李四-100￥；要么借钱成功，张三的账户+100￥，李四的账户-10">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库事务的四大特性及事务的隔离级别">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/09/数据库事务的四大特性及事务的隔离级别/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta property="og:description" content="一、数据库事务的四大特性（ACID）1. 原子性（Atomicity）概念回答：事务所包含的所有操作要么全部执行，要么全部都不执行（称为失败回滚），即某一事务所包含的操作若成功执行，必须全部应用到数据库，若失败回滚，则不能对数据库有任何改变。 通俗易懂的回答：假设张三去找李四借100￥，那么借钱的事务包含2个操作：张三+100￥，李四-100￥；要么借钱成功，张三的账户+100￥，李四的账户-10">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-09T03:30:04.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="傻曾🍍">
-<meta name="twitter:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta name="twitter:title" content="数据库事务的四大特性及事务的隔离级别">
+<meta name="twitter:description" content="一、数据库事务的四大特性（ACID）1. 原子性（Atomicity）概念回答：事务所包含的所有操作要么全部执行，要么全部都不执行（称为失败回滚），即某一事务所包含的操作若成功执行，必须全部应用到数据库，若失败回滚，则不能对数据库有任何改变。 通俗易懂的回答：假设张三去找李四借100￥，那么借钱的事务包含2个操作：张三+100￥，李四-100￥；要么借钱成功，张三的账户+100￥，李四的账户-10">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/tags/稀疏数组/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/09/数据库事务的四大特性及事务的隔离级别/">
 
 
 
 
 
-  <title>标签: 稀疏数组 | 傻曾🍍</title>
+  <title>数据库事务的四大特性及事务的隔离级别 | 傻曾🍍</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,52 +301,220 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>稀疏数组<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/数据库事务的四大特性及事务的隔离级别/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/08/25/稀疏数组/" itemprop="url">
-              
-                <span itemprop="name">三分钟数据结构-稀疏数组</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">数据库事务的四大特性及事务的隔离级别</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-25T10:42:56+08:00" content="2019-08-25">
-          08-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T11:25:01+08:00">
+                2020-03-09
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,722字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、数据库事务的四大特性（ACID）"><a href="#一、数据库事务的四大特性（ACID）" class="headerlink" title="一、数据库事务的四大特性（ACID）"></a>一、数据库事务的四大特性（ACID）</h1><h2 id="1-原子性（Atomicity）"><a href="#1-原子性（Atomicity）" class="headerlink" title="1. 原子性（Atomicity）"></a>1. 原子性（Atomicity）</h2><p>概念回答：事务所包含的所有操作要么<strong>全部执行</strong>，要么<strong>全部都不执行</strong>（称为失败回滚），即某一事务所包含的操作若成功执行，必须全部应用到数据库，若失败回滚，则不能对数据库有任何改变。</p>
+<p><strong>通俗易懂的回答</strong>：假设张三去找李四借100￥，那么借钱的事务包含2个操作：张三+100￥，李四-100￥；要么借钱成功，张三的账户+100￥，李四的账户-100￥；要么就不借钱；<strong>不能出现</strong>李四支付了100￥，但张三没收到，或者张三收到100￥，但李四没有扣钱的现象。</p>
+<h2 id="2-一致性（Consistency）"><a href="#2-一致性（Consistency）" class="headerlink" title="2. 一致性（Consistency）"></a>2. 一致性（Consistency）</h2><p>概念回答：一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。</p>
+<p><strong>通俗易懂的回答</strong>：一致性是指正确状态的一致性，假设张三今天要去买一件150￥的衣服，而张三的余额里只有140￥，当张三结账时，他会发现结账失败（事务回滚），因为在数据库中必须<strong>满足余额列 ≥ 0的约束，</strong>也就是说<strong>余额正确状态的一致性就是保证余额不小于0，即需要满足数据库的约束条件</strong>，如果张三付款后，张三的余额里只剩下-10￥，显然这不符合约束条件按，所以当状态从150￥转变为-10￥时，违反了数据库的一致性，此时事务会产生回滚。</p>
+<p>参考博客：<a href="https://www.zhihu.com/question/31346392" target="_blank" rel="noopener">https://www.zhihu.com/question/31346392</a></p>
+<a id="more"></a>
+
+<h2 id="3-隔离性（Isolation）"><a href="#3-隔离性（Isolation）" class="headerlink" title="3. 隔离性（Isolation）"></a>3. 隔离性（Isolation）</h2><p>概念回答：当多个事务并发地访问数据库时，在同一时间点只允许单个事务对数据库进行操作，不允许多个事务同时操作数据库。</p>
+<p><strong>通俗易懂的回答</strong>：例如张三今天要去买一件150￥的衣服和10￥的Macbook Pro电脑贴纸，他的账户有200￥，张三在买衣服结账的时候（事务A）同时在手机下单买了电脑贴纸（事务B），那么事务A和事务B将<strong>按照某种先后顺序依次操作张三的账户数据库，减少张三的余额</strong>。</p>
+<h2 id="4-持久性（Durability）"><a href="#4-持久性（Durability）" class="headerlink" title="4. 持久性（Durability）"></a>4. 持久性（Durability）</h2><p>概念回答：事务的持久性是指事务执行成功以后，该事务对数据库所作的更改会持久的保存在数据库之中，不会无缘无故的回滚。</p>
+<p><strong>通俗易懂的回答</strong>：张三买了总共160￥的衣服和电脑贴纸后，张三的账户余额就会从200￥变为40￥（事务A），<strong>这个变化会永久地存在于数据库中</strong>；如果张三将这两件物品退款了，张三的账户余额又从40￥变为200￥（事务B），但是<strong>这并不是否定了数据库的持久性，因为事务A是确实发生的，只不过事务B的操作恰好与事务A的操作相反，造成的效果是张三的总余额没有发生改变。</strong></p>
+<hr>
+<h1 id="二、数据库的四个隔离级别"><a href="#二、数据库的四个隔离级别" class="headerlink" title="二、数据库的四个隔离级别"></a>二、数据库的四个隔离级别</h1><h2 id="1-未提交读-脏读-（READ-UNCOMMITED）"><a href="#1-未提交读-脏读-（READ-UNCOMMITED）" class="headerlink" title="1. 未提交读[脏读]（READ UNCOMMITED）"></a>1. 未提交读[脏读]（READ UNCOMMITED）</h2><p>事务中的修改操作，即使未提交，也可以被其它事务读取。即某一个事务可以读取其它事务未提交的数据。这个隔离级别一般在实际应用中很少使用，因为它会导致很多问题出现，性能也不会比其它隔离级别好。</p>
+<p>例子：张三网购160￥的衣服送给他女朋友，假设张三确认收货时才真正地从数据库里扣钱，张三下单后账户被暂时确认扣除160￥（<strong>事务A，并没有真正写入数据库</strong>）没有告诉他女朋友，他的女朋友查张三的账户时发现少了160￥（<strong>事务B读取事务A的未提交数据</strong>），又不知道买了什么东西，就<strong>吵起架来了（出大问题）</strong>。</p>
+<h2 id="2-提交读-不可重复读-（READ-COMMITED）"><a href="#2-提交读-不可重复读-（READ-COMMITED）" class="headerlink" title="2. 提交读[不可重复读]（READ COMMITED）"></a>2. 提交读[不可重复读]（READ COMMITED）</h2><p>该隔离级别限定一个事务在开始后，只能读取其它已经提交事务所做的修改。也就是说，一个事务在开始之后直至提交之前所做的任何修改操作都无法被其它事务看见。这个隔离级别有时候也称不可重复读，原因是在某一个事务第一次读取的数据有可能与第二次读取的数据有区别，因为在两次读取数据之间有其它事务提交了修改操作。<strong>大部分数据库的隔离级别就是这个，例如Sql Server Oracle，但MySQL的默认隔离级别不是这个。</strong></p>
+<p>例子：张三下单后没有告诉他女朋友，但是他女朋友<strong>第一次查他账户时还是200￥</strong>，此时就不会吵架了，第二次查他账户时<strong>发现少了160￥，然后张三就送了一件衣服给他女朋友，她表示很surprise。</strong></p>
+<h2 id="3-可重复读（REPEATABLE-READ）"><a href="#3-可重复读（REPEATABLE-READ）" class="headerlink" title="3. 可重复读（REPEATABLE READ）"></a>3. 可重复读（REPEATABLE READ）</h2><p>可重复读解决了脏读的问题。<strong>该隔离级别保证了同一个事务中多次读取记录的结果是一致的。</strong>但是会导致<strong>幻读</strong>（Phantom Read）的问题。<strong>MySQL的隔离级别就是可重复读。</strong></p>
+<p><strong>幻读：某一个事务在第一次与第二次读取数据库数据之间，另外一个事务提交了插入数据的操作，导致之前的事务再次读取数据时出现了一行新的数据——幻行。</strong></p>
+<p>例子：张三的女朋友在记录张三买了当前什么东西时，第一次查询张三的购物记录（<strong>事务A访问数据库</strong>），发现买了一件衣服和一张电脑贴纸总共160￥，她准备这些记录<strong>打印出来</strong>，而此时张三在广州又买了一杯星爸爸喝，花了35￥（<strong>事务B增加消费记录并提交</strong>），当女朋友把账单打印出来时（<strong>事务A再次查询数据库</strong>），发现总共花了195￥，多了一条花费星爸爸的记录，女朋友<strong>感到很疑惑，以为之前出现幻觉了，没看到这条记录**</strong>（幻读）。**</p>
+<h2 id="4-串行化（SERIALIZABLE）"><a href="#4-串行化（SERIALIZABLE）" class="headerlink" title="4. 串行化（SERIALIZABLE）"></a><strong>4. 串行化（SERIALIZABLE）</strong></h2><p>它是<strong>最高</strong>的隔离级别。它<strong>强制事务串行执行</strong>，避免了可重复读导致的幻读问题。简单来说，<strong>串行化会在读取的每一行数据上加锁</strong>，所以可能会导致过多的超时等待和争用锁问题，在实际应用中也很少使用，除非要<strong>确保数据的一致性而且接受没有并发</strong>的情况下才会考虑使用。</p>
+<p>例子：省略…..</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/09/多线程/" rel="next" title="三分钟Java基础-多线程">
+                <i class="fa fa-chevron-left"></i> 三分钟Java基础-多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -352,6 +522,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -372,8 +546,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
           <p class="site-author-name" itemprop="name">傻曾</p>
@@ -478,6 +661,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、数据库事务的四大特性（ACID）"><span class="nav-number">1.</span> <span class="nav-text">一、数据库事务的四大特性（ACID）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-原子性（Atomicity）"><span class="nav-number">1.1.</span> <span class="nav-text">1. 原子性（Atomicity）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-一致性（Consistency）"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一致性（Consistency）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-隔离性（Isolation）"><span class="nav-number">1.3.</span> <span class="nav-text">3. 隔离性（Isolation）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-持久性（Durability）"><span class="nav-number">1.4.</span> <span class="nav-text">4. 持久性（Durability）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、数据库的四个隔离级别"><span class="nav-number">2.</span> <span class="nav-text">二、数据库的四个隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-未提交读-脏读-（READ-UNCOMMITED）"><span class="nav-number">2.1.</span> <span class="nav-text">1. 未提交读[脏读]（READ UNCOMMITED）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-提交读-不可重复读-（READ-COMMITED）"><span class="nav-number">2.2.</span> <span class="nav-text">2. 提交读[不可重复读]（READ COMMITED）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-可重复读（REPEATABLE-READ）"><span class="nav-number">2.3.</span> <span class="nav-text">3. 可重复读（REPEATABLE READ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-串行化（SERIALIZABLE）"><span class="nav-number">2.4.</span> <span class="nav-text">4. 串行化（SERIALIZABLE）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -633,10 +832,10 @@ setInterval("createtime()",250);
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>数据库事务的四大特性及事务的隔离级别</title>
+      <link href="/2020/03/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
+      <url>/2020/03/09/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7%E5%8F%8A%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、数据库事务的四大特性（ACID）"><a href="#一、数据库事务的四大特性（ACID）" class="headerlink" title="一、数据库事务的四大特性（ACID）"></a>一、数据库事务的四大特性（ACID）</h1><h2 id="1-原子性（Atomicity）"><a href="#1-原子性（Atomicity）" class="headerlink" title="1. 原子性（Atomicity）"></a>1. 原子性（Atomicity）</h2><p>概念回答：事务所包含的所有操作要么<strong>全部执行</strong>，要么<strong>全部都不执行</strong>（称为失败回滚），即某一事务所包含的操作若成功执行，必须全部应用到数据库，若失败回滚，则不能对数据库有任何改变。</p><p><strong>通俗易懂的回答</strong>：假设张三去找李四借100￥，那么借钱的事务包含2个操作：张三+100￥，李四-100￥；要么借钱成功，张三的账户+100￥，李四的账户-100￥；要么就不借钱；<strong>不能出现</strong>李四支付了100￥，但张三没收到，或者张三收到100￥，但李四没有扣钱的现象。</p><h2 id="2-一致性（Consistency）"><a href="#2-一致性（Consistency）" class="headerlink" title="2. 一致性（Consistency）"></a>2. 一致性（Consistency）</h2><p>概念回答：一致性是指事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说一个事务执行之前和执行之后都必须处于一致性状态。</p><p><strong>通俗易懂的回答</strong>：一致性是指正确状态的一致性，假设张三今天要去买一件150￥的衣服，而张三的余额里只有140￥，当张三结账时，他会发现结账失败（事务回滚），因为在数据库中必须<strong>满足余额列 ≥ 0的约束，</strong>也就是说<strong>余额正确状态的一致性就是保证余额不小于0，即需要满足数据库的约束条件</strong>，如果张三付款后，张三的余额里只剩下-10￥，显然这不符合约束条件按，所以当状态从150￥转变为-10￥时，违反了数据库的一致性，此时事务会产生回滚。</p><p>参考博客：<a href="https://www.zhihu.com/question/31346392" target="_blank" rel="noopener">https://www.zhihu.com/question/31346392</a></p><a id="more"></a><h2 id="3-隔离性（Isolation）"><a href="#3-隔离性（Isolation）" class="headerlink" title="3. 隔离性（Isolation）"></a>3. 隔离性（Isolation）</h2><p>概念回答：当多个事务并发地访问数据库时，在同一时间点只允许单个事务对数据库进行操作，不允许多个事务同时操作数据库。</p><p><strong>通俗易懂的回答</strong>：例如张三今天要去买一件150￥的衣服和10￥的Macbook Pro电脑贴纸，他的账户有200￥，张三在买衣服结账的时候（事务A）同时在手机下单买了电脑贴纸（事务B），那么事务A和事务B将<strong>按照某种先后顺序依次操作张三的账户数据库，减少张三的余额</strong>。</p><h2 id="4-持久性（Durability）"><a href="#4-持久性（Durability）" class="headerlink" title="4. 持久性（Durability）"></a>4. 持久性（Durability）</h2><p>概念回答：事务的持久性是指事务执行成功以后，该事务对数据库所作的更改会持久的保存在数据库之中，不会无缘无故的回滚。</p><p><strong>通俗易懂的回答</strong>：张三买了总共160￥的衣服和电脑贴纸后，张三的账户余额就会从200￥变为40￥（事务A），<strong>这个变化会永久地存在于数据库中</strong>；如果张三将这两件物品退款了，张三的账户余额又从40￥变为200￥（事务B），但是<strong>这并不是否定了数据库的持久性，因为事务A是确实发生的，只不过事务B的操作恰好与事务A的操作相反，造成的效果是张三的总余额没有发生改变。</strong></p><hr><h1 id="二、数据库的四个隔离级别"><a href="#二、数据库的四个隔离级别" class="headerlink" title="二、数据库的四个隔离级别"></a>二、数据库的四个隔离级别</h1><h2 id="1-未提交读-脏读-（READ-UNCOMMITED）"><a href="#1-未提交读-脏读-（READ-UNCOMMITED）" class="headerlink" title="1. 未提交读[脏读]（READ UNCOMMITED）"></a>1. 未提交读[脏读]（READ UNCOMMITED）</h2><p>事务中的修改操作，即使未提交，也可以被其它事务读取。即某一个事务可以读取其它事务未提交的数据。这个隔离级别一般在实际应用中很少使用，因为它会导致很多问题出现，性能也不会比其它隔离级别好。</p><p>例子：张三网购160￥的衣服送给他女朋友，假设张三确认收货时才真正地从数据库里扣钱，张三下单后账户被暂时确认扣除160￥（<strong>事务A，并没有真正写入数据库</strong>）没有告诉他女朋友，他的女朋友查张三的账户时发现少了160￥（<strong>事务B读取事务A的未提交数据</strong>），又不知道买了什么东西，就<strong>吵起架来了（出大问题）</strong>。</p><h2 id="2-提交读-不可重复读-（READ-COMMITED）"><a href="#2-提交读-不可重复读-（READ-COMMITED）" class="headerlink" title="2. 提交读[不可重复读]（READ COMMITED）"></a>2. 提交读[不可重复读]（READ COMMITED）</h2><p>该隔离级别限定一个事务在开始后，只能读取其它已经提交事务所做的修改。也就是说，一个事务在开始之后直至提交之前所做的任何修改操作都无法被其它事务看见。这个隔离级别有时候也称不可重复读，原因是在某一个事务第一次读取的数据有可能与第二次读取的数据有区别，因为在两次读取数据之间有其它事务提交了修改操作。<strong>大部分数据库的隔离级别就是这个，例如Sql Server Oracle，但MySQL的默认隔离级别不是这个。</strong></p><p>例子：张三下单后没有告诉他女朋友，但是他女朋友<strong>第一次查他账户时还是200￥</strong>，此时就不会吵架了，第二次查他账户时<strong>发现少了160￥，然后张三就送了一件衣服给他女朋友，她表示很surprise。</strong></p><h2 id="3-可重复读（REPEATABLE-READ）"><a href="#3-可重复读（REPEATABLE-READ）" class="headerlink" title="3. 可重复读（REPEATABLE READ）"></a>3. 可重复读（REPEATABLE READ）</h2><p>可重复读解决了脏读的问题。<strong>该隔离级别保证了同一个事务中多次读取记录的结果是一致的。</strong>但是会导致<strong>幻读</strong>（Phantom Read）的问题。<strong>MySQL的隔离级别就是可重复读。</strong></p><p><strong>幻读：某一个事务在第一次与第二次读取数据库数据之间，另外一个事务提交了插入数据的操作，导致之前的事务再次读取数据时出现了一行新的数据——幻行。</strong></p><p>例子：张三的女朋友在记录张三买了当前什么东西时，第一次查询张三的购物记录（<strong>事务A访问数据库</strong>），发现买了一件衣服和一张电脑贴纸总共160￥，她准备这些记录<strong>打印出来</strong>，而此时张三在广州又买了一杯星爸爸喝，花了35￥（<strong>事务B增加消费记录并提交</strong>），当女朋友把账单打印出来时（<strong>事务A再次查询数据库</strong>），发现总共花了195￥，多了一条花费星爸爸的记录，女朋友<strong>感到很疑惑，以为之前出现幻觉了，没看到这条记录**</strong>（幻读）。**</p><h2 id="4-串行化（SERIALIZABLE）"><a href="#4-串行化（SERIALIZABLE）" class="headerlink" title="4. 串行化（SERIALIZABLE）"></a><strong>4. 串行化（SERIALIZABLE）</strong></h2><p>它是<strong>最高</strong>的隔离级别。它<strong>强制事务串行执行</strong>，避免了可重复读导致的幻读问题。简单来说，<strong>串行化会在读取的每一行数据上加锁</strong>，所以可能会导致过多的超时等待和争用锁问题，在实际应用中也很少使用，除非要<strong>确保数据的一致性而且接受没有并发</strong>的情况下才会考虑使用。</p><p>例子：省略…..</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>三分钟Java基础-多线程</title>
       <link href="/2020/03/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
       <url>/2020/03/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
@@ -354,31 +379,6 @@
     
     
     <entry>
-      <title>JVM入门-四种垃圾回收算法</title>
-      <link href="/2019/08/25/JVM%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"/>
-      <url>/2019/08/25/JVM%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<h1 id="JVM的四种垃圾回收算法"><a href="#JVM的四种垃圾回收算法" class="headerlink" title="JVM的四种垃圾回收算法"></a>JVM的四种垃圾回收算法</h1><blockquote><p>概要：</p><p>垃圾回收算法仅对其思想和发展历程进行学习，并不细究算法的底层实现！</p></blockquote><h2 id="标记-清除算法-Mark-Sweep"><a href="#标记-清除算法-Mark-Sweep" class="headerlink" title="标记 - 清除算法(Mark Sweep)"></a>标记 - 清除算法(Mark Sweep)</h2><blockquote><p><strong>最基础的垃圾收集算法</strong>，之后的三种垃圾收集算法均<strong>由它演变</strong>而来。</p><p>回收步骤：</p><ol><li>标记出所有需要回收的对象，标记的过程就是判断对象<code>存活或死亡</code>的过程，标记结束后对被<code>宣判死亡</code>的对象进行回收。</li></ol></blockquote><p>补充知识点：</p><blockquote><p><strong>如何判断对象是存活还是死亡</strong></p></blockquote><p>在上一篇推文花大篇幅提及过，当对与<code>GC Roots</code>不可达时，会认为该对象<code>应该被回收</code>；<strong>实际上</strong>，即使与GC Roots不可达的对象，JVM也<code>不会立即判处死刑</code>，会有一个<code>“缓刑”</code>阶段，而这个缓刑阶段就是<code>最终决定此对象能不能存活下来的关键</code>。</p><p>真正宣告对象死亡之前需要经过<code>两个缓刑阶段</code>：</p><ol><li>第一次标记，并判断对象是否有必要执行<code>finalize()</code>方法；如果有必要则进入第二个阶段，没有必要则直接宣判死亡，回收它<del>(盘它)</del>。判断的标准为<code>GC是否已经执行过此方法或者对象是否覆盖了finalize()方法</code>。</li><li>将该对象放入<code>F-Queue队列</code>中，JVM中有一个特定线程<code>Finalizer</code>，它会根据低优先级去调用对象的Finalize()方法；对象如果想存活(Reachable)，就必须在执行它的Finalize()时完成“救赎”，也就是重新与GC Roots建立关系，使其的状态由<code>Unreachable转换为Reachable</code>，Finalize()方法执行完毕后GC会重新进行判断对象是否可达，若不可达则正式回收该对象；若可达则该对象存活下来。</li></ol><blockquote><p>Java规范并不推荐对象在Finalize()中重新建立引用关系，因为由于优先级的不稳定性导致执行的无序性，而且JVM不允许此方法执行的时间过长，以免队列后面的对象等待过长时间，导致队列内存溢出。</p></blockquote><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/timg.jpg" alt="img"></p><a id="more"></a><p>上图为此算法的执行过程及结果，当对象被回收后，<code>内存的可利用空间得到提升</code>，但是这个算法<code>并不是百利无害</code>的。</p><blockquote><p>“标记-清除”算法的<strong>弊端</strong>：</p></blockquote><ol><li><p><strong>效率问题</strong></p><p>标记和清除过程中的效率并不高，也就是俗称的性能问题</p></li><li><p><strong>空间问题</strong></p><p>对对象进行回收后会<code>产生很多内存空间碎片</code>，当需要存储一个占用内存空间很大的对象时可能无法找到一片<code>足够且连续</code>的内存空间，导致<strong>提早触发下一次垃圾回收</strong>。</p></li></ol><h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><h3 id="出现的原因"><a href="#出现的原因" class="headerlink" title="出现的原因"></a>出现的原因</h3><p>解决效率问题</p><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><blockquote><p>将内存按照容量划分为大小相等的两块，每次<code>只使用其中的一块</code>，当其中一块的内存被使用完时，则将存活的对象<code>复制</code>到另外一块内存区域中，并且<code>连续存放</code>，然后再<code>全部清除掉当前已经使用完的内存区域</code>，这样每次清除都是对<code>半个区域</code>进行清除，<code>不会出现内存碎片等情况。</code></p></blockquote><h3 id="算法的弊端"><a href="#算法的弊端" class="headerlink" title="算法的弊端"></a>算法的弊端</h3><blockquote><p>将原有的内存可用率从100%降低到50%</p></blockquote><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p><strong>将内存空间分为Eden空间和Survivor空间</strong></p><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/1569840490540.png" alt="1569840490540"></p><blockquote><p>将内存划分为较大的<code>Eden空间</code>(伊甸园)和<code>Survivor空间</code>(幸存者空间)，它们的内存空间占比大概是8  ：1，每次对象实例被创建时都会先进入Eden空间，Survivor空间又被<code>划分为两个部分</code>，一部分是<code>空闲区域（From Survivor）</code>，另一部分是<code>存储上一次垃圾回收时存活的对象（To Survivor）</code>；每一次进行GC时，会将Eden空间和Survivor空间存活的对象全部复制到另一块Survivor空间上，然后释放Eden空间和之前被利用的Survivor空间，所以<code>From/To Survivor空间不断地交替使用</code>，如果某次GC完成时发现无法将所有对象复制到另外一个Survivor区域，则需要依赖其它内存<strong>（老年代对象）</strong>进行<code>分配担保</code>。</p></blockquote><ul><li><p>老年代对象是什么？</p><p>存放在Survivor区域和Eden区域的对象被称为<code>新生代</code>，意思是这些对象的年龄非常年轻，随时可能被灭亡。</p><p><code>老年代</code>对象指的是在Survivor区域经过多次垃圾回收<strong>仍旧存活下来的新生代对象</strong><del>（新生代中含有对象年龄计数器，默认值达到15则晋升为老年代）</del>，将会<strong>被晋升为老年代</strong><del>（晋升原理暂不详细解释，若有兴趣可自行查阅相关资料）</del>。</p><p>老年代的存放位置和新生代一样，都是存放在GC堆中，但是老年代并不存放于Survivor空间中，这也是区分<code>老年代</code>和<code>新生代</code>的特征之一。</p></li><li><p><strong>分配担保概念：</strong></p><p>打个比喻：当我们向银行贷款借10000元时，银行分析出在98%的几率下我们能够及时还钱给银行，所以存在2%的风险。</p><p>但是，如果2%的风险出现时（我们不能按时还钱），<code>有另外一个靠谱的人说：“我来替他们还吧！”</code>，<strong>这一位靠谱的人</strong>就是我们所说的<strong>分配担保</strong>，<code>它能将银行借钱的风险降低为0%</code>。</p><p>回到主题，当进行新生代的GC时，<code>老年代</code>就是那一位靠谱的人，它保证了如果GC后无法将所有的新生代对象放入另一个Survivor区域时，<code>能够将某些对象直接放入老年代对象所存放的区域。</code></p></li></ul><blockquote><p>当<strong>老年代空间</strong>无法放入更多的对象时，会触发一次垃圾回收，称为<code>Full GC</code>；</p><p>对于新生代对象的垃圾回收，称为<code>Minor GC</code>；</p><p>Full GC花费的时间大约是Minor GC的<code>10倍</code></p></blockquote><h2 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记 - 整理算法"></a>标记 - 整理算法</h2><h3 id="出现的原因-1"><a href="#出现的原因-1" class="headerlink" title="出现的原因"></a>出现的原因</h3><blockquote><p>在”复制算法”的前提下，如果存在<strong>对象存活率较高</strong>的情况，<strong>会产生较多的复制操作</strong>，效率低下，而且要<code>牺牲老年代空间</code>以应对对象存活率较高而<strong>无法放入空闲的Survivor区域</strong>的情况，所以在老年代一般不能采用这种算法进行对象回收，继而有人提出了”标记 - 整理”算法。</p></blockquote><h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><blockquote><p>标记对象的过程与”标记 - 清除”算法相同，在标记过程结束以后并不是马上进行回收，<strong>而是将存活的对象向同一端移动，然后清除掉端边界外的内存。</strong></p></blockquote><h3 id="算法图解"><a href="#算法图解" class="headerlink" title="算法图解"></a>算法图解</h3><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/18092410_aV8b.jpg" alt="标记整理算法"></p><h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><h3 id="出现的原因-2"><a href="#出现的原因-2" class="headerlink" title="出现的原因"></a>出现的原因</h3><p><strong>提高对象回收的效率</strong>，没有新的思想。</p><blockquote><p><strong>分代就是分为“新生代”和“老年代”。</strong></p><p><strong>新生代采用的垃圾回收算法：</strong>由于在大多数情况下，新生代在Eden空间和Survivor空间存活的对象非常地少，因此只要采用<code>复制算法</code>，每一次<code>Minor GC</code>只需要少量的复制操作即可以完成对象的回收。</p><p><strong>老年代采用的垃圾回收算法：</strong>由于老年代空间的对象<strong>存活率较高</strong>，且<code>没有额外空间对老年代对象进行分配担保</code>，所以不能采用“复制”算法而采用“标记 - 整理”算法或者“标记 - 清除”算法。</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> JVM </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> JVM </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>三分钟Java基础-接口</title>
       <link href="/2019/08/25/JAVASE-%E6%8E%A5%E5%8F%A3/"/>
       <url>/2019/08/25/JAVASE-%E6%8E%A5%E5%8F%A3/</url>
@@ -396,6 +396,31 @@
         <tags>
             
             <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM入门-四种垃圾回收算法</title>
+      <link href="/2019/08/25/JVM%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"/>
+      <url>/2019/08/25/JVM%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="JVM的四种垃圾回收算法"><a href="#JVM的四种垃圾回收算法" class="headerlink" title="JVM的四种垃圾回收算法"></a>JVM的四种垃圾回收算法</h1><blockquote><p>概要：</p><p>垃圾回收算法仅对其思想和发展历程进行学习，并不细究算法的底层实现！</p></blockquote><h2 id="标记-清除算法-Mark-Sweep"><a href="#标记-清除算法-Mark-Sweep" class="headerlink" title="标记 - 清除算法(Mark Sweep)"></a>标记 - 清除算法(Mark Sweep)</h2><blockquote><p><strong>最基础的垃圾收集算法</strong>，之后的三种垃圾收集算法均<strong>由它演变</strong>而来。</p><p>回收步骤：</p><ol><li>标记出所有需要回收的对象，标记的过程就是判断对象<code>存活或死亡</code>的过程，标记结束后对被<code>宣判死亡</code>的对象进行回收。</li></ol></blockquote><p>补充知识点：</p><blockquote><p><strong>如何判断对象是存活还是死亡</strong></p></blockquote><p>在上一篇推文花大篇幅提及过，当对与<code>GC Roots</code>不可达时，会认为该对象<code>应该被回收</code>；<strong>实际上</strong>，即使与GC Roots不可达的对象，JVM也<code>不会立即判处死刑</code>，会有一个<code>“缓刑”</code>阶段，而这个缓刑阶段就是<code>最终决定此对象能不能存活下来的关键</code>。</p><p>真正宣告对象死亡之前需要经过<code>两个缓刑阶段</code>：</p><ol><li>第一次标记，并判断对象是否有必要执行<code>finalize()</code>方法；如果有必要则进入第二个阶段，没有必要则直接宣判死亡，回收它<del>(盘它)</del>。判断的标准为<code>GC是否已经执行过此方法或者对象是否覆盖了finalize()方法</code>。</li><li>将该对象放入<code>F-Queue队列</code>中，JVM中有一个特定线程<code>Finalizer</code>，它会根据低优先级去调用对象的Finalize()方法；对象如果想存活(Reachable)，就必须在执行它的Finalize()时完成“救赎”，也就是重新与GC Roots建立关系，使其的状态由<code>Unreachable转换为Reachable</code>，Finalize()方法执行完毕后GC会重新进行判断对象是否可达，若不可达则正式回收该对象；若可达则该对象存活下来。</li></ol><blockquote><p>Java规范并不推荐对象在Finalize()中重新建立引用关系，因为由于优先级的不稳定性导致执行的无序性，而且JVM不允许此方法执行的时间过长，以免队列后面的对象等待过长时间，导致队列内存溢出。</p></blockquote><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/timg.jpg" alt="img"></p><a id="more"></a><p>上图为此算法的执行过程及结果，当对象被回收后，<code>内存的可利用空间得到提升</code>，但是这个算法<code>并不是百利无害</code>的。</p><blockquote><p>“标记-清除”算法的<strong>弊端</strong>：</p></blockquote><ol><li><p><strong>效率问题</strong></p><p>标记和清除过程中的效率并不高，也就是俗称的性能问题</p></li><li><p><strong>空间问题</strong></p><p>对对象进行回收后会<code>产生很多内存空间碎片</code>，当需要存储一个占用内存空间很大的对象时可能无法找到一片<code>足够且连续</code>的内存空间，导致<strong>提早触发下一次垃圾回收</strong>。</p></li></ol><h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><h3 id="出现的原因"><a href="#出现的原因" class="headerlink" title="出现的原因"></a>出现的原因</h3><p>解决效率问题</p><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><blockquote><p>将内存按照容量划分为大小相等的两块，每次<code>只使用其中的一块</code>，当其中一块的内存被使用完时，则将存活的对象<code>复制</code>到另外一块内存区域中，并且<code>连续存放</code>，然后再<code>全部清除掉当前已经使用完的内存区域</code>，这样每次清除都是对<code>半个区域</code>进行清除，<code>不会出现内存碎片等情况。</code></p></blockquote><h3 id="算法的弊端"><a href="#算法的弊端" class="headerlink" title="算法的弊端"></a>算法的弊端</h3><blockquote><p>将原有的内存可用率从100%降低到50%</p></blockquote><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p><strong>将内存空间分为Eden空间和Survivor空间</strong></p><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/1569840490540.png" alt="1569840490540"></p><blockquote><p>将内存划分为较大的<code>Eden空间</code>(伊甸园)和<code>Survivor空间</code>(幸存者空间)，它们的内存空间占比大概是8  ：1，每次对象实例被创建时都会先进入Eden空间，Survivor空间又被<code>划分为两个部分</code>，一部分是<code>空闲区域（From Survivor）</code>，另一部分是<code>存储上一次垃圾回收时存活的对象（To Survivor）</code>；每一次进行GC时，会将Eden空间和Survivor空间存活的对象全部复制到另一块Survivor空间上，然后释放Eden空间和之前被利用的Survivor空间，所以<code>From/To Survivor空间不断地交替使用</code>，如果某次GC完成时发现无法将所有对象复制到另外一个Survivor区域，则需要依赖其它内存<strong>（老年代对象）</strong>进行<code>分配担保</code>。</p></blockquote><ul><li><p>老年代对象是什么？</p><p>存放在Survivor区域和Eden区域的对象被称为<code>新生代</code>，意思是这些对象的年龄非常年轻，随时可能被灭亡。</p><p><code>老年代</code>对象指的是在Survivor区域经过多次垃圾回收<strong>仍旧存活下来的新生代对象</strong><del>（新生代中含有对象年龄计数器，默认值达到15则晋升为老年代）</del>，将会<strong>被晋升为老年代</strong><del>（晋升原理暂不详细解释，若有兴趣可自行查阅相关资料）</del>。</p><p>老年代的存放位置和新生代一样，都是存放在GC堆中，但是老年代并不存放于Survivor空间中，这也是区分<code>老年代</code>和<code>新生代</code>的特征之一。</p></li><li><p><strong>分配担保概念：</strong></p><p>打个比喻：当我们向银行贷款借10000元时，银行分析出在98%的几率下我们能够及时还钱给银行，所以存在2%的风险。</p><p>但是，如果2%的风险出现时（我们不能按时还钱），<code>有另外一个靠谱的人说：“我来替他们还吧！”</code>，<strong>这一位靠谱的人</strong>就是我们所说的<strong>分配担保</strong>，<code>它能将银行借钱的风险降低为0%</code>。</p><p>回到主题，当进行新生代的GC时，<code>老年代</code>就是那一位靠谱的人，它保证了如果GC后无法将所有的新生代对象放入另一个Survivor区域时，<code>能够将某些对象直接放入老年代对象所存放的区域。</code></p></li></ul><blockquote><p>当<strong>老年代空间</strong>无法放入更多的对象时，会触发一次垃圾回收，称为<code>Full GC</code>；</p><p>对于新生代对象的垃圾回收，称为<code>Minor GC</code>；</p><p>Full GC花费的时间大约是Minor GC的<code>10倍</code></p></blockquote><h2 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记 - 整理算法"></a>标记 - 整理算法</h2><h3 id="出现的原因-1"><a href="#出现的原因-1" class="headerlink" title="出现的原因"></a>出现的原因</h3><blockquote><p>在”复制算法”的前提下，如果存在<strong>对象存活率较高</strong>的情况，<strong>会产生较多的复制操作</strong>，效率低下，而且要<code>牺牲老年代空间</code>以应对对象存活率较高而<strong>无法放入空闲的Survivor区域</strong>的情况，所以在老年代一般不能采用这种算法进行对象回收，继而有人提出了”标记 - 整理”算法。</p></blockquote><h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><blockquote><p>标记对象的过程与”标记 - 清除”算法相同，在标记过程结束以后并不是马上进行回收，<strong>而是将存活的对象向同一端移动，然后清除掉端边界外的内存。</strong></p></blockquote><h3 id="算法图解"><a href="#算法图解" class="headerlink" title="算法图解"></a>算法图解</h3><p><img src="//smallpineapp1e.github.io/2019/08/25/JVM的四种垃圾回收算法/18092410_aV8b.jpg" alt="标记整理算法"></p><h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><h3 id="出现的原因-2"><a href="#出现的原因-2" class="headerlink" title="出现的原因"></a>出现的原因</h3><p><strong>提高对象回收的效率</strong>，没有新的思想。</p><blockquote><p><strong>分代就是分为“新生代”和“老年代”。</strong></p><p><strong>新生代采用的垃圾回收算法：</strong>由于在大多数情况下，新生代在Eden空间和Survivor空间存活的对象非常地少，因此只要采用<code>复制算法</code>，每一次<code>Minor GC</code>只需要少量的复制操作即可以完成对象的回收。</p><p><strong>老年代采用的垃圾回收算法：</strong>由于老年代空间的对象<strong>存活率较高</strong>，且<code>没有额外空间对老年代对象进行分配担保</code>，所以不能采用“复制”算法而采用“标记 - 整理”算法或者“标记 - 清除”算法。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> JVM </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JVM </tag>
             
         </tags>
       
