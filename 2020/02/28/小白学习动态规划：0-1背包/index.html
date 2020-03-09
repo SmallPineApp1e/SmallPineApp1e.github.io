@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E6%83%85%E5%86%B5I.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%B0%8F%E7%99%BD%E5%AD%A6%E4%B9%A0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A0-1%E8%83%8C%E5%8C%85%5C%E6%83%85%E5%86%B5II.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%B0%8F%E7%99%BD%E5%AD%A6%E4%B9%A0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A0-1%E8%83%8C%E5%8C%85%5C%E5%9B%BE%E7%89%872.png">
-<meta property="og:updated_time" content="2020-03-09T00:43:22.547Z">
+<meta property="og:updated_time" content="2020-03-09T00:47:22.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划之01背包">
 <meta name="twitter:description" content="小白学习动态规划：0-1背包（经典例题）前言背包问题只是动态规划问题下的一个分类，求解0-1背包问题的思路本质上与求解动态规划的一般思路是一致的，我们经常遇到新的题目做不出来，并不是因为没有掌握动态规划的思想，而有可能是因为没有遇到这类具有显著特征的题目，无法将一般动态规划的解题思路应用在实战中。 动态规划的原理： ① 最优子结构性质：问题的最优解可以转化为求子问题的最优解，也就是说问题的最优解可">
@@ -479,6 +479,8 @@
 </blockquote>
 <p>先看下图，是在求出问题的解后整个动态规划表呈现的结果。下面就来看看这张表是如何一步步填上去并求出最终问题解的。</p>
 <p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%B0%8F%E7%99%BD%E5%AD%A6%E4%B9%A0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A0-1%E8%83%8C%E5%8C%85%5C%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<a id="more"></a>
+
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>① 确定子问题</p>
 <blockquote>
 <p>求容量为V的背包装入物品的价值总和最大，则考虑第i件物品是否放入背包，使得背包的价值保持最大。</p>

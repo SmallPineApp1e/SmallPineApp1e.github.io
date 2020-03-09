@@ -103,7 +103,7 @@
 <meta property="og:description" content="小白学习动态规划：完全背包参考博客：  https://blog.csdn.net/qq_38984851/article/details/81133840   https://blog.csdn.net/na_beginning/article/details/62884939  完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/%E5%9B%BE%E7%89%871.jpg">
-<meta property="og:updated_time" content="2020-03-09T00:43:12.372Z">
+<meta property="og:updated_time" content="2020-03-09T00:50:13.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划之完全背包">
 <meta name="twitter:description" content="小白学习动态规划：完全背包参考博客：  https://blog.csdn.net/qq_38984851/article/details/81133840   https://blog.csdn.net/na_beginning/article/details/62884939  完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。">
@@ -471,9 +471,16 @@
 <td align="center">8</td>
 </tr>
 </tbody></table>
-<h2 id="初步解题思路"><a href="#初步解题思路" class="headerlink" title="初步解题思路"></a>初步解题思路</h2><p>定义状态与01背包相同，下标i代表前i件物品，下标j代表背包的总容量为j<br>$$<br>此问题与01背包问题类似，但是每一件物品并不是选与不选的问题，\而是选几件的问题：选0件、选1件、选2件···选k件(k*Cost[i] ≤ V)<br>$$<br>所以，在01背包的基础上改变一下</p>
+<h2 id="初步解题思路"><a href="#初步解题思路" class="headerlink" title="初步解题思路"></a>初步解题思路</h2><p>定义状态与01背包相同，下标i代表前i件物品，下标j代表背包的总容量为j</p>
+<p>此问题与01背包问题类似，但是每一件物品并不是选与不选的问题，而是选几件的问题：</p>
+<blockquote>
+<p>选0件、选1件、选2件···选k件(k*Cost[i] ≤ V)</p>
+</blockquote>
+<p>所以，在01背包的基础上改变一下</p>
 <p>掌握完全背包问题前必须清楚<strong>01背包的状态转移方程</strong>：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-Cost[i]] + Wealth[i]&amp;if\ Cost[i] ≤j<br>\end{cases}<br>$$<br>而<strong>完全背包的状态转移方程</strong>为：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-k<em>Cost[i]] + k</em>Wealth[i]&amp;if\ k*Cost[i] ≤j<br>\end{cases}<br>$$</p>
 <p>需要乘上系数k的原因是如果背包的容量大于物品A的体积，那么放入一件A之后，有可能背包剩下的容量还可以继续放入A物品，每次放入都要放入<strong>尽可能多的</strong>物品。</p>
+<a id="more"></a>
+
 <p>例如：</p>
 <blockquote>
 <p>背包容量V = 9，物品A的体积为Cost[A] = 2，那么拿1件A放入背包后，背包容量 = 10 - 2 = 8，还可以继续放A，直到背包容量为剩下1时（此时放了4件A），无法继续放入A了才结束。</p>
@@ -490,7 +497,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">        <span class="comment">//假设不选第i件</span></span><br><span class="line">        dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">        <span class="comment">//假设能放k件</span></span><br><span class="line">        <span class="keyword">int</span> k = j / cost[i-<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//可以选k件</span></span><br><span class="line">        dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>当物品可以放入时，可能还可以继续放入该物品，所以状态转移方程需要变化：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i][j-Cost[i]] + Wealth[i]&amp;if\ Cost[i] ≤j<br>\end{cases}<br>$$</p>
-<p>$$<br>当Cost[i] ≤ j时，当放入一个物品i时，之后还可能会放入物品i\所以状态转移方程是F[i][j-Cost[i]]+Wealth[i]而不是F[i-1][j-Cost[i]]+Wealth[i]。<br>$$</p>
+<p>$$<br>当Cost[i] ≤ j时，当放入一个物品i时，之后还可能会放入物品i<br>$$</p>
+<p>$$<br>所以状态转移方程是F[i][j-Cost[i]]+Wealth[i]而不是F[i-1][j-Cost[i]]+Wealth[i]。<br>$$</p>
 <p><strong>优化代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">        <span class="comment">//假设不选第i件</span></span><br><span class="line">        dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">if</span>(cost[i-<span class="number">1</span>] &lt; j)&#123;</span><br><span class="line">            <span class="comment">//可以放进去</span></span><br><span class="line">            dp[i][j] = Math.max(dp[i][j], dp[i][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

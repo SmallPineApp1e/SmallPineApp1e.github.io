@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%8710.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%8711.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%8712.jpg">
-<meta property="og:updated_time" content="2020-03-09T00:42:10.672Z">
+<meta property="og:updated_time" content="2020-03-09T00:47:49.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划优化篇">
 <meta name="twitter:description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。[小白学习动态规划：入门篇]: https://blog.csdn.net/weixin_41949328/article/details/104150403 今天主要是">
@@ -463,6 +463,8 @@
 <p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%872.jpg" alt="图片2"></p>
 <p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%873.jpg" alt="图片3"></p>
 <p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%874.jpg" alt="图片4"></p>
+<a id="more"></a>
+
 <p>从上面几幅图可以很清晰地观察到，从求第四阶楼梯的爬楼梯方法数之后，每求下一阶楼梯的方法数时，<strong>就会有多一个值被废弃掉，而求某个状态的值（爬楼梯的方法数）只与它的第(n-2)个状态和第(n-1)个状态[n &gt;= 3]有依赖关系</strong>，所以在第(n-2)个状态以前的值就被废弃掉了。</p>
 <blockquote>
 <p>所以，这个定义一维DP数组在某种程度上是浪费了内存空间的。</p>
