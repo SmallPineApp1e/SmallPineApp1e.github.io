@@ -694,7 +694,7 @@
 <p>这是最基础的0-1背包问题</p>
 </blockquote>
 <p>先看下图，是在求出问题的解后整个动态规划表呈现的结果。下面就来看看这张表是如何一步步填上去并求出最终问题解的。</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%B0%8F%E7%99%BD%E5%AD%A6%E4%B9%A0%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9A0-1%E8%83%8C%E5%8C%85%5C%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/02/28/小白学习动态规划：0-1背包/#more" rel="contents">
@@ -882,10 +882,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)&#123; <span class="comment">//第1阶</span></span><br><span class="line">				dp[i] = <span class="number">1</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">1</span>)&#123; <span class="comment">//第2阶</span></span><br><span class="line">				dp[i] = <span class="number">2</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123; <span class="comment">//第3阶及以上</span></span><br><span class="line">				dp[i] = dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>首先，我们先分析dp的填充过程，观察有什么值是会在某个时间段后作废（一直没有使用到）</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%871.jpg" alt="图片1"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%872.jpg" alt="图片2"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%873.jpg" alt="图片3"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/.%5C%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%BC%98%E5%8C%96%E7%AF%87%5C%E5%9B%BE%E7%89%874.jpg" alt="图片4"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%871.jpg" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%872.jpg" alt="图片2"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%873.jpg" alt="图片3"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%874.jpg" alt="图片4"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/02/16/动态规划优化篇/#more" rel="contents">

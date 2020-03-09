@@ -102,12 +102,12 @@
 <meta property="og:site_name" content="傻曾🍍">
 <meta property="og:description" content="小白学习动态规划：完全背包参考博客：  https://blog.csdn.net/qq_38984851/article/details/81133840   https://blog.csdn.net/na_beginning/article/details/62884939  完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/%E5%9B%BE%E7%89%871.jpg">
-<meta property="og:updated_time" content="2020-03-09T00:50:13.468Z">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/1.jpg">
+<meta property="og:updated_time" content="2020-03-09T00:55:17.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划之完全背包">
 <meta name="twitter:description" content="小白学习动态规划：完全背包参考博客：  https://blog.csdn.net/qq_38984851/article/details/81133840   https://blog.csdn.net/na_beginning/article/details/62884939  完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/%E5%9B%BE%E7%89%871.jpg">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/1.jpg">
 
 
 
@@ -491,7 +491,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输出结果：</span><br><span class="line">0 0 0 0 0 0 0 0 0  0  0 </span><br><span class="line">0 0 2 2 4 4 6 6 8  8  10 </span><br><span class="line">0 0 2 4 4 6 8 8 10 12 12 </span><br><span class="line">0 0 2 4 4 7 8 9 11 12 14 </span><br><span class="line">0 0 2 4 4 7 8 9 11 12 14 </span><br><span class="line">0 0 2 4 4 7 8 9 12 12 14 </span><br><span class="line">14</span><br></pre></td></tr></table></figure>
 
 <p>此算法的空间复杂度为O（N²），共需要求解O（NV）个状态，求解每个状态的时间不是常数级了，因为每个物品并不是只有拿和不拿两种情况，而是拿k件（k≥1）或不拿的多种情况，求dp[i][j]所需要的时间是O（j/Cost[i]）,所以总的时间复杂度为O（NVΣ(j/Cost[i])）。在这种复杂度较高的情况下一般是不能AC的。所以要优化时间复杂度。尝试将其转化为01背包问题。</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/%E5%9B%BE%E7%89%871.jpg" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/1.jpg" alt="图片1"></p>
 <h2 id="优化解题思路（转化为01背包问题）"><a href="#优化解题思路（转化为01背包问题）" class="headerlink" title="优化解题思路（转化为01背包问题）"></a>优化解题思路（转化为01背包问题）</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>可以在每一个物品可以放多少个时，<strong>直接求出可以放入的最大值k</strong>，即每个物品要么不能放进去，要么放k件，等价于01背包中要么不能放入物品，要么可以放入1件物品。</p>
 <p><strong>优化代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">        <span class="comment">//假设不选第i件</span></span><br><span class="line">        dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">        <span class="comment">//假设能放k件</span></span><br><span class="line">        <span class="keyword">int</span> k = j / cost[i-<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//可以选k件</span></span><br><span class="line">        dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
