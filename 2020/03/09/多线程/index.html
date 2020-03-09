@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="多线程线程与进程的区别与联系进程：处于运行过程中的程序，并且有一定的独立功能。进程是资源分配和调度的独立单位。 进程的三个特征：独立性、动态性和并发性  独立性：进程拥有自己的地址空间，拥有自己独立的资源，在系统中是独立的实体。 动态性：进程与程序的区别在于，程序只是一个静态的指令集合，而进程则是正在系统中活动的一个指令集合。在进程中加入了时间的概念。 并发性：多个进程可以在单个处理器上并发执行，">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟Java基础-多线程">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/09/多线程/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="多线程线程与进程的区别与联系进程：处于运行过程中的程序，并且有一定的独立功能。进程是资源分配和调度的独立单位。 进程的三个特征：独立性、动态性和并发性  独立性：进程拥有自己的地址空间，拥有自己独立的资源，在系统中是独立的实体。 动态性：进程与程序的区别在于，程序只是一个静态的指令集合，而进程则是正在系统中活动的一个指令集合。在进程中加入了时间的概念。 并发性：多个进程可以在单个处理器上并发执行，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/多线程/image-20200308091433274.png">
+<meta property="og:updated_time" content="2020-03-09T02:56:49.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟Java基础-多线程">
+<meta name="twitter:description" content="多线程线程与进程的区别与联系进程：处于运行过程中的程序，并且有一定的独立功能。进程是资源分配和调度的独立单位。 进程的三个特征：独立性、动态性和并发性  独立性：进程拥有自己的地址空间，拥有自己独立的资源，在系统中是独立的实体。 动态性：进程与程序的区别在于，程序只是一个静态的指令集合，而进程则是正在系统中活动的一个指令集合。在进程中加入了时间的概念。 并发性：多个进程可以在单个处理器上并发执行，">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/09/多线程/image-20200308091433274.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/09/多线程/">
+
+
+
+
+
+  <title>三分钟Java基础-多线程 | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/多线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟Java基础-多线程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T10:56:45+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  6,822字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  26分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="线程与进程的区别与联系"><a href="#线程与进程的区别与联系" class="headerlink" title="线程与进程的区别与联系"></a>线程与进程的区别与联系</h2><p>进程：处于运行过程中的程序，并且有一定的独立功能。进程是资源分配和调度的独立单位。</p>
+<p>进程的三个特征：独立性、动态性和并发性</p>
+<blockquote>
+<p>独立性：进程拥有自己的地址空间，拥有自己独立的资源，在系统中是独立的实体。</p>
+<p>动态性：进程与程序的区别在于，程序只是一个静态的指令集合，而进程则是正在系统中活动的一个指令集合。在进程中加入了时间的概念。</p>
+<p>并发性：多个进程可以在单个处理器上并发执行，多个进程之间不会相互影响。</p>
+</blockquote>
+<p>Q&amp;A：并发性与并行性的区别？</p>
+<blockquote>
+<p>并发性（concurrency）指在同一时刻只能有一条指令执行，但多个进程指令被快速轮换执行，在宏观上具有多个进程同时执行的效果。</p>
+<p>并行性（parallel）指在同一时刻，有多条指令在多个处理器上同时执行。</p>
+</blockquote>
+<p>线程（Thread）：也被称作为轻量级进程，线程是进程的组成部分，一个进程可以拥有多个线程，一个线程只能属于一个进程。线程拥有自己的局部变量、堆栈和程序计数器，它不拥有系统资源，它与父进程的其它线程共享该进程拥有的所有资源。多个线程存在于进程中可能会发生抢占CPU的情况。</p>
+<p>归纳：一个操作系统可以执行多个任务，这些任务就是进程，每个进程可以拥有多个线程去共同完成任务。</p>
+<a id="more"></a>
+
+<h2 id="线程的创建和启动"><a href="#线程的创建和启动" class="headerlink" title="线程的创建和启动"></a>线程的创建和启动</h2><h3 id="1-继承Thread类创建线程类"><a href="#1-继承Thread类创建线程类" class="headerlink" title="1. 继承Thread类创建线程类"></a>1. 继承Thread类创建线程类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="title">extend</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程A开始执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ThreadA t = <span class="keyword">new</span> ThreadA();</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-实现Runnable接口创建线程类"><a href="#2-实现Runnable接口创建线程类" class="headerlink" title="2. 实现Runnable接口创建线程类"></a>2. 实现Runnable接口创建线程类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="title">implments</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"线程A开始执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ThreadA t = <span class="keyword">new</span> ThreadA();</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-使用Callable和Future创建线程"><a href="#3-使用Callable和Future创建线程" class="headerlink" title="3. 使用Callable和Future创建线程"></a>3. 使用Callable和Future创建线程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ThreadA t = <span class="keyword">new</span> ThreadA();</span><br><span class="line">        FutureTask&lt;Integer&gt; task = <span class="keyword">new</span> FutureTask&lt;&gt;((Callable&lt;Integer&gt;)()-&gt;&#123;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>( ; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">"的循环变量i的值："</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//class()方法可以有返回值</span></span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-创建线程的三种方式对比"><a href="#4-创建线程的三种方式对比" class="headerlink" title="4. 创建线程的三种方式对比"></a>4. 创建线程的三种方式对比</h3><p>实现Runnable接口与实现Callable接口的方式基本相同，只是Callable接口里的线程执行方法可以<strong>有返回值和抛出异常</strong>，因此可以将实现Callable和Runnable接口归为同一种方式。这种方式与继承Thread方式的主要差别如下。</p>
+<p>采用实现Runnable、Callable接口方式创建多线程的优缺点：</p>
+<blockquote>
+<p>优势：</p>
+<p>线程类实现了Runnable或Callable接口还可以继承其它类</p>
+<p>多个线程可以共享同一个target对象，适合多个相同线程来处理同一份资源</p>
+<p>劣势：</p>
+<p>编程较复杂，访问当前线程时需要用<code>Thread.currentThread()</code>方法。</p>
+</blockquote>
+<p>采用继承Thread类的方式创建多线程的优缺点：</p>
+<blockquote>
+<p>优势：</p>
+<p>编写简单，访问当前线程时直接使用this即可。</p>
+<p>缺点：</p>
+<p>无法继承其它类。</p>
+</blockquote>
+<p>因此一般推荐采用实现Runnable接口、Callable接口来创建多线程。</p>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>线程的五种状态：新建（New）、就绪（Ready）、运行（Running）、阻塞（Blocked）和死亡（Dead）。</p>
+<h3 id="1-新建和就绪状态"><a href="#1-新建和就绪状态" class="headerlink" title="1. 新建和就绪状态"></a>1. 新建和就绪状态</h3><p>新建状态：当程序使用<code>new</code>关键字创建一个线程后，线程处于新建状态。</p>
+<p>就绪状态：程序调用线程的<code>start()</code>方法之后，该线程处于就绪状态。</p>
+<p>Attention：启动线程使用<code>start()</code>方法而不是<code>run()</code>方法！永远不要调用线程对象的<code>run()</code>方法！调用<code>start()</code>方法，系统会把<code>run()</code>方法当作线程执行体来处理；如果直接调用<code>run()</code>方法，则<code>run()</code>方法被当作一个普通方法执行，系统会将线程对象当成一个普通对象，无法让多个线程并发执行。</p>
+<h3 id="2-运行和阻塞状态"><a href="#2-运行和阻塞状态" class="headerlink" title="2. 运行和阻塞状态"></a>2. 运行和阻塞状态</h3><p>运行状态：处于就绪状态的线程获得了CPU，开始执行<code>run()</code>方法的线程执行体，则该线程处于运行状态。</p>
+<p>阻塞状态：线程调用<code>sleep()</code>方法主动放弃占用的处理器资源、线程调用了一个阻塞式IO方法（键盘输入），在该方法返回前，该线程被阻塞、线程试图获得一个同步监视器，但是该同步监视器正被其他线程所持有、线程在等待某个通知（notify）、程序调用了线程的<code>suspend()</code>方法将该线程挂起。</p>
+<p>阻塞 -&gt; 就绪：<code>sleep()</code>方法的线程经过了指定时间、线程调用的阻塞式IO方法已经返回、线程成功获得同步监视器、线程正在等待某个线程时，其它线程发出了通知、处于挂起状态的线程调用了<code>resume()</code>恢复方法。</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/09/多线程/image-20200308091433274.png" alt="image-20200308091433274"></p>
+<h3 id="3-线程死亡"><a href="#3-线程死亡" class="headerlink" title="3. 线程死亡"></a>3. 线程死亡</h3><p>线程会以三种方式结束（死亡）：<code>run()</code>或<code>call()</code>方法执行完成，线程正常结束、线程抛出一个未捕获的<code>Exception</code>或<code>Error</code>、直接调用该线程的<code>stop()</code>方法结束该线程-容易导致死锁。</p>
+<p>测试线程是否死亡<code>isAlive()</code>：处于就绪、运行和阻塞状态时返回<code>true</code>，处于新建、死亡状态返回<code>false</code>。</p>
+<p>线程死亡后不要尝试再”复活”线程，不要调用<code>start()</code>方法，会发生<code>IllegalThreadStateExceptiion</code>异常。</p>
+<h2 id="控制线程"><a href="#控制线程" class="headerlink" title="控制线程"></a>控制线程</h2><h3 id="1-join线程"><a href="#1-join线程" class="headerlink" title="1. join线程"></a>1. join线程</h3><p><code>join()</code>方法的作用是让一个线程等待另外一个线程执行完成。当某个线程调用其它线程的<code>join()</code>方法时，该线程将会被阻塞，直到被调用<code>join()</code>方法加入的线程执行完毕。</p>
+<p>重载方法：<code>join(long millis)</code>：等待被join的线程时间最长为milis毫秒。在millis毫秒后如果被join线程还没有执行完就不再等待。</p>
+<h3 id="2-后台线程"><a href="#2-后台线程" class="headerlink" title="2. 后台线程"></a>2. 后台线程</h3><p>后台线程又称为“守护线程”，典型的后台线程是JVM的垃圾回收线程。后台线程的设置必须在线程启动之前设置，即在<code>start()</code>前设置。</p>
+<p>后台线程的特征：如果所有的前台特征都死亡，后台线程会自动死亡。</p>
+<p>设置后台线程方法：<code>setDaemon(true)</code></p>
+<h3 id="3-线程睡眠：sleep"><a href="#3-线程睡眠：sleep" class="headerlink" title="3. 线程睡眠：sleep"></a>3. 线程睡眠：sleep</h3><p>让当前执行的线程暂停一段时间并进入阻塞状态，可通过调用Thread类的静态方法<code>sleep(long millis)</code>来实现。在其睡眠时间内不会获得执行的机会，一直处于阻塞状态。</p>
+<p>相似方法：<code>yield()</code>方法让当前正在执行的线程暂停，但是不会阻塞该线程，只是将该线程转入就绪状态。当线程调用<code>yield()</code>方法时，只有线程优先级大于等于当前线程优先级的其它线程才能获得执行机会。</p>
+<p><code>sleep()</code>与<code>yield()</code>的区别：</p>
+<blockquote>
+<p><code>sleep()</code>方法暂停当前线程后会给其它线程执行机会，不会理会线程的优先级问题；<code>yield()</code>方法只会给优先级相同，或优先级更高的线程执行机会。</p>
+<p><code>sleep()</code>方法由运行态转入阻塞态，直到经过睡眠时间后才会再次进入就绪态；<code>yield()</code>方法不会将线程转入阻塞态，只是强制将其转入就绪态，所有被<code>yield()</code>方法调用的线程完全有可能立即再次获得CPU资源被执行。</p>
+<p><code>sleep()</code>方法抛出了<code>InterruptedException</code>异常，而<code>yield()</code>方法没有声明抛出任何异常。</p>
+<p><code>sleep()</code>比<code>yield()</code>拥有更好的移植性，所以不推荐采用后者控制线程并发的执行。</p>
+</blockquote>
+<h3 id="4-改变线程优先级"><a href="#4-改变线程优先级" class="headerlink" title="4. 改变线程优先级"></a>4. 改变线程优先级</h3><p>优先级高的线程获得较多的执行机会，而优先级低的线程则获得较少的执行机会。</p>
+<p>每个线程的优先级与创建它的父进程的优先级相同，在默认情况下，main线程具有普通优先级。</p>
+<p>Thread类提供<code>setPriority(int newPriority)</code>和<code>getPriority()</code>方法来设置和返回指定线程的优先级，Thread类提供三个常数：<code>MAX_PRIORITY:10、MIN_PRIORITY:1、NORM_PRIORITY:5</code></p>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><h3 id="1-线程安全问题"><a href="#1-线程安全问题" class="headerlink" title="1. 线程安全问题"></a>1. 线程安全问题</h3><p>由于线程调度的不确定性导致程序逻辑发生错误。</p>
+<h3 id="2-同步代码块"><a href="#2-同步代码块" class="headerlink" title="2. 同步代码块"></a>2. 同步代码块</h3><p>引入同步监视器解决问题，通用方法就是同步代码块，语法格式如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">synchroinized(obj)&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">//此处的代码就是同步代码块</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>obj</code>对象就是同步监视器，在线程开始执行同步代码块之前需要获取对<code>obj</code>的同步监视器的锁定。</p>
+<p>Attention：任何时候只能有一个线程获得对同步监视器的锁定（加锁），当同步代码块执行完成后，该线程会释放对该同步监视器的锁定（释放锁）</p>
+<h3 id="3-同步方法"><a href="#3-同步方法" class="headerlink" title="3. 同步方法"></a>3. 同步方法</h3><p>同步方法就是使用<code>synchronized</code>关键字来修饰某个方法，同步方法的同步监视器是<code>this</code>，也就是调用该方法的对象。</p>
+<p>不可变类总是线程安全的，因为它的状态不可改变。多线程环境下操作可变类就要额外的方法来保证线程安全。</p>
+<blockquote>
+<p>不要对线程安全类的所有方法都进行同步，只对那些会改变竞争资源（共享资源）的方法进行同步。</p>
+<p>如果可变类有两种运行环境：单线程环境和多线程环境</p>
+</blockquote>
+<h3 id="4-释放同步监视器的锁定-释放锁"><a href="#4-释放同步监视器的锁定-释放锁" class="headerlink" title="4. 释放同步监视器的锁定(释放锁)"></a>4. 释放同步监视器的锁定(释放锁)</h3><p>两种特定情况下，线程不会释放同步监视器</p>
+<blockquote>
+<p>程序调用<code>Thread.sleep()、Thread.yield()</code>方法来暂停当前线程的执行，当前线程不会释放同步监视器</p>
+<p>在该线程执行同步代码块时，其它线程调用了该线程的<code>suspend()</code>方法将该线程挂起，该线程<strong>不会释放同步监视器</strong>（不会释放锁）。程序应该尽量避免使用<code>suspend()、resume()</code>方法来控制线程</p>
+</blockquote>
+<h3 id="5-同步锁（Lock）"><a href="#5-同步锁（Lock）" class="headerlink" title="5. 同步锁（Lock）"></a>5. 同步锁（Lock）</h3><p>从Java 5开始，提供了一种功能更加强大的线程同步机制-<code>Lock</code>，它提供了比<code>synchronized</code>方法和<code>synchronized</code>代码块更广泛的锁定操作。</p>
+<p><code>Lock</code>是控制多个线程对共享资源进行访问的工具。线程开始访问共享资源之前应该先获得<code>Lock</code>对象。</p>
+<p><code>Lock、ReadWriteLock</code>是Java 5提供的两个根接口，并为<code>Lock</code>提供了<code>ReentrantLock(可重入锁)</code>实现类，为<code>ReadWriteLock</code>提供了<code>ReentrantReadWriteLock</code>实现类。</p>
+<p>在实现线程安全的机制下，较常用的是<code>ReentrantLock</code>。通常使用<code>try...catch..finally</code>块来确保在必要时释放锁。获得可重入锁的线程可以对已被加锁的ReentrantLock锁再次加锁，ReentrantLock对象内部会维持一个计数器来追踪<code>lock()</code>方法的嵌套调用，线程每次调用<code>lock()</code>加锁后，必须显式调用<code>unlock()</code>来释放锁，所以一段被锁保护的代码可以调用另一个被相同锁保护的方法。</p>
+<h3 id="6-死锁及常用处理策略"><a href="#6-死锁及常用处理策略" class="headerlink" title="6. 死锁及常用处理策略"></a>6. 死锁及常用处理策略</h3><p>当两个线程相互等待对方释放同步监视器时就会发生死锁的情况，我们应该避免死锁发生，因为Java没有自动解决死锁的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockA</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">A1</span><span class="params">(DeadLockB b)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"进入A1()方法"</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">200</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"准备调用B2()方法"</span>);</span><br><span class="line">        b.B2();</span><br><span class="line">        System.out.println(<span class="string">"成功调用B2()方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">A2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"进入A2()方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeadLockB</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">B1</span><span class="params">(DeadLockA a)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"进入B1()方法"</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Thread.sleep(<span class="number">200</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception ex)&#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"准备调用A2()方法"</span>);</span><br><span class="line">        a.A2();</span><br><span class="line">        System.out.println(<span class="string">"成功调用A2()方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">B2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"进入B2()方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="title">implments</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    DeadLockA a = <span class="keyword">new</span> DeadLockA();</span><br><span class="line">    DeadLockB b = <span class="keyword">new</span> DeadLockB();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        b.b1(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        a.A1(b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h2><h3 id="1-传统的线程通信"><a href="#1-传统的线程通信" class="headerlink" title="1. 传统的线程通信"></a>1. 传统的线程通信</h3><p>Object类提供的<code>wait()、notify()和notifyAll()</code>三个方法，由同步监视器对象来调用。</p>
+<blockquote>
+<p>对于使用synchronized修饰的同步方法，因为该类的默认实例<code>(this)</code>就是同步监视器，所以可以在同步方法中直接调用这三个方法。</p>
+<p>对于使用synchronized修饰的同步代码块，同步监视器是synchronized后括号里面的对象，所以必须使用这个对象调用这三个方法。</p>
+</blockquote>
+<p><code>wait()</code>：阻塞当前线程，直到其它线程调用本线程锁对象的<code>notify()</code>或者<code>notifyAll()</code>进行唤醒，使该进程进入就绪态。</p>
+<p><code>notify()</code>：唤醒在此同步监视器上等待的单个线程。如果由多个线程，则会随机唤醒其中一个线程，只有当前线程放弃同步监视器的锁（使用<code>wait()</code>方法），才可以执行被唤醒的线程。</p>
+<p><code>notifyAll()</code>：唤醒在此同步监视器上锁定的所有线程。只有当前线程放弃对该同步监视器的锁（使用<code>wait()</code>方法），才可以执行被唤醒的线程。</p>
+<h3 id="2-使用Condition控制线程通信"><a href="#2-使用Condition控制线程通信" class="headerlink" title="2. 使用Condition控制线程通信"></a>2. 使用Condition控制线程通信</h3><p>Condition用于使用Lock对象来保证同步时的线程通信。Condition对象与Lock对象绑定在一起，要获得特定Lock实例的Condition实例，调用Lock的<code>newCondition()</code>方法即可。Condition提供如下三个方法：</p>
+<p><code>await()</code>：类似于<code>wait()</code>，导致当前线程阻塞，直到其它线程调用该Condition的<code>signal()</code>方法或者<code>signalAll()</code>方法。</p>
+<p><code>signal()</code>：类似于<code>notify()</code>，唤醒在此Lock对象上的某个线程，如果有多个线程在此Lock对象上等待，那么唤醒随机一个线程。只有当前线程放弃对该Lock对象的锁定之后（使用<code>await()</code>或者<code>unlock()</code>方法），才可以执行被唤醒的线程。</p>
+<p><code>signalAll()</code>：类似于<code>notifyAll()</code>，唤醒在此Lock对象等待的所有线程。只有当前线程放弃对该Lock对象的锁定之后（使用<code>await()</code>或者<code>unlock()</code>方法），才可以执行被唤醒的线程。</p>
+<h3 id="3-使用阻塞队列（BlockingQueue）控制线程通信"><a href="#3-使用阻塞队列（BlockingQueue）控制线程通信" class="headerlink" title="3. 使用阻塞队列（BlockingQueue）控制线程通信"></a>3. 使用阻塞队列（BlockingQueue）控制线程通信</h3><p>Java 5提供了BlockingQueue接口，是Queue的子接口，它的主要作用是作为<strong>线程同步</strong>的工具，BlockingQueue具有以下特征：当生产者线程试图向BlockingQueue中放入元素时，如果该队列已满，则该线程被阻塞；当消费者线程试图从BlockingQueue中取出元素时，如果该队列已空，则该线程被阻塞。</p>
+<p>BlockingQueue提供了两个支持阻塞的方法：</p>
+<p><code>put(E e)</code>：尝试把E元素放入BlockingQueue中，如果队列的元素已满，则阻塞该线程。</p>
+<p><code>take()</code>：尝试从BlockingQueue的头部取出元素，如果该队列的元素已空，则阻塞该线程。</p>
+<p>BlockingQueue包含的方法之间的对应关系：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">抛出异常</th>
+<th align="center">不同返回值</th>
+<th align="center">阻塞线程</th>
+<th align="center">指定超时时长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">队尾插入元素</td>
+<td align="center">add(e)</td>
+<td align="center">offer(e)</td>
+<td align="center">put(e)</td>
+<td align="center">offer(e, time, unit)</td>
+</tr>
+<tr>
+<td align="center">队头删除元素</td>
+<td align="center">remove()</td>
+<td align="center">poll()</td>
+<td align="center">take()</td>
+<td align="center">poll(time, unit)</td>
+</tr>
+<tr>
+<td align="center">获取、不删除元素</td>
+<td align="center">element()</td>
+<td align="center">peek()</td>
+<td align="center">无</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>常用的阻塞队列：</p>
+<p>ArrayBlockingQueue：基于数组实现的BlockingQueue队列。</p>
+<p>LinkedBlockingQueue：基于链表实现的BlockingQueue队列。</p>
+<p>PriorityBlockingQueue：不是标准的阻塞队列，和PriorityBlockingQueue类似，它返回的是排好序的第一个元素，排序可以实现Comparable接口进行自然排序或者使用Comparator进行定制排序。</p>
+<h3 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4. 线程池"></a>4. 线程池</h3><p>线程池在系统启动时即创建大量空闲线程，程序将一个Runnable对象或者Callable对象传给线程池，线程池就会启动一个空闲线程来执行它们的<code>run()</code>或者<code>call()</code>方法，当方法执行结束后，该线程并不会死亡，而是再次返回线程池中成为空闲状态，等待执行下一个Runnable对象的<code>run()</code>或<code>call()</code>方法。</p>
+<p>Java 5开始后，使用Executors工厂类来产生线程池，它包含以下方法：</p>
+<p><code>newCachedThreadPool()</code>：创建一个具有缓存功能的线程池，系统根据需要创建线程，这些线程将会被缓存在线程池中。</p>
+<p><code>newFixedThreadPool(int nThreads)</code>：创建一个可重用的、具有固定线程数的线程池。</p>
+<p><code>newSingleThreadExecutor()</code>：创建一个只有单线程的线程池，它相当于调用<code>newFixedThreadPool()</code>方法时传入参数为1</p>
+<p><code>newSingleThreadScheduledExecutor()</code>：创建只有一个线程的线程池，它可以在指定延迟后执行线程任务。</p>
+<p><code>newScheduledThreadPool(int corePoolSize)</code>：创建具有指定线程数的线程池，它可以在指定延迟后执行线程任务。corePoolSize指池中保存的线程数，即使线程是空闲的也被保存在线程池内。</p>
+<p><code>ExecutorService newWorkStealingPool(int parallelism)</code>：创建持有足够的线程的线程池来支持给定的并行级别，该方法还会使用多个队列来减少竞争。</p>
+<p><code>ExecutorService newWorkStealingPool()</code>：该方法是前一个方法的简化版本。如果当前机器有4个CPU，则目标并行级别被设置为4，也就是相当于为前一个方法传入4作为参数。</p>
+<blockquote>
+<p>前三个方法返回一个<code>ExecutorService</code>对象，该对象代表一个线程池，它可以执行Runnable对象或Callable对象所代表的线程；</p>
+<p>中间两个方法返回一个<code>ScheduledExecutorService</code>线程池，它是ExecutorService的子类，它可以在指定延迟后执行线程任务；</p>
+<p>最后两个方法是Java8新增方法，这两个方法可充分利用多CPU并行的能力。生成的<code>work stealing</code>池，相当于后台线程池，如果所有的前台线程都死亡了，work stealing池中的线程会自动死亡。</p>
+</blockquote>
+<p><code>ExecutorService</code>代表尽快执行线程的线程池（只要线程池中有空闲线程，就立即执行线程任务），程序只要将一个<code>Runnable</code></p>
+<p>对象或者<code>Callable</code>对象（代表线程任务）提交给该线程池，该线程池就会尽快执行该任务。此对象提供了<strong>三个方法</strong>：</p>
+<blockquote>
+<p><code>Future&lt;?&gt; submit(Runnable task)</code>：将一个Runnable对象提交给指定的线程池，线程池将在有空闲线程时执行Runnable对象代表的任务，返回值Future可以调用<code>isDone()/isCancelled()</code>方法来获得Runnable对象的执行状态。</p>
+<p><code>&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result)</code>：第一个参数和上面的方法一样，第二个参数显式指定线程执行结束后的返回值，所以Future对象将在<code>run()</code>方法执行结束后返回result。</p>
+<p><code>&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)</code>：将一个Callable对象提交给指定的线程池，线程池将在有空闲线程时执行Callable对象代表的任务，返回值Future代表Callable对象里的<code>call()</code>方法的返回值。</p>
+</blockquote>
+<p><code>ScheduledExecutorService</code>代表可在指定延迟后或周期性地执行线程任务的线程池，它提供了下面<strong>四个方法</strong>：</p>
+<blockquote>
+<p><code>ScheduledFuture&lt;V&gt; schedule(Callable&lt;V&gt; callable, long delay, TimeUnit unit)</code>：指定Callable任务将在delay延迟后执行。</p>
+<p><code>ScheduledFuture&lt;?&gt; schedule(Runnable command, long delay, TimeUnit unit)</code>：指定command任务将在delay延迟后执行。</p>
+<p><code>ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit)</code>：指定command任务将在delay延迟后执行，而且以设定频率重复执行。也就是说，在initialDelay后开始执行，依次在initialDelay+period、initialDelay+2*period···处重复执行，依次类推。</p>
+<p><code>ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit)</code>：创建并执行一个在给定初始延迟initialDelay后首次启用的定期操作，随后在每次执行终止和下一次执行开始之间都存在给定的delay延迟。如果任务在任意一次执行遇到异常，就会取消后续执行；否则，只能通过程序来显式取消或终止该任务。</p>
+</blockquote>
+<p>用完一个线程池后，应该调用该线程池的<code>shutdown()</code>方法，之后线程池不再接收新任务，但会将以前所有已经提交的任务执行完成。当线程池中的所有任务都执行完成后，池中的所有线程都会死亡；另外也可以调用线程池的<code>shutdownNow()</code>方法来关闭线程池，该方法试图停止所有正在执行的活动任务，暂停处理正在等待的任务，并返回正在执行的任务列表。</p>
+<h3 id="5-使用线程池来执行任务的步骤"><a href="#5-使用线程池来执行任务的步骤" class="headerlink" title="5. 使用线程池来执行任务的步骤"></a>5. 使用线程池来执行任务的步骤</h3><blockquote>
+<p>调用Executors类的静态工厂方法创建一个ExecutorService对象，该对象代表一个线程池；</p>
+<p>创建Runnable实现类或Callable实现类的实例，作为线程执行任务；</p>
+<p>调用ExecutorService对象的<code>submit()</code>方法来提交Runnable实例或Callable实例；</p>
+<p>当不想提交任何任务时，调用ExecutorService对象的<code>shutdown()</code>方法来关闭线程池。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//创建一个具有固定线程数(6)的线程池</span></span><br><span class="line">        ExecutorService pool = Executors.newFixedThreadPool(<span class="number">6</span>);</span><br><span class="line">        <span class="comment">//使用Lambda表达式创建Runnable对象</span></span><br><span class="line">        Runnable target = () -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)&#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">"的i值为："</span>+i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//向线程池中提交2个线程</span></span><br><span class="line">        pool.submit(target);</span><br><span class="line">        pool.submit(target);</span><br><span class="line">        <span class="comment">//关闭线程池</span></span><br><span class="line">        pool.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程相关类"><a href="#线程相关类" class="headerlink" title="线程相关类"></a>线程相关类</h2><h3 id="1-ThreadLocal类"><a href="#1-ThreadLocal类" class="headerlink" title="1. ThreadLocal类"></a>1. ThreadLocal类</h3><p>ThreadLocal，是Thread Local Variable（线程局部变量）的意思，ThreadLocal的功用其实非常简单，就是为每一个使用该变量的线程提供一个变量值的副本，使<strong>每一个线程都可以独立地改变自己的副本</strong>，而<strong>不会和其他线程的副本冲突</strong>。</p>
+<p><strong>从线程的角度来看，就好像每一个线程都完全拥有该变量一样。</strong></p>
+<p>ThreadLocal提供了三个public方法：</p>
+<p><code>T get()</code>：返回此线程局部变量中当前线程副本中的值。</p>
+<p><code>void remove()</code>：删除此线程局部变量中当前线程的值。</p>
+<p><code>void set(T value)</code>：设置此线程局部变量中当前副本中的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span></span>&#123;</span><br><span class="line">    <span class="comment">/* 定义一个Thread Local类型的变量，该变量将会是一个线程局部变量,</span></span><br><span class="line"><span class="comment">    每个变量都将会保留该变量的一个副本*/</span></span><br><span class="line">    <span class="keyword">private</span> ThreadLocal&lt;String&gt; name = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">    <span class="comment">// 定义一个初始化name成员变量的构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Account</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name.set(name);</span><br><span class="line">        <span class="comment">//下面代码用于访问当前线程的name副本的值</span></span><br><span class="line">        System.out.println(<span class="string">"---"</span> + <span class="keyword">this</span>.name.get());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name.get();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name.set(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="comment">//定义一个Account类型的变量</span></span><br><span class="line">    <span class="keyword">private</span> Account account;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyTest</span><span class="params">(Account account, String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">        <span class="keyword">this</span>.account = account;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">            <span class="comment">//如果i=6,将名字替换为当前线程的名字</span></span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">6</span>)&#123;</span><br><span class="line">                account.setName(<span class="keyword">this</span>.getName());</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(account.getName+<span class="string">"账户的i值："</span>+i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//初始化实例,使两个线程共享一个对象</span></span><br><span class="line">        Account ac = <span class="keyword">new</span> Account(<span class="string">"初始名"</span>);</span><br><span class="line">        <span class="comment">/*虽然两个线程共享同一个账户，即只有一个账户名，但由于账户名是ThreadLLocal类型的，所以每个</span></span><br><span class="line"><span class="comment">        线程都拥有自己的name，在i=6之后可以看到两个线程访问同一个账户时出现不同的用户名*/</span></span><br><span class="line">        <span class="keyword">new</span> MyTest(ac, <span class="string">"甲"</span>).start();</span><br><span class="line">        <span class="keyword">new</span> MyTest(ac, <span class="string">"乙"</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ThreadLocal只是解决了多线程环境下的并发访问，因为它将不安全的变量拷贝多份分给不同的线程进行操作和访问，这样可以将不安全的变量转换为用ThreadLocal保证安全的变量。</p>
+<blockquote>
+<p>但是ThreadLocal不能代替同步机制，两者面向的问题领域不同。同步机制时为了同步多个线程对<strong>相同资源</strong>的并发访问，是多个线程之间进行通信的有效方式；而ThreadLocal是为了<strong>隔离多个线程的数据共享</strong>，从根本上避免多个线程之间对共享资源的竞争，也就不需要对多个线程进行同步了。</p>
+</blockquote>
+<p>通常建议：如果多个线程之间需要共享资源，以达到线程之间的通信功能，就使用同步机制；如果仅仅需要隔离多个线程之间的共享冲突，则可以使用ThreadLocal。</p>
+<h3 id="2-包装线程不安全的集合"><a href="#2-包装线程不安全的集合" class="headerlink" title="2. 包装线程不安全的集合"></a>2. 包装线程不安全的集合</h3><p>ArrayList、LinkedList、HashSet、TreeSet、HashMap、TreeMap等都是线程不安全的。可以使用Collections提供的类方法把这些集合包装成线程安全的集合。</p>
+<p><code>&lt;T&gt; Collection&lt;T&gt; synchronizedCollection(Collection&lt;T&gt; c)</code>：返回指定collection对应的线程安全的collection。</p>
+<p><code>static &lt;T&gt; List&lt;T&gt; synchronizedList(List&lt;T&gt; list)</code>：返回指定List对象对应的线程安全的List对象。</p>
+<p><code>static &lt;K, V&gt; Map&lt;K, V&gt; synchronizedMap(Map&lt;K, V&gt; m)</code>：返回指定Map对象对应的线程安全的Map对象。</p>
+<p><code>static &lt;T&gt; Set&lt;T&gt; synchronizedSet(Set&lt;T&gt; s)</code>：返回指定Set对象对应的线程安全的Set对象。</p>
+<p>….</p>
+<h3 id="3-线程安全的集合类"><a href="#3-线程安全的集合类" class="headerlink" title="3. 线程安全的集合类"></a>3. 线程安全的集合类</h3><p>从Java 5开始，在JUC包下提供了大量支持高效并发访问的集合接口和实现类。可分为以下两类：</p>
+<blockquote>
+<p>以<code>Concurrent</code>开头的集合类，如ConcurrentHashMap、COncurrentSkipListMap、ConcurrentSkipListSet、ConcurrentLinkedQueue和ConcurrentLinkedDeque。</p>
+<p>以<code>CopyOnWrite</code>开头的集合类，如CopyOnWriteArrayList、CopyOnWriteArraySet。</p>
+</blockquote>
+<p>其中以Concurrent开头的集合类代表了支持并发访问的集合，它们支持<strong>多个线程并发写入访问</strong>，这些写入线程的所有操作都是线程安全的，但<strong>读取操作不必锁定</strong>。以Concurrent开头的集合类采用了更复杂的算法来保证<strong>永远不会锁住整个集合</strong>，在并发写入时有较好的性能。</p>
+<p>当<strong>多个线程共享访问一个公共集合</strong>时使用<code>ConcurrentLinkedQueue</code>是一个恰当的选择，它不允许存储<code>null</code>元素。</p>
+<p><code>ConcurrentHashMap</code>默认支持16个线程并发写入，当有超过16个线程并发向该Map写入数据时，有一些线程需要等待。实际上，程序通过设置<code>concurrencyLevel</code>构造参数可以支持更多的并发写入线程。因为<code>ConcurrentHashMap</code>和<code>ConcerrentLinkedQueue</code>支持并发访问，当使用迭代器对这两个集合迭代的过程中，如果有线程修改了元素，<strong>不会抛出异常</strong>（而HashMap和其它普通的集合则会抛出异常，因为fail-fast机制）。</p>
+<p>由于<code>CopyOnWriteArraySet</code>的底层封装了<code>CopyOnWriteArrayList</code>，它的实现机制类似于<code>CopyOnWriteArrayList</code>集合。<code>CopyOnWriteArrayList</code>采用复制底层数组的方式实现写操作，当线程对其执行读取操作时，线程将会读取集合本身，无需加锁和阻塞。当线程对其进行写入操作时（包括<code>add()/set()/remove()</code>等方法），集合会在底层复制一份新的数组，接下来对新的数组执行写入操作，然后再赋值回原数组当中。由于<code>CopyOnWriteArrayList</code>集合执行写入操作时需要频繁地复制数组，性能比较差，但由于读操作和写操作不是操作同一个数组，而且读操作不需要加锁，因此读操作很快很安全。由此可见，<code>CopyOnWriteArrayList</code>集合适合用在读取操作远远大于写入操作地场景中，例如<strong>缓存</strong>等。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/09/Vue工作目录详解/" rel="next" title="三分钟前端-Vue工作目录详解">
+                <i class="fa fa-chevron-left"></i> 三分钟前端-Vue工作目录详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程与进程的区别与联系"><span class="nav-number">1.1.</span> <span class="nav-text">线程与进程的区别与联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的创建和启动"><span class="nav-number">1.2.</span> <span class="nav-text">线程的创建和启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-继承Thread类创建线程类"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 继承Thread类创建线程类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实现Runnable接口创建线程类"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 实现Runnable接口创建线程类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用Callable和Future创建线程"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 使用Callable和Future创建线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建线程的三种方式对比"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 创建线程的三种方式对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的生命周期"><span class="nav-number">1.3.</span> <span class="nav-text">线程的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-新建和就绪状态"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 新建和就绪状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-运行和阻塞状态"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 运行和阻塞状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-线程死亡"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 线程死亡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制线程"><span class="nav-number">1.4.</span> <span class="nav-text">控制线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-join线程"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. join线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-后台线程"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 后台线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-线程睡眠：sleep"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 线程睡眠：sleep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-改变线程优先级"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 改变线程优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步"><span class="nav-number">1.5.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-线程安全问题"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-同步代码块"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 同步代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-同步方法"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 同步方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-释放同步监视器的锁定-释放锁"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. 释放同步监视器的锁定(释放锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-同步锁（Lock）"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. 同步锁（Lock）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-死锁及常用处理策略"><span class="nav-number">1.5.6.</span> <span class="nav-text">6. 死锁及常用处理策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通信"><span class="nav-number">1.6.</span> <span class="nav-text">线程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-传统的线程通信"><span class="nav-number">1.6.1.</span> <span class="nav-text">1. 传统的线程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用Condition控制线程通信"><span class="nav-number">1.6.2.</span> <span class="nav-text">2. 使用Condition控制线程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用阻塞队列（BlockingQueue）控制线程通信"><span class="nav-number">1.6.3.</span> <span class="nav-text">3. 使用阻塞队列（BlockingQueue）控制线程通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-线程池"><span class="nav-number">1.6.4.</span> <span class="nav-text">4. 线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-使用线程池来执行任务的步骤"><span class="nav-number">1.6.5.</span> <span class="nav-text">5. 使用线程池来执行任务的步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程相关类"><span class="nav-number">1.7.</span> <span class="nav-text">线程相关类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ThreadLocal类"><span class="nav-number">1.7.1.</span> <span class="nav-text">1. ThreadLocal类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-包装线程不安全的集合"><span class="nav-number">1.7.2.</span> <span class="nav-text">2. 包装线程不安全的集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-线程安全的集合类"><span class="nav-number">1.7.3.</span> <span class="nav-text">3. 线程安全的集合类</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+
