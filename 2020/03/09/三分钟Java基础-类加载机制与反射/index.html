@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="类加载机制与反射,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="本章会深入介绍Java类的加载、连接和初始化知识 类的加载、连接和初始化1. JVM和类每调用java命令运行某个Java程序时，该命令将会启动一个Java虚拟机进程。同一个JVM的所有线程、所有变量都处于同一个进程里，他们都使用该JVM进程的内存区。当Java程序运行结束时，JVM进程结束，该进程在内存中的状态将会丢失。 12345678910111213141516public class A">
+<meta name="keywords" content="类加载机制与反射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟Java基础-类加载机制与反射">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="本章会深入介绍Java类的加载、连接和初始化知识 类的加载、连接和初始化1. JVM和类每调用java命令运行某个Java程序时，该命令将会启动一个Java虚拟机进程。同一个JVM的所有线程、所有变量都处于同一个进程里，他们都使用该JVM进程的内存区。当Java程序运行结束时，JVM进程结束，该进程在内存中的状态将会丢失。 12345678910111213141516public class A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309205330263.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309205707691.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309223418025.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310081538440.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310083930990.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310085814281.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310125039999.png">
+<meta property="og:updated_time" content="2020-03-10T04:51:15.542Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟Java基础-类加载机制与反射">
+<meta name="twitter:description" content="本章会深入介绍Java类的加载、连接和初始化知识 类的加载、连接和初始化1. JVM和类每调用java命令运行某个Java程序时，该命令将会启动一个Java虚拟机进程。同一个JVM的所有线程、所有变量都处于同一个进程里，他们都使用该JVM进程的内存区。当Java程序运行结束时，JVM进程结束，该进程在内存中的状态将会丢失。 12345678910111213141516public class A">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309205330263.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/">
+
+
+
+
+
+  <title>三分钟Java基础-类加载机制与反射 | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟Java基础-类加载机制与反射</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T19:43:38+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4,942字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  20分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本章会深入介绍Java类的加载、连接和初始化知识</p>
+<h1 id="类的加载、连接和初始化"><a href="#类的加载、连接和初始化" class="headerlink" title="类的加载、连接和初始化"></a>类的加载、连接和初始化</h1><h2 id="1-JVM和类"><a href="#1-JVM和类" class="headerlink" title="1. JVM和类"></a>1. JVM和类</h2><p>每调用java命令运行某个Java程序时，该命令将会启动一个Java虚拟机进程。同一个JVM的所有线程、所有变量都处于同一个进程里，他们都使用该JVM进程的内存区。当Java程序运行结束时，JVM进程结束，该进程在内存中的状态将会丢失。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        A.a++;</span><br><span class="line">        System.out.print(a.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        A b = <span class="keyword">new</span> A();</span><br><span class="line">        System.out.println(b.a)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ATest1打印的值为7；ATest2打印的值为6。这就是JVM进程结束导致内存中的状态丢失。</p>
+<h2 id="2-类的加载"><a href="#2-类的加载" class="headerlink" title="2. 类的加载"></a>2. 类的加载</h2><p>当程序主动使用某个类时，如果该类还未被加载到内存中，则系统会通过<code>加载、连接、初始化</code>三个步骤来对该类进行初始化，有时候将这三个步骤统称为<strong>类加载或类初始化</strong>。</p>
+<p>类加载指的是将类的class文件读入内存，并为之创建一个<code>java.lang.Class</code>对象，也就是说，当程序中使用任何类时，系统都会为它建立一个<code>java.lang.Class</code>对象。系统中所有的类实际上也是实例，它们都是<code>java.lang.Class</code>的实例。</p>
+<p>类的加载由类加载器完成，类加载器通常由JVM提供，这些类加载器是<strong>所有程序运行的基础</strong>，JVM提供的这些类加载器通常被称为<strong>系统类加载器</strong>。除此之外，开发者可以通过继承<code>ClassLoader</code>基类来创建自己的类加载器。</p>
+<p>通过使用不同的类加载器，可以从不同来源加载类的二进制数据，通常有如下几种来源。</p>
+<blockquote>
+<p>从本地文件系统加载class文件，这是前面绝大部分示例程序的类加载方式。</p>
+<p>从jar包加载class文件</p>
+<p>通过网络加载class文件</p>
+<p>把一个Java源文件动态编译，并执行加载。</p>
+</blockquote>
+<p>Java虚拟机规范允许系统预先加载某些类，不必等到“首次使用”才加载此类。</p>
+<a id="more"></a>
+
+<h2 id="3-类的连接"><a href="#3-类的连接" class="headerlink" title="3. 类的连接"></a>3. 类的连接</h2><p>当类被加载之后，系统为之生成一个对应的Class对象，接着将会进入连接阶段，连接阶段负责把类的二进制数据合并到JRE当中。类连接分为三个阶段：</p>
+<blockquote>
+<p>（1）验证：验证阶段用于检验被加载的类是否又正确的内部结构，并和其他类协调一致。</p>
+<p>（2）准备：类准备阶段则负责为类的类变量分配内存，并设置默认初始值。</p>
+<p>（3）解析：将类的二进制数据中的符号引用替换成直接引用。</p>
+</blockquote>
+<p>简单来说，就是看不懂~</p>
+<h2 id="4-类的初始化"><a href="#4-类的初始化" class="headerlink" title="4. 类的初始化"></a>4. 类的初始化</h2><p>在类的初始化阶段，虚拟机负责对类进行初始化，主要是对类变量进行初始化。类变量的初始化又两种方式：</p>
+<blockquote>
+<p>① 声明类变量时指定初始值</p>
+<p>② 使用静态代码块为类变量指定初始值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="comment">//声明变量a时指定初始值</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">//没有指定初始值则采用默认初始值0</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="comment">//使用静态代码块为变量b指定初始值</span></span><br><span class="line">        b = <span class="number">6</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="comment">//如果静态代码块在b的下面,则变量b的最终值为6</span></span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="comment">//使用静态初始化块为变量b指定初始值</span></span><br><span class="line">        b = <span class="number">6</span>;</span><br><span class="line">        System.out.println(<span class="string">"-------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">//再次为b赋值,此时b为9</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(Test.b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JVM初始化一个类包含如下几个步骤：</p>
+<blockquote>
+<p>① 假如这个类还没有被加载和连接，则先加载并连接该类。</p>
+<p>② 假如该类的直接父类还没有被初始化，则先<strong>初始化其直接父类</strong>（<strong>最先初始化的类必然是Object</strong>）</p>
+<p>③ 假如类中有初始化语句，则系统<strong>依次执行</strong>这些初始化语句</p>
+</blockquote>
+<h2 id="5-类的初始化时机（什么时候初始化类）"><a href="#5-类的初始化时机（什么时候初始化类）" class="headerlink" title="5. 类的初始化时机（什么时候初始化类）"></a>5. 类的初始化时机（什么时候初始化类）</h2><p>通过6种方式调用某个类或接口时，系统就会初始化该类或接口。</p>
+<blockquote>
+<p>创建类的实例。包括<code>new</code>、反射、反序列化</p>
+<p>调用某个类的类方法（静态方法）</p>
+<p>访问某个类或接口的类变量，或者为该类变量赋值</p>
+<p>※ 使用反射方式强制创建某个类或接口对应的<code>java.lang.Class</code>对象。例如<code>Class.forName(&quot;Person&quot;)</code>，如果系统还未初始化Person类，则这行代码会导致该Person类被初始化，并返回Person类对应的<code>java.lang.Class</code>对象</p>
+<p>初始化某个类的子类。因为JVM会初始化这个类的直接父类</p>
+<p>直接使用<code>java.exe</code>命令来运行某个主类。当运行某个主类时，程序会先初始化该主类。</p>
+</blockquote>
+<p><strong>类不会被初始化的特殊情况</strong></p>
+<blockquote>
+<p>final变量导致的“宏变量”：宏变量在编译期就可以确定下来，<strong>Java编译器会在编译时把这个类变量出现的地方直接替换成它的常量值</strong>，即使使用类变量，调用它也不会导致类的初始化</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"类初始化开始..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//使用一个字符串直接量为static final的类变量赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String compileConstant = <span class="string">"淡泊名利，宁静致远。"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompileConstantTest</span></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(Test.compileConstant);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309205330263.png" alt="image-20200309205330263"></p>
+<p>如果final修饰的类变量的值不能在编译期确定下来，只有等到运行时才可以去顶值，则访问该类的类变量还是会导致类的初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"类初始化开始..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//使用一个字符串直接量为static final的类变量赋值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String compileConstant = System.currentTimeMillis()+<span class="string">"淡泊名利，宁静致远。"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompileConstantTest</span></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(Test.compileConstant);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309205707691.png" alt="image-20200309205707691"></p>
+<p>当使用ClassLoader类的<code>loadClass()</code>方法来加载某个类时，该方法只有加载此类，并不会执行类的初始化。使用Class的<code>forName()</code>静态方法才会导致强制初始化该类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tester</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Tester类的静态初始化块..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        ClassLoader cl = ClassLoader.getSystemClassLoader();</span><br><span class="line">        <span class="comment">//下面语句仅仅只是加载Tester类</span></span><br><span class="line">        cl.loadClass(<span class="string">"Tester"</span>);</span><br><span class="line">        <span class="comment">//执行下面语句才会初始化Tester类</span></span><br><span class="line">        Class.forName(<span class="string">"Tester"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h1><p>类加载器负责将<code>.class</code>文件（可能在硬盘上，可能在网络上）加载到内存中，并为之生成对应的<code>java.lang.Class</code>对象。作为Java开发人员应该了解其工作机制，明白如何做才能让其更好地满足我们地需要。</p>
+<h2 id="1-类加载机制"><a href="#1-类加载机制" class="headerlink" title="1. 类加载机制"></a>1. 类加载机制</h2><p>类加载器负责加载所有的类，系统为所有被载入内存中的类生成一个<code>java.lang.Class</code>实例。一旦一个类被载入JVM种，同一个类就不会被再次载入了。现在的问题是，怎样才算“同一个类”？</p>
+<p>一个载入JVM中的类<strong>有一个唯一的标识</strong>。在Java中，一个类用其<strong>全限定类名（包名+类名）</strong>作为标识；但在JVM中，一个类用其<strong>全限定类名和其类加载器</strong>作为唯一标识。例如：在smallpineapple包中有一个类叫Person类，有<strong>两个类加载器ClassLoader的实例k1和k2</strong>，则这两个实例加载Person类是<strong>不同</strong>的。</p>
+<p>它们的标识是：（Person、smallpineapple、k1），（Person、smallpineapple、k2），它们所加载的类也是<strong>完全不同、互不相容</strong>的</p>
+<p>当JVM启动时，会形成由<strong>三个类加载器组成的初始类加载器层次结构</strong>。</p>
+<blockquote>
+<p>Bootstrap ClassLoader：根类加载器</p>
+<p>Extension ClassLoader：扩展类加载器</p>
+<p>System ClassLoader：系统类加载器</p>
+</blockquote>
+<p>Bootstrap ClassLoader被称为原始类加载器，它负责加载Java的<strong>核心类</strong>。在Sun的JVM中，当执行<code>java.exe</code>命令时，使用<code>-Xbootclasspath</code>或<code>-D</code>指定<code>sun.boot.class.path</code>系统属性值可以指定加载附加的类。</p>
+<p>JVM的类加载机制主要有如下三种：</p>
+<blockquote>
+<p>全盘负责。当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显式使用另一个类加载器来载入。</p>
+<p>父类委托。先让自己的父类加载器尝试加载该Class，只有在父类加载器无法加载此类时才尝试从自己的类路径加载此类。</p>
+<p>缓存机制。保证所有加载过的Class都会被缓存，当程序需要使用某个Class时，类加载器先从缓存区中搜索该Class，如果不存在，才会读取该类的二进制数据转换成Class对象存入缓存区中。<strong>这就是为什么修改了Class后，必须重新启动JVM，程序所做的修改才会生效的原因。</strong></p>
+</blockquote>
+<p>注意：类加载器之间的父子关系并<strong>不是继承上的父子关系</strong>，而是<strong>类加载器实例之间</strong>的父子关系。</p>
+<p>除了使用Java提供了类加载器以外，开发者可以使用自己的类加载器，通过继承<code>ClassLoader</code>实现，这4种类加载器的层次结构如下图所示。</p>
+<img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200309223418025.png" alt="image-20200309223418025" style="zoom:67%;">
+
+<p>访问JVM的类加载器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/3/9 20:52</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();</span><br><span class="line">        System.out.println(<span class="string">"系统类加载器："</span>+systemClassLoader);</span><br><span class="line">        <span class="comment">//获取类加载器的加载路径，是程序运行的当前路径</span></span><br><span class="line">        Enumeration&lt;URL&gt; resources = systemClassLoader.getResources(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">while</span> (resources.hasMoreElements())&#123;</span><br><span class="line">            System.out.println(resources.nextElement());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取系统类加载器的父类加载器，得到扩展类加载器</span></span><br><span class="line">        ClassLoader parent = systemClassLoader.getParent();</span><br><span class="line">        System.out.println(<span class="string">"扩展类加载器："</span>+parent);</span><br><span class="line">        System.out.println(<span class="string">"扩展类加载器的加载路径："</span>+System.getProperty(<span class="string">"java.ext.dirs"</span>));</span><br><span class="line">        System.out.println(<span class="string">"扩展类加载器的parent："</span>+parent.getParent());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">系统类加载器：sun.misc.Launcher$AppClassLoader@<span class="number">18</span>b4aac2</span><br><span class="line">file:/E:/IdeaProjects/%e5%ae%<span class="number">9</span>e%e4%b9%a0%e9%<span class="number">9</span>d%a2%e8%af%<span class="number">95</span>%e5%<span class="number">87</span>%<span class="number">86</span>%e5%a4%<span class="number">87</span>/out/production/%e5%ae%<span class="number">9</span>e%e4%b9%a0%e9%<span class="number">9</span>d%a2%e8%af%<span class="number">95</span>%e5%<span class="number">87</span>%<span class="number">86</span>%e5%a4%<span class="number">87</span>/</span><br><span class="line">扩展类加载器：sun.misc.Launcher$ExtClassLoader@<span class="number">4554617</span>c</span><br><span class="line">扩展类加载器的加载路径：D:\installation\jdk1.8\jre\lib\ext;C:\Windows\Sun\Java\lib\ext</span><br><span class="line">扩展类加载器的parent：<span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到系统类加载器是AppClassLoader的实例，扩展类是ExtClassLoader的实例，但是扩展类的父类加载器是null，并不是根类加载器。<strong>这是因为根类加载器不是由Java实现的</strong>，它没有继承<code>ClassLoader</code>抽象类。</p>
+<h1 id="通过反射查看类信息"><a href="#通过反射查看类信息" class="headerlink" title="通过反射查看类信息"></a>通过反射查看类信息</h1><p>程序需要在运行时发现对象和类的真实信息，解决该问题有两种做法：</p>
+<blockquote>
+<p>假设在编译期和运行时都完全知道类型的具体信息，可以使用<code>instanceOf</code>强转类型到其运行时类型的变量即可。</p>
+<p>编译期根本无法预知该对象和类可能属于哪些类，程序只能依靠运行时信息来发现该对象和类的真实信息，必须用到反射</p>
+</blockquote>
+<h2 id="1-获取Class对象"><a href="#1-获取Class对象" class="headerlink" title="1. 获取Class对象"></a>1. 获取Class对象</h2><blockquote>
+<p><code>Class.forName(String clazzName)</code>静态方法。该方法需要传入字符串参数，参数的值为某个类的全限定类名（必须添加完整包名）。</p>
+<p>调用某个类的<code>class</code>属性来获取该类对应的<code>Class对象</code>。例如：Person.class将会返回Person类对应的Class对象。</p>
+<p>调用某个对象的<code>getClass()</code>方法。该方法是<code>java.lang.Object</code>类中的一个方法，所以所有的Java对象都可以调用该方法，返回该对象所属类对应的Class对象。</p>
+</blockquote>
+<p>对于第一种方式和第二种方式相比之下，一般建议采用<strong>第二种方式</strong>，原因如下：</p>
+<blockquote>
+<p>代码更安全。程序在编译阶段就可以检查需要访问的Class对象是否存在。</p>
+<p>程序性能更好，因为这种方式无需调用方法。</p>
+</blockquote>
+<p>第一种方法可能抛出一个<code>ClassNotFoundException</code>异常。</p>
+<h2 id="2-从Class中获取信息（一堆API）"><a href="#2-从Class中获取信息（一堆API）" class="headerlink" title="2. 从Class中获取信息（一堆API）"></a>2. 从Class中获取信息（一堆API）</h2><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310081538440.png" alt="image-20200310081538440" style="zoom:60%;">
+
+<p>上面的多个<code>getMethod()</code>方法和<code>getConstructor()</code>方法中，都需要传入多个类型为<code>Class&lt;?&gt;</code>的参数，用于获取指定的方法或指定的构造器。关于这个参数的作用，假设某个类中包含下面三个info方法。</p>
+<p><code>public void info()</code></p>
+<p><code>public void info(String info)</code></p>
+<p><code>public void info(String str, Integer num)</code></p>
+<p>这三个同名方法属于重载，它们的方法名相同，但参数列表不同，如果要获取某一个方法例如第二个方法，必须指定方法名为info，形参类型为String.class，因此在程序中获取该方法用如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前一个参数指定方法名，后面的个数可变的Class参数指定形参类型列表</span></span><br><span class="line">clazz.getMethod(<span class="string">"info"</span>, String.class);</span><br><span class="line">clazz.getMethod(<span class="string">"info"</span>, String.class, Integer.class);</span><br></pre></td></tr></table></figure>
+
+<p>获取构造器时无需传入构造器名-同一个类的所有构造器的名字都是相同的，所以要确定一个构造器只要指定形参列表即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java基础.反射.反射查看类信息;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/3/10 8:28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ClassTest</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClassTest</span><span class="params">(String name)</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行无参数的info方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行有参数的info方法,其str参数值："</span>+str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="comment">//获取ClassTest对应的Class</span></span><br><span class="line">        Class&lt;ClassTest&gt; clazz = ClassTest.class;</span><br><span class="line">        <span class="comment">//获取该class对象所对应类的全部构造器</span></span><br><span class="line">        Constructor&lt;?&gt;[] ctors = clazz.getDeclaredConstructors();</span><br><span class="line">        <span class="keyword">for</span> (Constructor&lt;?&gt; ctor : ctors) &#123;</span><br><span class="line">            System.out.println(ctor);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取该Class对象所对应类的全部public构造器</span></span><br><span class="line">        Constructor&lt;?&gt;[] publicCtors = clazz.getConstructors();</span><br><span class="line">        <span class="keyword">for</span> (Constructor&lt;?&gt; publicCtor : publicCtors) &#123;</span><br><span class="line">            System.out.println(publicCtor);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取该Class对象对应类的所有public方法</span></span><br><span class="line">        Method[] methods = clazz.getMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//获取该Class对象对应类的指定方法</span></span><br><span class="line">        System.out.println(<span class="string">"ClassTest里带一个字符串参数的info方法为："</span>+clazz.getMethod(<span class="string">"info"</span>, String.class));</span><br><span class="line">        <span class="comment">//获取该Class对象对应类的全部内部类</span></span><br><span class="line">        Class&lt;?&gt;[] innerClasses = clazz.getDeclaredClasses();</span><br><span class="line">        <span class="keyword">for</span> (Class&lt;?&gt; aClass : innerClasses) &#123;</span><br><span class="line">            System.out.println(aClass);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//加载ClassTest的Inner内部类</span></span><br><span class="line">        Class&lt;?&gt; inClazz = Class.forName(<span class="string">"java基础.反射.反射查看类信息.ClassTest$Inner"</span>);</span><br><span class="line">        <span class="comment">//通过getDeclaringClass()访问类所在的外部类</span></span><br><span class="line">        System.out.println(<span class="string">"inClazz对应类的外部类为："</span>+inClazz.getDeclaringClass());</span><br><span class="line">        System.out.println(<span class="string">"ClassTest的包为："</span>+clazz.getPackage());</span><br><span class="line">        System.out.println(<span class="string">"ClassTest的父类为："</span>+clazz.getSuperclass());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310083930990.png" alt="image-20200310083930990"></p>
+<h2 id="3-方法参数反射"><a href="#3-方法参数反射" class="headerlink" title="3. 方法参数反射"></a>3. 方法参数反射</h2><p>Executable提供了如下两个方法来获取该方法或参数的形参个数及形参名。</p>
+<blockquote>
+<p>int getParameterCount()：获取该构造器或方法的形参个数</p>
+<p>Parameter[] getParameters()：获取该构造器或方法的所有形参</p>
+</blockquote>
+<p>Parameter是方法的形参对象，可以获取关于该参数的信息：</p>
+<blockquote>
+<p><code>getModifiers()</code>：获取修饰该形参的修饰符</p>
+<p><code>String getName()</code>：获取形参名</p>
+<p><code>Type getParameterizedType()</code>：获取带泛型的形参类型</p>
+<p><code>Class&lt;?&gt; getType()</code>：获取形参类型</p>
+<p><code>boolean isNamePresent()</code>：该方法返回主类的class文件中是否包含了方法的形参名信息</p>
+<p><code>boolean isVarArgs()</code>：该方法用于判断该参数是否为个数可变的形参</p>
+</blockquote>
+<p>javac命令编译java源文件时，默认生成的class文件并不包含方法的形参名信息，因此调用<code>isNamePresent()</code>方法将会返回false，调用<code>getName()</code>方法也不能得到该参数的形参名。如果需要保留形参信息，需要指定<code>-parameters</code>选项。</p>
+<p>下面程序演示了Java 8的方法参数反射功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Parameter;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/3/10 8:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodParameterTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">        <span class="comment">//获取Test类</span></span><br><span class="line">        Class&lt;Test&gt; clazz = Test.class;</span><br><span class="line">        <span class="comment">//获取Test类的带两个参数的replace()方法</span></span><br><span class="line">        Method replace = clazz.getMethod(<span class="string">"replace"</span>, String.class, List.class);</span><br><span class="line">        <span class="comment">//获取指定方法的参数个数</span></span><br><span class="line">        System.out.println(<span class="string">"replace方法参数个数："</span>+replace.getParameterCount());</span><br><span class="line">        <span class="comment">//获取replace方法的所有参数信息</span></span><br><span class="line">        Parameter[] parameters = replace.getParameters();</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//遍历所有参数</span></span><br><span class="line">        <span class="keyword">for</span> (Parameter parameter : parameters) &#123;</span><br><span class="line">            System.out.println(<span class="string">"---第"</span>+ index++ + <span class="string">"个参数信息---"</span>);</span><br><span class="line">            System.out.println(<span class="string">"参数名:"</span>+parameter.getName());</span><br><span class="line">            System.out.println(<span class="string">"形参类型:"</span>+ parameter.getType());</span><br><span class="line">            System.out.println(<span class="string">"泛型类型:"</span>+parameter.getParameterizedType());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">replace</span><span class="params">(String str, List&lt;String&gt; list)</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310085814281.png" alt="image-20200310085814281"></p>
+<p>可以看到参数名不是原本的参数名str和list，因为在编译命令时没有使用<code>-parameters</code>选项。</p>
+<h1 id="使用反射生成并操作对象"><a href="#使用反射生成并操作对象" class="headerlink" title="使用反射生成并操作对象"></a>使用反射生成并操作对象</h1><p>Class对象里可以获得该类里的方法（Method对象）、构造器（Constructor对象）、成员变量（Field对象）。程序可以通过Method对象执行对应的方法，通过Constructor对象来调用对应的构造器创建实例，能通过Field对象直接访问并修改对象的成员变量值。</p>
+<h2 id="1-创建对象"><a href="#1-创建对象" class="headerlink" title="1. 创建对象"></a>1. 创建对象</h2><p>三个步骤：</p>
+<blockquote>
+<p>① 获取该类的Class对象</p>
+<p>② 利用Class对象的<code>getConstructor()</code>方法来获取指定的构造器</p>
+<p>③ 调用Constructor的<code>newInstance()</code>方法来创建Java对象。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateJFrame</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取JFrame对应的Class对象</span></span><br><span class="line">        Class&lt;?&gt; jframeClazz = Class.forName(<span class="string">"javax.swing.JFrame"</span>);</span><br><span class="line">        <span class="comment">//获取JFrame中带一个字符串参数的构造器</span></span><br><span class="line">        Constructor ctor = jframeClazz.getConstructor(String.class);</span><br><span class="line">        <span class="comment">//调用Constructor的newInstance方法创建对象</span></span><br><span class="line">        Object obj = ctor.newInstance(<span class="string">"测试窗口"</span>);</span><br><span class="line">        <span class="comment">//输出Jframe对象</span></span><br><span class="line">        System.out.println(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面的CreateJFrame类中已知<code>java.swing.JFrame</code>的情形通常没有必要使用反射来创建该对象，毕竟反射创建对象的性能稍低一些。实际上，只有当程序需要动态创建某个类的对象时才会考虑反射，通常在开发通用性比较广的框架、基础平台时可能会大量使用反射。</p>
+<h2 id="2-调用方法"><a href="#2-调用方法" class="headerlink" title="2. 调用方法"></a>2. 调用方法</h2><p>每个Method对象对应一个方法，该对象里含有一个<code>invoke(Object obj, Object... args)</code>方法</p>
+<blockquote>
+<p><code>Object invoke(Object obj, Object... args)</code>：该方法的obj是执行该方法的主调，后面的args是执行该方法时传入该方法的实参。</p>
+</blockquote>
+<p>下面程序对对象池工厂进行加强，允许在配置文件中增加配置对象的成员变量的值，对象池工厂会读取为该对象配置的成员变量值，并利用该对象对应的<code>setter</code>方法设置成员变量的值。</p>
+<h2 id="3-访问成员变量值"><a href="#3-访问成员变量值" class="headerlink" title="3. 访问成员变量值"></a>3. 访问成员变量值</h2><p>通过Class对象的<code>getFields()</code>或<code>getField()</code>方法可以获取该类所包括的全部成员变量或指定成员变量，Field提供了两个方法读取或设置成员变量值。</p>
+<blockquote>
+<p><code>getXxx(Object obj)</code>：获取obj对象的该成员变量的值。此处的Xxx对应8种基本类型。</p>
+<p><code>setXxx(Object obj, Xxx val)</code>：将obj对象的该成员变量设置成val值，此处的Xxx对应8种基本类型。</p>
+<p>如果想获取引用类型的成员变量，则直接调用<code>get()</code>或<code>set()</code></p>
+</blockquote>
+<h2 id="4-操作数组"><a href="#4-操作数组" class="headerlink" title="4. 操作数组"></a>4. 操作数组</h2><p>在<code>java.lang.reflect</code>包下还提供了一个Array类，Array对象可以代表所有的数组。程序可以通过使用Array来动态地创建数组，操作数组元素等。</p>
+<p>Array提供了如下几类方法。</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟Java基础-类加载机制与反射/image-20200310125039999.png" alt="image-20200310125039999"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/类加载机制与反射/" rel="tag"># 类加载机制与反射</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/09/三分钟排序算法-堆排序/" rel="next" title="三分钟排序算法-堆排序">
+                <i class="fa fa-chevron-left"></i> 三分钟排序算法-堆排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类的加载、连接和初始化"><span class="nav-number">1.</span> <span class="nav-text">类的加载、连接和初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JVM和类"><span class="nav-number">1.1.</span> <span class="nav-text">1. JVM和类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-类的加载"><span class="nav-number">1.2.</span> <span class="nav-text">2. 类的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-类的连接"><span class="nav-number">1.3.</span> <span class="nav-text">3. 类的连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-类的初始化"><span class="nav-number">1.4.</span> <span class="nav-text">4. 类的初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-类的初始化时机（什么时候初始化类）"><span class="nav-number">1.5.</span> <span class="nav-text">5. 类的初始化时机（什么时候初始化类）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类加载器"><span class="nav-number">2.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-类加载机制"><span class="nav-number">2.1.</span> <span class="nav-text">1. 类加载机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过反射查看类信息"><span class="nav-number">3.</span> <span class="nav-text">通过反射查看类信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-获取Class对象"><span class="nav-number">3.1.</span> <span class="nav-text">1. 获取Class对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-从Class中获取信息（一堆API）"><span class="nav-number">3.2.</span> <span class="nav-text">2. 从Class中获取信息（一堆API）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-方法参数反射"><span class="nav-number">3.3.</span> <span class="nav-text">3. 方法参数反射</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用反射生成并操作对象"><span class="nav-number">4.</span> <span class="nav-text">使用反射生成并操作对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建对象"><span class="nav-number">4.1.</span> <span class="nav-text">1. 创建对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-调用方法"><span class="nav-number">4.2.</span> <span class="nav-text">2. 调用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-访问成员变量值"><span class="nav-number">4.3.</span> <span class="nav-text">3. 访问成员变量值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-操作数组"><span class="nav-number">4.4.</span> <span class="nav-text">4. 操作数组</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+
