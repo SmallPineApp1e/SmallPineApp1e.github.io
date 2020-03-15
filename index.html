@@ -315,6 +315,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/16/三分钟源码分析-String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/16/三分钟源码分析-String/" itemprop="url">三分钟源码分析-String</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-16T00:01:15+08:00">
+                2020-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码分析/" itemprop="url" rel="index">
+                    <span itemprop="name">源码分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,633字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="String源码分析"><a href="#String源码分析" class="headerlink" title="String源码分析"></a>String源码分析</h1><p> 问题抛出：String是如何实现的？它有哪些重要的方法？</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><blockquote>
+<p>以JDK1.8为例，String内部是以char数组实现的</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializale</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span></span>&#123;</span><br><span class="line">    <span class="comment">//用于存储字符串的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[];</span><br><span class="line">    <span class="comment">//缓存字符串的hash code</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> hash; <span class="comment">//Default to 0</span></span><br><span class="line">    <span class="comment">//...其他内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><blockquote>
+<p>String有<strong>多个构造方法</strong>：</p>
+<p>① 以String类型为参数的构造方法</p>
+<p>② 以char数组类型为参数的构造方法，内部使用数组拷贝赋值给final类型的value数组</p>
+<p>③ 以StringBuffer类型为参数的构造方法</p>
+<p>④ 以StringBuilder类型为参数的构造方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(String original)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = original.value;</span><br><span class="line">    <span class="keyword">this</span>.hash = original.hash;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(<span class="keyword">char</span> value[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = Arrays.copyOf(value, value.length);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(StringBuffer buffer)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(buffer)&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = Arrays.copyOf(buffer.getValue(), buffer.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span><span class="params">(StringBuilder builder)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = Arrays.copyOf(builder.getValue(), builder.length());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/16/三分钟源码分析-String/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -438,73 +628,22 @@
 
       
         
-          
-            <p><strong>写在前面：</strong>左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。<strong>我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！</strong></p>
+          <p><strong>写在前面：</strong>左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。<strong>我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！</strong></p>
 <h1 id="以2-3树揭秘左倾红黑树（LLRB）"><a href="#以2-3树揭秘左倾红黑树（LLRB）" class="headerlink" title="以2-3树揭秘左倾红黑树（LLRB）"></a>以2-3树揭秘左倾红黑树（LLRB）</h1><h2 id="什么是2-3树"><a href="#什么是2-3树" class="headerlink" title="什么是2-3树"></a>什么是2-3树</h2><p><strong>2-结点：</strong> <strong>含有一个值的结点，它有两条链接</strong>：左链接和右链接（即左右孩子），左链接的所有结点值都比该结点小，右链接的所有结点的值都比该结点大。</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png" alt="image-20200315160412351"></p>
-<p><strong>3-结点：</strong> <strong>含有两个值的结点，它有三条链接</strong>：左链接，中间链接和右链接（左孩子，中间孩子和右孩子），其中左链接的所有结点值都比左边结点的值小，中间链接的所有结点值是两个结点的中间值，右链接的所有结点值比右边结点的值要大。</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png" alt="image-20200315160412351"></p>
-<p><strong>一颗完美自平衡的2-3查找树中，所有空链接到根节点的距离是相等的</strong>，注意这个结论是不是觉得很像红黑树里的其中一条定义？</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png" style="zoom:67%"></p>
-<h2 id="2-3树的查找"><a href="#2-3树的查找" class="headerlink" title="2-3树的查找"></a>2-3树的查找</h2><blockquote>
-<p>判断一个值是否存在于树中，则<strong>遍历根节点的值，如果找到与其相等的值，则返回</strong>；如果找不到，则<strong>判断这个值可能存在于这个结点的哪一条链接下</strong>；如果<strong>这个结点是一个2-结点且待查找的值小于该结点值，递归往左子树中查找，否则往右子树中查找</strong>；如果<strong>这个结点是一个3-结点</strong>，则在2-结点的基础上需要<strong>再判断待查找的值是否在两个结点值之间的范围中，如果是则往中间链接递归查找。</strong></p>
-</blockquote>
-<h2 id="2-3树的插入（重要）"><a href="#2-3树的插入（重要）" class="headerlink" title="2-3树的插入（重要）"></a>2-3树的插入（重要）</h2><blockquote>
-<p>规律：<strong>2插3裂</strong>，即插入的结点位置如果是一个2-结点，则将新的结点插入使其成为3-结点；如果插入的结点位置是一个3-结点，则将新的结点插入后，把3-结点裂开。不用担心看不懂，操作一遍就会懂。</p>
-</blockquote>
-<h3 id="插入的结点位置是2-结点"><a href="#插入的结点位置是2-结点" class="headerlink" title="插入的结点位置是2-结点"></a>插入的结点位置是2-结点</h3><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163705861.png" style="zoom:67%"></p>
-<p>如下图所示，<strong>原来的2-结点变成了一个3-结点。</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163825686.png" style="zoom:67%"></p>
-<h3 id="插入的结点位置是3-结点"><a href="#插入的结点位置是3-结点" class="headerlink" title="插入的结点位置是3-结点"></a>插入的结点位置是3-结点</h3><h4 id="父结点是2-结点"><a href="#父结点是2-结点" class="headerlink" title="父结点是2-结点"></a>父结点是2-结点</h4><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164641342.png" style="zoom:67%"></p>
-<p>插入后的结果变成了下面这幅图：</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164946247.png" style="zoom:67%"></p>
-<p>此时出现了一个4-结点，而在2-3树里面是不允许4-结点出现的，所以要<strong>裂开</strong>。而由于父结点是2-结点，所以这个4-结点直接从中间裂开，S和X分别为父结点的中间孩子和右孩子。如下图所示</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315172258484.png" style="zoom:67%"></p>
-<p>这样的转换并不会影响2-3树的性质，因为T作为中间值被移动到父结点了，但是S和X的位置也符合2-3树有序的性质。</p>
-<h4 id="父结点是3-结点"><a href="#父结点是3-结点" class="headerlink" title="父结点是3-结点"></a>父结点是3-结点</h4><p>4-结点一直往上裂开并将中值插入父结点，然后父结点继续裂开将中值插入祖父结点，重复裂开插入的过程，<strong>直到裂开的中值插入一个2-结点中。</strong></p>
-<p><strong>（1）</strong><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173355368.png" style="zoom:67%"></p>
-<p><strong>（2）</strong>          <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173517707.png" style="zoom:67%"></p>
-<p><strong>（3）</strong>                 <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173802405.png" style="zoom:67%"></p>
-<p><strong>（4）</strong>                    <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315174238262.png" style="zoom:77%"></p>
-<h2 id="2-3树的插入总结"><a href="#2-3树的插入总结" class="headerlink" title="2-3树的插入总结"></a>2-3树的插入总结</h2><blockquote>
-<p>如果插入的结点位置是一个2-结点，则有空位，把待插入的结点直接插入；</p>
-<p>如果插入的结点位置是一个3-结点，则先把待插入的结点插入进去，然后将结点裂开，中值移动到它的父结点当中，父结点再进行一样的判断。</p>
-</blockquote>
-<p>疑问：为什么2-3树的插入规则是这样的呢？</p>
-<blockquote>
-<p>请注意观察一个点：树的高度什么时候会增加？</p>
-<p>树的高度取决于<strong>根节点是4-结点的时候裂开，才会使整个树的高度+1</strong>，所以结点裂开之后中值往上移的过程实际上是在<strong>保证整棵树的高度不会因其它结点的插入而改变</strong>，树的生长是由下往上的，而我们观察二叉查找树有可能出现极度不平衡的原因<strong>是树的高度生长是由上往下的</strong>，也就是说每个结点都有可能增加树的高度，而2-3树消除了这个弊端；所以</p>
-</blockquote>
-<h2 id="2-3树揭秘左倾红黑树"><a href="#2-3树揭秘左倾红黑树" class="headerlink" title="2-3树揭秘左倾红黑树"></a>2-3树揭秘左倾红黑树</h2><p><strong>左倾红黑树就是用红色链接表示3-结点的2-3树</strong>。</p>
-<blockquote>
-<p>红黑树背后的思想是用<strong>标准的二叉查找树（完全由2-结点构成）和一些额外的信息（替换3-结点）来表示2-3树。</strong></p>
-<p>我们将树中的链接分为两种类型：<strong>红链接将两个2-结点连接起来构成一个3-结点，黑链接则是2-3树中的普通链接。确切地说，我们将3-结点表示为由一条左斜的红色链接相连的两个2-结点。</strong></p>
-<p>这种表示法的一个优点是，我们无需修改就可以直接使用标准二叉查找树的get()方法。对于任意的2-3树，只要对结点进行转换，我们都可以立即派生出一颗对应的二叉查找树。我们将用这种方式表示2-3树的二叉查找树称为红黑树。</p>
-</blockquote>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517142303390.jfif" style="zoom:87%"></p>
-<p><strong>红黑树的另一种定义</strong>是满足下列条件的二叉查找树（左倾红黑树）：</p>
-<blockquote>
-<p>（1）<strong>红链接均为左链接。</strong></p>
-<p>（2）没有任何一个结点<strong>同时和两条红链接相连。</strong></p>
-<p>（3）该树是<strong>完美黑色平衡</strong>的，即<strong>任意空链接到根结点的路径上的黑链接数量相同。</strong></p>
-</blockquote>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182002777.png" style="zoom:67%"></p>
-<p>试试看<strong>把红色链接放平</strong>，就会出现下面的结果：</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182059415.png" alt="image-20200315182059415"></p>
-<p><strong>再看看2-3树：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182244642.png" alt="image-20200315182244642"></p>
-<blockquote>
-<p><strong>是不是一样的！！！！所以，这种左倾红黑树，本质上是2-3树，只不过外加了结点的颜色这个属性来表示3-结点中哪个是红色结点，哪个是黑色结点。</strong> （2-3树的深度很小，平衡性好，效率高，但是其有两种不同的结点，实际代码实现比较复杂。而红黑树用红链接表示2-3树中另类的3-结点，统一了树中的结点类型，使代码实现简单化，又不破坏其高效性。） </p>
-</blockquote>
-<p><strong>颜色表示</strong>：</p>
-<blockquote>
-<p>因为每个结点都只会有一条指向自己的链接（从它的父结点指向它），我们将链接的颜色保存在表示结点的Node数据类型的布尔变量color中（若<strong>指向它的链接是红色的，那么该变量为true，黑色则为false</strong>）。</p>
-<p><strong>当我们提到一个结点颜色时，我们指的是指向该结点的链接的颜色。</strong></p>
-</blockquote>
-<p><strong>只要把红黑树的插入过程可以看作是2-3树的插入过程即可，可以得到一颗正确的红黑树：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517143739453.png"></p>
+<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png" alt="image-20200315160412351">
 
-          
+<p><strong>3-结点：</strong> <strong>含有两个值的结点，它有三条链接</strong>：左链接，中间链接和右链接（左孩子，中间孩子和右孩子），其中左链接的所有结点值都比左边结点的值小，中间链接的所有结点值是两个结点的中间值，右链接的所有结点值比右边结点的值要大。</p>
+<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png" alt="image-20200315160412351">
+
+<p><strong>一颗完美自平衡的2-3查找树中，所有空链接到根节点的距离是相等的</strong>，注意这个结论是不是觉得很像红黑树里的其中一条定义？</p>
+<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png" style="zoom:67%">
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/15/三分钟数据结构-红黑树！/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -636,7 +775,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  723字
+                  794字
                 </span>
               
 
@@ -874,8 +1013,11 @@
 </blockquote>
 <h2 id="二叉树的四种遍历方式"><a href="#二叉树的四种遍历方式" class="headerlink" title="二叉树的四种遍历方式"></a>二叉树的四种遍历方式</h2><p> <img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/ab103822e75b5b15c615b68560cb2416.jpg" alt="img"> </p>
 <h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    System.out.print(node.val+<span class="string">" "</span>);</span><br><span class="line">    preOrder(node.left);</span><br><span class="line">    preOrder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    inOrder(node.left);</span><br><span class="line">    System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">    inOrder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    postOrder(node.left);</span><br><span class="line">    postOrder(node.right);</span><br><span class="line">    System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//层次遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    Deque&lt;Node&gt; queue = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">    queue.addLast(node);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">        Node tempNode = queue.removeFirst();</span><br><span class="line">        <span class="keyword">if</span>(tempNode.left != <span class="keyword">null</span>)</span><br><span class="line">            queue.addLast(tempNode.left);</span><br><span class="line">        <span class="keyword">if</span>(tempNode.right != <span class="keyword">null</span>)</span><br><span class="line">            queue.addLast(tempNode.right);</span><br><span class="line">        System.out.print(tempNode.val+ <span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
@@ -1062,6 +1204,7 @@
 </ul>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MD5(&quot;我今天讲哈希算法！&quot;) = 425f0d5a917188d2c3c3dc85b5e4f2cb</span><br><span class="line">MD5(&quot;我今天讲哈希算法&quot;) = a1fb91ac128e6aa37fe42c663971ac3d</span><br></pre></td></tr></table></figure>
+
 <p>即使只相差了一个<code>!</code>，但是得出的哈希值变动非常的大。</p>
 <p>哈希算法的应用又非常多，例如：安全加密、数据校验、唯一标识、散列函数、负载均衡、数据分片、分布式存储。</p>
           <!--noindex-->
@@ -1202,7 +1345,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,702字
+                  3,726字
                 </span>
               
 
@@ -1387,7 +1530,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,728字
+                  2,739字
                 </span>
               
 
@@ -1995,6 +2138,7 @@
           <p>本章会深入介绍Java类的加载、连接和初始化知识</p>
 <h1 id="类的加载、连接和初始化"><a href="#类的加载、连接和初始化" class="headerlink" title="类的加载、连接和初始化"></a>类的加载、连接和初始化</h1><h2 id="1-JVM和类"><a href="#1-JVM和类" class="headerlink" title="1. JVM和类"></a>1. JVM和类</h2><p>每调用java命令运行某个Java程序时，该命令将会启动一个Java虚拟机进程。同一个JVM的所有线程、所有变量都处于同一个进程里，他们都使用该JVM进程的内存区。当Java程序运行结束时，JVM进程结束，该进程在内存中的状态将会丢失。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest1</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        A.a++;</span><br><span class="line">        System.out.print(a.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        A b = <span class="keyword">new</span> A();</span><br><span class="line">        System.out.println(b.a)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>ATest1打印的值为7；ATest2打印的值为6。这就是JVM进程结束导致内存中的状态丢失。</p>
 <h2 id="2-类的加载"><a href="#2-类的加载" class="headerlink" title="2. 类的加载"></a>2. 类的加载</h2><p>当程序主动使用某个类时，如果该类还未被加载到内存中，则系统会通过<code>加载、连接、初始化</code>三个步骤来对该类进行初始化，有时候将这三个步骤统称为<strong>类加载或类初始化</strong>。</p>
 <p>类加载指的是将类的class文件读入内存，并为之创建一个<code>java.lang.Class</code>对象，也就是说，当程序中使用任何类时，系统都会为它建立一个<code>java.lang.Class</code>对象。系统中所有的类实际上也是实例，它们都是<code>java.lang.Class</code>的实例。</p>
@@ -2010,191 +2154,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/09/三分钟Java基础-类加载机制与反射/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-堆排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/09/三分钟排序算法-堆排序/" itemprop="url">三分钟排序算法-堆排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T11:48:58+08:00">
-                2020-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,247字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  5分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="1-堆排序算法原理及思想"><a href="#1-堆排序算法原理及思想" class="headerlink" title="1. 堆排序算法原理及思想"></a>1. 堆排序算法原理及思想</h1><p>堆排序（Heapsort）是指利用堆这种数据结构所设计的一种排序算法。它的最好、最坏和平均时间复杂度都为O(N*logN)，它是一种不稳定排序，下面了解堆这种数据结构。</p>
-<p>堆是一种特殊的完全二叉树，分为<strong>大顶堆和小顶堆</strong>；在<strong>原有的二叉树的性质上</strong>，大顶堆还需要严格保证父节点的值<strong>大于等于</strong>孩子节点的值；小顶堆则严格保证父节点的值<strong>小于等于</strong>孩子节点的值。</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-堆排序/20200304110834211.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-<p><strong>堆只是一个逻辑结构，本质上还是数组。</strong>如果用数组表示堆这个结构，大顶堆和小顶堆必须满足的条件用数组表示为：</p>
-<p><strong>大顶堆：arr[i] ≥ arr[2i+1] &amp;&amp; arr[i] ≥ arr[2i+2]</strong></p>
-<p><strong>小顶堆：arr[i] ≤ arr[2i+1] &amp;&amp; arr[i] ≤ arr[2i+2]</strong></p>
-<p><strong>如果要将数组升序排序则构造大顶堆，如果需要降序则构造小顶堆。</strong></p>
-<p><strong>构造大顶堆的目的是</strong>为了每一轮排序<strong>确定一个最大值</strong>并将其放到堆的尾部（数组的尾部）<strong>；</strong></p>
-<p><strong>构造小顶堆的目的是</strong>为了每一轮排序<strong>确定一个最小值</strong>并将其放到堆的尾部（数组的尾部）<strong>；</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/09/三分钟排序算法-堆排序/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2280,7 +2239,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2291,7 +2250,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2302,7 +2261,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2382,7 +2341,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>

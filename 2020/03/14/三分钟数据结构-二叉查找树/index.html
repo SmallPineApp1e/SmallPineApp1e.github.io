@@ -106,7 +106,8 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/96b3d86ed9b7c4f399e8357ceed0db2a.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/daa9fb557726ee6183c5b80222cfc5c5.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/299c615bc2e00dc32225f4d9e3490e2c.jpg">
-<meta property="og:updated_time" content="2020-03-14T13:49:27.230Z">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/e3d9b2977d350526d2156f01960383d9.jpg">
+<meta property="og:updated_time" content="2020-03-15T12:23:24.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟数据结构-二叉查找树">
 <meta name="twitter:description" content="二叉查找树（Binary Search Tree）二叉查找树的要求 二叉查找树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值。">
@@ -403,7 +404,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  723字
+                  794字
                 </span>
               
 
@@ -445,15 +446,18 @@
 </blockquote>
 <p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/f3bb11b6d4a18f95aa19e11f22b99bae.jpg" alt="img"> </p>
 <a id="more"></a>
+
 <h2 id="二叉查找树的查找操作-简单"><a href="#二叉查找树的查找操作-简单" class="headerlink" title="二叉查找树的查找操作(简单)"></a>二叉查找树的查找操作(简单)</h2><blockquote>
 <p>查找一个元素，与当前节点作比较，如果比当前节点小，则与左子树继续比较；如果比当前节点大，则与右子树继续比较；如果等于根节点，则返回。</p>
 </blockquote>
 <p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/96b3d86ed9b7c4f399e8357ceed0db2a.jpg" alt="img"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查找操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> val, Node root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(root.value == val)</span><br><span class="line">        result = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(val &lt; root.value)</span><br><span class="line">        result = search(val, root.left);</span><br><span class="line">    <span class="keyword">if</span>(val &gt; root.value)</span><br><span class="line">        result = search(val, root.right);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="二叉查找树的插入操作-简单"><a href="#二叉查找树的插入操作-简单" class="headerlink" title="二叉查找树的插入操作(简单)"></a>二叉查找树的插入操作(简单)</h2><blockquote>
 <p>插入一个元素，就找这个元素需要插入在哪个叶子节点，所以只要一直遍历节点，如<strong>果当前待插入节点的值比当前节点的，就在左子树中继续寻找插入位置；如果比当前节点大，就在右子树中继续寻找插入位置</strong>，直到找到叶子节点，判断当前的值与叶子节点的大小来决定是插入在左孩子还是右孩子。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val, Node root)</span></span>&#123;</span><br><span class="line">    Node node = <span class="keyword">new</span> Node(val);</span><br><span class="line">    Node nodePtr = root;</span><br><span class="line">    <span class="keyword">while</span> (root != <span class="keyword">null</span>)&#123;</span><br><span class="line">        nodePtr = root;</span><br><span class="line">        <span class="keyword">if</span>(node.value &gt;= root.value)</span><br><span class="line">            root = root.right;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(node.value &lt; root.value)</span><br><span class="line">            root = root.left;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"插入的父节点："</span>+nodePtr.value);</span><br><span class="line">    <span class="keyword">if</span>(node.value &gt;= nodePtr.value)</span><br><span class="line">        nodePtr.right = node;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        nodePtr.left = node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/daa9fb557726ee6183c5b80222cfc5c5.jpg" alt="img"> </p>
 <h2 id="二叉查找树的删除操作-较复杂"><a href="#二叉查找树的删除操作-较复杂" class="headerlink" title="二叉查找树的删除操作(较复杂)"></a>二叉查找树的删除操作(较复杂)</h2><blockquote>
 <p>可以分为<strong>三种情况</strong>：</p>
@@ -467,6 +471,10 @@
 <p>而<code>右子树的最小节点</code>是<strong>刚好大于左子树的，而同时也是右子树的最小节点</strong>，所以把<code>右子树的最小节点</code>作为新的根节点是符合二叉查找树的规则的。</p>
 </blockquote>
 <p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/299c615bc2e00dc32225f4d9e3490e2c.jpg" alt="img"> </p>
+<h2 id="二叉查找树的弊端"><a href="#二叉查找树的弊端" class="headerlink" title="二叉查找树的弊端"></a>二叉查找树的弊端</h2><blockquote>
+<p>二叉查找树在最坏的情况下，会退化成一条链表，试想如果每次插入的值都比上一次插入的值要小，那么插入的位置就一直处于某个结点的左孩子位置。</p>
+</blockquote>
+<p> <img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-二叉查找树/e3d9b2977d350526d2156f01960383d9.jpg" alt="img"> </p>
 
       
     </div>
@@ -584,7 +592,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +603,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -606,7 +614,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -686,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉查找树（Binary-Search-Tree）"><span class="nav-number">1.</span> <span class="nav-text">二叉查找树（Binary Search Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的要求"><span class="nav-number">1.1.</span> <span class="nav-text">二叉查找树的要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的查找操作-简单"><span class="nav-number">1.2.</span> <span class="nav-text">二叉查找树的查找操作(简单)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的插入操作-简单"><span class="nav-number">1.3.</span> <span class="nav-text">二叉查找树的插入操作(简单)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的删除操作-较复杂"><span class="nav-number">1.4.</span> <span class="nav-text">二叉查找树的删除操作(较复杂)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉查找树（Binary-Search-Tree）"><span class="nav-number">1.</span> <span class="nav-text">二叉查找树（Binary Search Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的要求"><span class="nav-number">1.1.</span> <span class="nav-text">二叉查找树的要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的查找操作-简单"><span class="nav-number">1.2.</span> <span class="nav-text">二叉查找树的查找操作(简单)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的插入操作-简单"><span class="nav-number">1.3.</span> <span class="nav-text">二叉查找树的插入操作(简单)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的删除操作-较复杂"><span class="nav-number">1.4.</span> <span class="nav-text">二叉查找树的删除操作(较复杂)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树的弊端"><span class="nav-number">1.5.</span> <span class="nav-text">二叉查找树的弊端</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -702,7 +710,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
