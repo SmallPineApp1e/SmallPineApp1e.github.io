@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="红黑树,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="写在前面：左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！ 以2-3树揭秘左倾红黑树（LLRB）什么是2">
+<meta name="keywords" content="红黑树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟数据结构-红黑树！">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="写在前面：左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！ 以2-3树揭秘左倾红黑树（LLRB）什么是2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163705861.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163825686.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164641342.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164946247.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315172258484.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173355368.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173517707.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173802405.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315174238262.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517142303390.jfif">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182002777.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182059415.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182244642.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517143739453.png">
+<meta property="og:updated_time" content="2020-03-15T10:29:18.551Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟数据结构-红黑树！">
+<meta name="twitter:description" content="写在前面：左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！ 以2-3树揭秘左倾红黑树（LLRB）什么是2">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/">
+
+
+
+
+
+  <title>三分钟数据结构-红黑树！ | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟数据结构-红黑树！</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-15T17:39:51+08:00">
+                2020-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,825字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>写在前面：</strong>左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。<strong>我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！</strong></p>
+<h1 id="以2-3树揭秘左倾红黑树（LLRB）"><a href="#以2-3树揭秘左倾红黑树（LLRB）" class="headerlink" title="以2-3树揭秘左倾红黑树（LLRB）"></a>以2-3树揭秘左倾红黑树（LLRB）</h1><h2 id="什么是2-3树"><a href="#什么是2-3树" class="headerlink" title="什么是2-3树"></a>什么是2-3树</h2><p><strong>2-结点：</strong> <strong>含有一个值的结点，它有两条链接</strong>：左链接和右链接（即左右孩子），左链接的所有结点值都比该结点小，右链接的所有结点的值都比该结点大。</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png" alt="image-20200315160412351"></p>
+<p><strong>3-结点：</strong> <strong>含有两个值的结点，它有三条链接</strong>：左链接，中间链接和右链接（左孩子，中间孩子和右孩子），其中左链接的所有结点值都比左边结点的值小，中间链接的所有结点值是两个结点的中间值，右链接的所有结点值比右边结点的值要大。</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png" alt="image-20200315160412351"></p>
+<p><strong>一颗完美自平衡的2-3查找树中，所有空链接到根节点的距离是相等的</strong>，注意这个结论是不是觉得很像红黑树里的其中一条定义？</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png" style="zoom:67%"></p>
+<h2 id="2-3树的查找"><a href="#2-3树的查找" class="headerlink" title="2-3树的查找"></a>2-3树的查找</h2><blockquote>
+<p>判断一个值是否存在于树中，则<strong>遍历根节点的值，如果找到与其相等的值，则返回</strong>；如果找不到，则<strong>判断这个值可能存在于这个结点的哪一条链接下</strong>；如果<strong>这个结点是一个2-结点且待查找的值小于该结点值，递归往左子树中查找，否则往右子树中查找</strong>；如果<strong>这个结点是一个3-结点</strong>，则在2-结点的基础上需要<strong>再判断待查找的值是否在两个结点值之间的范围中，如果是则往中间链接递归查找。</strong></p>
+</blockquote>
+<h2 id="2-3树的插入（重要）"><a href="#2-3树的插入（重要）" class="headerlink" title="2-3树的插入（重要）"></a>2-3树的插入（重要）</h2><blockquote>
+<p>规律：<strong>2插3裂</strong>，即插入的结点位置如果是一个2-结点，则将新的结点插入使其成为3-结点；如果插入的结点位置是一个3-结点，则将新的结点插入后，把3-结点裂开。不用担心看不懂，操作一遍就会懂。</p>
+</blockquote>
+<h3 id="插入的结点位置是2-结点"><a href="#插入的结点位置是2-结点" class="headerlink" title="插入的结点位置是2-结点"></a>插入的结点位置是2-结点</h3><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163705861.png" style="zoom:67%"></p>
+<p>如下图所示，<strong>原来的2-结点变成了一个3-结点。</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163825686.png" style="zoom:67%"></p>
+<h3 id="插入的结点位置是3-结点"><a href="#插入的结点位置是3-结点" class="headerlink" title="插入的结点位置是3-结点"></a>插入的结点位置是3-结点</h3><h4 id="父结点是2-结点"><a href="#父结点是2-结点" class="headerlink" title="父结点是2-结点"></a>父结点是2-结点</h4><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164641342.png" style="zoom:67%"></p>
+<p>插入后的结果变成了下面这幅图：</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164946247.png" style="zoom:67%"></p>
+<p>此时出现了一个4-结点，而在2-3树里面是不允许4-结点出现的，所以要<strong>裂开</strong>。而由于父结点是2-结点，所以这个4-结点直接从中间裂开，S和X分别为父结点的中间孩子和右孩子。如下图所示</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315172258484.png" style="zoom:67%"></p>
+<p>这样的转换并不会影响2-3树的性质，因为T作为中间值被移动到父结点了，但是S和X的位置也符合2-3树有序的性质。</p>
+<h4 id="父结点是3-结点"><a href="#父结点是3-结点" class="headerlink" title="父结点是3-结点"></a>父结点是3-结点</h4><p>4-结点一直往上裂开并将中值插入父结点，然后父结点继续裂开将中值插入祖父结点，重复裂开插入的过程，<strong>直到裂开的中值插入一个2-结点中。</strong></p>
+<p><strong>（1）</strong><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173355368.png" style="zoom:67%"></p>
+<p><strong>（2）</strong>          <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173517707.png" style="zoom:67%"></p>
+<p><strong>（3）</strong>                 <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173802405.png" style="zoom:67%"></p>
+<p><strong>（4）</strong>                    <img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315174238262.png" style="zoom:77%"></p>
+<h2 id="2-3树的插入总结"><a href="#2-3树的插入总结" class="headerlink" title="2-3树的插入总结"></a>2-3树的插入总结</h2><blockquote>
+<p>如果插入的结点位置是一个2-结点，则有空位，把待插入的结点直接插入；</p>
+<p>如果插入的结点位置是一个3-结点，则先把待插入的结点插入进去，然后将结点裂开，中值移动到它的父结点当中，父结点再进行一样的判断。</p>
+</blockquote>
+<p>疑问：为什么2-3树的插入规则是这样的呢？</p>
+<blockquote>
+<p>请注意观察一个点：树的高度什么时候会增加？</p>
+<p>树的高度取决于<strong>根节点是4-结点的时候裂开，才会使整个树的高度+1</strong>，所以结点裂开之后中值往上移的过程实际上是在<strong>保证整棵树的高度不会因其它结点的插入而改变</strong>，树的生长是由下往上的，而我们观察二叉查找树有可能出现极度不平衡的原因<strong>是树的高度生长是由上往下的</strong>，也就是说每个结点都有可能增加树的高度，而2-3树消除了这个弊端；所以</p>
+</blockquote>
+<h2 id="2-3树揭秘左倾红黑树"><a href="#2-3树揭秘左倾红黑树" class="headerlink" title="2-3树揭秘左倾红黑树"></a>2-3树揭秘左倾红黑树</h2><p><strong>左倾红黑树就是用红色链接表示3-结点的2-3树</strong>。</p>
+<blockquote>
+<p>红黑树背后的思想是用<strong>标准的二叉查找树（完全由2-结点构成）和一些额外的信息（替换3-结点）来表示2-3树。</strong></p>
+<p>我们将树中的链接分为两种类型：<strong>红链接将两个2-结点连接起来构成一个3-结点，黑链接则是2-3树中的普通链接。确切地说，我们将3-结点表示为由一条左斜的红色链接相连的两个2-结点。</strong></p>
+<p>这种表示法的一个优点是，我们无需修改就可以直接使用标准二叉查找树的get()方法。对于任意的2-3树，只要对结点进行转换，我们都可以立即派生出一颗对应的二叉查找树。我们将用这种方式表示2-3树的二叉查找树称为红黑树。</p>
+</blockquote>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517142303390.jfif" style="zoom:87%"></p>
+<p><strong>红黑树的另一种定义</strong>是满足下列条件的二叉查找树（左倾红黑树）：</p>
+<blockquote>
+<p>（1）<strong>红链接均为左链接。</strong></p>
+<p>（2）没有任何一个结点<strong>同时和两条红链接相连。</strong></p>
+<p>（3）该树是<strong>完美黑色平衡</strong>的，即<strong>任意空链接到根结点的路径上的黑链接数量相同。</strong></p>
+</blockquote>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182002777.png" style="zoom:67%"></p>
+<p>试试看<strong>把红色链接放平</strong>，就会出现下面的结果：</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182059415.png" alt="image-20200315182059415"></p>
+<p><strong>再看看2-3树：</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182244642.png" alt="image-20200315182244642"></p>
+<blockquote>
+<p><strong>是不是一样的！！！！所以，这种左倾红黑树，本质上是2-3树，只不过外加了结点的颜色这个属性来表示3-结点中哪个是红色结点，哪个是黑色结点。</strong> （2-3树的深度很小，平衡性好，效率高，但是其有两种不同的结点，实际代码实现比较复杂。而红黑树用红链接表示2-3树中另类的3-结点，统一了树中的结点类型，使代码实现简单化，又不破坏其高效性。） </p>
+</blockquote>
+<p><strong>颜色表示</strong>：</p>
+<blockquote>
+<p>因为每个结点都只会有一条指向自己的链接（从它的父结点指向它），我们将链接的颜色保存在表示结点的Node数据类型的布尔变量color中（若<strong>指向它的链接是红色的，那么该变量为true，黑色则为false</strong>）。</p>
+<p><strong>当我们提到一个结点颜色时，我们指的是指向该结点的链接的颜色。</strong></p>
+</blockquote>
+<p><strong>只要把红黑树的插入过程可以看作是2-3树的插入过程即可，可以得到一颗正确的红黑树：</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517143739453.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/红黑树/" rel="tag"># 红黑树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/14/三分钟数据结构-二叉查找树/" rel="next" title="三分钟数据结构-二叉查找树">
+                <i class="fa fa-chevron-left"></i> 三分钟数据结构-二叉查找树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#以2-3树揭秘左倾红黑树（LLRB）"><span class="nav-number">1.</span> <span class="nav-text">以2-3树揭秘左倾红黑树（LLRB）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是2-3树"><span class="nav-number">1.1.</span> <span class="nav-text">什么是2-3树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树的查找"><span class="nav-number">1.2.</span> <span class="nav-text">2-3树的查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树的插入（重要）"><span class="nav-number">1.3.</span> <span class="nav-text">2-3树的插入（重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入的结点位置是2-结点"><span class="nav-number">1.3.1.</span> <span class="nav-text">插入的结点位置是2-结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入的结点位置是3-结点"><span class="nav-number">1.3.2.</span> <span class="nav-text">插入的结点位置是3-结点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#父结点是2-结点"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">父结点是2-结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#父结点是3-结点"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">父结点是3-结点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树的插入总结"><span class="nav-number">1.4.</span> <span class="nav-text">2-3树的插入总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树揭秘左倾红黑树"><span class="nav-number">1.5.</span> <span class="nav-text">2-3树揭秘左倾红黑树</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+

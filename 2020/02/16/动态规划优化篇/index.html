@@ -94,31 +94,31 @@
 
 
 
-<meta name="description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。[小白学习动态规划：入门篇]: https://blog.csdn.net/weixin_41949328/article/details/104150403 今天主要是">
+<meta name="description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。 今天主要是对上一篇博客的两道题目进行优化，对于绝大多数利用动态规划的算法题作优化时，个人认为最重要的优化方法就是：画DP的图！找出状态之间的依赖关系，将其它没有依赖的状">
 <meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三分钟算法-动态规划优化篇">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。[小白学习动态规划：入门篇]: https://blog.csdn.net/weixin_41949328/article/details/104150403 今天主要是">
+<meta property="og:description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。 今天主要是对上一篇博客的两道题目进行优化，对于绝大多数利用动态规划的算法题作优化时，个人认为最重要的优化方法就是：画DP的图！找出状态之间的依赖关系，将其它没有依赖的状">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%871.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%872.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%873.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%874.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%875.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%876.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%877.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%878.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%879.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8710.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8711.jpg">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8712.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片1.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片2.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片3.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片4.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片5.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片6.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片7.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片8.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片9.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片10.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片11.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片12.jpg">
 <meta property="og:updated_time" content="2020-03-09T02:59:48.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-动态规划优化篇">
-<meta name="twitter:description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。[小白学习动态规划：入门篇]: https://blog.csdn.net/weixin_41949328/article/details/104150403 今天主要是">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%871.jpg">
+<meta name="twitter:description" content="小白学习动态规划：优化篇上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。 今天主要是对上一篇博客的两道题目进行优化，对于绝大多数利用动态规划的算法题作优化时，个人认为最重要的优化方法就是：画DP的图！找出状态之间的依赖关系，将其它没有依赖的状">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片1.jpg">
 
 
 
@@ -411,7 +411,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,421字
+                  1,297字
                 </span>
               
 
@@ -427,7 +427,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  6分钟
+                  5分钟
                 </span>
               
             </div>
@@ -448,7 +448,7 @@
       
 
       
-        <h1 id="小白学习动态规划：优化篇"><a href="#小白学习动态规划：优化篇" class="headerlink" title="小白学习动态规划：优化篇"></a>小白学习动态规划：优化篇</h1><p>上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。<br>[小白学习动态规划：入门篇]: <a href="https://blog.csdn.net/weixin_41949328/article/details/104150403" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41949328/article/details/104150403</a></p>
+        <h1 id="小白学习动态规划：优化篇"><a href="#小白学习动态规划：优化篇" class="headerlink" title="小白学习动态规划：优化篇"></a>小白学习动态规划：优化篇</h1><p>上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。</p>
 <p>今天主要是对上一篇博客的两道题目进行优化，对于绝大多数利用动态规划的算法题作优化时，个人认为最重要的优化方法就是：<strong>画DP的图！找出状态之间的依赖关系，将其它没有依赖的状态废弃掉。</strong></p>
 <p><strong>如果你不懂没有关系，可以看以下例子，很好理解~</strong></p>
 <h2 id="优化类型一：一维降变量"><a href="#优化类型一：一维降变量" class="headerlink" title="优化类型一：一维降变量"></a>优化类型一：一维降变量</h2><p>LeetCode70. 爬楼梯</p>
@@ -457,20 +457,24 @@
 </blockquote>
 <p><strong>未优化前的代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)&#123; <span class="comment">//第1阶</span></span><br><span class="line">				dp[i] = <span class="number">1</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">1</span>)&#123; <span class="comment">//第2阶</span></span><br><span class="line">				dp[i] = <span class="number">2</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123; <span class="comment">//第3阶及以上</span></span><br><span class="line">				dp[i] = dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>首先，我们先分析dp的填充过程，观察有什么值是会在某个时间段后作废（一直没有使用到）</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%871.jpg" alt="图片1"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%872.jpg" alt="图片2"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%873.jpg" alt="图片3"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%874.jpg" alt="图片4"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片1.jpg" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片2.jpg" alt="图片2"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片3.jpg" alt="图片3"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片4.jpg" alt="图片4"></p>
 <a id="more"></a>
-
 <p>从上面几幅图可以很清晰地观察到，从求第四阶楼梯的爬楼梯方法数之后，每求下一阶楼梯的方法数时，<strong>就会有多一个值被废弃掉，而求某个状态的值（爬楼梯的方法数）只与它的第(n-2)个状态和第(n-1)个状态[n &gt;= 3]有依赖关系</strong>，所以在第(n-2)个状态以前的值就被废弃掉了。</p>
 <blockquote>
 <p>所以，这个定义一维DP数组在某种程度上是浪费了内存空间的。</p>
 </blockquote>
-<p><strong>未优化前的状态转移方程：</strong><br>$$<br>dp[i] =<br>\begin{cases}<br>dp[i-1] + dp[i-2],&amp;if\ i≥2\<br>i &amp;if\ i &lt; 2<br>\end{cases}<br>$$<br><strong>优化的过程可以观察下图：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%875.jpg" alt="图片5"></p>
+<p><strong>未优化前的状态转移方程：</strong></p>
+<script type="math/tex; mode=display">
+dp[i] = 
+\begin{cases}
+dp[i-1] + dp[i-2],&if\ i≥2\\
+i &if\ i < 2
+\end{cases}</script><p><strong>优化的过程可以观察下图：</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片5.jpg" alt="图片5"></p>
 <blockquote>
 <p><strong>颜色的含义（帮助你理解整个过程）：</strong></p>
 <p>蓝色：初始化的状态值</p>
@@ -484,37 +488,46 @@
 </blockquote>
 <p><strong>优化后的代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt;= <span class="number">2</span>)&#123;<span class="keyword">return</span> n;&#125;</span><br><span class="line">        <span class="keyword">int</span> dp0 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> dp1 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> result = dp0 + dp1;</span><br><span class="line">            dp0 = dp1;</span><br><span class="line">            dp1 = result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="优化类型二：二维降一维"><a href="#优化类型二：二维降一维" class="headerlink" title="优化类型二：二维降一维"></a>优化类型二：二维降一维</h2><p>LeetCode62. 不同路径</p>
 <blockquote>
 <p>问题描述：一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
 <p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
 <p>问总共有多少条不同的路径？</p>
 </blockquote>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%876.jpg" alt="图片6"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片6.jpg" alt="图片6"></p>
 <blockquote>
 <p> <strong>说明</strong>：m 和 <em>n</em> 的值均不超过 100。 </p>
 </blockquote>
 <p><strong>未优化前的代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="comment">//上边界</span></span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>)&#123;dp[i][j] = <span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">                <span class="comment">//左边界</span></span><br><span class="line">                <span class="keyword">if</span>(j == <span class="number">0</span> &amp;&amp; i &gt;= <span class="number">0</span>)&#123;dp[i][j] = <span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">                <span class="comment">//其它情况</span></span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>观察未优化前的DP矩阵：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%877.jpg" alt="图片7"></p>
-<p>状态转移方程：<br>$$<br>dp[i][j]\begin{cases}dp[i-1][j]+dp[i][j-1], &amp;if\ j≥1\ AND\ i≥1\<br>1, &amp;if\  (i=0\ AND\ j≥0)OR(i≥0\ AND\ j=0)\<br>\end{cases}<br>$$<br>当填充第二行时，情况是这样的：</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%878.jpg" alt="图片8"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片7.jpg" alt="图片7"></p>
+<p>状态转移方程：</p>
+<script type="math/tex; mode=display">
+dp[i][j]\begin{cases}dp[i-1][j]+dp[i][j-1], &if\ j≥1\ AND\ i≥1\\
+1, &if\  (i=0\ AND\ j≥0)OR(i≥0\ AND\ j=0)\\
+\end{cases}</script><p>当填充第二行时，情况是这样的：</p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片8.jpg" alt="图片8"></p>
 <p><strong>当填充第三行时，情况是这样的：</strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%879.jpg" alt="图片9"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片9.jpg" alt="图片9"></p>
 <p><strong>细心的我们会发现：</strong>第一行数据已经没有用处了，它的存在与否不影响我们求第三行的数据。所以，<strong>我们只需要保存上一行数据，就可以得出下一行的数据，并且每求出下一行的一个数据时，都可以舍弃掉上一行的那一个数据，所以只需要一维数组保存一行数据就可以求出下一行的数据。</strong></p>
 <p><strong>如果你不是很懂，那么看下面几幅图就会秒懂~</strong></p>
 <p><strong><u>注意左边数组行下标一直为0，表示该数组本质上只有一行</u></strong></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8710.jpg" alt="图片10"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8711.jpg" alt="图片11"></p>
-<p>原本二维dp数组的状态转移方程为：<br>$$<br>dp[i][j]=\begin{cases}dp[i-1][j]+dp[i][j-1], &amp;if\ j≥1\ AND\ i≥1\<br>1, &amp;if\  (i=0\ AND\ j≥0)OR(i≥0\ AND\ j=0)\<br>\end{cases}<br>$$<br>在图中从位置上表现出来的结果是正确的，<strong>但是！！！重点来了！</strong></p>
-<p><strong>注意看！你会发现状态转移方程转化为：</strong><br>$$<br>dp[i]=\begin{cases}dp[i-1]+dp[i], &amp;if\ i≥1\<br>1, &amp;if\  i=0\<br>\end{cases}<br>$$<br>最后数组就会呈现出下图得到状态：</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%8712.jpg" alt="图片12"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片10.jpg" alt="图片10"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片11.jpg" alt="图片11"></p>
+<p>原本二维dp数组的状态转移方程为：</p>
+<script type="math/tex; mode=display">
+dp[i][j]=\begin{cases}dp[i-1][j]+dp[i][j-1], &if\ j≥1\ AND\ i≥1\\
+1, &if\  (i=0\ AND\ j≥0)OR(i≥0\ AND\ j=0)\\
+\end{cases}</script><p>在图中从位置上表现出来的结果是正确的，<strong>但是！！！重点来了！</strong></p>
+<p><strong>注意看！你会发现状态转移方程转化为：</strong>    </p>
+<script type="math/tex; mode=display">
+dp[i]=\begin{cases}dp[i-1]+dp[i], &if\ i≥1\\
+1, &if\  i=0\\
+\end{cases}</script><p>最后数组就会呈现出下图得到状态：</p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片12.jpg" alt="图片12"></p>
 <p><strong>优化后的一维dp代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m &lt;= <span class="number">1</span> || n &lt;= <span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j == <span class="number">0</span>)&#123;dp[j] = <span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">                dp[j] = dp[j-<span class="number">1</span>] + dp[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[dp.length - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -632,7 +645,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +667,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -750,7 +763,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
