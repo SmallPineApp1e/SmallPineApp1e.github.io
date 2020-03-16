@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,168字
+                  1,391字
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  6分钟
                 </span>
               
             </div>
@@ -441,80 +441,68 @@
 <p><a href="https://blog.csdn.net/qq_38984851/article/details/81133840" target="_blank" rel="noopener">https://blog.csdn.net/qq_38984851/article/details/81133840</a> </p>
 <p> <a href="https://blog.csdn.net/na_beginning/article/details/62884939" target="_blank" rel="noopener">https://blog.csdn.net/na_beginning/article/details/62884939</a> </p>
 <p>完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。</p>
-<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><script type="math/tex; mode=display">
-有N种物品和一个容量为V 的背包，每种物品都有无限件可用。放入第i种物品的耗费的空间是C_i，得到的价值是W_i。</script><script type="math/tex; mode=display">
-求解：将哪些物品装入背包，可使 这些物品的耗费的空间总和不超过背包容量，且价值总和最大。</script><script type="math/tex; mode=display">
-例：N = 5，V=10</script><div class="table-container">
+<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><p>$$<br>有N种物品和一个容量为V 的背包，每种物品都有无限件可用。放入第i种物品的耗费的空间是C_i，得到的价值是W_i。<br>$$</p>
+<p>$$<br>求解：将哪些物品装入背包，可使 这些物品的耗费的空间总和不超过背包容量，且价值总和最大。<br>$$</p>
+<p>$$<br>例：N = 5，V=10<br>$$</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">物品</th>
-<th style="text-align:center">A</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">C</th>
-<th style="text-align:center">D</th>
-<th style="text-align:center">E</th>
+<th align="center">物品</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+<th align="center">E</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">Wealth</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">12</td>
+<tbody><tr>
+<td align="center">Wealth</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">12</td>
 </tr>
 <tr>
-<td style="text-align:center">Cost</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">8</td>
+<td align="center">Cost</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">8</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="初步解题思路"><a href="#初步解题思路" class="headerlink" title="初步解题思路"></a>初步解题思路</h2><p>定义状态与01背包相同，下标i代表前i件物品，下标j代表背包的总容量为j</p>
 <p>此问题与01背包问题类似，但是每一件物品并不是选与不选的问题，而是选几件的问题：</p>
 <blockquote>
 <p>选0件、选1件、选2件···选k件(k*Cost[i] ≤ V)</p>
 </blockquote>
 <p>所以，在01背包的基础上改变一下</p>
-<p>掌握完全背包问题前必须清楚<strong>01背包的状态转移方程</strong>：</p>
-<script type="math/tex; mode=display">
-dp[i][j] = \begin{cases}
-dp[i-1][j]&if\ Cost[i] > j\\
-dp[i-1][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
-\end{cases}</script><p>而<strong>完全背包的状态转移方程</strong>为：</p>
-<script type="math/tex; mode=display">
-dp[i][j] = \begin{cases}
-dp[i-1][j]&if\ Cost[i] > j\\
-dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
-\end{cases}</script><p>需要乘上系数k的原因是如果背包的容量大于物品A的体积，那么放入一件A之后，有可能背包剩下的容量还可以继续放入A物品，每次放入都要放入<strong>尽可能多的</strong>物品。</p>
+<p>掌握完全背包问题前必须清楚<strong>01背包的状态转移方程</strong>：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-Cost[i]] + Wealth[i]&amp;if\ Cost[i] ≤j<br>\end{cases}<br>$$<br>而<strong>完全背包的状态转移方程</strong>为：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-k<em>Cost[i]] + k</em>Wealth[i]&amp;if\ k*Cost[i] ≤j<br>\end{cases}<br>$$</p>
+<p>需要乘上系数k的原因是如果背包的容量大于物品A的体积，那么放入一件A之后，有可能背包剩下的容量还可以继续放入A物品，每次放入都要放入<strong>尽可能多的</strong>物品。</p>
 <a id="more"></a>
+
 <p>例如：</p>
 <blockquote>
 <p>背包容量V = 9，物品A的体积为Cost[A] = 2，那么拿1件A放入背包后，背包容量 = 10 - 2 = 8，还可以继续放A，直到背包容量为剩下1时（此时放了4件A），无法继续放入A了才结束。</p>
 </blockquote>
 <p><strong>代码实现：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/2/12 22:34</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxWealth</span><span class="params">(<span class="keyword">int</span>[] cost, <span class="keyword">int</span>[] wealth, <span class="keyword">int</span> N, <span class="keyword">int</span> V)</span></span>&#123;</span><br><span class="line">        <span class="comment">//给dp table加一行和一列避免复杂的初始化问题</span></span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[N+<span class="number">1</span>][V+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp.length; i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp[<span class="number">0</span>].length; i++)&#123;</span><br><span class="line">            dp[<span class="number">0</span>][i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">                <span class="comment">//假设不选第i件</span></span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k*cost[i-<span class="number">1</span>] &lt;= j; k++)&#123;</span><br><span class="line">                    <span class="comment">//可以选k件</span></span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//观察dp table值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">                System.out.print(dp[i][j]+<span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[N][V];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] cost = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] wealth = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">9</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> N = <span class="number">4</span>;</span><br><span class="line">        <span class="keyword">int</span> V = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> i = maxWealth(cost, wealth, N, V);</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输出结果：</span><br><span class="line">0 0 0 0 0 0 0 0 0  0  0 </span><br><span class="line">0 0 2 2 4 4 6 6 8  8  10 </span><br><span class="line">0 0 2 4 4 6 8 8 10 12 12 </span><br><span class="line">0 0 2 4 4 7 8 9 11 12 14 </span><br><span class="line">0 0 2 4 4 7 8 9 11 12 14 </span><br><span class="line">0 0 2 4 4 7 8 9 12 12 14 </span><br><span class="line">14</span><br></pre></td></tr></table></figure>
+
 <p>此算法的空间复杂度为O（N²），共需要求解O（NV）个状态，求解每个状态的时间不是常数级了，因为每个物品并不是只有拿和不拿两种情况，而是拿k件（k≥1）或不拿的多种情况，求dp[i][j]所需要的时间是O（j/Cost[i]）,所以总的时间复杂度为O（NVΣ(j/Cost[i])）。在这种复杂度较高的情况下一般是不能AC的。所以要优化时间复杂度。尝试将其转化为01背包问题。</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/05/小白学习动态规划：完全背包/1.jpg" alt="图片1"></p>
 <h2 id="优化解题思路（转化为01背包问题）"><a href="#优化解题思路（转化为01背包问题）" class="headerlink" title="优化解题思路（转化为01背包问题）"></a>优化解题思路（转化为01背包问题）</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><p>可以在每一个物品可以放多少个时，<strong>直接求出可以放入的最大值k</strong>，即每个物品要么不能放进去，要么放k件，等价于01背包中要么不能放入物品，要么可以放入1件物品。</p>
 <p><strong>优化代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">        <span class="comment">//假设不选第i件</span></span><br><span class="line">        dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">        <span class="comment">//假设能放k件</span></span><br><span class="line">        <span class="keyword">int</span> k = j / cost[i-<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//可以选k件</span></span><br><span class="line">        dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>当物品可以放入时，可能还可以继续放入该物品，所以状态转移方程需要变化：</p>
-<script type="math/tex; mode=display">
-dp[i][j] = \begin{cases}
-dp[i-1][j]&if\ Cost[i] > j\\
-dp[i][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
-\end{cases}</script><script type="math/tex; mode=display">
-当Cost[i] ≤ j时，当放入一个物品i时，之后还可能会放入物品i</script><script type="math/tex; mode=display">
-所以状态转移方程是F[i][j-Cost[i]]+Wealth[i]而不是F[i-1][j-Cost[i]]+Wealth[i]。</script><p><strong>优化代码：</strong></p>
+
+<h3 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h3><p>当物品可以放入时，可能还可以继续放入该物品，所以状态转移方程需要变化：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i][j-Cost[i]] + Wealth[i]&amp;if\ Cost[i] ≤j<br>\end{cases}<br>$$</p>
+<p>$$<br>当Cost[i] ≤ j时，当放入一个物品i时，之后还可能会放入物品i<br>$$</p>
+<p>$$<br>所以状态转移方程是F[i][j-Cost[i]]+Wealth[i]而不是F[i-1][j-Cost[i]]+Wealth[i]。<br>$$</p>
+<p><strong>优化代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N+<span class="number">1</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; V+<span class="number">1</span>; j++)&#123;</span><br><span class="line">        <span class="comment">//假设不选第i件</span></span><br><span class="line">        dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">if</span>(cost[i-<span class="number">1</span>] &lt; j)&#123;</span><br><span class="line">            <span class="comment">//可以放进去</span></span><br><span class="line">            dp[i][j] = Math.max(dp[i][j], dp[i][j - k*cost[i-<span class="number">1</span>]] + k*wealth[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="思路3（二进制思想）（还没看懂）"><a href="#思路3（二进制思想）（还没看懂）" class="headerlink" title="思路3（二进制思想）（还没看懂）"></a>思路3（二进制思想）（还没看懂）</h3><hr>
 
 <p><strong>时间有限，能力有限，如有错误欢迎指正！乐意与大家交流！</strong></p>
@@ -635,7 +623,7 @@ dp[i][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -657,7 +645,7 @@ dp[i][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -753,7 +741,7 @@ dp[i][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
