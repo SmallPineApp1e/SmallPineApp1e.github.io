@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,247字
+                  1,497字
                 </span>
               
 
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  6分钟
                 </span>
               
             </div>
@@ -623,13 +623,13 @@
 
       
         
-          <h1 id="1-快速排序原理介绍"><a href="#1-快速排序原理介绍" class="headerlink" title="1. 快速排序原理介绍"></a>1. 快速排序原理介绍</h1><p>快速排序是一种不稳定的排序算法，它的时间复杂度是O(N<em>logN)，快速排序的基本思想是：每次从待排序的序列中*</em>选出一个基准数/枢轴<strong>（英文称为pivot），</strong>然后比它小的数都放到它的左边，比它大的数都放到它的右边，然后再对pivot的左边和右边两个序列进行快速排序，<strong>当排序的序列中只有一个数时不需要进行排序，此时排序已经完成。这里也有用到一种</strong>“分治思想”**</p>
+          <h1 id="1-快速排序原理介绍"><a href="#1-快速排序原理介绍" class="headerlink" title="1. 快速排序原理介绍"></a>1. 快速排序原理介绍</h1><p>快速排序是一种不稳定的排序算法，它的时间复杂度是O(N<em>logN)，快速排序的基本思想是：每次从待排序的序列中<strong>选出一个基准数/枢轴</strong>（英文称为pivot），<strong>然后比它小的数都放到它的左边，比它大的数都放到它的右边，然后再对pivot的左边和右边两个序列进行快速排序，</strong>当排序的序列中只有一个数时不需要进行排序，此时排序已经完成。这里也有用到一种<em>*“分治思想”</em></em></p>
 <p>举个例子：假设现在有一个序列：[33, 27, 41, 26, 78, 19, 52, 81]，首先取第一个元素作为枢轴：pivot = 33，对整个序列进行快速排序，排序后的结果为：[<strong>19, 27, 26,</strong> 33, <strong>78, 41, 52, 81</strong>]，可以看到以33为pivot的第一轮排序后，<strong>比它小的元素全部位于33的左边，比它大的元素全部位于33的右边</strong>，此时我们再对左右两边的序列：[19, 27, 26]和[78, 41, 52, 81]进行快速排序<strong>（分治）</strong>，同样取每个序列的第一个元素作为枢轴······直至序列只有一个元素时，此时整个序列已经有序。</p>
 <p>因为快速排序的效率非常高，而且掌握它也有一定的难度，所以各大企业都会拿这个来考察程序员，通常上来就让你写一个快速排序给他过目，掌握这个排序真的已经是企业的基础了，也是考察一个程序员基础的重要指标之一了。</p>
 <h1 id="2-快速排序算法步骤"><a href="#2-快速排序算法步骤" class="headerlink" title="2. 快速排序算法步骤"></a>2. 快速排序算法步骤</h1><p>现在有一个待排序的序列：[33, 27, 41, 26, 78, 19, 52, 81]，使用快速排序算法进行排序，我会以<strong>第一轮排序为例</strong>演示快速排序的整个流程。</p>
 <p>我假定每次排序都取第一个数为基准数（pivot），则第一轮排序pivot = 33，<strong>由于33被pivot这个变量存储，所以我们可以认为index = 0的位置是挖空出来的，可以放数据进去</strong>，也就是下图中的红色区域。然后使用两个指针left和right分别指向序列的首部和尾部。初始化left = 0，right = 7</p>
 <p>【下图中的前三行】（1）从后往前扫描元素,找到<strong>第一个小于pivot</strong>的元素，找到下标<strong>right = 5</strong>的元素满足条件<strong>（19 &lt; 33）</strong>，插入到当前的空闲位置（left = 0），则arr[left] = arr[right] 即 arr[0] = arr[5] = 19，而此时空闲位置<strong>由 left = 0 转化为 right = 5。将左指针left++（left = 1）</strong></p>
-<p>【下图中的第四五行】（2）从前往后扫描元素,找到<strong>第一个大于pivot</strong>的元素, 找到下标<strong>left = 2</strong>的元素满足条件<strong>（41 &gt; 33）</strong>，插入到当前的空闲位置（right = 5），则arr[right] = arr[left] 即 arr[5] = arr[2] = 41，空闲位置<strong>由right = 5转化为left = 2。将右指针right–（right = 4）</strong></p>
+<p>【下图中的第四五行】（2）从前往后扫描元素,找到<strong>第一个大于pivot</strong>的元素, 找到下标<strong>left = 2</strong>的元素满足条件<strong>（41 &gt; 33）</strong>，插入到当前的空闲位置（right = 5），则arr[right] = arr[left] 即 arr[5] = arr[2] = 41，空闲位置<strong>由right = 5转化为left = 2。将右指针right—（right = 4）</strong></p>
 <p>【下图中的第六行】（3）从后往前扫描元素，找到下标<strong>right = 3</strong>的元素满足条件<strong>（26 &lt; 33）</strong>，插入到当前空闲位置（left = 2），则arr[left] = arr[right] 即 arr[2] = arr[3] = 26，空闲位置<strong>由left = 2转化为right = 3。将指针left++（left = 3）</strong></p>
 <p><strong>【</strong>下图中的第七行<strong>】</strong>（4）从前往后扫描元素，此时 <strong>left = right，</strong>代表所有元素都已经与pivot比较过，<strong>换言之所有需要交换位置的元素都已经交换完毕</strong>，所以最后将pivot填到最后的空闲位置（left = right = 3）即arr[left]/arr[right] = pivot 即 arr[3] = 33，此时第一轮排序完成，进行下一轮的快速排序（重复这四个步骤）</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-快速排序/20200302195007706.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
@@ -1009,11 +1009,11 @@
 <p>（index = 2，index = 5）的两个元素组成一个序列：[1, 6]</p>
 <p>我们对这三个序列进行直接插入排序，排序完成后各个子序列的状态是：[2, 3, 7]，[4, 5]，[1, 6]</p>
 <p>从原序列来看，排序后的序列为：<strong>[2, 4, 1, 3, 5, 6, 7]</strong>，此时看到数组已经大致有序了，较大的数都在数组靠右的位置，较小的数都在数组靠左的位置。</p>
-<ol start="2">
+<ol>
 <li>增量以原来的1/2递减，即Step = Step &gt;&gt; 1 = 3 &gt;&gt; 1 = 1，此时增量为1，待排序的序列为整个数组序列[2, 4, 1, 3, 5, 6, 7]</li>
 </ol>
 <p>使用直接插入排序对整个序列进行排序，具体流程就不演示了，我们可以发现只需要移动三次就可以完成排序了，分别是1和4交换位置，1和2交换位置，3和4交换位置，<strong>希尔排序在面对数据量较大的数组时表现出来的速度会比直接插入排序快很多。</strong></p>
-<ol start="3">
+<ol>
 <li>Step &gt;&gt; 1 = 0，表明数组已有序，排序完成。</li>
 </ol>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-希尔排序/20200229234108792.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
@@ -2107,7 +2107,7 @@
       
         
           <h2 id="1-冒泡排序介绍"><a href="#1-冒泡排序介绍" class="headerlink" title="1. 冒泡排序介绍"></a>1. 冒泡排序介绍</h2><p> 冒泡排序是一种比较简单的排序方法，以数组升序的情况为例，它的原理是从第一个元素开始，每个元素都与其相邻的元素做比较，如果前一个元素比后一个元素大，则交换两个元素的位置，<strong>每一轮排序都确定一个最大值</strong>。它是一种稳定的排序方法，因为两个元素相等时不会做交换，相对位置不会发生改变。 </p>
-<p> <img src="//smallpineapp1e.github.io/2020/03/09/冒泡排序/%E5%9B%BE%E7%89%871.jpg" alt="img"> </p>
+<p> <img src="//smallpineapp1e.github.io/2020/03/09/冒泡排序/图片1.jpg" alt="img"> </p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/09/冒泡排序/#more" rel="contents">
