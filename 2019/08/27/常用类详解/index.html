@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+<meta name="description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125; 返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数据">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="三分钟Java基础-常用类详解">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2019/08/27/常用类详解/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+<meta property="og:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125; 返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数据">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-03-09T01:21:45.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟Java基础-常用类详解">
-<meta name="twitter:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125;  返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数">
+<meta name="twitter:description" content="Object类 Object类是所有类的父类！它本身没有父类，它已经是顶层类。  equals(Object obj)方法123public boolean equals(Object obj)&amp;#123;    return this == obj;&amp;#125; 返回值是布尔类型，方法参数为Object类型，即任何类型的参数都可以传递进去。 用于比较其它对象与本对象的内存地址是否相等。 引用数据">
 
 
 
@@ -439,14 +439,11 @@
 <p>Object类是<strong>所有类的父类</strong>！它本身没有父类，它已经是<strong>顶层类</strong>。</p>
 </blockquote>
 <h2 id="equals-Object-obj-方法"><a href="#equals-Object-obj-方法" class="headerlink" title="equals(Object obj)方法"></a>equals(Object obj)方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> == obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>返回值是布尔类型，方法参数为Object类型，即<strong>任何类型</strong>的参数都可以传递进去。</p>
 <p>用于比较<strong>其它对象与本对象的内存地址</strong>是否相等。</p>
 <p><strong>引用</strong>数据类型 “==” 用于<strong>比较两个对象的内存地址</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//Person类继承Object类，继承了Object类的equals方法</span></span><br><span class="line">    Person p1 = <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">25</span>);</span><br><span class="line">    Person p2 = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="comment">//Person的对象p1，调用父类的方法equals，进行对象的内存地址比较</span></span><br><span class="line">    <span class="keyword">boolean</span> b = p1.equals(p2);</span><br><span class="line">    System.out.println(b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <a id="more"></a>
-
 <p>Question：</p>
 <ol>
 <li>this指的是谁？</li>
@@ -454,7 +451,7 @@
 <blockquote>
 <p>谁调用的，就是谁，p1对象调用equals方法，所以this指的是p1对象</p>
 </blockquote>
-<ol start="2">
+<ol>
 <li>obj指的是谁？</li>
 </ol>
 <blockquote>
@@ -463,16 +460,13 @@
 <p>两个对象比较地址没有意义！</p>
 <p>为使equals方法有意义，则在子类中重写equals()方法，可以比较两个对象中的成员变量，由于Object能传递任何类型的变量，所以存在安全隐患，所以<strong>应该在重写方法中判断传递过来的参数到底是什么。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person)&#123;</span><br><span class="line">        <span class="comment">//参数obj接受到的是Person对象，才能进行转型</span></span><br><span class="line">        <span class="comment">//对obj参数进行向下转型,obj转成Person类型</span></span><br><span class="line">        Person p = (Person) obj;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.age == p.age);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>传递参数时会发生多态中的向上转型Person引用数据类型<strong>变量被提升为Object类型</strong>多态中的弊端：<strong>无法调用子类的特有内容！</strong></p>
 <p>所以要向下转型：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">子类数据类型 变量名 = (子类数据类型)   父类数据类型变量名</span><br><span class="line">Person p = (Person) obj；</span><br></pre></td></tr></table></figure>
-
 <p>若传过来的参数为null,直接返回false；</p>
 <p>若传过来的参数是自己本身，自己与自己比较，则直接返回true；增加上述判断情况可提高程序的执行效率！！！考虑更加周全！！！</p>
 <h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><p>输出语句中，输出一个对象，则对象自动调用自身的toString()方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//调用Person类的方法toString()</span></span><br><span class="line">    <span class="comment">//输出语句中，写的是一个对象，默认调用的toString方法</span></span><br><span class="line">    Person p = <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">20</span>);</span><br><span class="line">    String s = p.toString();</span><br><span class="line">    System.out.println(p);</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Output：</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br><span class="line">cn.itcast.demo01.Person<span class="meta">@da</span>6bf4</span><br></pre></td></tr></table></figure>
-
 <p>重写方法toString()，因为没有必要让调用者看到内存地址</p>
 <blockquote>
 <p>在开发中重写toString方法的一般要求：在方法中返回所有成员变量的值</p>
@@ -485,7 +479,6 @@
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>字符串是常量， 它的值在创建后不能更改！</strong></p>
 <p>但<strong>引用类型本身所指向的地址可以改变</strong>，每一个双引号都是String类型的对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//引起变量str执行内存变化</span></span><br><span class="line">    <span class="comment">//定义好的字符串对象，不变</span></span><br><span class="line">    String str = <span class="string">"smallpineapple"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">    str = <span class="string">"pig"</span>;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>str对象<strong>可以指向不同的地址</strong>，但是<strong>双引号内的值是永远不变的。</strong></p>
 <p>因为String类源码本身定义了一个<strong>字符数组常量进行存储字符</strong>。</p>
 <h2 id="equal-Object-obj-方法"><a href="#equal-Object-obj-方法" class="headerlink" title="equal(Object obj)方法"></a>equal(Object obj)方法</h2><blockquote>
@@ -563,50 +556,52 @@
 <li>SimpleDateFormat调用方法format对日期进行格式化，String format(Date date)    传递日期对象，返回字符串</li>
 </ol>
 </blockquote>
-<h2 id="日期模式："><a href="#日期模式：" class="headerlink" title="日期模式："></a>日期模式：</h2><table>
+<h2 id="日期模式："><a href="#日期模式：" class="headerlink" title="日期模式："></a>日期模式：</h2><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">日期格式</th>
-<th align="center">含义</th>
+<th style="text-align:center">日期格式</th>
+<th style="text-align:center">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">yyyy</td>
-<td align="center">年份</td>
+<tbody>
+<tr>
+<td style="text-align:center">yyyy</td>
+<td style="text-align:center">年份</td>
 </tr>
 <tr>
-<td align="center">MM</td>
-<td align="center">月份</td>
+<td style="text-align:center">MM</td>
+<td style="text-align:center">月份</td>
 </tr>
 <tr>
-<td align="center">dd</td>
-<td align="center">天数</td>
+<td style="text-align:center">dd</td>
+<td style="text-align:center">天数</td>
 </tr>
 <tr>
-<td align="center">HH</td>
-<td align="center">0-23小时</td>
+<td style="text-align:center">HH</td>
+<td style="text-align:center">0-23小时</td>
 </tr>
 <tr>
-<td align="center">mm</td>
-<td align="center">小时当中的分钟数</td>
+<td style="text-align:center">mm</td>
+<td style="text-align:center">小时当中的分钟数</td>
 </tr>
 <tr>
-<td align="center">ss</td>
-<td align="center">分钟当中的秒数</td>
+<td style="text-align:center">ss</td>
+<td style="text-align:center">分钟当中的秒数</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="format-Date-date"><a href="#format-Date-date" class="headerlink" title="format(Date date)"></a>format(Date date)</h2><blockquote>
 <p>将日期对象转换为字符串后进行时间的输出，可以自定义日期格式</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">    String date = sdf.format(<span class="keyword">new</span> Date());</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="parse-String-date"><a href="#parse-String-date" class="headerlink" title="parse(String date)"></a>parse(String date)</h2><p>parse()步骤：</p>
 <blockquote>
 <p>1.创建SimpleDateFormat对象，构造方法中指定日期模式</p>
 <p>2.子类对象，调用方法parse传递String，返回Date</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">    Date date = sdf.parse(<span class="string">"1995-5-6"</span>);</span><br><span class="line">    System.out.println(date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h1 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h1><h2 id="getInstance"><a href="#getInstance" class="headerlink" title="getInstance()"></a>getInstance()</h2><blockquote>
 <p>返回了子类的对象，不需要直接new，而是通过调用静态方法</p>
 </blockquote>
@@ -614,7 +609,6 @@
 <p>获取某个日历字段的值</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Calendar c = Calendar.getInstance();</span><br><span class="line">    <span class="comment">//获取年份</span></span><br><span class="line">    <span class="keyword">int</span> year = c.get(Calendar.YEAR);</span><br><span class="line">    <span class="comment">//获取月份,默认是0-11,所以需要+1</span></span><br><span class="line">    <span class="keyword">int</span> month = c.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//获取日期</span></span><br><span class="line">    <span class="keyword">int</span> day = c.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">    System.out.println(year+<span class="string">"-"</span>+month+<span class="string">"-"</span>+day);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="set-int-field-int-value-设置日历"><a href="#set-int-field-int-value-设置日历" class="headerlink" title="set(int field, int value)设置日历"></a>set(int field, int value)设置日历</h2><blockquote>
 <p>field表示日历的字段</p>
 <p>value表示设置后的具体数值</p>
@@ -638,7 +632,8 @@
 <h2 id="static-Properties-getProperties"><a href="#static-Properties-getProperties" class="headerlink" title="static Properties getProperties()"></a>static Properties getProperties()</h2><blockquote>
 <p>获取当前操作系统的属性</p>
 </blockquote>
-<h2 id="static-void-arrayCopy"><a href="#static-void-arrayCopy" class="headerlink" title="static void arrayCopy(~)"></a>static void arrayCopy(<del>~</del>)</h2><p>参数列表：</p>
+<h2 id="static-void-arrayCopy"><a href="#static-void-arrayCopy" class="headerlink" title="static void arrayCopy(~~~)"></a>static void arrayCopy(~~~)</h2><p>参数列表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -646,7 +641,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Object src</td>
 <td>要复制的源数组</td>
 </tr>
@@ -666,15 +662,19 @@
 <td>int length</td>
 <td>复制几个</td>
 </tr>
-</tbody></table>
-<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><table>
+</tbody>
+</table>
+</div>
+<h1 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h1><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>方法</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>static int abs(int i)</td>
 <td>返回参数的绝对值</td>
 </tr>
@@ -702,7 +702,9 @@
 <td>static double round(double d)</td>
 <td>获取参数的四舍五入值，取整数</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -820,7 +822,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -842,7 +844,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -922,7 +924,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类"><span class="nav-number">1.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-Object-obj-方法"><span class="nav-number">2.</span> <span class="nav-text">equals(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toString-方法"><span class="nav-number">3.</span> <span class="nav-text">toString()方法</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#String类"><span class="nav-number"></span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal-Object-obj-方法"><span class="nav-number">3.</span> <span class="nav-text">equal(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equalsIgnoreCase-String-s"><span class="nav-number">4.</span> <span class="nav-text">equalsIgnoreCase(String s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-length"><span class="nav-number">5.</span> <span class="nav-text">int length()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-subString-int-beginIndex"><span class="nav-number">6.</span> <span class="nav-text">String subString(int beginIndex)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-startsWith-String-prefix"><span class="nav-number">7.</span> <span class="nav-text">boolean startsWith(String prefix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-endsWith-String-suffix"><span class="nav-number">8.</span> <span class="nav-text">boolean endsWith(String suffix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-charAt-int-index"><span class="nav-number">9.</span> <span class="nav-text">char charAt(int index)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuffer类"><span class="nav-number"></span> <span class="nav-text">StringBuffer类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer-append-String-str"><span class="nav-number">1.</span> <span class="nav-text">StringBuffer append(String str)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-int-start-int-end"><span class="nav-number">2.</span> <span class="nav-text">delete(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-int-index-任意类型"><span class="nav-number">3.</span> <span class="nav-text">insert(int index, 任意类型)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-int-start-int-end"><span class="nav-number">4.</span> <span class="nav-text">replace(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">5.</span> <span class="nav-text">reverse()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuilder类"><span class="nav-number"></span> <span class="nav-text">StringBuilder类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date类"><span class="nav-number"></span> <span class="nav-text">Date类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">System.currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法Date-Long-millis"><span class="nav-number">2.</span> <span class="nav-text">构造方法Date(Long millis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空参构造方法"><span class="nav-number">3.</span> <span class="nav-text">空参构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#long-getTime"><span class="nav-number">4.</span> <span class="nav-text">long getTime()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-setTime-Long-millis"><span class="nav-number">5.</span> <span class="nav-text">Date setTime(Long millis)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleDateFormat类"><span class="nav-number"></span> <span class="nav-text">SimpleDateFormat类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日期格式化步骤"><span class="nav-number">1.</span> <span class="nav-text">日期格式化步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期模式："><span class="nav-number">2.</span> <span class="nav-text">日期模式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#format-Date-date"><span class="nav-number">3.</span> <span class="nav-text">format(Date date)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-String-date"><span class="nav-number">4.</span> <span class="nav-text">parse(String date)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Calendar类"><span class="nav-number"></span> <span class="nav-text">Calendar类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#getInstance"><span class="nav-number">1.</span> <span class="nav-text">getInstance()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-get-int-number"><span class="nav-number">2.</span> <span class="nav-text">int get(int number)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-field-int-value-设置日历"><span class="nav-number">3.</span> <span class="nav-text">set(int field, int value)设置日历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-year-int-month-int-day"><span class="nav-number">4.</span> <span class="nav-text">set(int year, int month, int day)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-int-field-int-value"><span class="nav-number">5.</span> <span class="nav-text">add(int field, int value)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System类"><span class="nav-number"></span> <span class="nav-text">System类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#static-long-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">static long currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-exit"><span class="nav-number">2.</span> <span class="nav-text">static void exit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-gc"><span class="nav-number">3.</span> <span class="nav-text">static void gc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-Properties-getProperties"><span class="nav-number">4.</span> <span class="nav-text">static Properties getProperties()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-arrayCopy"><span class="nav-number">5.</span> <span class="nav-text">static void arrayCopy(~)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math类"><span class="nav-number"></span> <span class="nav-text">Math类</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object类"><span class="nav-number">1.</span> <span class="nav-text">Object类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-Object-obj-方法"><span class="nav-number">2.</span> <span class="nav-text">equals(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toString-方法"><span class="nav-number">3.</span> <span class="nav-text">toString()方法</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#String类"><span class="nav-number"></span> <span class="nav-text">String类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equal-Object-obj-方法"><span class="nav-number">3.</span> <span class="nav-text">equal(Object obj)方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equalsIgnoreCase-String-s"><span class="nav-number">4.</span> <span class="nav-text">equalsIgnoreCase(String s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-length"><span class="nav-number">5.</span> <span class="nav-text">int length()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-subString-int-beginIndex"><span class="nav-number">6.</span> <span class="nav-text">String subString(int beginIndex)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-startsWith-String-prefix"><span class="nav-number">7.</span> <span class="nav-text">boolean startsWith(String prefix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-endsWith-String-suffix"><span class="nav-number">8.</span> <span class="nav-text">boolean endsWith(String suffix)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-charAt-int-index"><span class="nav-number">9.</span> <span class="nav-text">char charAt(int index)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuffer类"><span class="nav-number"></span> <span class="nav-text">StringBuffer类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer-append-String-str"><span class="nav-number">1.</span> <span class="nav-text">StringBuffer append(String str)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-int-start-int-end"><span class="nav-number">2.</span> <span class="nav-text">delete(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-int-index-任意类型"><span class="nav-number">3.</span> <span class="nav-text">insert(int index, 任意类型)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-int-start-int-end"><span class="nav-number">4.</span> <span class="nav-text">replace(int start, int end)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">5.</span> <span class="nav-text">reverse()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StringBuilder类"><span class="nav-number"></span> <span class="nav-text">StringBuilder类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date类"><span class="nav-number"></span> <span class="nav-text">Date类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">System.currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法Date-Long-millis"><span class="nav-number">2.</span> <span class="nav-text">构造方法Date(Long millis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空参构造方法"><span class="nav-number">3.</span> <span class="nav-text">空参构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#long-getTime"><span class="nav-number">4.</span> <span class="nav-text">long getTime()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Date-setTime-Long-millis"><span class="nav-number">5.</span> <span class="nav-text">Date setTime(Long millis)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleDateFormat类"><span class="nav-number"></span> <span class="nav-text">SimpleDateFormat类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日期格式化步骤"><span class="nav-number">1.</span> <span class="nav-text">日期格式化步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期模式："><span class="nav-number">2.</span> <span class="nav-text">日期模式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#format-Date-date"><span class="nav-number">3.</span> <span class="nav-text">format(Date date)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-String-date"><span class="nav-number">4.</span> <span class="nav-text">parse(String date)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Calendar类"><span class="nav-number"></span> <span class="nav-text">Calendar类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#getInstance"><span class="nav-number">1.</span> <span class="nav-text">getInstance()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-get-int-number"><span class="nav-number">2.</span> <span class="nav-text">int get(int number)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-field-int-value-设置日历"><span class="nav-number">3.</span> <span class="nav-text">set(int field, int value)设置日历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-int-year-int-month-int-day"><span class="nav-number">4.</span> <span class="nav-text">set(int year, int month, int day)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-int-field-int-value"><span class="nav-number">5.</span> <span class="nav-text">add(int field, int value)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System类"><span class="nav-number"></span> <span class="nav-text">System类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#static-long-currentTimeMillis"><span class="nav-number">1.</span> <span class="nav-text">static long currentTimeMillis()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-exit"><span class="nav-number">2.</span> <span class="nav-text">static void exit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-gc"><span class="nav-number">3.</span> <span class="nav-text">static void gc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-Properties-getProperties"><span class="nav-number">4.</span> <span class="nav-text">static Properties getProperties()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-void-arrayCopy"><span class="nav-number">5.</span> <span class="nav-text">static void arrayCopy(~~~)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Math类"><span class="nav-number"></span> <span class="nav-text">Math类</span></a></li></div>
             
 
           </div>
@@ -938,7 +940,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
