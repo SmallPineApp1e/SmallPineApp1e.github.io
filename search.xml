@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>三分钟计算机网络-OSI七层模型及各层的作用</title>
+      <link href="/2020/03/23/%E4%B8%89%E5%88%86%E9%92%9F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E5%8F%8A%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+      <url>/2020/03/23/%E4%B8%89%E5%88%86%E9%92%9F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E5%8F%8A%E5%90%84%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="OSI七层模型及各层的作用"><a href="#OSI七层模型及各层的作用" class="headerlink" title="OSI七层模型及各层的作用"></a>OSI七层模型及各层的作用</h1><p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180802094638614.png" alt="img"> </p><p>OSI的七层模型：</p><p><strong>应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</strong></p><p><strong>物理层：底层的物理硬件如电缆、双绞线······传输的信号是电信号，根据约定规定电信号的大小转化为二进制位0和1。</strong></p><p><strong>数据链路层：对传输过来的电信号进行封装成帧，在两个相邻的结点上透明地传输帧数据，如果检验到帧出现错误则丢弃该帧，无法进行校正。</strong></p><p><strong>网络层：使用无连接的网际协议IP和许多路由选择协议，为分组交换网上的不同主机提供通信服务，把运输层产生的报文段或用户数据报封装成分组或包进行发送。</strong></p><p><strong>运输层：向两个主机中的进程提供端到端的通信服务，最广泛使用的协议是TCP协议和UDP协议，TCP协议是可靠传输，数据包的长度没有限制，但为了保证网络的效率，TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不会再被分割。UDP协议的报头是8个字节，它是不可靠传输，从长度不能超过65535个字节，也就是一个IP数据包的长度。</strong></p><p><strong>应用层： 直接为用户的应用进程提供服务，规定了不同的应用进程的数据格式，如 HTTP、支持文件传输的 FTP 协议等。</strong></p><a id="more"></a><h2 id="一次完整的HTTP请求流程"><a href="#一次完整的HTTP请求流程" class="headerlink" title="一次完整的HTTP请求流程"></a>一次完整的HTTP请求流程</h2><p>当我们在浏览器输入<a href="http://www.baidu.com时，会发生什么事情？" target="_blank" rel="noopener">www.baidu.com时，会发生什么事情？</a></p><p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180331214930150.png" alt="这里写图片描述"> </p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180401105158285.png" alt="这里写图片描述" style="zoom:67%;"> <blockquote><ol><li><p>对<a href="http://www.baidu.com进行域名解析，得到IP地址" target="_blank" rel="noopener">www.baidu.com进行域名解析，得到IP地址</a></p></li><li><p>根据这个IP地址找到对应的服务器，与该服务器<strong>建立TCP连接（三次握手）</strong></p></li><li><p>建立TCP连接后<strong>发起HTTP请求</strong></p></li><li><p>服务器<strong>响应HTTP请求</strong>，返回HTML静态资源</p></li><li><p>浏览器<strong>解析HTML静态资源</strong>，并发送请求获取CSS/JS等资源（必须先得到HTML，再去请求其它资源）</p></li><li><p>浏览器<strong>对页面进行渲染呈现给用户</strong></p></li><li><p>服务器<strong>关闭TCP连接</strong></p></li></ol></blockquote><p>注：</p><ol><li>DNS如何找到域名对应的IP地址？</li></ol><blockquote><p>DNS域名解析采用的是递归查询的方式，过程是，发起请求时，先去找浏览器本地缓存-&gt;-&gt;浏览器缓存找不到则去找根域名服务器-&gt;根域名服务器找不到就去顶级域名服务器找······直到找到为止，然后返回给浏览器</p></blockquote><ol start="2"><li>为什么HTTP协议要基于TCP协议来实现？</li></ol><blockquote><p>TCP协议是一个面向连接的、端到端的可靠传输协议，HTTP协议基于TCP协议不用担心数据传输的各种问题</p></blockquote><h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><h4 id="DNS解析（域名解析服务器）"><a href="#DNS解析（域名解析服务器）" class="headerlink" title="DNS解析（域名解析服务器）"></a>DNS解析（域名解析服务器）</h4><ol><li>首先会去浏览器的DNS缓存里面去找对应的域名，如果找到则直接返回</li><li>如果找不到则去本地域名服务器里面找，在windows下是hosts文件，在Linux下是/etc/resolv.conf  文件，如果找到则直接返回，里面一般会有一条 localhost 127.0.0.1的DNS映射IP地址记录</li><li>如果找不到则去根域名服务器里面找，如果找到则返回其IP地址</li><li>如果找不到则去顶级域名服务器里面找，一直递归查找下去，直到找到后返回给浏览器</li><li>浏览器保存该DNS缓存，以免下次再递归查找</li></ol><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/image-20200323202338721.png" alt="image-20200323202338721" style="zoom:100%;"><p>OSI七层模型：</p><p> <a href="https://blog.csdn.net/taotongning/article/details/81352985" target="_blank" rel="noopener">https://blog.csdn.net/taotongning/article/details/81352985</a> </p><p>一次HTTP请求的流程</p><p> <a href="https://blog.csdn.net/baidu_36697353/article/details/100008544" target="_blank" rel="noopener">https://blog.csdn.net/baidu_36697353/article/details/100008544</a> </p><p> <a href="https://blog.csdn.net/x_iya/article/details/79774018?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task" target="_blank" rel="noopener">https://blog.csdn.net/x_iya/article/details/79774018?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a> </p><p> <a href="https://www.cnblogs.com/WindSun/p/11489356.html" target="_blank" rel="noopener">https://www.cnblogs.com/WindSun/p/11489356.html</a> </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OSI七层模型及各层的作用 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>三分钟计算机网络-三次握手和四次挥手</title>
       <link href="/2020/03/23/%E4%B8%89%E5%88%86%E9%92%9F%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
       <url>/2020/03/23/%E4%B8%89%E5%88%86%E9%92%9F%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
