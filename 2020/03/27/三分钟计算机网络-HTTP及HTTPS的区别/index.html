@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="HTTP与HTTPS,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="HTTP与HTTPS的区别 观察上面两幅图，一个是访问域名http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？ 1. HTTP和HTTPS的发展历史什么是HTTP协议？  HTTP是一种超文本传输协议，一种基于请求和响应、无状态的、应用层的协议，常用于TCP/IP协议传输数据，是">
+<meta name="keywords" content="HTTP与HTTPS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟计算机网络-HTTP及HTTPS的区别">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="HTTP与HTTPS的区别 观察上面两幅图，一个是访问域名http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？ 1. HTTP和HTTPS的发展历史什么是HTTP协议？  HTTP是一种超文本传输协议，一种基于请求和响应、无状态的、应用层的协议，常用于TCP/IP协议传输数据，是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153620351.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153501281.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723105652242.jfif">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/2019080311162578.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327165504233.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327170007052.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327175103986.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327174628160.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327182236129.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327185928092.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180719094739178.jfif">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20190803111825690.png">
+<meta property="og:updated_time" content="2020-03-27T13:30:29.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟计算机网络-HTTP及HTTPS的区别">
+<meta name="twitter:description" content="HTTP与HTTPS的区别 观察上面两幅图，一个是访问域名http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？ 1. HTTP和HTTPS的发展历史什么是HTTP协议？  HTTP是一种超文本传输协议，一种基于请求和响应、无状态的、应用层的协议，常用于TCP/IP协议传输数据，是">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153620351.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/">
+
+
+
+
+
+  <title>三分钟计算机网络-HTTP及HTTPS的区别 | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟计算机网络-HTTP及HTTPS的区别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T15:25:46+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,129字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  8分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1><p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153620351.png" alt="image-20200327153620351" style="zoom:67%;float:left"><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153501281.png" alt="image-20200327153501281" style="zoom:77%;float:left"></p>
+<p>观察上面两幅图，一个是访问域名<a href="http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？" target="_blank" rel="noopener">http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？</a></p>
+<h2 id="1-HTTP和HTTPS的发展历史"><a href="#1-HTTP和HTTPS的发展历史" class="headerlink" title="1. HTTP和HTTPS的发展历史"></a>1. HTTP和HTTPS的发展历史</h2><p><strong>什么是HTTP协议？</strong></p>
+<blockquote>
+<p>HTTP是一种超文本传输协议，一种基<strong>于请求和响应、无状态的</strong>、应用层的协议，常用于TCP/IP协议<strong>传输数据</strong>，是互联网上应用最为广泛的一种网络协议，所有的WWW文件都必须遵守这个标准。设计HTTP协议的初衷是<strong>为了发布和接收HTML页面</strong>的方法。</p>
+</blockquote>
+<p><strong>HTTP协议的发展历史</strong></p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>产生时间</th>
+<th>内容</th>
+<th>发展现状</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HTTP/0.9</td>
+<td>1991年</td>
+<td>不涉及数据包传输，规定客户端与服务器之间的通信格式，只能使用GET请求</td>
+<td>没有作为正式的标准</td>
+</tr>
+<tr>
+<td>HTTP/1.0</td>
+<td>1996年</td>
+<td>传输内容的格式不受限制，增加了PUT、PATCH、HEAD、OPTIONS、DELETE命令</td>
+<td>正式作为标准</td>
+</tr>
+<tr>
+<td>HTTP/1.1</td>
+<td>1997年</td>
+<td>增加了持久连接（长连接）、节约带宽、Host域、管道机制、分块传输编码</td>
+<td>2015年使用最为广泛</td>
+</tr>
+<tr>
+<td>HTTP/2.0</td>
+<td>2015年</td>
+<td>多路复用、服务器推送、头信息压缩、二进制协议等</td>
+<td>逐渐覆盖市场</td>
+</tr>
+</tbody></table>
+ <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> 
+
+<p>这是Akamai公司建立的一个官方的演示，使用HTTP/1.1和HTTP/2.0各自同时请求379张照片，从请求的时间可以看出HTTP/2.0的性能占优势。</p>
+<a id="more"></a>
+
+ <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723105652242.jfif" alt="这里写图片描述" style="zoom:40%;"> 
+
+<p>HTTP/2.0的多路复用机制：通过单一的HTTP/2.0连接请求发出<strong>多重的请求-响应信息</strong>，多个stream共享一个TCP连接，实现多流并行而不是依赖多个TCP连接。</p>
+<p><strong>HTTP报文格式</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/2019080311162578.png" alt="在这里插入图片描述" style="zoom:67%;"> 
+
+<h2 id="2-HTTP-VS-HTTPS"><a href="#2-HTTP-VS-HTTPS" class="headerlink" title="2. HTTP VS HTTPS"></a>2. HTTP VS HTTPS</h2><h3 id="HTTP的特点"><a href="#HTTP的特点" class="headerlink" title="HTTP的特点"></a><strong>HTTP的特点</strong></h3><blockquote>
+<ol>
+<li><strong>无状态</strong>：HTTP协议没有对客户端进行状态存储，对事物没有“记忆能力”，也就说每一次发起请求对于服务器来说都是一个新的客户端请求。</li>
+<li><strong>无连接</strong>：<strong>HTTP/1.1之前</strong>，由于无状态的特点，每次连接都需要进行三次握手和四次挥手</li>
+<li><strong>基于请求和响应</strong>：由客户端发起请求，服务器响应</li>
+<li><strong>通信使用明文</strong>，请求和响应不会对通信方进行确认、无法保证数据的完整性</li>
+</ol>
+</blockquote>
+<p><strong>抓包分析</strong></p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327165504233.png" alt="image-20200327165504233" style="zoom:67%;">
+
+<p><strong>结果分析：</strong>可以看到HTTP协议传输数据全部采用<strong>明文形式显示</strong>，可以看到如果用Post请求被抓包之后，获取到用户名和密码就GG了</p>
+<p><strong>针对无状态的一些解决策略</strong>：</p>
+<blockquote>
+<ol>
+<li>采用Cookie/Session技术</li>
+<li>HTTP/1.1持久连接（Keep-alive），只要任意一端没有明确提出断开连接，则保持TCP的连接状态，请求头字段中的Connection:Keep-alive表明使用了持久连接</li>
+</ol>
+</blockquote>
+<h3 id="HTTPS的特点"><a href="#HTTPS的特点" class="headerlink" title="HTTPS的特点"></a><strong>HTTPS的特点</strong></h3><p>基于HTTP协议，采用SSL认证机制加密处理数据，验证对方身份以及数据完整性保护</p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327170007052.png" alt="image-20200327170007052" style="zoom:67%;">
+
+<p>通过抓包可以看到数据<strong>并不是明文传输</strong>，也就是说被加密了，而且HTTPS具有以下特点：</p>
+<blockquote>
+<ol>
+<li>内容加密：采用混合加密技术，中间者无法直接查看明文信息</li>
+<li>验证身份：通过证书认证客户端访问的是自己的服务器</li>
+<li>保护数据完整性：防止传输的内容被中间人冒充或者篡改</li>
+</ol>
+</blockquote>
+<p><strong>进一步了解HTTPS前需要了解的几种加密方式</strong>：</p>
+<blockquote>
+<p><strong>对称加密</strong>：客户端与服务器使用的是同一个密钥，所以称为对称加密。密钥只有一个，即为私钥，常用的对称加密算法有：DES、AES、3DES等等；</p>
+<p><strong>非对称加密</strong>：加密和解密使用的不是同一个密钥，<strong>一个作为公开的密钥分发给信任的客户端</strong>，另一个作为私钥保存在服务器。公钥加密的信息，只有私钥才能解密；私钥加密的信息，只有公钥才能解密，常见的非对称加密算法：RSA，ECC</p>
+</blockquote>
+<p>最简单的<strong>非对称加密的执行流程</strong>：</p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327175103986.png" alt="image-20200327175103986" style="zoom:67%;">
+
+<p>交换公钥后就可以利用对方的公钥对明文信息进行加密发送，对方接收到后可以用私钥进行解密，当然在实际信息交流中不只是直接对明文进行加密，在加密前还会做一步<strong>散列</strong>的操作，这一点有兴趣自行上网详细了解：</p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327174628160.png" alt="image-20200327174628160" style="zoom:67%;">
+
+<p><strong>HTTPS的加密方式</strong>：</p>
+<blockquote>
+<p><strong>混合加密</strong>：结合对称加密和非对称加密方式。客户端A使用对称密钥对明文信息进行加密形成密文1.0，然后再使用非对称加密的公钥B对密文进行再次加密形成密文2.0；然后客户端B使用私钥B对密文2.0进行解密得到密文1.0，然后再使用对称密钥对密文1.0解密得到明文信息。即使被黑客拦截掉，由于黑客没有对应的私钥对密文2.0解密，也就无法获得密文1.0，更无法获得明文。</p>
+<p><strong>数字摘要</strong>：通过<strong>单向Hash函数</strong>对原文进行哈希，将需要加密的明文进行“哈希”得到一串固定长度的密文（称为<strong>数字摘要</strong>），<strong>不同明文摘要成的密文其结果总是不相同的</strong>，<strong>相同的明文使用相同的Hash函数形成的明文摘要必定一致</strong>，并且即使知道了数字摘要也不能反推出明文。</p>
+<p><strong>数字签名</strong>：数字签名建立在公钥加密技术基础之上，<strong>结合混合加密和数字摘要技术</strong>，产生了数字签名这一说法，产生这一项技术的原因在于进一步对明文的安全性进行提高。</p>
+</blockquote>
+<p><strong>混合加密流程图解</strong>：</p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327182236129.png" alt="image-20200327182236129" style="zoom:80%;">
+
+<p><strong>数字签名流程</strong>：</p>
+<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327185928092.png" alt="image-20200327185928092" style="zoom:67%;">
+
+<h2 id="3-HTTP通信传输"><a href="#3-HTTP通信传输" class="headerlink" title="3. HTTP通信传输"></a>3. HTTP通信传输</h2><p>​                                             <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180719094739178.jfif" alt="这里写图片描述" style="zoom:70%;"> </p>
+<h2 id="4-HTTPS实现原理"><a href="#4-HTTPS实现原理" class="headerlink" title="4. HTTPS实现原理"></a>4. HTTPS实现原理</h2> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20190803111825690.png" alt="在这里插入图片描述" style="zoom:67%;"> 
+
+<blockquote>
+<ol>
+<li>client向server发送请求<a href="https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。" target="_blank" rel="noopener">https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。</a></li>
+<li>server接收到信息之后给予client响应握手信息，包括随机值2和匹配好的协商加密算法，这个加密算法一定是client发送给server加密算法的子集。</li>
+<li>随即server给client发送第二个响应报文是数字证书。服务端必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面，这套证书其实就是一对公钥和私钥。传送证书，这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间、服务端的公钥，第三方证书认证机构(CA)的签名，服务端的域名信息等内容。</li>
+<li>客户端解析证书，这部分工作是由客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。如果证书没有问题，那么就生成一个随即值（预主秘钥）。</li>
+<li>客户端认证证书通过之后，接下来是通过随机值1、随机值2和预主秘钥组装会话秘钥。然后通过证书的公钥加密会话秘钥。</li>
+<li>传送加密信息，这部分传送的是用证书加密后的会话秘钥，目的就是让服务端使用秘钥解密得到随机值1、随机值2和预主秘钥。</li>
+<li>服务端解密得到随机值1、随机值2和预主秘钥，然后组装会话秘钥，跟客户端会话秘钥相同。</li>
+<li>客户端通过会话秘钥加密一条消息发送给服务端，主要验证服务端是否正常接受客户端加密的消息。</li>
+<li>同样服务端也会通过会话秘钥加密一条消息回传给客户端，如果Z客户端能够正常接受的话表明SSL层连接建立完成了。</li>
+</ol>
+<p>参考：<a href="https://blog.csdn.net/xiaoming100001/article/details/81109617" target="_blank" rel="noopener">https://blog.csdn.net/xiaoming100001/article/details/81109617</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP与HTTPS/" rel="tag"># HTTP与HTTPS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/" rel="next" title="三分钟操作系统-进程、线程与协程的区别与联系">
+                <i class="fa fa-chevron-left"></i> 三分钟操作系统-进程、线程与协程的区别与联系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP与HTTPS的区别"><span class="nav-number">1.</span> <span class="nav-text">HTTP与HTTPS的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HTTP和HTTPS的发展历史"><span class="nav-number">1.1.</span> <span class="nav-text">1. HTTP和HTTPS的发展历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTTP-VS-HTTPS"><span class="nav-number">1.2.</span> <span class="nav-text">2. HTTP VS HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP的特点"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS的特点"><span class="nav-number">1.2.2.</span> <span class="nav-text">HTTPS的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-HTTP通信传输"><span class="nav-number">1.3.</span> <span class="nav-text">3. HTTP通信传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HTTPS实现原理"><span class="nav-number">1.4.</span> <span class="nav-text">4. HTTPS实现原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+
