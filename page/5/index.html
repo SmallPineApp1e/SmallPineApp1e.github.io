@@ -444,7 +444,6 @@
 <p><strong>在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法</strong></p>
 </blockquote>
 <h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类类型或接口类型 引用变量 = <span class="keyword">new</span> 子类对象();</span><br></pre></td></tr></table></figure>
-
 <h2 id="成员变量的特点"><a href="#成员变量的特点" class="headerlink" title="成员变量的特点"></a>成员变量的特点</h2><p>编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败</p>
 <p>运行时：运行的是父类的变量值</p>
 <blockquote>
@@ -457,6 +456,191 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/26/JAVASE-多态/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/25/JAVASE-接口/" itemprop="url">三分钟Java基础-接口</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T23:56:53+08:00">
+                2019-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  695字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><blockquote>
+<p><strong>接口是功能的集合</strong>，同样是一种数据类型，是比抽象类更为抽象的“类”。</p>
+<p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
+</blockquote>
+<h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
+<p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/25/JAVASE-接口/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -658,192 +842,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/25/JVM的四种垃圾回收算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/25/JAVASE-接口/" itemprop="url">三分钟Java基础-接口</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T23:56:53+08:00">
-                2019-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  695字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><blockquote>
-<p><strong>接口是功能的集合</strong>，同样是一种数据类型，是比抽象类更为抽象的“类”。</p>
-<p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
-</blockquote>
-<h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
-<p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/25/JAVASE-接口/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1352,7 +1350,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,068字
+                  3,069字
                 </span>
               
 
@@ -1532,7 +1530,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  832字
+                  833字
                 </span>
               
 
@@ -1571,45 +1569,57 @@
       
         
           <h2 id="leetcode-7-整数反转"><a href="#leetcode-7-整数反转" class="headerlink" title="leetcode-7. 整数反转"></a>leetcode-7. 整数反转</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>示例 1:</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>输入: 123</td>
 </tr>
 <tr>
 <td>输出: 321</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>示例 2:</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>输入: -123</td>
 </tr>
 <tr>
 <td>输出: -321</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>示例 3:</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>输入: 120</td>
 </tr>
 <tr>
 <td>输出: 21</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 $[-2^{31}, 2^{31}-1] $。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1787,14 +1797,16 @@
 
       
         
-          <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><table>
+          <h1 id="SpringData-JPA"><a href="#SpringData-JPA" class="headerlink" title="SpringData JPA"></a>SpringData JPA</h1><h2 id="创建数据库表"><a href="#创建数据库表" class="headerlink" title="创建数据库表"></a>创建数据库表</h2><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>注解</th>
 <th>解释</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>@Entity</td>
 <td>告诉Spring这是一个实体类</td>
 </tr>
@@ -1822,7 +1834,9 @@
 <td>@Temporal</td>
 <td>指定日期类型(DATE,DATETIME, TIMESTAMP)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/24/SpringDataJPA入门/#more" rel="contents">
@@ -2000,7 +2014,6 @@
       
         
           <h2 id="1-在hexo根目录安装第三方插件"><a href="#1-在hexo根目录安装第三方插件" class="headerlink" title="1. 在hexo根目录安装第三方插件"></a>1. 在hexo根目录安装第三方插件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-
 <h2 id="2-修改-config-xml文件的内容"><a href="#2-修改-config-xml文件的内容" class="headerlink" title="2. 修改_config.xml文件的内容"></a>2. 修改_config.xml文件的内容</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
@@ -2179,7 +2192,7 @@
       
         
           <h1 id="数学真的可以救命"><a href="#数学真的可以救命" class="headerlink" title="数学真的可以救命"></a>数学真的可以救命</h1><h2 id="今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东"><a href="#今天我们要解决的是约瑟夫问题-首先我们先来了解链表到底是什么东东" class="headerlink" title="今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东"></a>今天我们要解决的是约瑟夫问题, 首先我们先来了解链表到底是什么东东</h2><h3 id="1-链表的基本概念"><a href="#1-链表的基本概念" class="headerlink" title="1 .链表的基本概念"></a>1 .链表的基本概念</h3><h4 id="1-1-什么是链表"><a href="#1-1-什么是链表" class="headerlink" title="1.1 什么是链表 ?"></a>1.1 什么是链表 ?</h4><p>如下图所示  : </p>
-<p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/%E5%8D%95%E5%8F%8C%E9%93%BE%E8%A1%A8.png" alt="“单向链表”"></p>
+<p><img src="//smallpineapp1e.github.io/2019/08/23/数学真的可以救命之约瑟夫问题/单双链表.png" alt="“单向链表”"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/23/数学真的可以救命之约瑟夫问题/#more" rel="contents">

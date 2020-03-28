@@ -449,14 +449,12 @@
 <p><strong>运输层：向两个主机中的进程提供端到端的通信服务，最广泛使用的协议是TCP协议和UDP协议，TCP协议是可靠传输，数据包的长度没有限制，但为了保证网络的效率，TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不会再被分割。UDP协议的报头是8个字节，它是不可靠传输，从长度不能超过65535个字节，也就是一个IP数据包的长度。</strong></p>
 <p><strong>应用层： 直接为用户的应用进程提供服务，规定了不同的应用进程的数据格式，如 HTTP、支持文件传输的 FTP 协议等。</strong></p>
 <a id="more"></a>
-
-<h2 id="一次完整的HTTP请求流程"><a href="#一次完整的HTTP请求流程" class="headerlink" title="一次完整的HTTP请求流程"></a>一次完整的HTTP请求流程</h2><p>当我们在浏览器输入<a href="http://www.baidu.com时，会发生什么事情？" target="_blank" rel="noopener">www.baidu.com时，会发生什么事情？</a></p>
+<h2 id="一次完整的HTTP请求流程"><a href="#一次完整的HTTP请求流程" class="headerlink" title="一次完整的HTTP请求流程"></a>一次完整的HTTP请求流程</h2><p>当我们在浏览器输入www.baidu.com时，会发生什么事情？</p>
 <p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180331214930150.png" alt="这里写图片描述"> </p>
- <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180401105158285.png" alt="这里写图片描述" style="zoom:67%;"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/20180401105158285.png" alt="这里写图片描述" style="zoom:67%;"> </p>
 <blockquote>
 <ol>
-<li><p>对<a href="http://www.baidu.com进行域名解析，得到IP地址" target="_blank" rel="noopener">www.baidu.com进行域名解析，得到IP地址</a></p>
+<li><p>对www.baidu.com进行域名解析，得到IP地址</p>
 </li>
 <li><p>根据这个IP地址找到对应的服务器，与该服务器<strong>建立TCP连接（三次握手）</strong></p>
 </li>
@@ -479,7 +477,7 @@
 <blockquote>
 <p>DNS域名解析采用的是递归查询的方式，过程是，发起请求时，先去找浏览器本地缓存-&gt;-&gt;浏览器缓存找不到则去找根域名服务器-&gt;根域名服务器找不到就去顶级域名服务器找······直到找到为止，然后返回给浏览器</p>
 </blockquote>
-<ol start="2">
+<ol>
 <li>为什么HTTP协议要基于TCP协议来实现？</li>
 </ol>
 <blockquote>
@@ -492,8 +490,7 @@
 <li>如果找不到则去顶级域名服务器里面找，一直递归查找下去，直到找到后返回给浏览器</li>
 <li>浏览器保存该DNS缓存，以免下次再递归查找</li>
 </ol>
-<img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/image-20200323202338721.png" alt="image-20200323202338721" style="zoom:100%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/image-20200323202338721.png" alt="image-20200323202338721" style="zoom:100%;"></p>
 <p>OSI七层模型：</p>
 <p> <a href="https://blog.csdn.net/taotongning/article/details/81352985" target="_blank" rel="noopener">https://blog.csdn.net/taotongning/article/details/81352985</a> </p>
 <p>一次HTTP请求的流程</p>

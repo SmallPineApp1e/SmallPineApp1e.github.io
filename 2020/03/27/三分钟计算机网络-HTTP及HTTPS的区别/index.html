@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327185928092.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180719094739178.jfif">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20190803111825690.png">
-<meta property="og:updated_time" content="2020-03-27T13:30:29.515Z">
+<meta property="og:updated_time" content="2020-03-28T02:12:57.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟计算机网络-HTTP及HTTPS的区别">
 <meta name="twitter:description" content="HTTP与HTTPS的区别 观察上面两幅图，一个是访问域名http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？ 1. HTTP和HTTPS的发展历史什么是HTTP协议？  HTTP是一种超文本传输协议，一种基于请求和响应、无状态的、应用层的协议，常用于TCP/IP协议传输数据，是">
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,129字
+                  2,131字
                 </span>
               
 
@@ -449,13 +449,14 @@
       
 
       
-        <h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1><p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153620351.png" alt="image-20200327153620351" style="zoom:67%;float:left"><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153501281.png" alt="image-20200327153501281" style="zoom:77%;float:left"></p>
+        <h1 id="HTTP与HTTPS的区别"><a href="#HTTP与HTTPS的区别" class="headerlink" title="HTTP与HTTPS的区别"></a>HTTP与HTTPS的区别</h1><p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153620351.png" alt="image-20200327153620351" style="zoom:67%;"><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327153501281.png" alt="image-20200327153501281" style="zoom:77%"></p>
 <p>观察上面两幅图，一个是访问域名<a href="http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？" target="_blank" rel="noopener">http://web.4399.com/，谷歌浏览器提示连接不安全，第二个是访问广东海洋大学的官网https://gdou.edu.cn，浏览器显示安全，为什么会这样子呢？</a></p>
 <h2 id="1-HTTP和HTTPS的发展历史"><a href="#1-HTTP和HTTPS的发展历史" class="headerlink" title="1. HTTP和HTTPS的发展历史"></a>1. HTTP和HTTPS的发展历史</h2><p><strong>什么是HTTP协议？</strong></p>
 <blockquote>
 <p>HTTP是一种超文本传输协议，一种基<strong>于请求和响应、无状态的</strong>、应用层的协议，常用于TCP/IP协议<strong>传输数据</strong>，是互联网上应用最为广泛的一种网络协议，所有的WWW文件都必须遵守这个标准。设计HTTP协议的初衷是<strong>为了发布和接收HTML页面</strong>的方法。</p>
 </blockquote>
 <p><strong>HTTP协议的发展历史</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -465,7 +466,8 @@
 <th>发展现状</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>HTTP/0.9</td>
 <td>1991年</td>
 <td>不涉及数据包传输，规定客户端与服务器之间的通信格式，只能使用GET请求</td>
@@ -489,18 +491,16 @@
 <td>多路复用、服务器推送、头信息压缩、二进制协议等</td>
 <td>逐渐覆盖市场</td>
 </tr>
-</tbody></table>
- <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> 
-
+</tbody>
+</table>
+</div>
+<p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> </p>
 <p>这是Akamai公司建立的一个官方的演示，使用HTTP/1.1和HTTP/2.0各自同时请求379张照片，从请求的时间可以看出HTTP/2.0的性能占优势。</p>
 <a id="more"></a>
-
- <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723105652242.jfif" alt="这里写图片描述" style="zoom:40%;"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723105652242.jfif" alt="这里写图片描述" style="zoom:40%;"> </p>
 <p>HTTP/2.0的多路复用机制：通过单一的HTTP/2.0连接请求发出<strong>多重的请求-响应信息</strong>，多个stream共享一个TCP连接，实现多流并行而不是依赖多个TCP连接。</p>
 <p><strong>HTTP报文格式</strong></p>
- <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/2019080311162578.png" alt="在这里插入图片描述" style="zoom:67%;"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/2019080311162578.png" alt="在这里插入图片描述" style="zoom:67%;"> </p>
 <h2 id="2-HTTP-VS-HTTPS"><a href="#2-HTTP-VS-HTTPS" class="headerlink" title="2. HTTP VS HTTPS"></a>2. HTTP VS HTTPS</h2><h3 id="HTTP的特点"><a href="#HTTP的特点" class="headerlink" title="HTTP的特点"></a><strong>HTTP的特点</strong></h3><blockquote>
 <ol>
 <li><strong>无状态</strong>：HTTP协议没有对客户端进行状态存储，对事物没有“记忆能力”，也就说每一次发起请求对于服务器来说都是一个新的客户端请求。</li>
@@ -510,8 +510,7 @@
 </ol>
 </blockquote>
 <p><strong>抓包分析</strong></p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327165504233.png" alt="image-20200327165504233" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327165504233.png" alt="image-20200327165504233" style="zoom:67%;"></p>
 <p><strong>结果分析：</strong>可以看到HTTP协议传输数据全部采用<strong>明文形式显示</strong>，可以看到如果用Post请求被抓包之后，获取到用户名和密码就GG了</p>
 <p><strong>针对无状态的一些解决策略</strong>：</p>
 <blockquote>
@@ -521,8 +520,7 @@
 </ol>
 </blockquote>
 <h3 id="HTTPS的特点"><a href="#HTTPS的特点" class="headerlink" title="HTTPS的特点"></a><strong>HTTPS的特点</strong></h3><p>基于HTTP协议，采用SSL认证机制加密处理数据，验证对方身份以及数据完整性保护</p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327170007052.png" alt="image-20200327170007052" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327170007052.png" alt="image-20200327170007052" style="zoom:67%;"></p>
 <p>通过抓包可以看到数据<strong>并不是明文传输</strong>，也就是说被加密了，而且HTTPS具有以下特点：</p>
 <blockquote>
 <ol>
@@ -537,11 +535,9 @@
 <p><strong>非对称加密</strong>：加密和解密使用的不是同一个密钥，<strong>一个作为公开的密钥分发给信任的客户端</strong>，另一个作为私钥保存在服务器。公钥加密的信息，只有私钥才能解密；私钥加密的信息，只有公钥才能解密，常见的非对称加密算法：RSA，ECC</p>
 </blockquote>
 <p>最简单的<strong>非对称加密的执行流程</strong>：</p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327175103986.png" alt="image-20200327175103986" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327175103986.png" alt="image-20200327175103986" style="zoom:67%;"></p>
 <p>交换公钥后就可以利用对方的公钥对明文信息进行加密发送，对方接收到后可以用私钥进行解密，当然在实际信息交流中不只是直接对明文进行加密，在加密前还会做一步<strong>散列</strong>的操作，这一点有兴趣自行上网详细了解：</p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327174628160.png" alt="image-20200327174628160" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327174628160.png" alt="image-20200327174628160" style="zoom:67%;"></p>
 <p><strong>HTTPS的加密方式</strong>：</p>
 <blockquote>
 <p><strong>混合加密</strong>：结合对称加密和非对称加密方式。客户端A使用对称密钥对明文信息进行加密形成密文1.0，然后再使用非对称加密的公钥B对密文进行再次加密形成密文2.0；然后客户端B使用私钥B对密文2.0进行解密得到密文1.0，然后再使用对称密钥对密文1.0解密得到明文信息。即使被黑客拦截掉，由于黑客没有对应的私钥对密文2.0解密，也就无法获得密文1.0，更无法获得明文。</p>
@@ -549,14 +545,11 @@
 <p><strong>数字签名</strong>：数字签名建立在公钥加密技术基础之上，<strong>结合混合加密和数字摘要技术</strong>，产生了数字签名这一说法，产生这一项技术的原因在于进一步对明文的安全性进行提高。</p>
 </blockquote>
 <p><strong>混合加密流程图解</strong>：</p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327182236129.png" alt="image-20200327182236129" style="zoom:80%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327182236129.png" alt="image-20200327182236129" style="zoom:80%;"></p>
 <p><strong>数字签名流程</strong>：</p>
-<img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327185928092.png" alt="image-20200327185928092" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/image-20200327185928092.png" alt="image-20200327185928092" style="zoom:67%;"></p>
 <h2 id="3-HTTP通信传输"><a href="#3-HTTP通信传输" class="headerlink" title="3. HTTP通信传输"></a>3. HTTP通信传输</h2><p>​                                             <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180719094739178.jfif" alt="这里写图片描述" style="zoom:70%;"> </p>
-<h2 id="4-HTTPS实现原理"><a href="#4-HTTPS实现原理" class="headerlink" title="4. HTTPS实现原理"></a>4. HTTPS实现原理</h2> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20190803111825690.png" alt="在这里插入图片描述" style="zoom:67%;"> 
-
+<h2 id="4-HTTPS实现原理"><a href="#4-HTTPS实现原理" class="headerlink" title="4. HTTPS实现原理"></a>4. HTTPS实现原理</h2><p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20190803111825690.png" alt="在这里插入图片描述" style="zoom:67%;"> </p>
 <blockquote>
 <ol>
 <li>client向server发送请求<a href="https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。" target="_blank" rel="noopener">https://baidu.com，然后连接到server的443端口，发送的信息主要是随机值1和客户端支持的加密算法。</a></li>
@@ -569,8 +562,8 @@
 <li>客户端通过会话秘钥加密一条消息发送给服务端，主要验证服务端是否正常接受客户端加密的消息。</li>
 <li>同样服务端也会通过会话秘钥加密一条消息回传给客户端，如果Z客户端能够正常接受的话表明SSL层连接建立完成了。</li>
 </ol>
-<p>参考：<a href="https://blog.csdn.net/xiaoming100001/article/details/81109617" target="_blank" rel="noopener">https://blog.csdn.net/xiaoming100001/article/details/81109617</a></p>
 </blockquote>
+<p>参考博客：<a href="https://blog.csdn.net/xiaoming100001/article/details/81109617" target="_blank" rel="noopener">https://blog.csdn.net/xiaoming100001/article/details/81109617</a></p>
 
       
     </div>

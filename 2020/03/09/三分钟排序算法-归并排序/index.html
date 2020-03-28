@@ -462,7 +462,6 @@
 <p>以下图为例，子序列[3, 5]和子序列[1, 2]合并成一个新的子序列[1, 2, 3, 5]；子序列[4, 6]和[7, 8]合并成为一个新的子序列[4, 6, 7, 8]；子序列[1, 2, 3, 5]和子序列[4, 6, 7, 8]最终合并为一个新的子序列[1, 2, 3, 4, 5, 6, 7, 8]，此时排序结束。</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-归并排序/20200301223750505.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <a id="more"></a>
-
 <h1 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2. 代码实现"></a>2. 代码实现</h1><p>利用一个长度和原数组相同的temp数组，每次对两个子序列进行合并后的结果都存放到temp数组中，然后将temp数组中的有效元素拷贝到原数组中，这样可以保证在排序过程中只操作2个数组，不会产生额外的空间开销。如果不太明白可以参考下图：</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-归并排序/20200301231249131.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-归并排序/20200301231420610.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
