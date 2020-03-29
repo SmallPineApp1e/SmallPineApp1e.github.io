@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="多源BFS,">
 
 
 
@@ -94,17 +94,23 @@
 
 
 
-<meta name="description" content="爱学习,爱生活,不停下前进的脚步!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://smallpineapp1e.github.io/categories/index.html">
+<meta name="description" content="从串行的BFS升级到并行BFSLeetCode1162.地图分析你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。 我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：$$(x0,">
+<meta name="keywords" content="多源BFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode每日一题-1162-多源BFS取最大值">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta property="og:description" content="从串行的BFS升级到并行BFSLeetCode1162.地图分析你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。 我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：$$(x0,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-09T00:07:38.769Z">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg">
+<meta property="og:image" content="https://pic.leetcode-cn.com/a3f28eeb94837d510ad7360e756881059e65ca78489d4d9bae6973884b9870bb-%E5%8D%95%E6%BA%90BFS.gif">
+<meta property="og:image" content="https://pic.leetcode-cn.com/be6bdff2b8d983d2135e5d2675b4dae750fef16104c904e462d9b1d64ef6d8ed-%E5%A4%9A%E6%BA%90BFS.gif">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/image-20200329162425319.png">
+<meta property="og:updated_time" content="2020-03-29T08:27:45.491Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta name="twitter:title" content="LeetCode每日一题-1162-多源BFS取最大值">
+<meta name="twitter:description" content="从串行的BFS升级到并行BFSLeetCode1162.地图分析你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。 我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：$$(x0,">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg">
 
 
 
@@ -133,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/categories/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/">
 
 
 
 
 
-  <title>categories | 傻曾🍍</title>
+  <title>LeetCode每日一题-1162-多源BFS取最大值 | 傻曾🍍</title>
   
 
 
@@ -302,40 +308,229 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 14 个分类
+          <h1 class="post-title" itemprop="name headline">LeetCode每日一题-1162-多源BFS取最大值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-29T10:36:27+08:00">
+                2020-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  951字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4分钟
+                </span>
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringData-JPA/">SpringData JPA</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/leetcode/">leetcode</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码分析/">源码分析</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机网络/">计算机网络</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件测试/">软件测试</a><span class="category-list-count">3</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="从串行的BFS升级到并行BFS"><a href="#从串行的BFS升级到并行BFS" class="headerlink" title="从串行的BFS升级到并行BFS"></a>从串行的BFS升级到并行BFS</h1><h2 id="LeetCode1162-地图分析"><a href="#LeetCode1162-地图分析" class="headerlink" title="LeetCode1162.地图分析"></a>LeetCode1162.地图分析</h2><p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
+<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：<br>$$<br>(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。<br>$$<br>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<p><strong>示例1：</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg" alt="img" style="zoom:80%;"> 
+
+<blockquote>
+<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>输出：2<br>解释：<br>海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。</p>
+</blockquote>
+<p><strong>示例 2：</strong> </p>
+<blockquote>
+<p>输入：[[1,0,0],[0,0,0],[0,0,0]]<br>输出：4<br>解释：<br>海洋区域 (2, 2) 和所有陆地区域之间的距离都达到最大，最大距离为 4。</p>
+</blockquote>
+<p><strong>提示：</strong></p>
+<ol>
+<li><code>1 &lt;= grid.length == grid[0].length &lt;= 100</code></li>
+<li><code>grid[i][j]</code> 不是 <code>0</code> 就是 <code>1</code></li>
+</ol>
+<a id="more"></a>
+
+<p>先看数据范围提示，是[1, 100]，那么使用O(n^2)、O(n^3)的时间复杂度算法都是可以接受的，一般数据范围在10^7以下都不会爆时间。题目给定的数据都是合理的，也就是说<code>grid[i][j]不会是0或1以外的数据</code></p>
+<p> <img src="https://pic.leetcode-cn.com/a3f28eeb94837d510ad7360e756881059e65ca78489d4d9bae6973884b9870bb-%E5%8D%95%E6%BA%90BFS.gif" alt="单源BFS.gif"> </p>
+<p>看看上图，是单源BFS的示意图，<strong>即每一次都是从一个点出发扩散，遍历完所有可以它遍历的点</strong>，很好理解，下面<strong>揭开多源BFS的庐山真面目。</strong></p>
+<p> <img src="https://pic.leetcode-cn.com/be6bdff2b8d983d2135e5d2675b4dae750fef16104c904e462d9b1d64ef6d8ed-%E5%A4%9A%E6%BA%90BFS.gif" alt="多源BFS.gif"> </p>
+<p>下面讲解我的思路哈<strong>（“填海造陆”）</strong></p>
+<p>首先找到所有的陆地，<strong>将其加入队列（“多源的开始”）</strong>，然后就利用<code>BFS</code>算法进行操作，<strong>某一块海洋一定是离它最近的那一块陆地给先填平，所以一开始有多少块陆地（多少个源），就会有多少个离它们最近的海洋距离（注意这里！）</strong>，因为某一块海洋被一块陆地率先填平（遍历）后，<strong>其它陆地就不能再次填平这块海洋了</strong>，所以我们最后只需要遍历一下这些海洋离它最近的那块陆地的距离，<strong>取最大值即可获得答案</strong>。</p>
+<blockquote>
+<p>注意：这里取<strong>最大值并不是说BFS算法是求最大值路径</strong>的意思，<strong>BFS还是在求达到结果的最小值，但是本题是几个结果之间取最大值</strong>，而将这几个结果分开来看，在<strong>单源BFS当中代表着这个陆地到达某一块海洋的最小距离</strong>。</p>
+<p><strong>另外：如果题目需要知道离哪一块陆地最近，那么需要记录到达当前最大值距离的这块海洋的路径，然后递归找到它的源点（一开始的陆地）。</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDistance</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] distance = <span class="keyword">new</span> <span class="keyword">int</span>[grid.length][grid[<span class="number">0</span>].length];</span><br><span class="line">        <span class="keyword">int</span>[][] position = &#123;&#123;-<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, -<span class="number">1</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">boolean</span>[][] isVisited = <span class="keyword">new</span> <span class="keyword">boolean</span>[grid.length][grid[<span class="number">0</span>].length];</span><br><span class="line">        Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[<span class="number">0</span>].length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>)&#123;</span><br><span class="line">                    queue.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">                    isVisited[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                    distance[i][j] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(queue.isEmpty())</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">int</span>[] sea = queue.poll();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; position.length; i++)&#123;</span><br><span class="line">                <span class="keyword">int</span> next_X = sea[<span class="number">0</span>] + position[i][<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">int</span> next_Y = sea[<span class="number">1</span>] + position[i][<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span>(next_X &lt; <span class="number">0</span> || next_X &gt;= grid.length || next_Y &lt; <span class="number">0</span> || next_Y &gt;= grid[<span class="number">0</span>].length || grid[next_X][next_Y] == <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span>(!isVisited[next_X][next_Y]) &#123;</span><br><span class="line">                    queue.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;next_X, next_Y&#125;);</span><br><span class="line">                    isVisited[next_X][next_Y] = <span class="keyword">true</span>;</span><br><span class="line">                    distance[next_X][next_Y] = distance[sea[<span class="number">0</span>]][sea[<span class="number">1</span>]] + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] arr:distance)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> dist : arr)&#123;</span><br><span class="line">                res = Math.max(dist, res);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res == <span class="number">0</span> ? -<span class="number">1</span> : res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/image-20200329162425319.png" alt="image-20200329162425319" style="zoom:67%;">
+
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多源BFS/" rel="tag"># 多源BFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/" rel="next" title="三分钟计算机网络-预判面试官的预判-Get和Post的区别">
+                <i class="fa fa-chevron-left"></i> 三分钟计算机网络-预判面试官的预判-Get和Post的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -368,8 +563,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
           <p class="site-author-name" itemprop="name">傻曾</p>
@@ -474,6 +678,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从串行的BFS升级到并行BFS"><span class="nav-number">1.</span> <span class="nav-text">从串行的BFS升级到并行BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode1162-地图分析"><span class="nav-number">1.1.</span> <span class="nav-text">LeetCode1162.地图分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -629,10 +849,10 @@ setInterval("createtime()",250);
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
