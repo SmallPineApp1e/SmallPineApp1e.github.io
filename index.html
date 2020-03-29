@@ -1147,7 +1147,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  0字
+                  4,188字
                 </span>
               
 
@@ -1163,7 +1163,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  17分钟
                 </span>
               
             </div>
@@ -1185,9 +1185,20 @@
 
       
         
-          
-            
-          
+          <p>事先声明：本文只是采自labuladong的文章，并没有过多修改，只是在学习过程中不断记录不断理解，顺带把文章稍加理解做成自己可以复习的文章，原文链接： <a href="https://zhuanlan.zhihu.com/p/83334559" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/83334559</a> </p>
+<h1 id="KMP算法入坑到脱坑"><a href="#KMP算法入坑到脱坑" class="headerlink" title="KMP算法入坑到脱坑"></a>KMP算法入坑到脱坑</h1><p>KMP 算法（Knuth-Morris-Pratt 算法）是一个著名的字符串匹配算法，效率很高，但是确实有点复杂。 </p>
+<p>在开始学习KMP算法之前约定，用<code>pat</code>表示模式串，长度为<code>M</code>，用<code>txt</code>表示主文本串，长度为<code>N</code>。</p>
+<p><strong>KMP算法时在<code>txt</code>中查找字串<code>pat</code>，如果存在，则返回这个字串的起始索引，否则返回-1</strong></p>
+<p>本文的<strong>骚操作</strong>：<strong>KMP算法就是一个动态规划问题</strong>。对于动态规划，最重要的是确定状态，也就是<code>dp</code>数组，是一维（一个状态）还是二维（两个状态）······</p>
+<p>我见过的 KMP 算法应该是，一波诡异的操作处理 <code>pat</code> 后形成一个一维的数组 <code>next</code>，然后根据这个数组经过又一波复杂操作去匹配 <code>txt</code>。时间复杂度 O(N)，空间复杂度 O(M)。其实它这个 <code>next</code> 数组就相当于 <code>dp</code> 数组，其中元素的含义跟 <code>pat</code> 的前缀和后缀有关，判定规则比较复杂，不好理解。 <del>（是我实锤了）</del></p>
+<p>本文则<strong>用一个二维的 <code>dp</code> 数组（但空间复杂度还是 O(M)）</strong>，重新定义其中元素的含义，使得代码长度大大减少，可解释性大大提高。 本文的代码参考<strong>《算法4》<del>（md有空一定要去看完这本书）</del></strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/28/三百年算法-死磕字符串匹配算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
