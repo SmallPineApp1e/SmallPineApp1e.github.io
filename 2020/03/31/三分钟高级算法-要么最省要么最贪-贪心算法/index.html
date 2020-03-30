@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="贪心算法,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/webIcon.jpg?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="要么最省要么最壕-贪心算法贪心、分治、回溯、动态规划这 4 个算法思想，原理解释起来都很简单，但是要真正掌握且灵活应用，并不是件容易的事情。所以学习这四个算法思想的最好方法就是结合具体的问题，感受这些算法是怎么工作的，是如何解决问题的，体会算法的本质。 贪心算法（greedy algorithm）的应用有很多：霍夫曼编码（Huffman Coding）、Prim 和 Kruskal 最小生成树算法">
+<meta name="keywords" content="贪心算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三分钟高级算法-要么最省要么最贪-贪心算法">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/index.html">
+<meta property="og:site_name" content="傻曾🍍">
+<meta property="og:description" content="要么最省要么最壕-贪心算法贪心、分治、回溯、动态规划这 4 个算法思想，原理解释起来都很简单，但是要真正掌握且灵活应用，并不是件容易的事情。所以学习这四个算法思想的最好方法就是结合具体的问题，感受这些算法是怎么工作的，是如何解决问题的，体会算法的本质。 贪心算法（greedy algorithm）的应用有很多：霍夫曼编码（Huffman Coding）、Prim 和 Kruskal 最小生成树算法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f93f4567168d3bc65688a785b76753c7.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/640.jfif">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/2de91c0afb0912378c5acf32a173f642.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331012456616.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013152518.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f0a1b7978711651d9f084d19a70805cd.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ef2d0bd8284cb6e69294566a45b0e2b5.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013743502.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/83921e609c8a4dc81ca5b90c8b4cd745.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/7b6a08e7df45eac66820b959c64f877a.jpg">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ccf15d048be005924a409574dce143ed.jpg">
+<meta property="og:updated_time" content="2020-03-30T17:48:03.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三分钟高级算法-要么最省要么最贪-贪心算法">
+<meta name="twitter:description" content="要么最省要么最壕-贪心算法贪心、分治、回溯、动态规划这 4 个算法思想，原理解释起来都很简单，但是要真正掌握且灵活应用，并不是件容易的事情。所以学习这四个算法思想的最好方法就是结合具体的问题，感受这些算法是怎么工作的，是如何解决问题的，体会算法的本质。 贪心算法（greedy algorithm）的应用有很多：霍夫曼编码（Huffman Coding）、Prim 和 Kruskal 最小生成树算法">
+<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f93f4567168d3bc65688a785b76753c7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/">
+
+
+
+
+
+  <title>三分钟高级算法-要么最省要么最贪-贪心算法 | 傻曾🍍</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">傻曾🍍</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">三分钟高级算法-要么最省要么最贪-贪心算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-31T00:51:01+08:00">
+                2020-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,319字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  11分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="要么最省要么最壕-贪心算法"><a href="#要么最省要么最壕-贪心算法" class="headerlink" title="要么最省要么最壕-贪心算法"></a>要么最省要么最壕-贪心算法</h1><p>贪心、分治、回溯、动态规划这 4 个算法思想，原理解释起来都很简单，但是要真正掌握且灵活应用，并不是件容易的事情。所以学习这四个算法思想的最好方法<strong>就是结合具体的问题，感受这些算法是怎么工作的，是如何解决问题的，体会算法的本质</strong>。</p>
+<p><strong>贪心算法（greedy algorithm）</strong>的应用有很多：<strong>霍夫曼编码（Huffman Coding）、Prim 和 Kruskal 最小生成树算法、还有 Dijkstra 单源最短路径算法。</strong></p>
+<p>这篇文章主要是<strong>围绕贪心算法展开讲解霍夫曼编码是如何压缩数据规模，以达到节省数据存储空间的。</strong></p>
+<h2 id="1-如何理解贪心算法"><a href="#1-如何理解贪心算法" class="headerlink" title="1. 如何理解贪心算法"></a>1. 如何理解贪心算法</h2><p>假设我们有一个可以容纳 100kg 物品的背包，可以装各种物品。我们有以下 5 种豆子，每种豆子的总量和总价值都各不相同。<strong>为了让背包中所装物品的总价值最大，我们如何选择在背包中装哪些豆子？每种豆子又该装多少呢？</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f93f4567168d3bc65688a785b76753c7.jpg" alt="img" style="zoom:67%;"> 
+
+<p>实际上，我们用手算就能得出答案，黄豆1元/kg，绿豆3元/kg，红豆2元/kg，黑豆4元/kg，青豆1.5元/kg，单价从高到低排列，依次是：<strong>黑豆、绿豆、红豆、青豆、黄豆，</strong>所以，我们可以往背包里装 <strong>20kg 黑豆、30kg 绿豆、50kg 红豆。</strong></p>
+<p>那么如何让计算机知道要这样选择呢？<strong>答案就是贪心算法。</strong></p>
+<p>贪心算法解决问题的步骤是有规律的，下面就<strong>揭开它的庐山真面目。</strong></p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/640.jfif" style="zoom:67%"> 
+
+<h2 id="2-如何用我的🐕脸识别这是一道贪心问题"><a href="#2-如何用我的🐕脸识别这是一道贪心问题" class="headerlink" title="2. 如何用我的🐕脸识别这是一道贪心问题"></a>2. 如何用我的🐕脸识别这是一道贪心问题</h2><p>第一步，当我们看到这类问题的时候，首先要联想到贪心算法：针对一组数据，题目定义了<strong>限制值和期望值，希望从中选出几个数据，在满足限制值的情况下，期望值最大。</strong></p>
+<blockquote>
+<p>类比到刚刚的例子，<strong>限制值就是重量不能超过 100kg</strong>，<strong>期望值就是物品的总价值</strong>。这组<strong>数据就是 5 种豆子</strong>。我们<strong>从中选出一部分，满足重量不超过 100kg，并且总价值最大</strong>。 </p>
+</blockquote>
+<p>第二步，我们尝试看下这个问题<strong>是否可以用贪心算法解决</strong>：每次选择当前情况下，在<strong>对限制值同等贡献量的情况下，对期望值贡献最大的数据。</strong></p>
+<blockquote>
+<p>类比到刚刚的例子，我们每次都<strong>从剩下的豆子里面，选择单价最高的，也就是重量相同的情况下，对价值贡献最大的豆子。</strong></p>
+</blockquote>
+<p>第三步，我们<strong>举几个例子看下贪心算法产生的结果是否是最优的</strong>。大部分情况下，举几个例子验证一下就可以了。严格地证明贪心算法的正确性，是非常复杂的，需要涉及比较多的数学推理。</p>
+<blockquote>
+<p>实际上，<strong>用贪心算法解决问题的思路，并不总能给出最优解。(原因在于其后效性)</strong></p>
+</blockquote>
+<p>举一个例子。在一个有权图中，我们<strong>从顶点 S 开始，找一条到顶点 T 的最短路径（路径中边的权值和最小）</strong>。</p>
+<p>贪心算法的解决思路是，<strong>每次都选择一条跟当前顶点相连的权最小的边，直到找到顶点 T。按照这种思路，我们求出的最短路径是 S-&gt;A-&gt;E-&gt;T，路径长度是 1+4+4=9。</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/2de91c0afb0912378c5acf32a173f642.jpg" alt="img" style="zoom:67%;"> 
+
+<p>但是，这种<strong>贪心的选择方式，最终求的路径并不是最短路径，因为路径 S-&gt;B-&gt;D-&gt;T 才是最短路径，因为这条路径的长度是 2+2+2=6。</strong></p>
+<p>为什么贪心算法在这个问题上不工作了呢？</p>
+<blockquote>
+<p>在这个问题上，贪心算法不工作的主要原因是，<strong>前面的选择，会影响后面的选择（贪心算法的有后效性）</strong>。如果<strong>我们第一步从顶点 S 走到顶点 A，那接下来面对的顶点和边，跟第一步从顶点 S 走到顶点 B，是完全不同的</strong>。所以，即便我们第一步选择最优的走法（边最短），但<strong>有可能因为这一步选择，导致后面每一步的选择都很糟糕，最终也就无缘全局最优解了。得到的解只是一个局部最优解（就是貌似看起来某一次距离是最短的，然而总距离却走多了）</strong></p>
+<p>而<strong>动态规划正是解决了后效性这个问题，将每个子问题都是看作是独立的，在这里不展开讲了。</strong></p>
+</blockquote>
+<h2 id="3-贪心算法实战分析"><a href="#3-贪心算法实战分析" class="headerlink" title="3. 贪心算法实战分析"></a>3. 贪心算法实战分析</h2><p><strong>1. 分糖果</strong></p>
+<p>我们有<code>m</code>个糖果和<code>n</code>个孩子。我们现在要把糖果分给这些孩子吃，但是糖果少，孩子多<code>（m&lt;n）</code>，所以糖果只能分配给一部分孩子。</p>
+<p>每个糖果的大小不等，这<code>m</code>个糖果的大小分别是<code>s1，s2，s3，……，sm</code>。除此之外，每个孩子对糖果大小的需求也是不一样的，<strong>只有糖果的大小大于等于孩子的对糖果大小的需求的时候，孩子才得到满足</strong>。假设这<code>n</code>个孩子对糖果大小的需求分别是<code>g1，g2，g3，……，gn</code>。</p>
+<p> <strong>如何分配糖果，能尽可能满足最多数量的孩子？</strong> </p>
+<p>我们可以把这个问题抽象成，从<code>n</code>个孩子中，抽取一部分孩子分配糖果，<strong>让满足的孩子的个数（期望值）是最大的</strong>。这个问题的限制值就是糖果个数 <code>m</code>。</p>
+<p>我们可以这样理解：有<code>m</code>颗糖果需要分给<code>n</code>个孩子，但是<code>m &lt; n</code>，所以要将糖果尽量分给更多的孩子吃，那么<strong>每个孩子最好拿到大小刚好等于这个孩子需求的糖果或者离孩子需求差值最小的糖果，这样保证每颗糖果不会被浪费或者浪费很多</strong>，如果小的糖果可以满足孩子，就没必要拿更大的糖果去满足这个孩子，留下更大的糖果可以满足其它有更大需求的孩子（你可真能吃）。</p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331012456616.png" alt="image-20200331012456616" style="zoom:100%;">
+
+<blockquote>
+<p>所以，我们可以从<strong>需求小的孩子开始分配糖果</strong>。因为<strong>满足一个需求大的孩子跟满足一个需求小的孩子，对我们期望值的贡献是一样的（期望值的贡献就是可分配糖果的孩子+1，每个孩子被分配糖果后都是贡献值为1）。</strong></p>
+<p>我们<strong>每次从剩下的孩子中，找出对糖果大小需求最小的</strong>，然后<strong>发给他剩下的糖果中能满足他的最小的糖果</strong>，这样得到的分配方案，<strong>也就是满足的孩子个数最多的方案。</strong></p>
+</blockquote>
+<p><strong>2. 钱币找零</strong></p>
+<p>这个问题在我们的日常生活中更加普遍。假设我们有 <code>1 元、2 元、5 元、10 元、20 元、50 元、100 元</code>这些面额的纸币，它们的张数分别是 <code>c1、c2、c5、c10、c20、c50、c100</code>。我们现在要<strong>用这些钱来支付 K 元</strong>，<strong>最少要用多少张纸币呢？</strong></p>
+<p>我们可以把问题抽象为从给定面额的纸币中，选取最少张纸币，用来支付K元，那么<strong>期望值就是花费纸币的张数</strong>，<strong>这个问题的限制值就是支付的金额为K元</strong>，<strong>数据就是各种面额的纸币及其张数。</strong></p>
+<p>在生活中，<strong>我们肯定是先用面值最大的来支付，如果不够，就继续用更小一点面值的，以此类推，最后剩下的用 1 元来补齐。</strong></p>
+<blockquote>
+<p>在<strong>贡献相同期望值（纸币数目）的情况下</strong>，我们<strong>希望多贡献点金额</strong>，这样就<strong>可以让纸币数更少</strong>，<strong>这就是一种贪心算法的解决思路</strong>。直觉告诉我们，这种处理方法就是最好的。实际上，要严谨地证明这种贪心算法的正确性，需要比较复杂的、有技巧的数学推导，我不建议你花太多时间在上面，不过如果感兴趣的话，可以自己去研究下。</p>
+</blockquote>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013152518.png" alt="image-20200331013152518" style="zoom:67%;">
+
+
+
+<p><strong>3. 区间覆盖</strong></p>
+<p>假设我们有 n 个区间，区间的起始端点和结束端点分别是<code>[l1, r1]，[l2, r2]，[l3, r3]，……，[ln, rn]</code>。我们从这 n 个区间中选出一部分区间，这部分区间满足两两不相交（端点相交的情况不算相交），最多能选出多少个区间呢？</p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f0a1b7978711651d9f084d19a70805cd.jpg" alt="img" style="zoom:67%;"> 
+
+<p><strong>这个处理思想在很多贪心算法问题中都有用到，比如任务调度、教师排课等等问题。</strong></p>
+<p>这个问题的解决思路是这样的：我们假设这 <code>n</code> 个区间中最左端点是<code>lmin</code>，最右端点是<code>rmax</code>。这个问题就相当于，<strong>我们选择几个不相交的区间</strong>，从左到右将<code>[lmin, rmax]</code>覆盖上。<strong>我们按照起始端点从小到大的顺序对这 n 个区间排序。</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ef2d0bd8284cb6e69294566a45b0e2b5.jpg" alt="img" style="zoom:50%;"> 
+
+<p>我们每次选择的时候，<strong>左端点跟前面的已经覆盖的区间不重合的，右端点又尽量小的</strong>，<strong>这样可以让剩下的未覆盖区间尽可能的大，就可以放置更多的区间。这实际上就是一种贪心的选择方法。</strong></p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013743502.png" alt="image-20200331013743502" style="zoom:50%;">
+
+<h2 id="4-贪心算法实现霍夫曼编码"><a href="#4-贪心算法实现霍夫曼编码" class="headerlink" title="4. 贪心算法实现霍夫曼编码"></a>4. 贪心算法实现霍夫曼编码</h2><p>我们现在来看开篇的问题，<strong>如何用贪心算法实现霍夫曼编码？</strong></p>
+<p>假设我有一个包含 1000 个字符的文件，<strong>每个字符占 1 个 byte（1byte=8bits），存储这 1000 个字符就一共需要 8000bits</strong>，那<strong>有没有更加节省空间的存储方式</strong>呢？</p>
+<blockquote>
+<p><strong>霍夫曼编码</strong>就要登场了。霍夫曼编码是一种十分有效的编码方法，<strong>广泛用于数据压缩中，其压缩率通常在 20%～90% 之间。</strong></p>
+</blockquote>
+<p>霍夫曼编码<strong>不仅会考察文本中有多少个不同字符</strong>，<strong>还会考察每个字符出现的频率，根据频率的不同，选择不同长度的编码</strong>。霍夫曼编码试图用<strong>这种不等长的编码方法，来进一步增加压缩的效率</strong>。</p>
+<p><strong>如何给不同频率的字符选择不同长度的编码呢</strong>？</p>
+<p>根据<strong>贪心的思想，我们可以把出现频率比较多的字符，用稍微短一些的编码；出现频率比较少的字符，用稍微长一些的编码。</strong>为了避免解压缩过程中的歧义，<strong>霍夫曼编码要求各个字符的编码之间，不会出现某个编码是另一个编码前缀</strong>的情况。</p>
+<blockquote>
+<p>假设这 <strong>6 个字符出现的频率从高到低依次是 a、b、c、d、e、f</strong>。我们把它们编码下面这个样子，<strong>任何一个字符的编码都不是另一个的前缀，在解压缩的时候，我们每次会读取尽可能长的可解压的二进制串，所以在解压缩的时候也不会歧义。经过这种编码压缩之后，这 1000 个字符只需要 2100bits 就可以了。</strong></p>
+</blockquote>
+<p> <strong><img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/83921e609c8a4dc81ca5b90c8b4cd745.jpg" alt="img" style="zoom:57%;"></strong> </p>
+<p><strong>那么如何根据字符的出现频率来确定各个字符的编码格式呢？</strong></p>
+<p>我们把<strong>每个字符的出现频率当作是一个权值</strong>，放入一个<strong>优先级队列当中</strong>，<strong>每次从优先级队列当中取出队首两个元素作叶子结点A和叶子结点B，生成它们的父结点，父结点的权值为子结点的权值之和</strong>，然后再将父结点放入到优先级队列当中；依次重复这个过程，就是下面这个图的演变过程。</p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/7b6a08e7df45eac66820b959c64f877a.jpg" alt="img" style="zoom:50%;"> 
+
+<p>得到最后这棵树后， 给<strong>每一条边加上画一个权值，指向左子节点的边我们统统标记为 0，指向右子节点的边，我们统统标记为 1</strong>，那从<strong>根节点到叶节点的路径就是叶节点对应字符的霍夫曼编码。</strong><img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ccf15d048be005924a409574dce143ed.jpg" alt="img" style="zoom:57%;"> </p>
+<h2 id="5-贪心算法小结"><a href="#5-贪心算法小结" class="headerlink" title="5. 贪心算法小结"></a>5. 贪心算法小结</h2><p>实际上，贪心算法适用的场景比较有限。这种算法思想更多的是指导设计基础算法。比如最小生成树算法、单源最短路径算法，这些算法都用到了贪心算法。<strong>从我个人的学习经验来讲，不要刻意去记忆贪心算法的原理，多练习才是最有效的学习方法。</strong></p>
+<p>贪心算法的<strong>最难</strong>的一块是<strong>如何将要解决的问题抽象成贪心算法模型，只要这一步搞定之后，贪心算法的编码一般都很简单</strong>。贪心算法解决问题的正确性虽然很多时候都看起来是显而易见的，但是要严谨地证明算法能够得到最优解，并不是件容易的事。所以，很多时候，我们<strong>只需要多举几个例子，看一下贪心算法的解决方案是否真的能得到最优解就可以了。</strong></p>
+<h2 id="6-更多的贪心算法题目"><a href="#6-更多的贪心算法题目" class="headerlink" title="6. 更多的贪心算法题目"></a>6. 更多的贪心算法题目</h2><p>······</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/贪心算法/" rel="tag"># 贪心算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/29/三分钟计算机网络-一定要懂Cookie和Session的区别/" rel="next" title="三分钟计算机网络-一定要懂Cookie和Session的区别">
+                <i class="fa fa-chevron-left"></i> 三分钟计算机网络-一定要懂Cookie和Session的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
+          <p class="site-author-name" itemprop="name">傻曾</p>
+           
+              <p class="site-description motion-element" itemprop="description">爱学习,爱生活,不停下前进的脚步!</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/SmallPineApp1e" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://blog.csdn.net/weixin_41949328" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-copyright"></i>
+                  
+                    
+                      CSDN
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="QQ">
+                  
+                    <i class="fa fa-fw fa-qq"></i>
+                  
+                    
+                      QQ
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/about/" target="_blank" title="微信">
+                  
+                    <i class="fa fa-fw fa-weixin"></i>
+                  
+                    
+                      微信
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#要么最省要么最壕-贪心算法"><span class="nav-number">1.</span> <span class="nav-text">要么最省要么最壕-贪心算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-如何理解贪心算法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 如何理解贪心算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何用我的🐕脸识别这是一道贪心问题"><span class="nav-number">1.2.</span> <span class="nav-text">2. 如何用我的🐕脸识别这是一道贪心问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-贪心算法实战分析"><span class="nav-number">1.3.</span> <span class="nav-text">3. 贪心算法实战分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-贪心算法实现霍夫曼编码"><span class="nav-number">1.4.</span> <span class="nav-text">4. 贪心算法实现霍夫曼编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-贪心算法小结"><span class="nav-number">1.5.</span> <span class="nav-text">5. 贪心算法小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-更多的贪心算法题目"><span class="nav-number">1.6.</span> <span class="nav-text">6. 更多的贪心算法题目</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+		
+	
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		<div class="widget-wrap">
+			<h3 class="widget-title">Tag Cloud</h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="250" height="250" id="resCanvas" style="width=100%">
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie-Session/">Cookie&Session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Get-Post方法/">Get&Post方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多源BFS/">多源BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心算法/">贪心算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程的通信方式/">进程的通信方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+	
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">傻曾</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style="display:none">
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style="display:none">
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("03/09/2019 13:14:21");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+  <!--背景动态-->
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
+
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+<!--背景动态-->
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+
+

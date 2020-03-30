@@ -315,6 +315,265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/" itemprop="url">三分钟高级算法-要么最省要么最贪-贪心算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-31T00:51:01+08:00">
+                2020-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,319字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  11分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="要么最省要么最壕-贪心算法"><a href="#要么最省要么最壕-贪心算法" class="headerlink" title="要么最省要么最壕-贪心算法"></a>要么最省要么最壕-贪心算法</h1><p>贪心、分治、回溯、动态规划这 4 个算法思想，原理解释起来都很简单，但是要真正掌握且灵活应用，并不是件容易的事情。所以学习这四个算法思想的最好方法<strong>就是结合具体的问题，感受这些算法是怎么工作的，是如何解决问题的，体会算法的本质</strong>。</p>
+<p><strong>贪心算法（greedy algorithm）</strong>的应用有很多：<strong>霍夫曼编码（Huffman Coding）、Prim 和 Kruskal 最小生成树算法、还有 Dijkstra 单源最短路径算法。</strong></p>
+<p>这篇文章主要是<strong>围绕贪心算法展开讲解霍夫曼编码是如何压缩数据规模，以达到节省数据存储空间的。</strong></p>
+<h2 id="1-如何理解贪心算法"><a href="#1-如何理解贪心算法" class="headerlink" title="1. 如何理解贪心算法"></a>1. 如何理解贪心算法</h2><p>假设我们有一个可以容纳 100kg 物品的背包，可以装各种物品。我们有以下 5 种豆子，每种豆子的总量和总价值都各不相同。<strong>为了让背包中所装物品的总价值最大，我们如何选择在背包中装哪些豆子？每种豆子又该装多少呢？</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f93f4567168d3bc65688a785b76753c7.jpg" alt="img" style="zoom:67%;"> 
+
+<p>实际上，我们用手算就能得出答案，黄豆1元/kg，绿豆3元/kg，红豆2元/kg，黑豆4元/kg，青豆1.5元/kg，单价从高到低排列，依次是：<strong>黑豆、绿豆、红豆、青豆、黄豆，</strong>所以，我们可以往背包里装 <strong>20kg 黑豆、30kg 绿豆、50kg 红豆。</strong></p>
+<p>那么如何让计算机知道要这样选择呢？<strong>答案就是贪心算法。</strong></p>
+<p>贪心算法解决问题的步骤是有规律的，下面就<strong>揭开它的庐山真面目。</strong></p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/640.jfif" style="zoom:67%"> 
+
+<h2 id="2-如何用我的🐕脸识别这是一道贪心问题"><a href="#2-如何用我的🐕脸识别这是一道贪心问题" class="headerlink" title="2. 如何用我的🐕脸识别这是一道贪心问题"></a>2. 如何用我的🐕脸识别这是一道贪心问题</h2><p>第一步，当我们看到这类问题的时候，首先要联想到贪心算法：针对一组数据，题目定义了<strong>限制值和期望值，希望从中选出几个数据，在满足限制值的情况下，期望值最大。</strong></p>
+<blockquote>
+<p>类比到刚刚的例子，<strong>限制值就是重量不能超过 100kg</strong>，<strong>期望值就是物品的总价值</strong>。这组<strong>数据就是 5 种豆子</strong>。我们<strong>从中选出一部分，满足重量不超过 100kg，并且总价值最大</strong>。 </p>
+</blockquote>
+<p>第二步，我们尝试看下这个问题<strong>是否可以用贪心算法解决</strong>：每次选择当前情况下，在<strong>对限制值同等贡献量的情况下，对期望值贡献最大的数据。</strong></p>
+<blockquote>
+<p>类比到刚刚的例子，我们每次都<strong>从剩下的豆子里面，选择单价最高的，也就是重量相同的情况下，对价值贡献最大的豆子。</strong></p>
+</blockquote>
+<p>第三步，我们<strong>举几个例子看下贪心算法产生的结果是否是最优的</strong>。大部分情况下，举几个例子验证一下就可以了。严格地证明贪心算法的正确性，是非常复杂的，需要涉及比较多的数学推理。</p>
+<blockquote>
+<p>实际上，<strong>用贪心算法解决问题的思路，并不总能给出最优解。(原因在于其后效性)</strong></p>
+</blockquote>
+<p>举一个例子。在一个有权图中，我们<strong>从顶点 S 开始，找一条到顶点 T 的最短路径（路径中边的权值和最小）</strong>。</p>
+<p>贪心算法的解决思路是，<strong>每次都选择一条跟当前顶点相连的权最小的边，直到找到顶点 T。按照这种思路，我们求出的最短路径是 S-&gt;A-&gt;E-&gt;T，路径长度是 1+4+4=9。</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/2de91c0afb0912378c5acf32a173f642.jpg" alt="img" style="zoom:67%;"> 
+
+<p>但是，这种<strong>贪心的选择方式，最终求的路径并不是最短路径，因为路径 S-&gt;B-&gt;D-&gt;T 才是最短路径，因为这条路径的长度是 2+2+2=6。</strong></p>
+<p>为什么贪心算法在这个问题上不工作了呢？</p>
+<blockquote>
+<p>在这个问题上，贪心算法不工作的主要原因是，<strong>前面的选择，会影响后面的选择（贪心算法的有后效性）</strong>。如果<strong>我们第一步从顶点 S 走到顶点 A，那接下来面对的顶点和边，跟第一步从顶点 S 走到顶点 B，是完全不同的</strong>。所以，即便我们第一步选择最优的走法（边最短），但<strong>有可能因为这一步选择，导致后面每一步的选择都很糟糕，最终也就无缘全局最优解了。得到的解只是一个局部最优解（就是貌似看起来某一次距离是最短的，然而总距离却走多了）</strong></p>
+<p>而<strong>动态规划正是解决了后效性这个问题，将每个子问题都是看作是独立的，在这里不展开讲了。</strong></p>
+</blockquote>
+<h2 id="3-贪心算法实战分析"><a href="#3-贪心算法实战分析" class="headerlink" title="3. 贪心算法实战分析"></a>3. 贪心算法实战分析</h2><p><strong>1. 分糖果</strong></p>
+<p>我们有<code>m</code>个糖果和<code>n</code>个孩子。我们现在要把糖果分给这些孩子吃，但是糖果少，孩子多<code>（m&lt;n）</code>，所以糖果只能分配给一部分孩子。</p>
+<p>每个糖果的大小不等，这<code>m</code>个糖果的大小分别是<code>s1，s2，s3，……，sm</code>。除此之外，每个孩子对糖果大小的需求也是不一样的，<strong>只有糖果的大小大于等于孩子的对糖果大小的需求的时候，孩子才得到满足</strong>。假设这<code>n</code>个孩子对糖果大小的需求分别是<code>g1，g2，g3，……，gn</code>。</p>
+<p> <strong>如何分配糖果，能尽可能满足最多数量的孩子？</strong> </p>
+<p>我们可以把这个问题抽象成，从<code>n</code>个孩子中，抽取一部分孩子分配糖果，<strong>让满足的孩子的个数（期望值）是最大的</strong>。这个问题的限制值就是糖果个数 <code>m</code>。</p>
+<p>我们可以这样理解：有<code>m</code>颗糖果需要分给<code>n</code>个孩子，但是<code>m &lt; n</code>，所以要将糖果尽量分给更多的孩子吃，那么<strong>每个孩子最好拿到大小刚好等于这个孩子需求的糖果或者离孩子需求差值最小的糖果，这样保证每颗糖果不会被浪费或者浪费很多</strong>，如果小的糖果可以满足孩子，就没必要拿更大的糖果去满足这个孩子，留下更大的糖果可以满足其它有更大需求的孩子（你可真能吃）。</p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331012456616.png" alt="image-20200331012456616" style="zoom:100%;">
+
+<blockquote>
+<p>所以，我们可以从<strong>需求小的孩子开始分配糖果</strong>。因为<strong>满足一个需求大的孩子跟满足一个需求小的孩子，对我们期望值的贡献是一样的（期望值的贡献就是可分配糖果的孩子+1，每个孩子被分配糖果后都是贡献值为1）。</strong></p>
+<p>我们<strong>每次从剩下的孩子中，找出对糖果大小需求最小的</strong>，然后<strong>发给他剩下的糖果中能满足他的最小的糖果</strong>，这样得到的分配方案，<strong>也就是满足的孩子个数最多的方案。</strong></p>
+</blockquote>
+<p><strong>2. 钱币找零</strong></p>
+<p>这个问题在我们的日常生活中更加普遍。假设我们有 <code>1 元、2 元、5 元、10 元、20 元、50 元、100 元</code>这些面额的纸币，它们的张数分别是 <code>c1、c2、c5、c10、c20、c50、c100</code>。我们现在要<strong>用这些钱来支付 K 元</strong>，<strong>最少要用多少张纸币呢？</strong></p>
+<p>我们可以把问题抽象为从给定面额的纸币中，选取最少张纸币，用来支付K元，那么<strong>期望值就是花费纸币的张数</strong>，<strong>这个问题的限制值就是支付的金额为K元</strong>，<strong>数据就是各种面额的纸币及其张数。</strong></p>
+<p>在生活中，<strong>我们肯定是先用面值最大的来支付，如果不够，就继续用更小一点面值的，以此类推，最后剩下的用 1 元来补齐。</strong></p>
+<blockquote>
+<p>在<strong>贡献相同期望值（纸币数目）的情况下</strong>，我们<strong>希望多贡献点金额</strong>，这样就<strong>可以让纸币数更少</strong>，<strong>这就是一种贪心算法的解决思路</strong>。直觉告诉我们，这种处理方法就是最好的。实际上，要严谨地证明这种贪心算法的正确性，需要比较复杂的、有技巧的数学推导，我不建议你花太多时间在上面，不过如果感兴趣的话，可以自己去研究下。</p>
+</blockquote>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013152518.png" alt="image-20200331013152518" style="zoom:67%;">
+
+
+
+<p><strong>3. 区间覆盖</strong></p>
+<p>假设我们有 n 个区间，区间的起始端点和结束端点分别是<code>[l1, r1]，[l2, r2]，[l3, r3]，……，[ln, rn]</code>。我们从这 n 个区间中选出一部分区间，这部分区间满足两两不相交（端点相交的情况不算相交），最多能选出多少个区间呢？</p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/f0a1b7978711651d9f084d19a70805cd.jpg" alt="img" style="zoom:67%;"> 
+
+<p><strong>这个处理思想在很多贪心算法问题中都有用到，比如任务调度、教师排课等等问题。</strong></p>
+<p>这个问题的解决思路是这样的：我们假设这 <code>n</code> 个区间中最左端点是<code>lmin</code>，最右端点是<code>rmax</code>。这个问题就相当于，<strong>我们选择几个不相交的区间</strong>，从左到右将<code>[lmin, rmax]</code>覆盖上。<strong>我们按照起始端点从小到大的顺序对这 n 个区间排序。</strong></p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ef2d0bd8284cb6e69294566a45b0e2b5.jpg" alt="img" style="zoom:50%;"> 
+
+<p>我们每次选择的时候，<strong>左端点跟前面的已经覆盖的区间不重合的，右端点又尽量小的</strong>，<strong>这样可以让剩下的未覆盖区间尽可能的大，就可以放置更多的区间。这实际上就是一种贪心的选择方法。</strong></p>
+<img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/image-20200331013743502.png" alt="image-20200331013743502" style="zoom:50%;">
+
+<h2 id="4-贪心算法实现霍夫曼编码"><a href="#4-贪心算法实现霍夫曼编码" class="headerlink" title="4. 贪心算法实现霍夫曼编码"></a>4. 贪心算法实现霍夫曼编码</h2><p>我们现在来看开篇的问题，<strong>如何用贪心算法实现霍夫曼编码？</strong></p>
+<p>假设我有一个包含 1000 个字符的文件，<strong>每个字符占 1 个 byte（1byte=8bits），存储这 1000 个字符就一共需要 8000bits</strong>，那<strong>有没有更加节省空间的存储方式</strong>呢？</p>
+<blockquote>
+<p><strong>霍夫曼编码</strong>就要登场了。霍夫曼编码是一种十分有效的编码方法，<strong>广泛用于数据压缩中，其压缩率通常在 20%～90% 之间。</strong></p>
+</blockquote>
+<p>霍夫曼编码<strong>不仅会考察文本中有多少个不同字符</strong>，<strong>还会考察每个字符出现的频率，根据频率的不同，选择不同长度的编码</strong>。霍夫曼编码试图用<strong>这种不等长的编码方法，来进一步增加压缩的效率</strong>。</p>
+<p><strong>如何给不同频率的字符选择不同长度的编码呢</strong>？</p>
+<p>根据<strong>贪心的思想，我们可以把出现频率比较多的字符，用稍微短一些的编码；出现频率比较少的字符，用稍微长一些的编码。</strong>为了避免解压缩过程中的歧义，<strong>霍夫曼编码要求各个字符的编码之间，不会出现某个编码是另一个编码前缀</strong>的情况。</p>
+<blockquote>
+<p>假设这 <strong>6 个字符出现的频率从高到低依次是 a、b、c、d、e、f</strong>。我们把它们编码下面这个样子，<strong>任何一个字符的编码都不是另一个的前缀，在解压缩的时候，我们每次会读取尽可能长的可解压的二进制串，所以在解压缩的时候也不会歧义。经过这种编码压缩之后，这 1000 个字符只需要 2100bits 就可以了。</strong></p>
+</blockquote>
+<p> <strong><img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/83921e609c8a4dc81ca5b90c8b4cd745.jpg" alt="img" style="zoom:57%;"></strong> </p>
+<p><strong>那么如何根据字符的出现频率来确定各个字符的编码格式呢？</strong></p>
+<p>我们把<strong>每个字符的出现频率当作是一个权值</strong>，放入一个<strong>优先级队列当中</strong>，<strong>每次从优先级队列当中取出队首两个元素作叶子结点A和叶子结点B，生成它们的父结点，父结点的权值为子结点的权值之和</strong>，然后再将父结点放入到优先级队列当中；依次重复这个过程，就是下面这个图的演变过程。</p>
+ <img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/7b6a08e7df45eac66820b959c64f877a.jpg" alt="img" style="zoom:50%;"> 
+
+<p>得到最后这棵树后， 给<strong>每一条边加上画一个权值，指向左子节点的边我们统统标记为 0，指向右子节点的边，我们统统标记为 1</strong>，那从<strong>根节点到叶节点的路径就是叶节点对应字符的霍夫曼编码。</strong><img src="//smallpineapp1e.github.io/2020/03/31/三分钟高级算法-要么最省要么最贪-贪心算法/ccf15d048be005924a409574dce143ed.jpg" alt="img" style="zoom:57%;"> </p>
+<h2 id="5-贪心算法小结"><a href="#5-贪心算法小结" class="headerlink" title="5. 贪心算法小结"></a>5. 贪心算法小结</h2><p>实际上，贪心算法适用的场景比较有限。这种算法思想更多的是指导设计基础算法。比如最小生成树算法、单源最短路径算法，这些算法都用到了贪心算法。<strong>从我个人的学习经验来讲，不要刻意去记忆贪心算法的原理，多练习才是最有效的学习方法。</strong></p>
+<p>贪心算法的<strong>最难</strong>的一块是<strong>如何将要解决的问题抽象成贪心算法模型，只要这一步搞定之后，贪心算法的编码一般都很简单</strong>。贪心算法解决问题的正确性虽然很多时候都看起来是显而易见的，但是要严谨地证明算法能够得到最优解，并不是件容易的事。所以，很多时候，我们<strong>只需要多举几个例子，看一下贪心算法的解决方案是否真的能得到最优解就可以了。</strong></p>
+<h2 id="6-更多的贪心算法题目"><a href="#6-更多的贪心算法题目" class="headerlink" title="6. 更多的贪心算法题目"></a>6. 更多的贪心算法题目</h2><p>······</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/29/三分钟计算机网络-一定要懂Cookie和Session的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -400,7 +659,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,063字
+                  1,066字
                 </span>
               
 
@@ -442,7 +701,7 @@
 <h2 id="Session和Cookie典型应用场景"><a href="#Session和Cookie典型应用场景" class="headerlink" title="Session和Cookie典型应用场景"></a>Session和Cookie典型应用场景</h2><blockquote>
 <p>登录操作：输入用户名和密码登录后，很多情况下在一段时间内，关闭浏览器再重新打开就不需要再次手动输入用户名和密码登陆了，这个时候用到的一个机制就是Cookie和Session，使用Session在服务器保存状态信息，使用Cookie在客户端保存sessionId，当用户再次访问网站时，会自动将Cookie当中的sessionId传递给服务器端，服务器端识别到这个id是有效的，那么会返回用户信息给客户端进行保存。</p>
 </blockquote>
-<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为<name, '张三'>，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</name,></p>
+<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为&lt;name, ‘张三’&gt;，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/29/三分钟计算机网络-一定要懂Cookie和Session的区别/#more" rel="contents">
@@ -581,7 +840,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  931字
+                  951字
                 </span>
               
 
@@ -620,11 +879,10 @@
       
         
           <h1 id="从串行的BFS升级到并行BFS"><a href="#从串行的BFS升级到并行BFS" class="headerlink" title="从串行的BFS升级到并行BFS"></a>从串行的BFS升级到并行BFS</h1><h2 id="LeetCode1162-地图分析"><a href="#LeetCode1162-地图分析" class="headerlink" title="LeetCode1162.地图分析"></a>LeetCode1162.地图分析</h2><p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
-<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：</p>
-<script type="math/tex; mode=display">
-(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</script><p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：<br>$$<br>(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。<br>$$<br>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
 <p><strong>示例1：</strong></p>
-<p> <img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg"> </p>
+ <img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg"> 
+
 <blockquote>
 <p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>输出：2<br>解释：<br>海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。</p>
 </blockquote>
@@ -828,7 +1086,7 @@
 </blockquote>
 <p>👨‍⚖️面试官：就这？还有吗？</p>
 <p>👦我： emmm…我就知道这么多😭</p>
-<p>👨‍⚖️面试官：那行~没关系~我们继续吧（<strong>回去等通知吧</strong>）</p>
+<p>👨‍⚖️面试官：那行<del>没关系</del>我们继续吧（<strong>回去等通知吧</strong>）</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/#more" rel="contents">
@@ -1009,7 +1267,7 @@
 <h2 id="进程间通信的本质"><a href="#进程间通信的本质" class="headerlink" title="进程间通信的本质"></a>进程间通信的本质</h2><p> 进程之间<strong>可以看到一份公共资源</strong>，提供这份资源的形式或者提供者不同，造成了通信方式不同，而<strong>pipe(管道)</strong>就是提供这份公共资源的形式之一。 </p>
 <h2 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h2><p><strong>匿名管道</strong></p>
 <p>创建方式：调用<strong>pipe(int fd[2])函数创建管道，fd参数返回两个文件描述符，fd[0]指向管道的读端，fd[1]指向管道的写端，fd[1]的输入等于fd[0]的输出。</strong> </p>
-<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟操作系统-进程的通信方式/image-20200328210609756.png" alt="image-20200328210609756" style="zoom:67%;"></p>
+<img src="//smallpineapp1e.github.io/2020/03/28/三分钟操作系统-进程的通信方式/image-20200328210609756.png" alt="image-20200328210609756" style="zoom:67%;">
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/28/三分钟操作系统-进程的通信方式/#more" rel="contents">
@@ -1376,7 +1634,6 @@
 <p>HTTP是一种超文本传输协议，一种基<strong>于请求和响应、无状态的</strong>、应用层的协议，常用于TCP/IP协议<strong>传输数据</strong>，是互联网上应用最为广泛的一种网络协议，所有的WWW文件都必须遵守这个标准。设计HTTP协议的初衷是<strong>为了发布和接收HTML页面</strong>的方法。</p>
 </blockquote>
 <p><strong>HTTP协议的发展历史</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1386,8 +1643,7 @@
 <th>发展现状</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>HTTP/0.9</td>
 <td>1991年</td>
 <td>不涉及数据包传输，规定客户端与服务器之间的通信格式，只能使用GET请求</td>
@@ -1411,10 +1667,9 @@
 <td>多路复用、服务器推送、头信息压缩、二进制协议等</td>
 <td>逐渐覆盖市场</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> </p>
+</tbody></table>
+ <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> 
+
 <p>这是Akamai公司建立的一个官方的演示，使用HTTP/1.1和HTTP/2.0各自同时请求379张照片，从请求的时间可以看出HTTP/2.0的性能占优势。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1614,11 +1869,11 @@
 <h1 id="白话理解进程与线程"><a href="#白话理解进程与线程" class="headerlink" title="白话理解进程与线程"></a>白话理解进程与线程</h1><p>计算机的核心就是CPU，它承担着所有的计算任务，它就像一座工厂，时刻在运行。</p>
 <p>​                                                 <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014324003" alt="1" style="zoom:30%;"> </p>
 <p>工厂的电力有限，每次只能够运行一个车间，也就是说如果有某一个车间在运行时，其它车间必须停止运作，也就是说在单核CPU中，同一时刻只能有一个进程在运行。</p>
-<pre><code>                                             &lt;img src=&quot;三分钟操作系统-进程、线程与协程的区别与联系/p-1585014499091&quot; alt=&quot;640?wx_fmt=jpeg&quot; style=&quot;zoom:30%;&quot; /&gt;
-</code></pre><p>​      进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态 。</p>
+<pre><code>&lt;img src=&quot;三分钟操作系统-进程、线程与协程的区别与联系/p-1585014499091&quot; alt=&quot;640?wx_fmt=jpeg&quot; style=&quot;zoom:30%;&quot; /&gt;</code></pre><p>​      进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态 。</p>
 <p>​                                                 <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014598863" alt="640?wx_fmt=jpeg" style="zoom:43%;"> </p>
 <p> 一个车间里，可以有很多工人。他们协同完成一个任务。线程就好比车间里的工人。一个进程可以包括多个线程。 </p>
-<p><img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/image-20200324095057176.png" alt="image-20200324095057176" style="zoom:33%;"></p>
+<img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/image-20200324095057176.png" alt="image-20200324095057176" style="zoom:33%;">
+
 <p>车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。 </p>
 <p>​                                             <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014686946" alt="640?wx_fmt=jpeg" style="zoom:50%;"> </p>
 <h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>协程可以是“主动式”的，由程序来告诉计算机，我要进入IO行为了，可以把CPU的控制权交给别人，这个实现的基础是用户态的。所以，协程在用户线程中，两个程序协商好了，通过某种方式协作运营，共享CPU控制权的方法。一般来说，这种协商的方法通用的关键字是yield。 </p>
@@ -1796,7 +2051,8 @@
           <h1 id="TCP是如何实现可靠传输的"><a href="#TCP是如何实现可靠传输的" class="headerlink" title="TCP是如何实现可靠传输的"></a>TCP是如何实现可靠传输的</h1><h2 id="TCP实现可靠传输的原理"><a href="#TCP实现可靠传输的原理" class="headerlink" title="TCP实现可靠传输的原理"></a>TCP实现可靠传输的原理</h2><h3 id="⭐停止等待协议"><a href="#⭐停止等待协议" class="headerlink" title="⭐停止等待协议"></a>⭐停止等待协议</h3><blockquote>
 <p><strong>发送方每发送一个分组就等待接收方发出确认报文，在收到对方的确认后再发送下一个分组。</strong></p>
 </blockquote>
-<p><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-TCP是如何实现可靠传输的/image-20200323205552613.png" alt="image-20200323205552613" style="zoom:67%;"></p>
+<img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-TCP是如何实现可靠传输的/image-20200323205552613.png" alt="image-20200323205552613" style="zoom:67%;">
+
 <blockquote>
 <p><strong>发送方出现差错时：</strong>接收方接收到有差错的报文，则丢弃。而<strong>发送方在一段时间内没有接收到接收方的确认报文，则重传报文。</strong></p>
 </blockquote>
@@ -2024,192 +2280,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/23/三分钟计算机网络-三次握手和四次挥手/" itemprop="url">三分钟计算机网络-三次握手和四次挥手</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T14:25:38+08:00">
-                2020-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,063字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  7分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="白话讲明白三次握手和四次握手"><a href="#白话讲明白三次握手和四次握手" class="headerlink" title="白话讲明白三次握手和四次握手"></a>白话讲明白三次握手和四次握手</h1><h1 id="答应我，这次真的要懂！白话讲明白三次握手和四次握手"><a href="#答应我，这次真的要懂！白话讲明白三次握手和四次握手" class="headerlink" title="答应我，这次真的要懂！白话讲明白三次握手和四次握手"></a>答应我，这次真的要懂！白话讲明白三次握手和四次握手</h1><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp" alt="img" style="zoom:67%;"> </p>
-<p>先用<strong>通俗的语言</strong>来了解以下三次握手的过程：<strong>发送方为张三，接收方为李四</strong></p>
-<blockquote>
-<p>张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了</p>
-<p><strong>张三：嘿！！！李四，能听到我说话吗？！（发送方请求连接）</strong></p>
-<p><strong>李四：嘿！！！我能听到啊，你能不能听到呀！！（接收方接收请求，并向发送方发送请求建立连接）</strong></p>
-<p><strong>张三：我能听到！！！（确认连接）</strong></p>
-<p>张三：······（尬聊）</p>
-<p>李四：······（尬聊）</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/23/三分钟计算机网络-三次握手和四次挥手/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2258,7 +2328,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2280,7 +2350,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2360,7 +2430,7 @@
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie-Session/">Cookie&Session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Get-Post方法/">Get&Post方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多源BFS/">多源BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程的通信方式/">进程的通信方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie-Session/">Cookie&Session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Get-Post方法/">Get&Post方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多源BFS/">多源BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心算法/">贪心算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程的通信方式/">进程的通信方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
