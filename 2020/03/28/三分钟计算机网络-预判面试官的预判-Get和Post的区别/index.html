@@ -462,9 +462,8 @@
 </blockquote>
 <p>👨‍⚖️面试官：就这？还有吗？</p>
 <p>👦我： emmm…我就知道这么多😭</p>
-<p>👨‍⚖️面试官：那行<del>没关系</del>我们继续吧（<strong>回去等通知吧</strong>）</p>
+<p>👨‍⚖️面试官：那行~没关系~我们继续吧（<strong>回去等通知吧</strong>）</p>
 <a id="more"></a>
-
 <h2 id="深入理解Get和Post"><a href="#深入理解Get和Post" class="headerlink" title="深入理解Get和Post"></a>深入理解Get和Post</h2><p>众所周知，Get和Post是基于HTTP协议的两种请求方法，而HTTP协议是基于TCP/IP的，那么Get和Post也是基于TCP/IP的，也就是说它们都是基于TCP进行请求的。那么它们能做的事情应该是一样的，也就是说在Get方法中使用RequestBody传递数据、在Post方法中使用URL传递数据，在技术上是可行的，<strong>那么为什么要分为Get和Post呢？</strong><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/v2-b6006698e6520984bd39040fcec09ab4_b.png" alt="img" style="zoom:50%;"></p>
 <p><strong>把TCP协议比喻成一辆汽车</strong>，那么我们使用TCP来运输数据是可靠的，不会发生丢包或少包的现象。但是如果路上跑的全部都是看起来一模一样的汽车，那么这个师姐就会一团混乱，送急件的汽车可能会被前面满载货物的汽车拦堵在路上，整个交通系统会瘫痪。为了避免这种情况发生，<strong>交通规则HTTP协议诞生了</strong>。</p>
 <p>HTTP协议给汽车运输设定了好几个运输类别，如GET/POST/PUT/DELETE等等，HTTP规定，当这辆车是GET请求时，<strong>那么需要传送的数据就要放在这辆车的车顶（URL上）以方便记录。当然你可以把一点点数据偷偷地放在车厢中（RequestBody中）</strong>，当然这并不光彩，也不一定会被服务器所接纳。</p>
@@ -472,35 +471,26 @@
 <blockquote>
 <p>所以<strong>HTTP协议只是一个行为准则，而TCP协议才是GET和POST实现的基准。</strong></p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003532393.png" alt="image-20200329003532393" style="zoom:53%;">
-
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003342562.png" alt="image-20200329003342562" style="zoom:60%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003532393.png" alt="image-20200329003532393" style="zoom:53%;"></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003342562.png" alt="image-20200329003342562" style="zoom:60%"></p>
 <p>现在我们知道<strong>GET和POST本质上都是TCP连接，在传输中并没有什么太大的区别</strong>，但是<strong>由于HTTP协议和浏览器的限制</strong>导致它们在应用过程中体现出一些不同之处。</p>
 <p>但是！但是！但是！你以为这就结束了吗？那就真的图样图森破了，<strong>GET和POST的真正区别是什么呢？</strong></p>
 <h2 id="揭开卢头山真面目"><a href="#揭开卢头山真面目" class="headerlink" title="揭开卢头山真面目"></a>揭开卢头山真面目</h2><p>GET和POST有什么区别呢？<strong>打开我的Charles抓包工具</strong>，用一个POST请求和一个GET请求我的网站，看看抓出来了什么东西？</p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004540193.png" alt="image-20200329004540193" style="zoom:67%;">
-
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004613670.png" alt="image-20200329004613670" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004540193.png" alt="image-20200329004540193" style="zoom:67%;"></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004613670.png" alt="image-20200329004613670" style="zoom:67%;"></p>
 <p>如上图所示，我用POST请求一个login接口，我点击一下登录按钮，理论上只会发送一个请求数据包给服务器，但是它却发了两个请求，<strong>有趣</strong>，点进去两个login包看看是什么？</p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011459377.png" alt="image-20200329011459377" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011459377.png" alt="image-20200329011459377" style="zoom:67%;"></p>
 <p>可以看到第一个login包<strong>之前也没有与服务器建立连接Kept Alive = No，所以此次连接花费了Connect = 17ms</strong></p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005130324.png" alt="image-20200329005130324" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005130324.png" alt="image-20200329005130324" style="zoom:67%;"></p>
 <p>再进去Contents看看提交了什么内容，可以看到也就是一些很常规的头信息，例如用户信息（User-Agent）、是否使用持久连接（Connection）······<strong>貌似并没有找到我们要提交的用户名和密码啊？由此可以得出一个结论，这只是一个请求与服务器连接的数据包。</strong></p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005723716.png" alt="image-20200329005723716" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005723716.png" alt="image-20200329005723716" style="zoom:67%;"></p>
 <p>然后我们再来看<strong>第二个login数据包</strong>，我们可以观察到，第二个login数据包并没有发起连接（Connect字段空），而且<strong>Kept Alive = Yes</strong>，代表客户端与服务器之前已经建立连接了，一直保持着连接，<strong>这证明了第一个数据包的作用是与服务器握手连接</strong>，我们继续看Contents。</p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329010202321.png" alt="image-20200329010202321" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329010202321.png" alt="image-20200329010202321" style="zoom:67%;"></p>
 <p>wocwocwoc（疯狂三连），这不就是我要发的POST请求吗？RequestBody里熟悉的username和password字段，返回的JSON是渲染到页面上的数据。到这里为止，我们的POST请求才真正完成了。</p>
 <blockquote>
 <p>所以，<strong>POST请求会发送两个数据包，第一个数据包会先去和服务器请求连接，而第二个数据包才是真正将数据传送去服务器进行请求。</strong>（听说Firefox对Post请求只会发出一个TCP包，逃~）</p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011626759.png" alt="image-20200329011626759" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011626759.png" alt="image-20200329011626759" style="zoom:67%;"></p>
 <blockquote>
 <p>而GET请求每次只会发送一个数据包，但是作者观察其Kept Alive=Yes，有可能是之前已经连接过该服务器了，这个问题还没得到验证，之后再验证吧，如果读者有什么看法或者我文章里有什么错误欢迎指出！</p>
 </blockquote>

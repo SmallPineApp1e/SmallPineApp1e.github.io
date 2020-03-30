@@ -439,9 +439,7 @@
       
         
           <h1 id="Spring-Boot实现系统启动任务"><a href="#Spring-Boot实现系统启动任务" class="headerlink" title="Spring Boot实现系统启动任务"></a>Spring Boot实现系统启动任务</h1><h2 id="CommandLineRunner"><a href="#CommandLineRunner" class="headerlink" title="CommandLineRunner"></a>CommandLineRunner</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">99</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCommandLineRunner1</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"MyCommandLineRunner1&gt;&gt;&gt;"</span>+Arrays.toString(args))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">98</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCommandLineRunner2</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"MyCommandLineRunner2&gt;&gt;&gt;"</span>+Arrays.toString(args))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>注意：</p>
 <ol>
 <li><p>将系统启动类注册到容器当中去，使用<code>@Component</code></p>
@@ -807,7 +805,6 @@
       
         
           <h2 id="book-properties"><a href="#book-properties" class="headerlink" title="book.properties"></a>book.properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book.id=19</span><br><span class="line">book.name=三国演义</span><br><span class="line">book.author=罗贯中</span><br></pre></td></tr></table></figure>
-
 <h2 id="Book实体类"><a href="#Book实体类" class="headerlink" title="Book实体类"></a>Book实体类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注册到Spring容器</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="comment">//加入classpath路径下的对应配置文件</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:book.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span></span>&#123;</span><br><span class="line">    <span class="comment">//注入属性的值,$&#123;&#125;动态获取配置文件中的值</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.id&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.name&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;book.author&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String author;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*getter and setter*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
@@ -989,7 +986,6 @@
 <p>Object类是<strong>所有类的父类</strong>！它本身没有父类，它已经是<strong>顶层类</strong>。</p>
 </blockquote>
 <h2 id="equals-Object-obj-方法"><a href="#equals-Object-obj-方法" class="headerlink" title="equals(Object obj)方法"></a>equals(Object obj)方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> == obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>返回值是布尔类型，方法参数为Object类型，即<strong>任何类型</strong>的参数都可以传递进去。</p>
 <p>用于比较<strong>其它对象与本对象的内存地址</strong>是否相等。</p>
 <p><strong>引用</strong>数据类型 “==” 用于<strong>比较两个对象的内存地址</strong>。</p>
@@ -1354,7 +1350,6 @@
 <p><strong>在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法</strong></p>
 </blockquote>
 <h2 id="定义格式"><a href="#定义格式" class="headerlink" title="定义格式"></a>定义格式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">父类类型或接口类型 引用变量 = <span class="keyword">new</span> 子类对象();</span><br></pre></td></tr></table></figure>
-
 <h2 id="成员变量的特点"><a href="#成员变量的特点" class="headerlink" title="成员变量的特点"></a>成员变量的特点</h2><p>编译时：参考父类是否有该成员变量，如果有则编译成功，否则编译失败</p>
 <p>运行时：运行的是父类的变量值</p>
 <blockquote>
@@ -1367,192 +1362,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/26/JAVASE-多态/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/25/JAVASE-接口/" itemprop="url">三分钟Java基础-接口</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T23:56:53+08:00">
-                2019-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  695字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><blockquote>
-<p><strong>接口是功能的集合</strong>，同样是一种数据类型，是比抽象类更为抽象的“类”。</p>
-<p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
-</blockquote>
-<h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
-<p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/25/JAVASE-接口/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1754,6 +1563,191 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/25/JVM的四种垃圾回收算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/08/25/JAVASE-接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/25/JAVASE-接口/" itemprop="url">三分钟Java基础-接口</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-25T23:56:53+08:00">
+                2019-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  695字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><blockquote>
+<p><strong>接口是功能的集合</strong>，同样是一种数据类型，是比抽象类更为抽象的“类”。</p>
+<p><strong>接口只描述所应该具备的方法，并没有具体实现</strong>，具体的实现由接口的实现类（相当于接口的子类）来完成。<strong>这样将功能的定义与实现分离，优化了程序设计。</strong></p>
+</blockquote>
+<h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><h3 id="抽象方法"><a href="#抽象方法" class="headerlink" title="抽象方法"></a>抽象方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> 返回值类型 方法名字(参数列表);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>接口中的成员方法<strong>全部都为抽象方法！</strong></p>
+<p>可以省略修饰符public abstract，但<strong>仍然存在！</strong></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/25/JAVASE-接口/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

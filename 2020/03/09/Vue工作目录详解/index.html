@@ -451,7 +451,6 @@
 <p>在<code>main.js</code>里可以看到vue将渲染<code>#app</code>的标签元素</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200219232436027.png" alt="image-20200219232436027"></p>
 <a id="more"></a>
-
 <p>实际上在首页看到的内容就是template渲染的内容，也就是<code>&lt;App/&gt;</code></p>
 <p>而<code>App</code>是在<code>main.js</code>里定义的一个组件<code>components:{App}</code></p>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200219232656443.png" alt="image-20200219232656443"></p>
@@ -467,16 +466,15 @@
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200219235533212.png" alt="image-20200219235533212"></p>
 <p>打开<code>HelloWorld.vue</code>组件，看到的就是首页图片下面的那一堆链接内容。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">	&lt;!--省略更多...--&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &apos;Welcome to Your Vue.js App&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Add &quot;scoped&quot; attribute to limit CSS to this component only --&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">   省略...</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
 <h2 id="二、Vue创建SPA应用编写工程代码步骤"><a href="#二、Vue创建SPA应用编写工程代码步骤" class="headerlink" title="二、Vue创建SPA应用编写工程代码步骤"></a>二、Vue创建SPA应用编写工程代码步骤</h2><ol>
 <li>在<code>components</code>目录下编写自己需要的组件</li>
 </ol>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200220000203318.png" alt="image-20200220000203318"></p>
-<ol start="2">
+<ol>
 <li>在<code>router</code>目录下的<code>index.js</code>中注册该组件，组件只有注册完成后才能根据特定路由去跳转</li>
 </ol>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200220000335111.png" alt="image-20200220000335111"></p>
-<ol start="3">
+<ol>
 <li>该组件显示的位置就是在<code>App.vue</code>的<code>&lt;router-view/&gt;</code>中</li>
 </ol>
 <p><img src="//smallpineapp1e.github.io/2020/03/09/Vue工作目录详解/image-20200220000602918.png" alt="image-20200220000602918"></p>

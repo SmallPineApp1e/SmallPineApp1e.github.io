@@ -441,7 +441,6 @@
 <p><strong>通俗易懂的回答</strong>：一致性是指正确状态的一致性，假设张三今天要去买一件150￥的衣服，而张三的余额里只有140￥，当张三结账时，他会发现结账失败（事务回滚），因为在数据库中必须<strong>满足余额列 ≥ 0的约束，</strong>也就是说<strong>余额正确状态的一致性就是保证余额不小于0，即需要满足数据库的约束条件</strong>，如果张三付款后，张三的余额里只剩下-10￥，显然这不符合约束条件按，所以当状态从150￥转变为-10￥时，违反了数据库的一致性，此时事务会产生回滚。</p>
 <p>参考博客：<a href="https://www.zhihu.com/question/31346392" target="_blank" rel="noopener">https://www.zhihu.com/question/31346392</a></p>
 <a id="more"></a>
-
 <h2 id="3-隔离性（Isolation）"><a href="#3-隔离性（Isolation）" class="headerlink" title="3. 隔离性（Isolation）"></a>3. 隔离性（Isolation）</h2><p>概念回答：当多个事务并发地访问数据库时，在同一时间点只允许单个事务对数据库进行操作，不允许多个事务同时操作数据库。</p>
 <p><strong>通俗易懂的回答</strong>：例如张三今天要去买一件150￥的衣服和10￥的Macbook Pro电脑贴纸，他的账户有200￥，张三在买衣服结账的时候（事务A）同时在手机下单买了电脑贴纸（事务B），那么事务A和事务B将<strong>按照某种先后顺序依次操作张三的账户数据库，减少张三的余额</strong>。</p>
 <h2 id="4-持久性（Durability）"><a href="#4-持久性（Durability）" class="headerlink" title="4. 持久性（Durability）"></a>4. 持久性（Durability）</h2><p>概念回答：事务的持久性是指事务执行成功以后，该事务对数据库所作的更改会持久的保存在数据库之中，不会无缘无故的回滚。</p>

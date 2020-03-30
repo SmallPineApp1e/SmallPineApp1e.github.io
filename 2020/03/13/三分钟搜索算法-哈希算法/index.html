@@ -455,11 +455,9 @@
 </ul>
 <p>例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MD5(&quot;我今天讲哈希算法！&quot;) = 425f0d5a917188d2c3c3dc85b5e4f2cb</span><br><span class="line">MD5(&quot;我今天讲哈希算法&quot;) = a1fb91ac128e6aa37fe42c663971ac3d</span><br></pre></td></tr></table></figure>
-
 <p>即使只相差了一个<code>!</code>，但是得出的哈希值变动非常的大。</p>
 <p>哈希算法的应用又非常多，例如：安全加密、数据校验、唯一标识、散列函数、负载均衡、数据分片、分布式存储。</p>
 <a id="more"></a>
-
 <h2 id="1-安全加密"><a href="#1-安全加密" class="headerlink" title="1. 安全加密"></a>1. 安全加密</h2><p>最常用于加密的哈希算法是<code>MD5</code>（MD5 Message-Digest Algorithm，MD5 消息摘要算法）加密算法和<code>SHA</code>（Secure Hash Algorithm，安全散列算法）。</p>
 <blockquote>
 <p>着重解释一下为什么散列冲突的概率要小而不是完全消除散列冲突，其实原理就是<code>鸽巢原理</code>，意思是只有10个鸽巢，但是有11只鸽子，所以有1个鸽巢必定会有2只鸽子；换而言之，哈希算法产生的哈希值的长度是一定的，比如以MD5加密算法为例，它生成的哈希值是128位的二进制串，所以能够表示的数据非常有限，最多能表示2^128个数据，而我们<strong>要加密的数据是无穷无尽的</strong>，所以当第(2^128)+1个数据进行MD5加密时（假设每个数据均不相同），必定会产生哈希碰撞。</p>
