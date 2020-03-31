@@ -107,13 +107,13 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003532393.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329003342562.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004540193.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004613670.png">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200331095332172.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011459377.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005130324.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329005723716.png">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329010202321.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011626759.png">
-<meta property="og:updated_time" content="2020-03-28T17:18:47.156Z">
+<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200331095209431.png">
+<meta property="og:updated_time" content="2020-03-31T01:56:03.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟计算机网络-预判面试官的预判-Get和Post的区别">
 <meta name="twitter:description" content="Get和Post方法👨‍⚖️面试官：小伙子听说你计算机网络整挺好，你知道Get和Post的区别吗？ 👦我：     Get在浏览器回退时是无害的，但是Post回退时会再次提交请求。 Get请求会被浏览器主动cache，而Post不会，除非主动设置。 Get请求只能进行URL编码，而Post支持多种编码方式。 Get请求参数会被完整保留在浏览器历史记录里，而Post请求中的参数不会被保留。 Ge">
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,281字
+                  1,306字
                 </span>
               
 
@@ -481,9 +481,9 @@
 <h2 id="揭开卢头山真面目"><a href="#揭开卢头山真面目" class="headerlink" title="揭开卢头山真面目"></a>揭开卢头山真面目</h2><p>GET和POST有什么区别呢？<strong>打开我的Charles抓包工具</strong>，用一个POST请求和一个GET请求我的网站，看看抓出来了什么东西？</p>
 <img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004540193.png" alt="image-20200329004540193" style="zoom:67%;">
 
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329004613670.png" alt="image-20200329004613670" style="zoom:67%;">
+<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200331095332172.png" alt="image-20200331095332172" style="zoom:60%;">
 
-<p>如上图所示，我用POST请求一个login接口，我点击一下登录按钮，理论上只会发送一个请求数据包给服务器，但是它却发了两个请求，<strong>有趣</strong>，点进去两个login包看看是什么？</p>
+<p>如上图所示，我用POST请求一个login接口，我点击一下登录按钮，<strong>理论上只会发送一个请求数据包给服务器，但是它却发了两个请求</strong>，<strong><del>（有趣）</del></strong>，让我们点进去两个login包看看是什么东西~</p>
 <img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011459377.png" alt="image-20200329011459377" style="zoom:67%;">
 
 <p>可以看到第一个login包<strong>之前也没有与服务器建立连接Kept Alive = No，所以此次连接花费了Connect = 17ms</strong></p>
@@ -497,9 +497,9 @@
 
 <p>wocwocwoc（疯狂三连），这不就是我要发的POST请求吗？RequestBody里熟悉的username和password字段，返回的JSON是渲染到页面上的数据。到这里为止，我们的POST请求才真正完成了。</p>
 <blockquote>
-<p>所以，<strong>POST请求会发送两个数据包，第一个数据包会先去和服务器请求连接，而第二个数据包才是真正将数据传送去服务器进行请求。</strong>（听说Firefox对Post请求只会发出一个TCP包，逃~）</p>
+<p>所以，<strong>POST请求会发送两个数据包，第一个数据包会先去和服务器请求连接，而第二个数据包才是真正将数据传送去服务器进行请求。</strong>（<strong>听说Firefox对Post请求只会发出一个TCP包，感兴趣的读者可以去研究下是为什么，先逃为敬hhh~</strong>）</p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200329011626759.png" alt="image-20200329011626759" style="zoom:67%;">
+<img src="//smallpineapp1e.github.io/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/image-20200331095209431.png" alt="image-20200331095209431" style="zoom:80%;">
 
 <blockquote>
 <p>而GET请求每次只会发送一个数据包，但是作者观察其Kept Alive=Yes，有可能是之前已经连接过该服务器了，这个问题还没得到验证，之后再验证吧，如果读者有什么看法或者我文章里有什么错误欢迎指出！</p>
@@ -621,7 +621,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +632,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

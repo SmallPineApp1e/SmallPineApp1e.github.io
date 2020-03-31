@@ -315,6 +315,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-希尔排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/09/三分钟排序算法-希尔排序/" itemprop="url">三分钟排序算法-希尔排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T11:43:18+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  994字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>如果还没真正了解过直接插入排序的读者可先去看看直接插入排序的原理及实现：<a href="https://blog.csdn.net/weixin_41949328/article/details/104580820" target="_blank" rel="noopener">一文掌握直接插入排序</a></p>
+<h1 id="1-希尔排序原理介绍"><a href="#1-希尔排序原理介绍" class="headerlink" title="1. 希尔排序原理介绍"></a>1. 希尔排序原理介绍</h1><p>希尔排序是直接插入排序的一种<strong>更高效的改进版本</strong>。但是希尔排序是一种<strong>非稳定</strong>排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ol>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
+<li>插入排序一般来说是非常低效的，因为插入排序每次只能将数据移动一位；</li>
+</ol>
+<p>希尔排序的原理：将一个待排序的数组分为若干个<strong>以Step为增量</strong>的若干个子序列，对这若干个子序列<strong>依次进行直接插入排序</strong>，在每一次排序完以后的S<strong>tep呈递减趋势变化</strong>，当<strong>Step为1</strong>时，此时的序列<strong>已经基本有序</strong>，对<strong>整个序列进行直接插入排序。当增量为0时代表数组已经有序。</strong></p>
+<h1 id="2-算法流程演示："><a href="#2-算法流程演示：" class="headerlink" title="2. 算法流程演示："></a>2. 算法流程演示：</h1><p>以下图为例：待排序数组为：<strong>[3, 5, 1, 2, 4, 6, 7]</strong></p>
+<ol>
+<li>增量Step取数组长度的一半即 7 / 2 = 3，意思就是每3个增量的元素被视为同一个序列当中</li>
+</ol>
+<p><strong>（我们主观逻辑上的序列，本质上还是只有一个数组）</strong></p>
+<p>（index = 0，index = 3， index = 6）三个元素组成一个序列：[3, 2, 7]</p>
+<p>（index = 1，index = 4，index = 7(超出数组长度)）的两个元素组成一个序列：[5, 4]</p>
+<p>（index = 2，index = 5）的两个元素组成一个序列：[1, 6]</p>
+<p>我们对这三个序列进行直接插入排序，排序完成后各个子序列的状态是：[2, 3, 7]，[4, 5]，[1, 6]</p>
+<p>从原序列来看，排序后的序列为：<strong>[2, 4, 1, 3, 5, 6, 7]</strong>，此时看到数组已经大致有序了，较大的数都在数组靠右的位置，较小的数都在数组靠左的位置。</p>
+<ol start="2">
+<li>增量以原来的1/2递减，即Step = Step &gt;&gt; 1 = 3 &gt;&gt; 1 = 1，此时增量为1，待排序的序列为整个数组序列[2, 4, 1, 3, 5, 6, 7]</li>
+</ol>
+<p>使用直接插入排序对整个序列进行排序，具体流程就不演示了，我们可以发现只需要移动三次就可以完成排序了，分别是1和4交换位置，1和2交换位置，3和4交换位置，<strong>希尔排序在面对数据量较大的数组时表现出来的速度会比直接插入排序快很多。</strong></p>
+<ol start="3">
+<li>Step &gt;&gt; 1 = 0，表明数组已有序，排序完成。</li>
+</ol>
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-希尔排序/20200229234108792.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/09/三分钟排序算法-希尔排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-直接插入排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2018,209 +2220,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/02/15/动态规划入门篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/15/动态规划入门篇/" itemprop="url">三分钟算法-动态规划入门篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-15T20:25:19+08:00">
-                2020-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,981字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  8分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="入门动态规划的归纳"><a href="#入门动态规划的归纳" class="headerlink" title="入门动态规划的归纳"></a>入门动态规划的归纳</h1><h2 id="一、动态规划概念"><a href="#一、动态规划概念" class="headerlink" title="一、动态规划概念"></a>一、动态规划概念</h2><h3 id="1-什么是动态规划"><a href="#1-什么是动态规划" class="headerlink" title="1. 什么是动态规划"></a>1. 什么是动态规划</h3><p>​        动态规划应用于拥有以下特点的问题：一般需要使用动态规划时，该问题的解可以由更小的解得出，例如：当求单位为n的最优解时，可以转换为求第n-1个单位的最优解······也就是说问题的解可以根据子问题的解求出。</p>
-<h3 id="2-动态规划问题的特点"><a href="#2-动态规划问题的特点" class="headerlink" title="2. 动态规划问题的特点"></a>2. 动态规划问题的特点</h3><p>① 问题具有<strong>最优子结构性质</strong>。</p>
-<blockquote>
-<p>如果问题的最优解所包含的子问题的解也是最优的，那么该问题具有最优子结构</p>
-</blockquote>
-<p>② <strong>无后效性</strong>。</p>
-<blockquote>
-<p>简单理解：某个子问题的解一旦确定则不会被改变，求其它子问题的解时仅会使用到这些已经确定好的解</p>
-</blockquote>
-<h3 id="3-动态规划的一般思路"><a href="#3-动态规划的一般思路" class="headerlink" title="3.动态规划的一般思路"></a>3.动态规划的一般思路</h3><p>① 将原问题分解为子问题</p>
-<blockquote>
-<p>把原问题分解为若干个子问题，子问题的规模比原问题更小，但求解的形式是相似的。</p>
-<p>子问题的解一旦求出就会被保存，所以每个子问题的解仅需求解一次</p>
-</blockquote>
-<p>② 确定状态并确定数组（数组维度和长度）</p>
-<blockquote>
-<p>我们往往将子问题的解称为一种“状态”，这种状态的维度一般在确定状态后就可以马上得出，如果这里你不理解没有关系，可以看下面的例题，很好理解~</p>
-</blockquote>
-<p>③ 确定初始（边界）状态的值</p>
-<blockquote>
-<p>随着子问题的不断拆分，最终会到达边界，而边界值是可以直接得出的，称为动态规划的初始值或边界值；</p>
-</blockquote>
-<p>④ 确定状态转移方程（递推公式）</p>
-<blockquote>
-<p>这一步是最重要的！它决定我们能否解决实际问题</p>
-<p>找出不同状态之间（前一个子问题与后一个子问题）的关联关系，如何根据之前的状态求出后一个状态，这也可以理解成递推公式</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/02/15/动态规划入门篇/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2269,7 +2268,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2280,7 +2279,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

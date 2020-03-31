@@ -315,6 +315,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/14/三分钟数据结构-树/" itemprop="url">三分钟数据结构-树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T09:51:42+08:00">
+                2020-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  529字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h1><p>树的三个基本概念：高度、深度、层数</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/4094a733986073fedb6b9d03f877d71e.jpg" alt="img"> </p>
+<blockquote>
+<p>高度、深度和层数的含义可以类比到生活当中，例如，高度是指一座楼的高度，从底部开始数到顶部的，叶子节点就是在地面，所以高度为0，依次往上；深度是指一个游泳池的深度，是从上往下沉的，所以水面的深度为0，依次往下数到水底下的地面；而层数是在树里的定义与现实生活相反，我们可以理解为在地面是第1层，依次往上数到最高层；</p>
+<p>所以，<strong>高度和深度是以0开始的、层数是以1开始的</strong></p>
+</blockquote>
+<p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/50f89510ad1f7570791dd12f4e9adeb4.jpg" alt="img"> </p>
+<h2 id="满二叉树和完全二叉树"><a href="#满二叉树和完全二叉树" class="headerlink" title="满二叉树和完全二叉树"></a>满二叉树和完全二叉树</h2><p>满二叉树是指<strong>除了叶子节点以外，每个节点都有两个孩子节点</strong> </p>
+<p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/09c2972d56eb0cf67e727deda0e9412b.jpg" alt="img"> </p>
+<p>完全二叉树是指<strong>树的结构严格按照从上往下，从左往右依次排列，叶子节点全部靠左排列，非叶子节点的个数要达到最大值</strong></p>
+<p><img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/18413c6597c2850b75367393b401ad60.jpg" alt="img"> </p>
+<h2 id="完全二叉树和满二叉树的一些重要性质"><a href="#完全二叉树和满二叉树的一些重要性质" class="headerlink" title="完全二叉树和满二叉树的一些重要性质"></a>完全二叉树和满二叉树的一些重要性质</h2><blockquote>
+<ol>
+<li>按照从下往下，从右往左的规则，<strong>第一个非叶子节点</strong>的数组下标是<code>arr.length / 2 - 1</code></li>
+<li>父节点的数组下标为<code>i</code>，则左孩子节点的数组下标为<code>2 * i + 1</code></li>
+</ol>
+</blockquote>
+<h2 id="二叉树的四种遍历方式"><a href="#二叉树的四种遍历方式" class="headerlink" title="二叉树的四种遍历方式"></a>二叉树的四种遍历方式</h2><p> <img src="//smallpineapp1e.github.io/2020/03/14/三分钟数据结构-树/ab103822e75b5b15c615b68560cb2416.jpg" alt="img"> </p>
+<h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    System.out.print(node.val+<span class="string">" "</span>);</span><br><span class="line">    preOrder(node.left);</span><br><span class="line">    preOrder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    inOrder(node.left);</span><br><span class="line">    System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">    inOrder(node.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">postOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    postOrder(node.left);</span><br><span class="line">    postOrder(node.right);</span><br><span class="line">    System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//层次遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node == <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    Deque&lt;Node&gt; queue = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">    queue.addLast(node);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">        Node tempNode = queue.removeFirst();</span><br><span class="line">        <span class="keyword">if</span>(tempNode.left != <span class="keyword">null</span>)</span><br><span class="line">            queue.addLast(tempNode.left);</span><br><span class="line">        <span class="keyword">if</span>(tempNode.right != <span class="keyword">null</span>)</span><br><span class="line">            queue.addLast(tempNode.right);</span><br><span class="line">        System.out.print(tempNode.val+ <span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -438,7 +634,8 @@
 
       
         
-          <p> <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/432360759ea2e98eb287a006cce87a9b.jpg" alt="img"> </p>
+          <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/432360759ea2e98eb287a006cce87a9b.jpg" alt="img" style="zoom:67%;"> 
+
 <h1 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h1><h2 id="什么是哈希算法"><a href="#什么是哈希算法" class="headerlink" title="什么是哈希算法"></a>什么是哈希算法</h2><p><strong>将任意长度的二进制值串映射成一段固定长度的二进制值串</strong>，这种映射规则就是哈希算法。通过原始数据映射之后得到的二进制值串就是<strong>哈希值</strong>。</p>
 <p>哈希算法满足的基本要求：</p>
 <ul>
@@ -1993,208 +2190,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-希尔排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/09/三分钟排序算法-希尔排序/" itemprop="url">三分钟排序算法-希尔排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T11:43:18+08:00">
-                2020-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  994字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>如果还没真正了解过直接插入排序的读者可先去看看直接插入排序的原理及实现：<a href="https://blog.csdn.net/weixin_41949328/article/details/104580820" target="_blank" rel="noopener">一文掌握直接插入排序</a></p>
-<h1 id="1-希尔排序原理介绍"><a href="#1-希尔排序原理介绍" class="headerlink" title="1. 希尔排序原理介绍"></a>1. 希尔排序原理介绍</h1><p>希尔排序是直接插入排序的一种<strong>更高效的改进版本</strong>。但是希尔排序是一种<strong>非稳定</strong>排序算法。</p>
-<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
-<ol>
-<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
-<li>插入排序一般来说是非常低效的，因为插入排序每次只能将数据移动一位；</li>
-</ol>
-<p>希尔排序的原理：将一个待排序的数组分为若干个<strong>以Step为增量</strong>的若干个子序列，对这若干个子序列<strong>依次进行直接插入排序</strong>，在每一次排序完以后的S<strong>tep呈递减趋势变化</strong>，当<strong>Step为1</strong>时，此时的序列<strong>已经基本有序</strong>，对<strong>整个序列进行直接插入排序。当增量为0时代表数组已经有序。</strong></p>
-<h1 id="2-算法流程演示："><a href="#2-算法流程演示：" class="headerlink" title="2. 算法流程演示："></a>2. 算法流程演示：</h1><p>以下图为例：待排序数组为：<strong>[3, 5, 1, 2, 4, 6, 7]</strong></p>
-<ol>
-<li>增量Step取数组长度的一半即 7 / 2 = 3，意思就是每3个增量的元素被视为同一个序列当中</li>
-</ol>
-<p><strong>（我们主观逻辑上的序列，本质上还是只有一个数组）</strong></p>
-<p>（index = 0，index = 3， index = 6）三个元素组成一个序列：[3, 2, 7]</p>
-<p>（index = 1，index = 4，index = 7(超出数组长度)）的两个元素组成一个序列：[5, 4]</p>
-<p>（index = 2，index = 5）的两个元素组成一个序列：[1, 6]</p>
-<p>我们对这三个序列进行直接插入排序，排序完成后各个子序列的状态是：[2, 3, 7]，[4, 5]，[1, 6]</p>
-<p>从原序列来看，排序后的序列为：<strong>[2, 4, 1, 3, 5, 6, 7]</strong>，此时看到数组已经大致有序了，较大的数都在数组靠右的位置，较小的数都在数组靠左的位置。</p>
-<ol start="2">
-<li>增量以原来的1/2递减，即Step = Step &gt;&gt; 1 = 3 &gt;&gt; 1 = 1，此时增量为1，待排序的序列为整个数组序列[2, 4, 1, 3, 5, 6, 7]</li>
-</ol>
-<p>使用直接插入排序对整个序列进行排序，具体流程就不演示了，我们可以发现只需要移动三次就可以完成排序了，分别是1和4交换位置，1和2交换位置，3和4交换位置，<strong>希尔排序在面对数据量较大的数组时表现出来的速度会比直接插入排序快很多。</strong></p>
-<ol start="3">
-<li>Step &gt;&gt; 1 = 0，表明数组已有序，排序完成。</li>
-</ol>
-<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-希尔排序/20200229234108792.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/09/三分钟排序算法-希尔排序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2243,7 +2238,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2254,7 +2249,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

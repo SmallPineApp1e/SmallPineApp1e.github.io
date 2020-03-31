@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/715de12e09843a1c4a5f99ffd00c9ef1.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/65ee084ee47ae9ef6f53f618c65d00d8.jpg">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/138b060ee522cd2eae83c0c31a16bc7c.jpg">
-<meta property="og:updated_time" content="2020-03-13T16:19:40.435Z">
+<meta property="og:updated_time" content="2020-03-31T13:56:10.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三分钟算法-哈希算法">
 <meta name="twitter:description" content="哈希算法什么是哈希算法将任意长度的二进制值串映射成一段固定长度的二进制值串，这种映射规则就是哈希算法。通过原始数据映射之后得到的二进制值串就是哈希值。 哈希算法满足的基本要求：  从哈希值不能反向推导出原始数据（所以哈希算法也叫单向哈希算法）；  对输入数据非常敏感，哪怕原始数据只修改了一个 Bit，最后得到的哈希值也大不相同；  散列冲突的概率要很小，对于不同的原始数据，哈希值相同的概率非">
@@ -440,7 +440,8 @@
       
 
       
-        <p> <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/432360759ea2e98eb287a006cce87a9b.jpg" alt="img"> </p>
+         <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/432360759ea2e98eb287a006cce87a9b.jpg" alt="img" style="zoom:67%;"> 
+
 <h1 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h1><h2 id="什么是哈希算法"><a href="#什么是哈希算法" class="headerlink" title="什么是哈希算法"></a>什么是哈希算法</h2><p><strong>将任意长度的二进制值串映射成一段固定长度的二进制值串</strong>，这种映射规则就是哈希算法。通过原始数据映射之后得到的二进制值串就是<strong>哈希值</strong>。</p>
 <p>哈希算法满足的基本要求：</p>
 <ul>
@@ -465,8 +466,10 @@
 <p>着重解释一下为什么散列冲突的概率要小而不是完全消除散列冲突，其实原理就是<code>鸽巢原理</code>，意思是只有10个鸽巢，但是有11只鸽子，所以有1个鸽巢必定会有2只鸽子；换而言之，哈希算法产生的哈希值的长度是一定的，比如以MD5加密算法为例，它生成的哈希值是128位的二进制串，所以能够表示的数据非常有限，最多能表示2^128个数据，而我们<strong>要加密的数据是无穷无尽的</strong>，所以当第(2^128)+1个数据进行MD5加密时（假设每个数据均不相同），必定会产生哈希碰撞。</p>
 </blockquote>
 <p> 下图是两串不同的字符串进行哈希算法哈希后发生哈希碰撞的哈希值</p>
-<p><img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/715de12e09843a1c4a5f99ffd00c9ef1.jpg" alt="img"></p>
-<p> <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/65ee084ee47ae9ef6f53f618c65d00d8.jpg" alt="img"> </p>
+<img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/715de12e09843a1c4a5f99ffd00c9ef1.jpg" alt="img" style="zoom:67%;">
+
+ <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/65ee084ee47ae9ef6f53f618c65d00d8.jpg" alt="img" style="zoom:67%;"> 
+
 <blockquote>
 <p>即便存在哈希碰撞的情况，但是概率非常的小，试想一想，用1个数据去进行MD5加密，哈希碰撞的概率就是1/2^128，所以MD5已经做的很好了。此外，强调一点的是，没有绝对的安全，只有更复杂、更安全的加密算法，破解时需要付出更大的代价。</p>
 </blockquote>
@@ -502,7 +505,8 @@
 <p>该如何决定将哪个数据放到哪个机器上呢？<strong>我们可以借用前面数据分片的思想，即通过哈希算法对数据取哈希值，然后对机器个数取模，这个最终值就是应该存储的缓存机器编号。</strong> </p>
 </blockquote>
 <p> 如果数据增多，原来的 10 个机器已经无法承受了，我们就需要扩容了，<strong>比如扩到 11 个机器，这时候麻烦就来了。因为，这里并不是简单地加个机器就可以了。</strong> 原来的数据是通过与 10 来取模的。比如 13 这个数据，存储在编号为 3 这台机器上。但是新加了一台机器中，我们对数据按照 11 取模，原来 13 这个数据就被分配到 2 号这台机器上了。 </p>
-<p> <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/138b060ee522cd2eae83c0c31a16bc7c.jpg" alt="img"> </p>
+ <img src="//smallpineapp1e.github.io/2020/03/13/三分钟搜索算法-哈希算法/138b060ee522cd2eae83c0c31a16bc7c.jpg" alt="img" style="zoom:67%;"> 
+
 <p> 因此，<strong>所有的数据都要重新计算哈希值，然后重新搬移到正确的机器上。</strong>这样就相当于，<strong>缓存中的数据一下子就都失效了</strong>。所有的数据请求都会<code>缓存穿透</code>，直接去请求数据库。这样就可能发生<code>雪崩效应</code>，压垮数据库。</p>
 <p>要一种方法，使得在新加入一个机器后，并不需要做大量的数据搬移。这时候，<strong>一致性哈希算法就要登场了。</strong></p>
 <p>解决方案： <a href="https://www.jianshu.com/p/570dc8913c20" target="_blank" rel="noopener">https://www.jianshu.com/p/570dc8913c20</a> </p>
@@ -623,7 +627,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -634,7 +638,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
