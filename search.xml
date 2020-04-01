@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>MySQL实战-日志系统</title>
+      <link href="/2020/04/01/MySQL%E5%AE%9E%E6%88%98-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/"/>
+      <url>/2020/04/01/MySQL%E5%AE%9E%E6%88%98-%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="日志系统：一条SQL更新语句是如何执行的"><a href="#日志系统：一条SQL更新语句是如何执行的" class="headerlink" title="日志系统：一条SQL更新语句是如何执行的"></a>日志系统：一条SQL更新语句是如何执行的</h1><p>与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table T(ID int primary key, c int);</span><br><span class="line">mysql&gt; update T set c=c+1 where ID=2;</span><br></pre></td></tr></table></figure><p>与查询流程不一样的是，更新流程还<strong>涉及了两个特别重要的日志模块</strong>：<strong>redo log(重做日志)和binlog(归档日志)</strong>。如果接触MySQL，这两个词一定是绕不开的。</p> <img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/11512754-1478bc80d668c2f8.webp" alt="img" style="zoom:67%;"> <h2 id="重要的日志模块：redo-log"><a href="#重要的日志模块：redo-log" class="headerlink" title="重要的日志模块：redo log"></a>重要的日志模块：redo log</h2><p>用一个现实的生活例子来跟你说清楚什么是<code>redo log</code>。</p><img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/image-20200401115414746.png" alt="image-20200401115414746" style="zoom:50%;"><a id="more"></a><p>《孔乙己》这篇文章中，酒店掌柜有一个粉板，<strong>专门用来记录客人的赊账记录（redo log）</strong>。如果赊账的人不多，那么他可以把顾客名和账目写在板上。但<strong>如果赊账的人多了，粉板总会有记不下的时候，这个时候掌柜一定还有一个专门记录赊账的账本（数据库）。</strong></p><p>如果有人要赊账或者还账的话，掌柜一般有两种做法：</p><blockquote><p>一种做法是<strong>直接把账本（数据库）翻出来，把这次赊的账加上去或者扣除掉</strong>；</p><p>另一种做法是<strong>先在粉板上记下这次的账（redo log），等打烊以后再把账本（数据库）翻出来核算</strong>。</p></blockquote><p>在生意红火柜台很忙时，掌柜<strong>一定会选择后者</strong>，因为前者操作实在是太麻烦了。首先，你得找到这个人的赊账总额那条记录。你想想，<strong>密密麻麻几十页，掌柜要找到那个名字，可能还得带上老花镜慢慢找，找到之后再拿出算盘计算，最后再将结果写回到账本上。</strong></p><p>相比之下，还是先在粉板上记一下方便。<strong>如果掌柜没有粉板的帮助，每次记账都得翻账本，效率是不是低得让人难以忍受？</strong></p><hr><p>映射到MySQL当中，如果每一次更新操作都需要写进磁盘，那么磁盘也需要找到那条记录，整个过程IO成本非常高。所以为了解决这个问题，<strong>MySQL的设计者就用了类似酒店掌柜的这个做法来提升更新效率。</strong></p><p>粉板和账本结合使用的过程，本质上就是数据库的<strong>WAL（Write-Ahead Logging）</strong>技术，意思就是<strong>先写日志，后写磁盘。等空闲的时候再写入磁盘。</strong></p><blockquote><p>当有一条记录需要更新的时候，InnoDB 引擎就会先把记录<strong>写到 redo log（粉板）里面，并更新内存，这个时候更新就算完成了，此时内存里的数据和磁盘上的数据不一致，这种情况称为存在脏页</strong>。InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面。</p></blockquote><p>如果<code>redo log</code>被写满了，那么此时InnoDB引擎会先往磁盘当中写入一部分数据，然后把这些操作记录从<code>redo log</code>中擦除掉，为<strong>新的数据</strong>腾出空间。 <img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/16a7950217b3f0f4ed02db5db59562a7.png" alt="img" style="zoom:67%;"> </p><p>InnoDB 的<code>redo log</code>是<strong>固定大小</strong>的，比如可以配置为一组 4 个文件，<strong>每个文件的大小是 1GB，那么这块“粉板”总共就可以记录 4GB 的操作</strong>。<strong>从头开始写，写到末尾就又回到开头循环写</strong></p><p><code>write_pos</code>代表当前<code>redo log</code>写入的位置，<code>check point</code>代表之前第一次写入<code>redo log</code>的操作记录，也是等待擦除的位置。如果<code>write_post</code>追上<code>check_point</code>，那么代表<code>redo log</code>无法缓存更多的数据，必须先把<code>check point</code>往前移动。</p><blockquote><p><strong>有了<code>redo log</code>，在MySQL异常重启的时候，也可以恢复之前的更新操作，因为所有操作都被记录在<code>redo log</code>当中。这个能力称为<code>crash safe</code>，也就是保证数据库“安全”地崩溃</strong></p></blockquote><p>额外说明：<code>redo log</code>也是存在于磁盘上的一个文件</p><h2 id="重要的日志模块：binlog"><a href="#重要的日志模块：binlog" class="headerlink" title="重要的日志模块：binlog"></a>重要的日志模块：binlog</h2><p><code>redo log</code>（重做日志）是<strong>InnoDB引擎特有</strong>的日志，而<strong>Server层也有自己的日志</strong>，那就是<code>binlog</code>（归档日志）</p><p><strong>了解一项技术就要先了解为什么会出现这项技术</strong>，为什么需要<code>bin log</code>呢？只要<code>redo log</code>就能保证数据库的<code>crash safe</code>了。</p><blockquote><p>因为<code>redo log</code>是InnoDB引擎特有的，而数据库在一开始的默认存储引擎是<strong>MyISAM</strong>，并没有<code>redo log</code>，只有<code>bin log</code>，但是MyISAM没有<code>crash safe</code>的能力，所以才出现了另外一套引擎InnoDB，并加入了自己的日志系统-<code>redo log</code>。</p></blockquote><p>那么<code>bin log</code>和<code>redo log</code>有什么不同呢？</p><blockquote><ol><li><code>bin log</code>是MySQL的Server层实现的，所以所有存储引擎都可以使用；而<code>redo log</code>是<strong>InnoDB引擎</strong>特有的。</li><li><code>redo log</code>是物理日志，记录的是<strong>“某个数据被修改的值”</strong>；例如<strong>“ID为2的那一行k值由1变为2”</strong>而<code>bin log</code>是记录原始的数据库操作，例如<strong>“在表名为T、列名ID值为2的行更新k的值加一”</strong></li><li><code>redo log</code>是<strong>循环写入</strong>，空间有限；而<code>bin log</code>是<strong>追加写入</strong>，也就是空间是无限的，一个文件达到指定大小的时候会自动切换到下一个文件。</li></ol></blockquote><h2 id="update语句执行流程"><a href="#update语句执行流程" class="headerlink" title="update语句执行流程"></a>update语句执行流程</h2><img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/2e5bff4910ec189fe1ee6e2ecc7b4bbe.png" alt="img" style="zoom:50%;"> <h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p><strong>为什么需要两阶段提交？</strong></p><p><strong>两阶段提交</strong>指的是保证<code>redo log</code>和<code>bin log</code>的<strong>逻辑一致性</strong>，所谓逻辑一致性，指的是你有的东西我都有，你没有的东西我也没有。</p><p>如果先写<code>redo log</code>后写<code>bin log</code>，在写完<code>redo log</code>后数据库<code>crash</code>了，那么会导致重启后写入磁盘时，多了一条记录，但<code>bin log</code><strong>没有记录这一条数据</strong>，之后使用这一份<code>bin log</code>进行数据恢复时，就会导致数据不一致。</p><p>如果先写<code>bin log</code>后写<code>redo log</code>，在写完<code>bin log</code>后数据库<code>crash</code>了，那么会导致重启后使用<code>bin log</code>数据恢复时，<code>redo log</code>中没有记录这个操作（事务回滚了），却被<code>bin log</code>强行执行了这个操作，也会导致数据不一致。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySQL实战-基础架构</title>
       <link href="/2020/04/01/MySQL%E5%AE%9E%E6%88%98-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"/>
       <url>/2020/04/01/MySQL%E5%AE%9E%E6%88%98-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/</url>
