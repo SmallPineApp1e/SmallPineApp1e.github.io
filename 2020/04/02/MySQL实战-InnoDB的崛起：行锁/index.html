@@ -445,17 +445,15 @@
 </blockquote>
 <p>行锁虽然有利于并发，但是对<strong>行锁的获取和释放时机的掌控</strong>是非常重要的，其中一个非常重要的协议是<strong>两阶段锁协议</strong>。</p>
 <a id="more"></a>
-
 <h2 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h2><p>举个例子，事务 B 的 update 语句执行时会是什么现象呢？假设字段 id 是表 t 的主键。</p>
- <img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/51f501f718e420244b0a2ec2ce858710.jpg" alt="img" style="zoom:40%;"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/51f501f718e420244b0a2ec2ce858710.jpg" alt="img" style="zoom:40%;"> </p>
 <p>你可以使用命令行执行两个事务，按上图顺序执行这三条语句，可以看到事务B的<code>update</code>语句是会被阻塞的，直到事务A执行<code>commit</code>之后，事务B才能继续执行。</p>
 <p>所以, 事务A持有两个行记录的锁, <strong>都是在<code>commit</code>之后才释放的</strong></p>
 <blockquote>
 <p><strong>两阶段锁协议</strong>就是: 在<code>InnoDB</code>事务中, <strong>行锁是在执行语句时获取的, 在提交事务后才释放</strong></p>
 </blockquote>
 <p>知道了这个设定后,我们使用事务时就要遵循以下原则: <strong>如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。</strong></p>
-<p>*<em>场景分析: *</em>顾客 A 要在影院 B 购买电影票。我们简化一点，这个业务需要涉及到以下操作</p>
+<p><strong>场景分析: </strong>顾客 A 要在影院 B 购买电影票。我们简化一点，这个业务需要涉及到以下操作</p>
 <blockquote>
 <p>1.从顾客 A 账户余额中扣除电影票价；</p>
 <p>2.给影院 B 的账户余额增加这张电影票价； </p>
@@ -466,9 +464,8 @@
 <p>我们可以发现最容易发生冲突的是第2条语句, 如果顾客C同时从影院B购买另一张票, 那么将会有两个事务往影院余额表上进行<code>update</code>操作, <strong>需要修改同一行数据</strong>, 所以我们把对影院余额表的<code>update</code>操作放置在最后执行, 离<code>commit</code>最近, 就可以<strong>尽最大可能地将锁冲突概率降低, 提高了并发度</strong></p>
 </blockquote>
 <p><strong>场景升级:</strong> 如果这个影院做活动，可以低价预售一年内所有的电影票，而且这个活动只做一天。于是在活动时间开始的时候，你的 MySQL 就挂了。你登上服务器一看，CPU 消耗接近 100%，但<strong>整个数据库每秒就执行不到 100 个事务。这是什么原因呢？</strong></p>
-<h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><p><strong>死锁: **当系统中</strong>不同线程出现循环等待对方正在占有的资源**时, 就会出现死锁现象</p>
-<img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/4d0eeec7b136371b79248a0aed005a52.jpg" alt="img" style="zoom:50%;"> 
-
+<h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><p><strong>死锁: </strong>当系统中<strong>不同线程出现循环等待对方正在占有的资源</strong>时, 就会出现死锁现象</p>
+<p><img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/4d0eeec7b136371b79248a0aed005a52.jpg" alt="img" style="zoom:50%;"> </p>
 <p>以上图为例: 事务A和事务B同时开始执行, 事务A先获取<code>id = 1</code>的行记录写锁 , 事务B获取<code>id = 2</code>的行记录写锁, 此时两个事务都成功获取锁, 之后事务A尝试获取<code>id = 2</code>的行记录写锁, 但因为事务B此时正在占有<code>id = 2</code>的写锁, 所以事务A被阻塞, 等待事务B释放锁, 事务B尝试获取<code>id = 1</code>的行记录写锁, 但因为事务A此时正在占有<code>id = 1</code>的写锁, 所以事务B被阻塞, 等待事务A释放锁</p>
 <blockquote>
 <p>此时两个线程都在<strong>占有着自己的资源, 却想要请求对方占有的资源,</strong> <strong>简单点来说就是, 自己有的不放开, 别人有的又想拿来</strong>, 则会导致死锁</p>

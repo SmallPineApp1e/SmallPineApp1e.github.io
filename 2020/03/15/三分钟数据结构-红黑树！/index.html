@@ -455,37 +455,26 @@
       
         <p><strong>写在前面：</strong>左倾红黑树（LLRB）只是红黑树的一种简化版本，很多标准的红黑树实现起来比较繁琐，而且情况复杂，分析难度大，LLRB是一种简化版的红黑树，理解起来非常顺畅，不会看懵逼，大家先记住一个结论：左倾红黑树就是由2-3树推导而来的，标准的红黑树是由2-3-4树推导而来的。<strong>我不希望大家记住红黑树必须保证的那4条性质，如果不从源头学起，你的大脑将会爆炸！</strong></p>
 <h1 id="以2-3树揭秘左倾红黑树（LLRB）"><a href="#以2-3树揭秘左倾红黑树（LLRB）" class="headerlink" title="以2-3树揭秘左倾红黑树（LLRB）"></a>以2-3树揭秘左倾红黑树（LLRB）</h1><h2 id="什么是2-3树"><a href="#什么是2-3树" class="headerlink" title="什么是2-3树"></a>什么是2-3树</h2><p><strong>2-结点：</strong> <strong>含有一个值的结点，它有两条链接</strong>：左链接和右链接（即左右孩子），左链接的所有结点值都比该结点小，右链接的所有结点的值都比该结点大。</p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png" alt="image-20200315160412351">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160412351.png" alt="image-20200315160412351"></p>
 <p><strong>3-结点：</strong> <strong>含有两个值的结点，它有三条链接</strong>：左链接，中间链接和右链接（左孩子，中间孩子和右孩子），其中左链接的所有结点值都比左边结点的值小，中间链接的所有结点值是两个结点的中间值，右链接的所有结点值比右边结点的值要大。</p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png" alt="image-20200315160412351">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315160640993.png" alt="image-20200315160412351"></p>
 <p><strong>一颗完美自平衡的2-3查找树中，所有空链接到根节点的距离是相等的</strong>，注意这个结论是不是觉得很像红黑树里的其中一条定义？</p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png" style="zoom:67%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163000038.png" style="zoom:67%"></p>
 <a id="more"></a>
-
 <h2 id="2-3树的查找"><a href="#2-3树的查找" class="headerlink" title="2-3树的查找"></a>2-3树的查找</h2><blockquote>
 <p>判断一个值是否存在于树中，则<strong>遍历根节点的值，如果找到与其相等的值，则返回</strong>；如果找不到，则<strong>判断这个值可能存在于这个结点的哪一条链接下</strong>；如果<strong>这个结点是一个2-结点且待查找的值小于该结点值，递归往左子树中查找，否则往右子树中查找</strong>；如果<strong>这个结点是一个3-结点</strong>，则在2-结点的基础上需要<strong>再判断待查找的值是否在两个结点值之间的范围中，如果是则往中间链接递归查找。</strong></p>
 </blockquote>
 <h2 id="2-3树的插入（重要）"><a href="#2-3树的插入（重要）" class="headerlink" title="2-3树的插入（重要）"></a>2-3树的插入（重要）</h2><blockquote>
 <p>规律：<strong>2插3裂</strong>，即插入的结点位置如果是一个2-结点，则将新的结点插入使其成为3-结点；如果插入的结点位置是一个3-结点，则将新的结点插入后，把3-结点裂开。不用担心看不懂，操作一遍就会懂。</p>
 </blockquote>
-<h3 id="插入的结点位置是2-结点"><a href="#插入的结点位置是2-结点" class="headerlink" title="插入的结点位置是2-结点"></a>插入的结点位置是2-结点</h3><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163705861.png" style="zoom:67%">
-
+<h3 id="插入的结点位置是2-结点"><a href="#插入的结点位置是2-结点" class="headerlink" title="插入的结点位置是2-结点"></a>插入的结点位置是2-结点</h3><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163705861.png" style="zoom:67%"></p>
 <p>如下图所示，<strong>原来的2-结点变成了一个3-结点。</strong></p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163825686.png" style="zoom:67%">
-
-
-
-<h3 id="插入的结点位置是3-结点"><a href="#插入的结点位置是3-结点" class="headerlink" title="插入的结点位置是3-结点"></a>插入的结点位置是3-结点</h3><h4 id="父结点是2-结点"><a href="#父结点是2-结点" class="headerlink" title="父结点是2-结点"></a>父结点是2-结点</h4><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164641342.png" style="zoom:67%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315163825686.png" style="zoom:67%"></p>
+<h3 id="插入的结点位置是3-结点"><a href="#插入的结点位置是3-结点" class="headerlink" title="插入的结点位置是3-结点"></a>插入的结点位置是3-结点</h3><h4 id="父结点是2-结点"><a href="#父结点是2-结点" class="headerlink" title="父结点是2-结点"></a>父结点是2-结点</h4><p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164641342.png" style="zoom:67%"></p>
 <p>插入后的结果变成了下面这幅图：</p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164946247.png" style="zoom:67%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315164946247.png" style="zoom:67%"></p>
 <p>此时出现了一个4-结点，而在2-3树里面是不允许4-结点出现的，所以要<strong>裂开</strong>。而由于父结点是2-结点，所以这个4-结点直接从中间裂开，S和X分别为父结点的中间孩子和右孩子。如下图所示</p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315172258484.png" style="zoom:67%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315172258484.png" style="zoom:67%"></p>
 <p>这样的转换并不会影响2-3树的性质，因为T作为中间值被移动到父结点了，但是S和X的位置也符合2-3树有序的性质。</p>
 <h4 id="父结点是3-结点"><a href="#父结点是3-结点" class="headerlink" title="父结点是3-结点"></a>父结点是3-结点</h4><p>4-结点一直往上裂开并将中值插入父结点，然后父结点继续裂开将中值插入祖父结点，重复裂开插入的过程，<strong>直到裂开的中值插入一个2-结点中。</strong></p>
 <p><strong>（1）</strong><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315173355368.png" style="zoom:67%"></p>
@@ -507,16 +496,14 @@
 <p>我们将树中的链接分为两种类型：<strong>红链接将两个2-结点连接起来构成一个3-结点，黑链接则是2-3树中的普通链接。确切地说，我们将3-结点表示为由一条左斜的红色链接相连的两个2-结点。</strong></p>
 <p>这种表示法的一个优点是，我们无需修改就可以直接使用标准二叉查找树的get()方法。对于任意的2-3树，只要对结点进行转换，我们都可以立即派生出一颗对应的二叉查找树。我们将用这种方式表示2-3树的二叉查找树称为红黑树。</p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517142303390.jfif" style="zoom:87%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517142303390.jfif" style="zoom:87%"></p>
 <p><strong>红黑树的另一种定义</strong>是满足下列条件的二叉查找树（左倾红黑树）：</p>
 <blockquote>
 <p>（1）<strong>红链接均为左链接。</strong></p>
 <p>（2）没有任何一个结点<strong>同时和两条红链接相连。</strong></p>
 <p>（3）该树是<strong>完美黑色平衡</strong>的，即<strong>任意空链接到根结点的路径上的黑链接数量相同。</strong></p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182002777.png" style="zoom:67%">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182002777.png" style="zoom:67%"></p>
 <p>试试看<strong>把红色链接放平</strong>，就会出现下面的结果：</p>
 <p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/image-20200315182059415.png" alt="image-20200315182059415"></p>
 <p><strong>再看看2-3树：</strong></p>
@@ -530,7 +517,8 @@
 <p><strong>当我们提到一个结点颜色时，我们指的是指向该结点的链接的颜色。</strong></p>
 </blockquote>
 <p><strong>只要把红黑树的插入过程可以看作是2-3树的插入过程即可，可以得到一颗正确的红黑树：</strong></p>
-<img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517143739453.png">
+<p><img src="//smallpineapp1e.github.io/2020/03/15/三分钟数据结构-红黑树！/20140517143739453.png"></p>
+
       
     </div>
     

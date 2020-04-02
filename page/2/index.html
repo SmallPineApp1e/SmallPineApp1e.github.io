@@ -400,7 +400,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,066字
+                  1,063字
                 </span>
               
 
@@ -442,7 +442,7 @@
 <h2 id="Session和Cookie典型应用场景"><a href="#Session和Cookie典型应用场景" class="headerlink" title="Session和Cookie典型应用场景"></a>Session和Cookie典型应用场景</h2><blockquote>
 <p>登录操作：输入用户名和密码登录后，很多情况下在一段时间内，关闭浏览器再重新打开就不需要再次手动输入用户名和密码登陆了，这个时候用到的一个机制就是Cookie和Session，使用Session在服务器保存状态信息，使用Cookie在客户端保存sessionId，当用户再次访问网站时，会自动将Cookie当中的sessionId传递给服务器端，服务器端识别到这个id是有效的，那么会返回用户信息给客户端进行保存。</p>
 </blockquote>
-<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为&lt;name, ‘张三’&gt;，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</p>
+<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为<name, '张三'>，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</name,></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/29/三分钟计算机网络-一定要懂Cookie和Session的区别/#more" rel="contents">
@@ -581,7 +581,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  951字
+                  931字
                 </span>
               
 
@@ -620,10 +620,11 @@
       
         
           <h1 id="从串行的BFS升级到并行BFS"><a href="#从串行的BFS升级到并行BFS" class="headerlink" title="从串行的BFS升级到并行BFS"></a>从串行的BFS升级到并行BFS</h1><h2 id="LeetCode1162-地图分析"><a href="#LeetCode1162-地图分析" class="headerlink" title="LeetCode1162.地图分析"></a>LeetCode1162.地图分析</h2><p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
-<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：<br>$$<br>(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。<br>$$<br>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：</p>
+<script type="math/tex; mode=display">
+(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</script><p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
 <p><strong>示例1：</strong></p>
- <img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/03/29/LeetCode每日一题-1162-多源BFS取最大值/1336_ex1.jpeg"> </p>
 <blockquote>
 <p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>输出：2<br>解释：<br>海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。</p>
 </blockquote>
@@ -827,7 +828,7 @@
 </blockquote>
 <p>👨‍⚖️面试官：就这？还有吗？</p>
 <p>👦我： emmm…我就知道这么多😭</p>
-<p>👨‍⚖️面试官：那行<del>没关系</del>我们继续吧（<strong>回去等通知吧</strong>）</p>
+<p>👨‍⚖️面试官：那行~没关系~我们继续吧（<strong>回去等通知吧</strong>）</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/28/三分钟计算机网络-预判面试官的预判-Get和Post的区别/#more" rel="contents">
@@ -1008,7 +1009,7 @@
 <h2 id="进程间通信的本质"><a href="#进程间通信的本质" class="headerlink" title="进程间通信的本质"></a>进程间通信的本质</h2><p> 进程之间<strong>可以看到一份公共资源</strong>，提供这份资源的形式或者提供者不同，造成了通信方式不同，而<strong>pipe(管道)</strong>就是提供这份公共资源的形式之一。 </p>
 <h2 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h2><p><strong>匿名管道</strong></p>
 <p>创建方式：调用<strong>pipe(int fd[2])函数创建管道，fd参数返回两个文件描述符，fd[0]指向管道的读端，fd[1]指向管道的写端，fd[1]的输入等于fd[0]的输出。</strong> </p>
-<img src="//smallpineapp1e.github.io/2020/03/28/三分钟操作系统-进程的通信方式/image-20200328210609756.png" alt="image-20200328210609756" style="zoom:67%;">
+<p><img src="//smallpineapp1e.github.io/2020/03/28/三分钟操作系统-进程的通信方式/image-20200328210609756.png" alt="image-20200328210609756" style="zoom:67%;"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/28/三分钟操作系统-进程的通信方式/#more" rel="contents">
@@ -1375,6 +1376,7 @@
 <p>HTTP是一种超文本传输协议，一种基<strong>于请求和响应、无状态的</strong>、应用层的协议，常用于TCP/IP协议<strong>传输数据</strong>，是互联网上应用最为广泛的一种网络协议，所有的WWW文件都必须遵守这个标准。设计HTTP协议的初衷是<strong>为了发布和接收HTML页面</strong>的方法。</p>
 </blockquote>
 <p><strong>HTTP协议的发展历史</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1384,7 +1386,8 @@
 <th>发展现状</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>HTTP/0.9</td>
 <td>1991年</td>
 <td>不涉及数据包传输，规定客户端与服务器之间的通信格式，只能使用GET请求</td>
@@ -1408,9 +1411,10 @@
 <td>多路复用、服务器推送、头信息压缩、二进制协议等</td>
 <td>逐渐覆盖市场</td>
 </tr>
-</tbody></table>
- <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> 
-
+</tbody>
+</table>
+</div>
+<p> <img src="//smallpineapp1e.github.io/2020/03/27/三分钟计算机网络-HTTP及HTTPS的区别/20180723103857872.png" alt="这里写图片描述" style="zoom:67%;"> </p>
 <p>这是Akamai公司建立的一个官方的演示，使用HTTP/1.1和HTTP/2.0各自同时请求379张照片，从请求的时间可以看出HTTP/2.0的性能占优势。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1610,11 +1614,11 @@
 <h1 id="白话理解进程与线程"><a href="#白话理解进程与线程" class="headerlink" title="白话理解进程与线程"></a>白话理解进程与线程</h1><p>计算机的核心就是CPU，它承担着所有的计算任务，它就像一座工厂，时刻在运行。</p>
 <p>​                                                 <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014324003" alt="1" style="zoom:30%;"> </p>
 <p>工厂的电力有限，每次只能够运行一个车间，也就是说如果有某一个车间在运行时，其它车间必须停止运作，也就是说在单核CPU中，同一时刻只能有一个进程在运行。</p>
-<pre><code>&lt;img src=&quot;三分钟操作系统-进程、线程与协程的区别与联系/p-1585014499091&quot; alt=&quot;640?wx_fmt=jpeg&quot; style=&quot;zoom:30%;&quot; /&gt;</code></pre><p>​      进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态 。</p>
+<pre><code>                                             &lt;img src=&quot;三分钟操作系统-进程、线程与协程的区别与联系/p-1585014499091&quot; alt=&quot;640?wx_fmt=jpeg&quot; style=&quot;zoom:30%;&quot; /&gt;
+</code></pre><p>​      进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态 。</p>
 <p>​                                                 <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014598863" alt="640?wx_fmt=jpeg" style="zoom:43%;"> </p>
 <p> 一个车间里，可以有很多工人。他们协同完成一个任务。线程就好比车间里的工人。一个进程可以包括多个线程。 </p>
-<img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/image-20200324095057176.png" alt="image-20200324095057176" style="zoom:33%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/image-20200324095057176.png" alt="image-20200324095057176" style="zoom:33%;"></p>
 <p>车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。 </p>
 <p>​                                             <img src="//smallpineapp1e.github.io/2020/03/24/三分钟操作系统-进程、线程与协程的区别与联系/p-1585014686946" alt="640?wx_fmt=jpeg" style="zoom:50%;"> </p>
 <h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>协程可以是“主动式”的，由程序来告诉计算机，我要进入IO行为了，可以把CPU的控制权交给别人，这个实现的基础是用户态的。所以，协程在用户线程中，两个程序协商好了，通过某种方式协作运营，共享CPU控制权的方法。一般来说，这种协商的方法通用的关键字是yield。 </p>
@@ -1792,8 +1796,7 @@
           <h1 id="TCP是如何实现可靠传输的"><a href="#TCP是如何实现可靠传输的" class="headerlink" title="TCP是如何实现可靠传输的"></a>TCP是如何实现可靠传输的</h1><h2 id="TCP实现可靠传输的原理"><a href="#TCP实现可靠传输的原理" class="headerlink" title="TCP实现可靠传输的原理"></a>TCP实现可靠传输的原理</h2><h3 id="⭐停止等待协议"><a href="#⭐停止等待协议" class="headerlink" title="⭐停止等待协议"></a>⭐停止等待协议</h3><blockquote>
 <p><strong>发送方每发送一个分组就等待接收方发出确认报文，在收到对方的确认后再发送下一个分组。</strong></p>
 </blockquote>
-<img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-TCP是如何实现可靠传输的/image-20200323205552613.png" alt="image-20200323205552613" style="zoom:67%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-TCP是如何实现可靠传输的/image-20200323205552613.png" alt="image-20200323205552613" style="zoom:67%;"></p>
 <blockquote>
 <p><strong>发送方出现差错时：</strong>接收方接收到有差错的报文，则丢弃。而<strong>发送方在一段时间内没有接收到接收方的确认报文，则重传报文。</strong></p>
 </blockquote>
@@ -2157,8 +2160,7 @@
 
       
         
-          <h1 id="白话讲明白三次握手和四次握手"><a href="#白话讲明白三次握手和四次握手" class="headerlink" title="白话讲明白三次握手和四次握手"></a>白话讲明白三次握手和四次握手</h1><h1 id="答应我，这次真的要懂！白话讲明白三次握手和四次握手"><a href="#答应我，这次真的要懂！白话讲明白三次握手和四次握手" class="headerlink" title="答应我，这次真的要懂！白话讲明白三次握手和四次握手"></a>答应我，这次真的要懂！白话讲明白三次握手和四次握手</h1><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp" alt="img" style="zoom:67%;"> 
-
+          <h1 id="白话讲明白三次握手和四次握手"><a href="#白话讲明白三次握手和四次握手" class="headerlink" title="白话讲明白三次握手和四次握手"></a>白话讲明白三次握手和四次握手</h1><h1 id="答应我，这次真的要懂！白话讲明白三次握手和四次握手"><a href="#答应我，这次真的要懂！白话讲明白三次握手和四次握手" class="headerlink" title="答应我，这次真的要懂！白话讲明白三次握手和四次握手"></a>答应我，这次真的要懂！白话讲明白三次握手和四次握手</h1><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp" alt="img" style="zoom:67%;"> </p>
 <p>先用<strong>通俗的语言</strong>来了解以下三次握手的过程：<strong>发送方为张三，接收方为李四</strong></p>
 <blockquote>
 <p>张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了</p>

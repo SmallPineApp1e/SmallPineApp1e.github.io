@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,066字
+                  1,063字
                 </span>
               
 
@@ -439,9 +439,8 @@
 <h2 id="Session和Cookie典型应用场景"><a href="#Session和Cookie典型应用场景" class="headerlink" title="Session和Cookie典型应用场景"></a>Session和Cookie典型应用场景</h2><blockquote>
 <p>登录操作：输入用户名和密码登录后，很多情况下在一段时间内，关闭浏览器再重新打开就不需要再次手动输入用户名和密码登陆了，这个时候用到的一个机制就是Cookie和Session，使用Session在服务器保存状态信息，使用Cookie在客户端保存sessionId，当用户再次访问网站时，会自动将Cookie当中的sessionId传递给服务器端，服务器端识别到这个id是有效的，那么会返回用户信息给客户端进行保存。</p>
 </blockquote>
-<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为&lt;name, ‘张三’&gt;，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</p>
+<h2 id="Cookie和Session的作用"><a href="#Cookie和Session的作用" class="headerlink" title="Cookie和Session的作用"></a>Cookie和Session的作用</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是将所有的数据均保存在客户端，比如，当你登录以后，服务器设置了cookie为<name, '张三'>，那么当你再次请求服务器时，浏览器会将用户名一起发给服务器，这些变量有一定的特殊标记，服务器会识别为cookie。只要不关闭浏览器，cookie变量就是有效的，所以能够保证长时间不掉线。如果能够截取到某个用户的cookie变量，<strong>然后伪造一个数据包发送到服务器，那么服务器依然会认为是合法的请求。</strong>所以Cookie被攻击的可能性比较大。如果设置了有效时间，那么它会保存在客户端的硬盘上，下次再次访问该网站时，浏览器会先检查有没有Cookie，如果有则读取该Cookie，然后发给服务器。</name,></p>
 <a id="more"></a>
-
 <h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>Session是<strong>存储在服务器</strong>的一种用来标识用户数据的类HashTable结构。<strong>每次创建Session时都会创建一个sessionId，作为该会话的一个唯一标识</strong>，然后将sessionId写回到客户端的Cookie当中，在下次提交请求时会携带Cookie当中的sessionId请求服务器。在tomcat中创建会话，生成的是jsessionId，然后可以调用Session的相关方法往Session中添加内容，Java中使用的方法是<code>session.setAttribute()</code>方法添加的，还有许多其它方法。</p>
 <p><strong>什么时候创建</strong>Session呢？</p>
 <p>这取决于应用程序调用Session创建方法的时机，一般应用场景会有登陆时需要创建session保存用户信息。</p>

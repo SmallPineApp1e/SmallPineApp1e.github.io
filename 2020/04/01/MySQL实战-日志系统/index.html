@@ -94,13 +94,13 @@
 
 
 
-<meta name="description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2;  与查询流程不一样的是，更新流程还涉">
+<meta name="description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2; 与查询流程不一样的是，更新流程还涉及">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL实战-日志系统">
 <meta property="og:url" content="https://smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2;  与查询流程不一样的是，更新流程还涉">
+<meta property="og:description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2; 与查询流程不一样的是，更新流程还涉及">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/11512754-1478bc80d668c2f8.webp">
 <meta property="og:image" content="https://smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/image-20200401115414746.png">
@@ -109,7 +109,7 @@
 <meta property="og:updated_time" content="2020-04-01T07:08:19.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL实战-日志系统">
-<meta name="twitter:description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2;  与查询流程不一样的是，更新流程还涉">
+<meta name="twitter:description" content="日志系统：一条SQL更新语句是如何执行的与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。 12mysql&amp;gt; create table T(ID int primary key, c int);mysql&amp;gt; update T set c=c+1 where ID=2; 与查询流程不一样的是，更新流程还涉及">
 <meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/11512754-1478bc80d668c2f8.webp">
 
 
@@ -442,15 +442,11 @@
       
         <h1 id="日志系统：一条SQL更新语句是如何执行的"><a href="#日志系统：一条SQL更新语句是如何执行的" class="headerlink" title="日志系统：一条SQL更新语句是如何执行的"></a>日志系统：一条SQL更新语句是如何执行的</h1><p>与查询语句相同的是，在经过分析器和优化器的“洗礼”后，来到了执行器这一阶段，找到对应的一行进行更新，假如我们使用下面这条SQL语句。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table T(ID int primary key, c int);</span><br><span class="line">mysql&gt; update T set c=c+1 where ID=2;</span><br></pre></td></tr></table></figure>
-
 <p>与查询流程不一样的是，更新流程还<strong>涉及了两个特别重要的日志模块</strong>：<strong>redo log(重做日志)和binlog(归档日志)</strong>。如果接触MySQL，这两个词一定是绕不开的。</p>
- <img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/11512754-1478bc80d668c2f8.webp" alt="img" style="zoom:67%;"> 
-
+<p> <img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/11512754-1478bc80d668c2f8.webp" alt="img" style="zoom:67%;"> </p>
 <h2 id="重要的日志模块：redo-log"><a href="#重要的日志模块：redo-log" class="headerlink" title="重要的日志模块：redo log"></a>重要的日志模块：redo log</h2><p>用一个现实的生活例子来跟你说清楚什么是<code>redo log</code>。</p>
-<img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/image-20200401115414746.png" alt="image-20200401115414746" style="zoom:50%;">
-
+<p><img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/image-20200401115414746.png" alt="image-20200401115414746" style="zoom:50%;"></p>
 <a id="more"></a>
-
 <p>《孔乙己》这篇文章中，酒店掌柜有一个粉板，<strong>专门用来记录客人的赊账记录（redo log）</strong>。如果赊账的人不多，那么他可以把顾客名和账目写在板上。但<strong>如果赊账的人多了，粉板总会有记不下的时候，这个时候掌柜一定还有一个专门记录赊账的账本（数据库）。</strong></p>
 <p>如果有人要赊账或者还账的话，掌柜一般有两种做法：</p>
 <blockquote>
@@ -486,8 +482,7 @@
 <li><code>redo log</code>是<strong>循环写入</strong>，空间有限；而<code>bin log</code>是<strong>追加写入</strong>，也就是空间是无限的，一个文件达到指定大小的时候会自动切换到下一个文件。</li>
 </ol>
 </blockquote>
-<h2 id="update语句执行流程"><a href="#update语句执行流程" class="headerlink" title="update语句执行流程"></a>update语句执行流程</h2><img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/2e5bff4910ec189fe1ee6e2ecc7b4bbe.png" alt="img" style="zoom:50%;"> 
-
+<h2 id="update语句执行流程"><a href="#update语句执行流程" class="headerlink" title="update语句执行流程"></a>update语句执行流程</h2><p><img src="//smallpineapp1e.github.io/2020/04/01/MySQL实战-日志系统/2e5bff4910ec189fe1ee6e2ecc7b4bbe.png" alt="img" style="zoom:50%;"> </p>
 <h3 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h3><p><strong>为什么需要两阶段提交？</strong></p>
 <p><strong>两阶段提交</strong>指的是保证<code>redo log</code>和<code>bin log</code>的<strong>逻辑一致性</strong>，所谓逻辑一致性，指的是你有的东西我都有，你没有的东西我也没有。</p>
 <p>如果先写<code>redo log</code>后写<code>bin log</code>，在写完<code>redo log</code>后数据库<code>crash</code>了，那么会导致重启后写入磁盘时，多了一条记录，但<code>bin log</code><strong>没有记录这一条数据</strong>，之后使用这一份<code>bin log</code>进行数据恢复时，就会导致数据不一致。</p>
