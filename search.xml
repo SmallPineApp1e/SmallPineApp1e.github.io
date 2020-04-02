@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>MySQL实战-InnDB的崛起：行锁</title>
+      <link href="/2020/04/02/MySQL%E5%AE%9E%E6%88%98-InnoDB%E7%9A%84%E5%B4%9B%E8%B5%B7%EF%BC%9A%E8%A1%8C%E9%94%81/"/>
+      <url>/2020/04/02/MySQL%E5%AE%9E%E6%88%98-InnoDB%E7%9A%84%E5%B4%9B%E8%B5%B7%EF%BC%9A%E8%A1%8C%E9%94%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="InnoDB的崛起之一：行锁"><a href="#InnoDB的崛起之一：行锁" class="headerlink" title="InnoDB的崛起之一：行锁"></a>InnoDB的崛起之一：行锁</h1><p><strong>老规矩，学一样东西，就要知道为什么会有这项技术？为什么会出现行锁呢？不用行锁不行吗？</strong></p><blockquote><p>在没有行锁之前，访问表数据的时候使用的是<strong>表锁</strong>，其中有<code>MDL锁</code>和<code>显式锁定(lock table)</code>两种。每个请求线程访问一张表时<strong><code>（DML）</code></strong>，<strong>都会将整个表锁住</strong>，之后的线程<strong>必须等待前面的线程释放表锁</strong>才可以去访问表，不仅如此，如果对表进行<code>DDL</code>操作，例如增删一个表的字段，<strong>也会将整张表锁住，可以看到并发度真的非常低</strong>。</p><p>所以，行锁应运而生，行锁就是<strong>针对数据表中行记录的锁</strong>。比如事务A需要更新一行数据，事务B也要更新同一行数据，<strong>事务B就必须等待事务A操作完成再进行更新</strong>。</p></blockquote><p>行锁虽然有利于并发，但是对<strong>行锁的获取和释放时机的掌控</strong>是非常重要的，其中一个非常重要的协议是<strong>两阶段锁协议</strong>。</p><a id="more"></a><h2 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h2><p>举个例子，事务 B 的 update 语句执行时会是什么现象呢？假设字段 id 是表 t 的主键。</p> <img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/51f501f718e420244b0a2ec2ce858710.jpg" alt="img" style="zoom:40%;"> <p>你可以使用命令行执行两个事务，按上图顺序执行这三条语句，可以看到事务B的<code>update</code>语句是会被阻塞的，直到事务A执行<code>commit</code>之后，事务B才能继续执行。</p><p>所以, 事务A持有两个行记录的锁, <strong>都是在<code>commit</code>之后才释放的</strong></p><blockquote><p><strong>两阶段锁协议</strong>就是: 在<code>InnoDB</code>事务中, <strong>行锁是在执行语句时获取的, 在提交事务后才释放</strong></p></blockquote><p>知道了这个设定后,我们使用事务时就要遵循以下原则: <strong>如果你的事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放。</strong></p><p>*<em>场景分析: *</em>顾客 A 要在影院 B 购买电影票。我们简化一点，这个业务需要涉及到以下操作</p><blockquote><p>1.从顾客 A 账户余额中扣除电影票价；</p><p>2.给影院 B 的账户余额增加这张电影票价； </p><p>3.记录一条交易日志。 </p></blockquote><p>也就是说,要完成这两个操作, 需要对顾客A余额表和影院B余额表做<code>update</code>操作, 对交易记录表做<code>isnert</code>操作, 由于这三条语句是在同一个事务中完成的, <strong>该如何分配它们的操作顺序以达到锁的冲突最小化呢?</strong></p><blockquote><p>我们可以发现最容易发生冲突的是第2条语句, 如果顾客C同时从影院B购买另一张票, 那么将会有两个事务往影院余额表上进行<code>update</code>操作, <strong>需要修改同一行数据</strong>, 所以我们把对影院余额表的<code>update</code>操作放置在最后执行, 离<code>commit</code>最近, 就可以<strong>尽最大可能地将锁冲突概率降低, 提高了并发度</strong></p></blockquote><p><strong>场景升级:</strong> 如果这个影院做活动，可以低价预售一年内所有的电影票，而且这个活动只做一天。于是在活动时间开始的时候，你的 MySQL 就挂了。你登上服务器一看，CPU 消耗接近 100%，但<strong>整个数据库每秒就执行不到 100 个事务。这是什么原因呢？</strong></p><h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><p><strong>死锁: **当系统中</strong>不同线程出现循环等待对方正在占有的资源**时, 就会出现死锁现象</p><img src="//smallpineapp1e.github.io/2020/04/02/MySQL实战-InnoDB的崛起：行锁/4d0eeec7b136371b79248a0aed005a52.jpg" alt="img" style="zoom:50%;"> <p>以上图为例: 事务A和事务B同时开始执行, 事务A先获取<code>id = 1</code>的行记录写锁 , 事务B获取<code>id = 2</code>的行记录写锁, 此时两个事务都成功获取锁, 之后事务A尝试获取<code>id = 2</code>的行记录写锁, 但因为事务B此时正在占有<code>id = 2</code>的写锁, 所以事务A被阻塞, 等待事务B释放锁, 事务B尝试获取<code>id = 1</code>的行记录写锁, 但因为事务A此时正在占有<code>id = 1</code>的写锁, 所以事务B被阻塞, 等待事务A释放锁</p><blockquote><p>此时两个线程都在<strong>占有着自己的资源, 却想要请求对方占有的资源,</strong> <strong>简单点来说就是, 自己有的不放开, 别人有的又想拿来</strong>, 则会导致死锁</p></blockquote><p>当死锁出现时, 在数据库中有两种策略可以破坏死锁: </p><blockquote><p>1.直接进入等待状态, <strong>直到请求超时</strong>, 超时时间可以通过<code>innodb_lock_wait_timeout</code>来设置</p><p>2.<strong>发起死锁检测</strong>, 发现死锁后, 主动回滚死锁链中的某一个事务, 使其它事务可以继续执行, 将参数<code>innodb_deadlock_detect</code>设置为 on，表示开启这个逻辑。</p></blockquote><p>在 InnoDB 中，<code>innodb_lock_wait_timeout</code> 的<strong>默认值是 50s</strong>，意味着如果采用第一个策略，当出现死锁以后，<strong>第一个被锁住的线程要过 50s 才会超时退出</strong>，然后其他线程才有可能继续执行。对于在线服务来说，<strong>这个等待时间往往是无法接受的</strong>。</p><p>但是我们<strong>不可以把它设置为一个很小的值例如1s</strong>, 因为如果只是简单的锁等待, <strong>不是发生死锁, 也有可能被误判死锁而报请求超时</strong></p><p>所以在正常情况下, <strong>采用第2种策略比采用第1种策略要好得多</strong>, <code>innodb_deadlock_detect</code> 的默认值本身就是 on。主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的，<strong>但是它也是有额外负担的</strong>。</p><p>假如有1000个线程同时更新同一行数据, 那么检测死锁的时间复杂度非常高, 因为要检测每个线程所依赖的线程有没有请求某个线程正在占有的资源, <strong>需要扫描所有线程正在占有的锁</strong>, 将会占用大量的CPU资源, 却一个事务也执行不了, <strong>那么该怎么解决这种热点数据更新问题呢?</strong></p><blockquote><p>在<strong>服务器端控制并发度</strong>, 如果有<strong>中间件</strong>, 可以在中间件实现请求线程的排队, 控制某个时间内最多只有<code>k</code>个线程请求数据库</p><p>或者<strong>考虑通过将一行改成逻辑上的多行来减少锁冲突</strong>。还是以影院账户为例，可以<strong>考虑放在多条记录上，比如 10 个记录，影院的账户总额等于这 10 个记录的值的总和。这样每次要给影院账户加金额的时候，随机选其中一条记录来加</strong>。但是这种做法有一个弊端, 如果客户要退款时, <strong>查到的影院余额的某一行如果为0或者退款金额不足, 就需要到其它行上获取退款金额, 需要在代码中做额外的逻辑处理</strong></p></blockquote><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote><p>首先我们<strong>抛出了行锁出现的原因</strong>, 然后分析<strong>行锁的两阶段协议</strong>, 然后<strong>分析了如何提高行锁的并发度</strong>, 继而<strong>分析了行锁有可能导致的死锁问题和两种解决方案</strong>, 最后分析了<strong>如果大量请求更新同一行而导致的死锁检测代价及如何控制并发度</strong>, 在看完文章后能答出来这些问题, 那就不用再来看这篇文章了, 出门右转吧~</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySQL实战-全局锁与表锁</title>
       <link href="/2020/04/02/MySQL%E5%AE%9E%E6%88%98-%E5%85%A8%E5%B1%80%E9%94%81%E4%B8%8E%E8%A1%A8%E9%94%81/"/>
       <url>/2020/04/02/MySQL%E5%AE%9E%E6%88%98-%E5%85%A8%E5%B1%80%E9%94%81%E4%B8%8E%E8%A1%A8%E9%94%81/</url>
