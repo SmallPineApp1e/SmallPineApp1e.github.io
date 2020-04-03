@@ -315,6 +315,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-直接插入排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/09/三分钟排序算法-直接插入排序/" itemprop="url">三分钟排序算法-直接插入排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T11:41:53+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  622字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-直接插入排序算法介绍"><a href="#1-直接插入排序算法介绍" class="headerlink" title="1. 直接插入排序算法介绍"></a>1. 直接插入排序算法介绍</h1><p>直接插入排序是一种非常好理解的排序算法，它的原理是将数组分为两个部分，一部分是已排序的，另外一部分是未排序的，每次排序都会从未排序的那一部分取出一个数，从有序序列的最后一个元素开始往前扫描，直至找到插入的位置。</p>
+<p>以升序为例，目前有一个数组：[3, 2, 1, 5, 4, 6]进行直接插入排序，第一个元素无需与其它元素比较，是有序序列的第一个元素</p>
+<p>所以我们从第一个元素开始排序：</p>
+<p>第一轮排序（数字2）：2 &lt; 3，所以2需要和3做交换，序列为[2, 3, 1, 5, 4, 6]，此时因为2已经是有序序列的第一个元素，所以确定插入位置，对下一个数字进行排序。</p>
+<p>第二轮排序（数字1）：1 &lt; 3，所以1和3交换位置，序列为[2, 1, 3, 5, 4, 6]，此时1前面还有元素，需要继续做比较；1 &lt; 2，所以1与2交换位置，此时1为有序序列的第一个元素，确定插入位置，对下一个数字进行排序。</p>
+<p>第三轮排序（数字5）：5 &gt; 3，无需交换位置，确定插入位置，对下一个数字进行排序。序列为[1, 2, 3, 5, 4, 6]</p>
+<p>第四轮排序（数字4）：4 &lt; 5，4和5交换位置，序列为[1, 2, 3, 4, 5, 6]，虽然此时已经有序，但计算机并不知道，它会继续与前一个元素做比较；4 &gt; 3，无需交换位置，确定插入位置，对下一个数字进行排序。</p>
+<p>第五轮排序（数字6）：6 &gt; 5，无需交换位置，确定插入位置，排序完成。</p>
+<p><img src="//smallpineapp1e.github.io/2020/03/09/三分钟排序算法-直接插入排序/2020022920170165.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/03/09/三分钟排序算法-直接插入排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/09/三分钟排序算法-选择排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1167,7 +1352,7 @@
       
         
           <h2 id="1-冒泡排序介绍"><a href="#1-冒泡排序介绍" class="headerlink" title="1. 冒泡排序介绍"></a>1. 冒泡排序介绍</h2><p> 冒泡排序是一种比较简单的排序方法，以数组升序的情况为例，它的原理是从第一个元素开始，每个元素都与其相邻的元素做比较，如果前一个元素比后一个元素大，则交换两个元素的位置，<strong>每一轮排序都确定一个最大值</strong>。它是一种稳定的排序方法，因为两个元素相等时不会做交换，相对位置不会发生改变。 </p>
-<p> <img src="//smallpineapp1e.github.io/2020/03/09/冒泡排序/图片1.jpg" alt="img"> </p>
+<p> <img src="//smallpineapp1e.github.io/2020/03/09/冒泡排序/%E5%9B%BE%E7%89%871.jpg" alt="img"> </p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/09/冒泡排序/#more" rel="contents">
@@ -1306,7 +1491,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,168字
+                  1,391字
                 </span>
               
 
@@ -1322,7 +1507,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  6分钟
                 </span>
               
             </div>
@@ -1348,58 +1533,45 @@
 <p><a href="https://blog.csdn.net/qq_38984851/article/details/81133840" target="_blank" rel="noopener">https://blog.csdn.net/qq_38984851/article/details/81133840</a> </p>
 <p> <a href="https://blog.csdn.net/na_beginning/article/details/62884939" target="_blank" rel="noopener">https://blog.csdn.net/na_beginning/article/details/62884939</a> </p>
 <p>完全背包与零一背包类似，不同的是每种物品有无限件，意味着选完一件物品放进背包后，有可能会继续选择同一件物品放入背包。</p>
-<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><script type="math/tex; mode=display">
-有N种物品和一个容量为V 的背包，每种物品都有无限件可用。放入第i种物品的耗费的空间是C_i，得到的价值是W_i。</script><script type="math/tex; mode=display">
-求解：将哪些物品装入背包，可使 这些物品的耗费的空间总和不超过背包容量，且价值总和最大。</script><script type="math/tex; mode=display">
-例：N = 5，V=10</script><div class="table-container">
+<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><p>$$<br>有N种物品和一个容量为V 的背包，每种物品都有无限件可用。放入第i种物品的耗费的空间是C_i，得到的价值是W_i。<br>$$</p>
+<p>$$<br>求解：将哪些物品装入背包，可使 这些物品的耗费的空间总和不超过背包容量，且价值总和最大。<br>$$</p>
+<p>$$<br>例：N = 5，V=10<br>$$</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">物品</th>
-<th style="text-align:center">A</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">C</th>
-<th style="text-align:center">D</th>
-<th style="text-align:center">E</th>
+<th align="center">物品</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+<th align="center">E</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">Wealth</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">12</td>
+<tbody><tr>
+<td align="center">Wealth</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">12</td>
 </tr>
 <tr>
-<td style="text-align:center">Cost</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">8</td>
+<td align="center">Cost</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">8</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="初步解题思路"><a href="#初步解题思路" class="headerlink" title="初步解题思路"></a>初步解题思路</h2><p>定义状态与01背包相同，下标i代表前i件物品，下标j代表背包的总容量为j</p>
 <p>此问题与01背包问题类似，但是每一件物品并不是选与不选的问题，而是选几件的问题：</p>
 <blockquote>
 <p>选0件、选1件、选2件···选k件(k*Cost[i] ≤ V)</p>
 </blockquote>
 <p>所以，在01背包的基础上改变一下</p>
-<p>掌握完全背包问题前必须清楚<strong>01背包的状态转移方程</strong>：</p>
-<script type="math/tex; mode=display">
-dp[i][j] = \begin{cases}
-dp[i-1][j]&if\ Cost[i] > j\\
-dp[i-1][j-Cost[i]] + Wealth[i]&if\ Cost[i] ≤j
-\end{cases}</script><p>而<strong>完全背包的状态转移方程</strong>为：</p>
-<script type="math/tex; mode=display">
-dp[i][j] = \begin{cases}
-dp[i-1][j]&if\ Cost[i] > j\\
-dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
-\end{cases}</script><p>需要乘上系数k的原因是如果背包的容量大于物品A的体积，那么放入一件A之后，有可能背包剩下的容量还可以继续放入A物品，每次放入都要放入<strong>尽可能多的</strong>物品。</p>
+<p>掌握完全背包问题前必须清楚<strong>01背包的状态转移方程</strong>：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-Cost[i]] + Wealth[i]&amp;if\ Cost[i] ≤j<br>\end{cases}<br>$$<br>而<strong>完全背包的状态转移方程</strong>为：<br>$$<br>dp[i][j] = \begin{cases}<br>dp[i-1][j]&amp;if\ Cost[i] &gt; j\<br>dp[i-1][j-k<em>Cost[i]] + k</em>Wealth[i]&amp;if\ k*Cost[i] ≤j<br>\end{cases}<br>$$</p>
+<p>需要乘上系数k的原因是如果背包的容量大于物品A的体积，那么放入一件A之后，有可能背包剩下的容量还可以继续放入A物品，每次放入都要放入<strong>尽可能多的</strong>物品。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/05/小白学习动态规划：完全背包/#more" rel="contents">
@@ -1538,7 +1710,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  991字
+                  1,332字
                 </span>
               
 
@@ -1554,7 +1726,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4分钟
+                  5分钟
                 </span>
               
             </div>
@@ -1580,46 +1752,41 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
 <p>动态规划的原理：</p>
 <p>① <strong>最优子结构性质</strong>：问题的最优解可以转化为求子问题的最优解，也就是说问题的最优解可以从子问题的最优解中得出。</p>
 <p>② <strong>子问题重叠性质</strong>：问题的解由子问题的解组成，所以先构造子问题的解，才能求出最终问题的解。而求问题的解时，由于已经记录子问题的解，所以不必重新求子问题的解，只需取出来使用即可。</p>
-<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><script type="math/tex; mode=display">
-有N件物品和一个容量为V 的背包。放入第i件物品耗费的空间是Ci，得到 的价值是Wi。
-\\求解将哪些物品装入背包可使价值总和最大。</script><script type="math/tex; mode=display">
-例：N = 5，V=10</script><div class="table-container">
+<h2 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h2><p>$$<br>有N件物品和一个容量为V 的背包。放入第i件物品耗费的空间是Ci，得到 的价值是Wi。<br>\求解将哪些物品装入背包可使价值总和最大。<br>$$</p>
+<p>$$<br>例：N = 5，V=10<br>$$</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">物品</th>
-<th style="text-align:center">A</th>
-<th style="text-align:center">B</th>
-<th style="text-align:center">C</th>
-<th style="text-align:center">D</th>
-<th style="text-align:center">E</th>
+<th align="center">物品</th>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">C</th>
+<th align="center">D</th>
+<th align="center">E</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">Wealth</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">7</td>
+<tbody><tr>
+<td align="center">Wealth</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
 </tr>
 <tr>
-<td style="text-align:center">Cost</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">8</td>
+<td align="center">Cost</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">8</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <blockquote>
 <p>这是最基础的0-1背包问题</p>
 </blockquote>
 <p>先看下图，是在求出问题的解后整个动态规划表呈现的结果。下面就来看看这张表是如何一步步填上去并求出最终问题解的。</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/图片1.png" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/28/小白学习动态规划：0-1背包/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/02/28/小白学习动态规划：0-1背包/#more" rel="contents">
@@ -1758,7 +1925,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,297字
+                  1,421字
                 </span>
               
 
@@ -1774,7 +1941,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  6分钟
                 </span>
               
             </div>
@@ -1796,7 +1963,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
 
       
         
-          <h1 id="小白学习动态规划：优化篇"><a href="#小白学习动态规划：优化篇" class="headerlink" title="小白学习动态规划：优化篇"></a>小白学习动态规划：优化篇</h1><p>上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。</p>
+          <h1 id="小白学习动态规划：优化篇"><a href="#小白学习动态规划：优化篇" class="headerlink" title="小白学习动态规划：优化篇"></a>小白学习动态规划：优化篇</h1><p>上一篇讲述了动态规划入门级题目，代码都是没有优化的，如果没有看过的读者也没关系，在下面会贴出这两道题目的所有代码，包括没有优化的和优化之后的。感兴趣的读者可以先去看一下上一篇的题目，都是EASY级别的题目。<br>[小白学习动态规划：入门篇]: <a href="https://blog.csdn.net/weixin_41949328/article/details/104150403" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41949328/article/details/104150403</a></p>
 <p>今天主要是对上一篇博客的两道题目进行优化，对于绝大多数利用动态规划的算法题作优化时，个人认为最重要的优化方法就是：<strong>画DP的图！找出状态之间的依赖关系，将其它没有依赖的状态废弃掉。</strong></p>
 <p><strong>如果你不懂没有关系，可以看以下例子，很好理解~</strong></p>
 <h2 id="优化类型一：一维降变量"><a href="#优化类型一：一维降变量" class="headerlink" title="优化类型一：一维降变量"></a>优化类型一：一维降变量</h2><p>LeetCode70. 爬楼梯</p>
@@ -1805,11 +1972,12 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
 </blockquote>
 <p><strong>未优化前的代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">climbStairs</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)&#123; <span class="comment">//第1阶</span></span><br><span class="line">				dp[i] = <span class="number">1</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">1</span>)&#123; <span class="comment">//第2阶</span></span><br><span class="line">				dp[i] = <span class="number">2</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123; <span class="comment">//第3阶及以上</span></span><br><span class="line">				dp[i] = dp[i-<span class="number">1</span>]+dp[i-<span class="number">2</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	    <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>首先，我们先分析dp的填充过程，观察有什么值是会在某个时间段后作废（一直没有使用到）</p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片1.jpg" alt="图片1"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片2.jpg" alt="图片2"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片3.jpg" alt="图片3"></p>
-<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/图片4.jpg" alt="图片4"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%871.jpg" alt="图片1"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%872.jpg" alt="图片2"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%873.jpg" alt="图片3"></p>
+<p><img src="//smallpineapp1e.github.io/2020/02/16/动态规划优化篇/%E5%9B%BE%E7%89%874.jpg" alt="图片4"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/02/16/动态规划优化篇/#more" rel="contents">
@@ -1948,7 +2116,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,846字
+                  1,981字
                 </span>
               
 
@@ -1964,7 +2132,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7分钟
+                  8分钟
                 </span>
               
             </div>
@@ -2053,184 +2221,6 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="傻曾">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/小菠萝头像.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="傻曾🍍">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/04/Springboot整合MyBatis/" itemprop="url">SpringBoot整合MyBatis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-04T17:39:51+08:00">
-                2019-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringBoot</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-			<br>
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  578字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>	
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  3分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Springboot整合MyBatis"><a href="#Springboot整合MyBatis" class="headerlink" title="Springboot整合MyBatis"></a>Springboot整合MyBatis</h1><h2 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h2><p><img src="//smallpineapp1e.github.io/2019/09/04/Springboot整合MyBatis/1567590619140.png" alt="1567590619140"></p>
-<h2 id="yml文件配置"><a href="#yml文件配置" class="headerlink" title="yml文件配置"></a>yml文件配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/test</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/09/04/Springboot整合MyBatis/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2279,7 +2269,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2290,7 +2280,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2301,7 +2291,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2381,7 +2371,7 @@ dp[i-1][j-k*Cost[i]] + k*Wealth[i]&if\ k*Cost[i] ≤j
 			<h3 class="widget-title">Tag Cloud</h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="250" height="250" id="resCanvas" style="width=100%">
-					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie-Session/">Cookie&Session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Get-Post方法/">Get&Post方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多源BFS/">多源BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心算法/">贪心算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程的通信方式/">进程的通信方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArrayList/">ArrayList</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie-Session/">Cookie&Session</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS-BFS/">DFS & BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Get-Post方法/">Get&Post方法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP与HTTPS/">HTTP与HTTPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP算法/">KMP算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSI七层模型及各层的作用/">OSI七层模型及各层的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringData-JPA/">SpringData JPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP可靠传输的实现/">TCP可靠传输的实现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三次握手和四次挥手/">三次握手和四次挥手</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分查找/">二分查找</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二叉查找树/">二叉查找树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/冒泡排序/">冒泡排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/哈希算法/">哈希算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图/">图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/堆排序/">堆排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多源BFS/">多源BFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/希尔排序/">希尔排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/归并排序/">归并排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快速排序/">快速排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/散列表/">散列表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/栈/">栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树/">树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/直接插入排序/">直接插入排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/稀疏数组/">稀疏数组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类加载机制与反射/">类加载机制与反射</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/红黑树/">红黑树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心算法/">贪心算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件测试/">软件测试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程的通信方式/">进程的通信方式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/进程线程与协程/">进程线程与协程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择排序/">选择排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/链表/">链表</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/黑盒测试概述/">黑盒测试概述</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
