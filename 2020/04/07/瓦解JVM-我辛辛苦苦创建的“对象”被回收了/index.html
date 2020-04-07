@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JVM,">
 
 
 
@@ -94,16 +94,25 @@
 
 
 
-<meta name="description" content="爱学习,爱生活,不停下前进的脚步!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="傻曾🍍">
-<meta property="og:url" content="https://smallpineapp1e.github.io/categories/源码分析/index.html">
+<meta name="description" content="虚拟机如何确定一个对象是不是垃圾 引用计数算法 使用一个引用计数器记录该对象还有多少个引用指针指向该对象，此算法简单高效但需要在代码中进行额外的逻辑处理以防止循环引用导致内存泄露的问题。  让我们来一起看看下面的例子来理解循环引用和内存泄漏两个概念： 12345678910111213141516171819202122232425262728293031323334/** * @author Z">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="瓦解JVM-我辛辛苦苦创建的“对象”被回收了">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-我辛辛苦苦创建的“对象”被回收了/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta property="og:description" content="虚拟机如何确定一个对象是不是垃圾 引用计数算法 使用一个引用计数器记录该对象还有多少个引用指针指向该对象，此算法简单高效但需要在代码中进行额外的逻辑处理以防止循环引用导致内存泄露的问题。  让我们来一起看看下面的例子来理解循环引用和内存泄漏两个概念： 12345678910111213141516171819202122232425262728293031323334/** * @author Z">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407070536.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407071433.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407073623.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407074258.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407074916.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407082526.png">
+<meta property="og:updated_time" content="2020-04-07T01:11:22.532Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="傻曾🍍">
-<meta name="twitter:description" content="爱学习,爱生活,不停下前进的脚步!">
+<meta name="twitter:title" content="瓦解JVM-我辛辛苦苦创建的“对象”被回收了">
+<meta name="twitter:description" content="虚拟机如何确定一个对象是不是垃圾 引用计数算法 使用一个引用计数器记录该对象还有多少个引用指针指向该对象，此算法简单高效但需要在代码中进行额外的逻辑处理以防止循环引用导致内存泄露的问题。  让我们来一起看看下面的例子来理解循环引用和内存泄漏两个概念： 12345678910111213141516171819202122232425262728293031323334/** * @author Z">
+<meta name="twitter:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407070536.png">
 
 
 
@@ -132,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/categories/源码分析/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-我辛辛苦苦创建的“对象”被回收了/">
 
 
 
 
 
-  <title>分类: 源码分析 | 傻曾🍍</title>
+  <title>瓦解JVM-我辛辛苦苦创建的“对象”被回收了 | 傻曾🍍</title>
   
 
 
@@ -163,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,105 +308,241 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>源码分析<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-我辛辛苦苦创建的“对象”被回收了/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="傻曾">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/小菠萝头像.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傻曾🍍">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/03/17/三分钟源码分析-ArrayList/" itemprop="url">
-              
-                <span itemprop="name">三分钟源码分析-ArrayList</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">瓦解JVM-我辛辛苦苦创建的“对象”被回收了</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-17T23:03:55+08:00" content="2020-03-17">
-          03-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T07:00:22+08:00">
+                2020-04-07
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+			<br>
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,355字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>	
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/16/三分钟源码分析-HashMap/" itemprop="url">
-              
-                <span itemprop="name">三分钟源码分析-HashMap</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-16T20:57:04+08:00" content="2020-03-16">
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/03/16/三分钟源码分析-String/" itemprop="url">
-              
-                <span itemprop="name">三分钟源码分析-String</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-03-16T00:01:15+08:00" content="2020-03-16">
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h1 id="虚拟机如何确定一个对象是不是垃圾"><a href="#虚拟机如何确定一个对象是不是垃圾" class="headerlink" title="虚拟机如何确定一个对象是不是垃圾"></a>虚拟机如何确定一个对象是不是垃圾</h1><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407070536.png" style="zoom:50%;"></p>
+<h2 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h2><blockquote>
+<p>使用<strong>一个引用计数器</strong>记录该对象还有多少个引用指针指向该对象，此算法<strong>简单高效</strong>但需要在代码中进行额外的逻辑处理以<strong>防止循环引用</strong>导致<strong>内存泄露</strong>的问题。</p>
+</blockquote>
+<p>让我们来一起看看下面的例子来理解<strong>循环引用</strong>和<strong>内存泄漏</strong>两个概念：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/4/6 11:41</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCountingGC</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 占点内存，以便观察清楚GC日志中是否有进行垃圾收集</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] bigSize = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span> * _1MB];</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">        System.out.println(<span class="string">"finalize method executed!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testGC</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ReferenceCountingGC objA = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        ReferenceCountingGC objB = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        <span class="comment">//对象内部的instance引用指针相互指向对方实例</span></span><br><span class="line">        objA.instance = objB;</span><br><span class="line">        objB.instance = objA;</span><br><span class="line">		<span class="comment">//除了instance指针以外没有其它引用指针指向这两个对象</span></span><br><span class="line">        objA = <span class="keyword">null</span>;</span><br><span class="line">        objB = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="comment">//执行finalize()方法的速度有些慢，让主线程等待一下它执行</span></span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testGC();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407071433.png" alt="循环引用" style="zoom:70%;"></p>
+<a id="more"></a>
+<p>在引用计数算法中对于<code>objA</code>和<code>objB</code>是无法回收的，因为它们内部含有对方实例的引用指针，但是除此之外<strong>没有其它指针引用这两个对象</strong>，也无法访问到这两个对象，<strong>JVM无法回收这两个对象</strong>，这就导致了<strong>内存泄漏</strong>。</p>
+<p>执行结果如下：</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407073623.png" alt="执行结果"></p>
+<blockquote>
+<p>可以看到JVM里面并不是采用引用计数算法，因为在显式指定垃圾收集时JVM确实把这两个对象给回收了，这两个对象的<code>finalize()</code>方法被调用了，这个方法是当对象<strong>第一次被回收时</strong>被调用的。</p>
+</blockquote>
+<p>那么JVM是如何确定对象是不是一个“垃圾”呢？</p>
+<h2 id="对象可达性分析"><a href="#对象可达性分析" class="headerlink" title="对象可达性分析"></a>对象可达性分析</h2><blockquote>
+<p>通过一系列的“<strong>GC Roots</strong>”根对象作为起始节点，一直往下搜索引用关系，搜索过程所走过的路径称为“<strong>引用链</strong>”。</p>
+</blockquote>
+<p>看下面的代码可以构成一条引用关系链，而<code>objD</code>因为没有指针引用它而成为了<code>垃圾</code>，等待下一次垃圾回收来了结它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/4/7 7:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceList</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReferenceList</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">        System.out.println(name + <span class="string">" finalize method executed!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        ReferenceList objA = <span class="keyword">new</span> ReferenceList(<span class="string">"objA"</span>);</span><br><span class="line">        ReferenceList objB = <span class="keyword">new</span> ReferenceList(<span class="string">"objB"</span>);</span><br><span class="line">        ReferenceList objC = <span class="keyword">new</span> ReferenceList(<span class="string">"objC"</span>);</span><br><span class="line">        objA.instance = objB;</span><br><span class="line">        objB.instance = objC;</span><br><span class="line">        objB = <span class="keyword">null</span>;</span><br><span class="line">        objC = <span class="keyword">null</span>;</span><br><span class="line">        ReferenceList objD = <span class="keyword">new</span> ReferenceList(<span class="string">"objD"</span>);</span><br><span class="line">        objD = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码得到的引用关系链如下图所示：</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407074258.png" alt="引用关系链"></p>
+<p>所以objD会被JVM回收，而objA、objB、objC可以存活下来，如下图所示可以验证这个结果：</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407074916.png" alt="objD对象被回收"></p>
+<p>固定作为GC Roots的对象主要有以下几种：</p>
+<blockquote>
+<p>虚拟机栈中引用的对象，例如<strong>局部变量</strong>、<strong>形式参数</strong>、<strong>临时变量</strong>······</p>
+<p>类静态属性引用的变量，例如<strong>类的静态引用类型成员变量</strong></p>
+<p>常量引用的对象，例如<code>String str = &quot;alive&quot;</code>，<strong>字符串常量池中的引用</strong>。</p>
+<p>同步锁引用的对象，例如<code>synchronized(obj)</code>中被锁住的<code>obj</code>可作为<code>GC Roots</code></p>
+</blockquote>
+<h2 id="细分的四种引用类型指定对象被回收的时机"><a href="#细分的四种引用类型指定对象被回收的时机" class="headerlink" title="细分的四种引用类型指定对象被回收的时机"></a>细分的四种引用类型指定对象被回收的时机</h2><blockquote>
+<p><strong>强引用</strong>（Strongly Reference）：即类似于<code>Object objA = new Object()</code>这种引用关系，垃圾收集器是永远不会回收掉强引用的对象的。</p>
+<p><strong>软引用</strong>（Soft Reference）：用于表示<strong>还有用，但非必须的对象</strong>，只有在发生<strong>内存溢出</strong>之前，才会回收这类对象。</p>
+<p><strong>弱引用</strong>（Weak Reference）：被弱引用关联的对象<strong>只能存活到下一次垃圾回收发生</strong>为止，无论内存是否可用，都会回收该类对象。</p>
+<p><strong>虚引用</strong>（Phantom Reference）：最差劲的一种引用关系，无法通过虚引用获取对象实例，设置虚引用的目的就是<strong>为了让它成为垃圾被回收掉</strong>。</p>
+</blockquote>
+<p>下面例子可以证明它们引用回收的时机</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.ref.PhantomReference;</span><br><span class="line"><span class="keyword">import</span> java.lang.ref.ReferenceQueue;</span><br><span class="line"><span class="keyword">import</span> java.lang.ref.SoftReference;</span><br><span class="line"><span class="keyword">import</span> java.lang.ref.WeakReference;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Zeng</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/4/7 8:16</span></span><br><span class="line"><span class="comment"> * 四种引用类型实践</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Reference</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Reference</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">        System.out.println(name + <span class="string">" finalize method executed!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="comment">//强引用</span></span><br><span class="line">        Reference obj = <span class="keyword">new</span> Reference(<span class="string">"强引用obj"</span>);</span><br><span class="line">        System.gc();</span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//软引用</span></span><br><span class="line">        Reference objA = <span class="keyword">new</span> Reference(<span class="string">"软引用objA"</span>);</span><br><span class="line">        SoftReference&lt;Reference&gt; softReferenceA = <span class="keyword">new</span> SoftReference&lt;&gt;(objA);</span><br><span class="line">        objA = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//弱引用</span></span><br><span class="line">        Reference objB = <span class="keyword">new</span> Reference(<span class="string">"弱引用objB"</span>);</span><br><span class="line">        WeakReference&lt;Reference&gt; weakReferenceB = <span class="keyword">new</span> WeakReference&lt;&gt;(objB);</span><br><span class="line">        objB = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="comment">//虚引用</span></span><br><span class="line">        Reference objC = <span class="keyword">new</span> Reference(<span class="string">"虚引用objC"</span>);</span><br><span class="line">        ReferenceQueue&lt;Reference&gt; phantomQueue = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();</span><br><span class="line">        PhantomReference&lt;Reference&gt; phantomReference = <span class="keyword">new</span> PhantomReference&lt;&gt;(objC, phantomQueue);</span><br><span class="line">        objC = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407082526.png" alt="运行结果"></p>
+<p>可以看到弱引用和虚引用在下一轮垃圾回收时都会被当成垃圾给回收掉，而强引用和软引用没有被回收，如果构造出堆溢出的情况，软引用也会被回收。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/05/瓦解JVM-深入理解Java内存区域及体验内存溢出/" rel="next" title="深入理解Java内存区域及体验内存溢出">
+                <i class="fa fa-chevron-left"></i> 深入理解Java内存区域及体验内存溢出
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -405,6 +550,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -425,8 +574,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/小菠萝头像.png" alt="傻曾">
           <p class="site-author-name" itemprop="name">傻曾</p>
@@ -531,6 +689,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机如何确定一个对象是不是垃圾"><span class="nav-number">1.</span> <span class="nav-text">虚拟机如何确定一个对象是不是垃圾</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用计数算法"><span class="nav-number">1.1.</span> <span class="nav-text">引用计数算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象可达性分析"><span class="nav-number">1.2.</span> <span class="nav-text">对象可达性分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细分的四种引用类型指定对象被回收的时机"><span class="nav-number">1.3.</span> <span class="nav-text">细分的四种引用类型指定对象被回收的时机</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -686,10 +860,10 @@ setInterval("createtime()",250);
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
