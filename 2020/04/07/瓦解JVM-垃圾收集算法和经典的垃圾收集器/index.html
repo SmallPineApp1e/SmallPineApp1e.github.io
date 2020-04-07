@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="三次握手和四次挥手,">
+  <meta name="keywords" content="JVM,">
 
 
 
@@ -94,25 +94,32 @@
 
 
 
-<meta name="description" content="白话讲明白三次握手和四次握手答应我，这次真的要懂！白话讲明白三次握手和四次握手三次握手    先用通俗的语言来了解以下三次握手的过程：发送方为张三，接收方为李四  张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了 张三：嘿！！！李四，能听到我说话吗？！（发送方请求连接） 李四：嘿！！！我能听到啊，你能不能听到呀！！（接收方接收请求，并向发送方发送请求建立连接） 张">
-<meta name="keywords" content="三次握手和四次挥手">
+<meta name="description" content="看完这篇，我再也不怕面试官问垃圾收集了说在前面：本文的篇幅较长，看本文的时候最好先去上个厕所，先准备好一杯枸杞茶，慢慢品，本文将会讲解三种垃圾收集算法：标记-清除、复制、标记-整理算法，以及各种成熟度较高的垃圾收集器：Serial、Serial Old、ParNew、Parallel Scavenge、Parallel Old、CMS以及G1（Garbage First）  在讨论垃圾收集算法之前">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三分钟计算机网络-三次握手和四次挥手">
-<meta property="og:url" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/index.html">
+<meta property="og:title" content="瓦解JVM-垃圾收集算法和经典的垃圾收集器">
+<meta property="og:url" content="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-垃圾收集算法和经典的垃圾收集器/index.html">
 <meta property="og:site_name" content="傻曾🍍">
-<meta property="og:description" content="白话讲明白三次握手和四次握手答应我，这次真的要懂！白话讲明白三次握手和四次握手三次握手    先用通俗的语言来了解以下三次握手的过程：发送方为张三，接收方为李四  张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了 张三：嘿！！！李四，能听到我说话吗？！（发送方请求连接） 李四：嘿！！！我能听到啊，你能不能听到呀！！（接收方接收请求，并向发送方发送请求建立连接） 张">
+<meta property="og:description" content="看完这篇，我再也不怕面试官问垃圾收集了说在前面：本文的篇幅较长，看本文的时候最好先去上个厕所，先准备好一杯枸杞茶，慢慢品，本文将会讲解三种垃圾收集算法：标记-清除、复制、标记-整理算法，以及各种成熟度较高的垃圾收集器：Serial、Serial Old、ParNew、Parallel Scavenge、Parallel Old、CMS以及G1（Garbage First）  在讨论垃圾收集算法之前">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/20180717202520531.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323154838462.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/20180717204202563.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323155649689.png">
-<meta property="og:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323162610183.png">
-<meta property="og:updated_time" content="2020-04-01T15:36:29.531Z">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4.gif">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407135737.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86.gif">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%861.gif">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86.gif">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E6%99%8B%E5%8D%87%E8%80%81%E5%B9%B4%E4%BB%A3.gif">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407161158.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407200749.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407161158.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407204521.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407210114.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407222353.png">
+<meta property="og:image" content="http://q8bnm1ux1.bkt.clouddn.com/20200407230126.png">
+<meta property="og:updated_time" content="2020-04-07T16:04:04.429Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="三分钟计算机网络-三次握手和四次挥手">
-<meta name="twitter:description" content="白话讲明白三次握手和四次握手答应我，这次真的要懂！白话讲明白三次握手和四次握手三次握手    先用通俗的语言来了解以下三次握手的过程：发送方为张三，接收方为李四  张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了 张三：嘿！！！李四，能听到我说话吗？！（发送方请求连接） 李四：嘿！！！我能听到啊，你能不能听到呀！！（接收方接收请求，并向发送方发送请求建立连接） 张">
-<meta name="twitter:image" content="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp">
+<meta name="twitter:title" content="瓦解JVM-垃圾收集算法和经典的垃圾收集器">
+<meta name="twitter:description" content="看完这篇，我再也不怕面试官问垃圾收集了说在前面：本文的篇幅较长，看本文的时候最好先去上个厕所，先准备好一杯枸杞茶，慢慢品，本文将会讲解三种垃圾收集算法：标记-清除、复制、标记-整理算法，以及各种成熟度较高的垃圾收集器：Serial、Serial Old、ParNew、Parallel Scavenge、Parallel Old、CMS以及G1（Garbage First）  在讨论垃圾收集算法之前">
+<meta name="twitter:image" content="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4.gif">
 
 
 
@@ -141,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/">
+  <link rel="canonical" href="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-垃圾收集算法和经典的垃圾收集器/">
 
 
 
 
 
-  <title>三分钟计算机网络-三次握手和四次挥手 | 傻曾🍍</title>
+  <title>瓦解JVM-垃圾收集算法和经典的垃圾收集器 | 傻曾🍍</title>
   
 
 
@@ -322,7 +329,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/">
+    <link itemprop="mainEntityOfPage" href="https://smallpineapp1e.github.io/2020/04/07/瓦解JVM-垃圾收集算法和经典的垃圾收集器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="傻曾">
@@ -339,7 +346,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">三分钟计算机网络-三次握手和四次挥手</h1>
+          <h1 class="post-title" itemprop="name headline">瓦解JVM-垃圾收集算法和经典的垃圾收集器</h1>
         
 
         <div class="post-meta">
@@ -351,8 +358,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-23T14:25:38+08:00">
-                2020-03-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-07T13:21:46+08:00">
+                2020-04-07
               </time>
             
 
@@ -374,8 +381,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机网络</span>
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -405,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,063字
+                  4,987字
                 </span>
               
 
@@ -421,7 +428,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7分钟
+                  18分钟
                 </span>
               
             </div>
@@ -442,92 +449,137 @@
       
 
       
-        <h1 id="白话讲明白三次握手和四次握手"><a href="#白话讲明白三次握手和四次握手" class="headerlink" title="白话讲明白三次握手和四次握手"></a>白话讲明白三次握手和四次握手</h1><h1 id="答应我，这次真的要懂！白话讲明白三次握手和四次握手"><a href="#答应我，这次真的要懂！白话讲明白三次握手和四次握手" class="headerlink" title="答应我，这次真的要懂！白话讲明白三次握手和四次握手"></a>答应我，这次真的要懂！白话讲明白三次握手和四次握手</h1><h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2> <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/2448752-eff7b1739456f904.webp" alt="img" style="zoom:67%;"> 
-
-<p>先用<strong>通俗的语言</strong>来了解以下三次握手的过程：<strong>发送方为张三，接收方为李四</strong></p>
+        <h1 id="看完这篇，我再也不怕面试官问垃圾收集了"><a href="#看完这篇，我再也不怕面试官问垃圾收集了" class="headerlink" title="看完这篇，我再也不怕面试官问垃圾收集了"></a>看完这篇，我再也不怕面试官问垃圾收集了</h1><p><strong>说在前面</strong>：本文的篇幅较长，看本文的时候最好先去上个厕所，先准备好一杯枸杞茶，慢慢品，本文将会讲解三种垃圾收集算法：<strong>标记-清除、复制、标记-整理算法</strong>，以及各种成熟度较高的垃圾收集器：<strong>Serial、Serial Old、ParNew、Parallel Scavenge、Parallel Old、CMS以及G1（Garbage First）</strong></p>
 <blockquote>
-<p>张三和李四的房子隔着一条高速公路，有一天他们一起在阳台上晾衣服，张三想和李四聊天了</p>
-<p><strong>张三：嘿！！！李四，能听到我说话吗？！（发送方请求连接）</strong></p>
-<p><strong>李四：嘿！！！我能听到啊，你能不能听到呀！！（接收方接收请求，并向发送方发送请求建立连接）</strong></p>
-<p><strong>张三：我能听到！！！（确认连接）</strong></p>
-<p>张三：······（尬聊）</p>
-<p>李四：······（尬聊）</p>
+<p>在讨论垃圾收集算法之前，需要先了解针对不同区域进行收集的名词：<code>Minor GC</code>（新生代收集）、<code>Major GC</code>（老年代收集）、<code>Full GC</code>（整个Java堆和方法区的收集）、<code>Mixed GC</code>（新生代收集和部分老年代的收集，目前只有G1收集器有这种行为）</p>
 </blockquote>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p>前一篇文章介绍了可达性分析算法后，了解了虚拟机会利用可达性分析来识别哪些对象是垃圾，可以回收，那么是如何进行回收的呢？下面就会介绍这三种垃圾收集算法</p>
+<h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><p><img src="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4.gif" alt="标记-清除算法动图"></p>
 <a id="more"></a>
 
-<p>下面用<strong>官方语言</strong>来解释TCP的三次握手，可以联想上面的生活例子</p>
- <img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/20180717202520531.png" alt="img" style="zoom:67%;"> 
-
+<p>可以看到，在对象可以被回收的区域上，JVM会直接把这些<strong>垃圾对象</strong>占用的内存直接清除掉。</p>
+<p>这个算法的优点很明显：<strong>简单</strong></p>
+<p>这个算法也有许多缺点：</p>
 <blockquote>
-<p><strong>第一次握手：</strong>客户端A主动打开连接，向服务器B发送SYN包，同步位SYN=1，随机序列seq=x。</p>
-<p><strong>第二次握手：</strong>服务器确认接收客户端的SYN包，同时服务器向客户端发送一个SYN包，同步位<code>SYN=1，ACK=1</code>（表示确认接收到客户端A的请求连接包），随机序列seq=y，下一个希望接收的序列号<code>ack=x+1</code>，此时<strong>确认A到B的连接（可以看到服务器向客户端发送数据包后，客户端A进入已建立连接状态）</strong></p>
-<p><strong>第三次握手：</strong>客户端A接收到服务器B发来的SYN包，此时客户端A发送确认包（<code>ACK=1</code>），发送到服务器B后，B接收到ACK包后，代表客户端A能够接收到客户端B的SYN包并确认接收，此时<strong>确认了B到A的连接</strong>，之后就可以进行数据传送。</p>
+<p>执行效率不稳定，如果Java堆中包含大量对象，某一次回收时无用的对象非常多，这时候会花费很多时间进行内存的清除。</p>
+<p>有可能造成内存空间碎片，上图只是一个理想的删除过程，正好没有内存碎片产生，而实际上在内存中待清除的内存有可能不是连续的，导致会产生许多内存碎片，如果某个大对象无法找到一块连续的内存进行存放时，会误以为堆内存不足，提前触发<code>Full GC</code></p>
 </blockquote>
-<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323154838462.png" alt="image-20200323154838462" style="zoom:67%;">
-
-<p>同样还是张三和李四，这次他们聊完天了，张三和李四要各自去上班了</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407135737.png" alt="放入内存失败"></p>
+<p>所以为了<strong>解决内存碎片问题</strong>，科学家们研制出了一种新的算法：标记-复制算法</p>
+<h3 id="标记-复制算法（Mark-Copying）"><a href="#标记-复制算法（Mark-Copying）" class="headerlink" title="标记-复制算法（Mark-Copying）"></a>标记-复制算法（Mark-Copying）</h3><p><img src="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86.gif" alt="标记-复制算法"></p>
+<p>由上面的动图可以看出，标记-复制算法将原本的<strong>堆内存划分了两个区域</strong>，采用了“半区复制”算法，将一半的内存省出来，当发生垃圾收集行为时，将存活的对象复制到另外一半保留区域中<strong>连续存放</strong>。</p>
+<p>标记-复制算法的优点是解决了<strong>大对象</strong>分配内存的<code>内存碎片问题</code>，也解决了标记-清除算法中大量垃圾对象导致的<code>清除效率问题</code>。</p>
+<p>缺点也非常的明显，那就是<strong>可分配的内存空间少了整整一半</strong>，而且如果某次存活的对象较多，甚至<strong>全部存活</strong>，那么复制的效率将会非常低。</p>
+<h3 id="标记-整理算法（Mark-Compact）"><a href="#标记-整理算法（Mark-Compact）" class="headerlink" title="标记-整理算法（Mark-Compact）"></a>标记-整理算法（Mark-Compact）</h3><p><img src="http://q8bnm1ux1.bkt.clouddn.com/%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%861.gif" alt="标记-整理"></p>
+<p>为了提升内存的利用率，科学家提出了标记-整理算法，该算法的起始过程和<code>标记-清除</code>算法相同，先标记处待回收对象的内存区域，但是在清除时不是对所有可回收对象清除，而是<strong>让所有存活对象往内存空间的一边移动</strong>，把存活对象边界外的内存直接清空掉。</p>
+<p>标记-整理算法<strong>提高了内存的利用率</strong>、解决了<strong>大对象分配时的内存碎片问题</strong>，看似完美的垃圾收集算法，也有它的弊端</p>
 <blockquote>
-<p><strong>张三：李四！！！我要走啦！！！</strong></p>
-<p><strong>李四：我知道你要走啦！！！你等等我，我还有些话要跟你说</strong></p>
-<p><strong>李四：······（李四向张三说的额外的话）</strong></p>
-<p><strong>李四：好啦我说完了，我知道你要走啦，我也要走啦！！！</strong></p>
-<p><strong>张三：好的，你走吧！我也走啦！</strong></p>
-<p><strong>张三：（等待2msl后）嗯，它的确走了，我走了。</strong></p>
+<p>在移动存活对象的过程中，需要全程暂停用户程序的执行，被设计者称为“<strong>Stop The World</strong>”。</p>
 </blockquote>
-<p> 接下来用官方的语言解释四次挥手，联想上面的生活例子</p>
-<img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/20180717204202563.png" alt="img" style="zoom:67%;"> 
-
+<h3 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h3><h4 id="新生代垃圾收集及内存分配"><a href="#新生代垃圾收集及内存分配" class="headerlink" title="新生代垃圾收集及内存分配"></a>新生代垃圾收集及内存分配</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86.gif" alt="分代收集"></p>
+<p>分代收集算法本质上<strong>标记-复制算法</strong>，它把堆内存中较大的一块区域作为<strong>新生代区域</strong>，新生代区域中分为一个Eden区域和两个Survivor区域，Eden和Survivor的比例默认是<strong>8:1</strong>，因为在Eden区域，绝大数对象都熬不过第一轮GC（98%），所以每个Survivor区域只需要10%的空间就足矣了，每一次触发<code>Minor GC</code>时，就会将Eden区和Survivor区存活的对象复制到另外一个Survivor区域中，然后清除掉被回收的对象，每次都依据这样的步骤进行垃圾收集。</p>
+<p>不知道你有没有注意到每个对象有一个数字的标记，这个标记是<strong>对象的年龄</strong>，当对象到了<strong>15岁以后</strong>（默认情况）就会被晋升为<strong>老年代</strong></p>
+<h4 id="晋升老年代"><a href="#晋升老年代" class="headerlink" title="晋升老年代"></a>晋升老年代</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/%E6%99%8B%E5%8D%87%E8%80%81%E5%B9%B4%E4%BB%A3.gif" alt="晋升老年代"></p>
+<p>如图所示，当对象在Survivor区存活了15次以后，就会晋升为老年代对象。</p>
+<p>还有以下情况会晋升为老年代对象：</p>
 <blockquote>
-<p><strong>第一次挥手：</strong>首先客户端A主动请求关闭，向服务器B发送释放报文，并<strong>进入终止等待状态1（FIN-WAIT-1）</strong></p>
-<p><strong>第二次挥手：</strong>服务器B接收到客户端A的释放报文后，发送确认报文(ACK)，并且通知高层应用进程客户端A要断开连接了，此时服务器B进入<strong>关闭等待状态（CLOSE-WAIT）</strong>，客户端A进入<strong>终止等待状态2（FIN-WAIIT-2）</strong></p>
-<p><strong>······（服务器B向客户端A发送的额外数据）</strong></p>
-<p><strong>第三次挥手：</strong>然后服务器B向客户端A发出释放报文，进入<strong>最后确认状态（LAST-ACK）</strong></p>
-<p><strong>第四次挥手：</strong>客户端A接收到服务器B的释放报文后，发送确认报文，<strong>确认B可以释放连接</strong>，并进入<strong>时间等待状态(TIME-WAIT)</strong>，此时服务器B关闭连接。</p>
-<p>最后<strong>客户端A经过2MSL后也关闭连接了</strong>。</p>
+<p><strong>大对象</strong>。当对象所占连续内存非常大时，不会分配在Eden区，如果分配在Eden区，那么对象存活时产生的复制操作将导致效率大大降低。</p>
+<p>如果在Survivor区，相同年龄的<strong>对象总大小</strong>大于<strong>Survivor区空间的一半</strong>时，也会将这些年龄相同的对象直接晋升到老年代，原因也是防止对象的复制操作导致的效率问题。</p>
 </blockquote>
-<p>对关键的地方进行解释：</p>
-<h3 id="2MSL的意义"><a href="#2MSL的意义" class="headerlink" title="2MSL的意义"></a>2MSL的意义</h3><blockquote>
-<p>MSL是<code>Maximun Segment Lifetime</code>，2MSL的时间长度是一个报文在网络上的最大生存时间，超过这个时间的报文将会被网络给丢弃，防止该报文被无限地转发，造成网络的拥塞。而MSL和TTL是有关系的，TTL是<code>Time To Live</code>，代表一个报文在网络上的最大经过路由次数，如果超过这个次数，该报文就会被丢弃。通常MSL要比TTL时间要长。<strong>如果在2MSL内还接收到服务器发送过来的FIN释放报文，说明由客户端发送的确认接收报文没有到达服务器端，此时确认重传。</strong></p>
-</blockquote>
-<h1 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h1><h2 id="为什么是三次握手，不能是两次吗？"><a href="#为什么是三次握手，不能是两次吗？" class="headerlink" title="为什么是三次握手，不能是两次吗？"></a>为什么是三次握手，不能是两次吗？</h2><p>联想张三和李四的例子，如果是两次握手，李四第一次回答张三后就已经确认了连接。</p>
-<img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323155649689.png" alt="image-20200323155649689" style="zoom:67%;">
-
-<p>那么试想以下的这一种情况：</p>
+<h4 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h4><p>在对象无法分配到Eden区时，会触发一次<code>Minor GC</code>，JVM会首先检查<strong>老年代最大的可用连续空间</strong>是否大于<strong>新生代所有对象的总和</strong>，如果大于，那么这次<code>Minor GC</code>是安全的，如果<strong>不大于</strong>的话，JVM就需要判断<code>HandlePromotionFailure</code>是否允许空间分配担保。</p>
+<p>如果允许担保，则证明老年代的连续可用内存空间大于历次晋升到老年代对象的平均大小，此时触发一次<code>Minor GC</code>，如果小于，那么证明老年代并没有把握放得下Survivor区有可能晋升的对象，此时发生一次<code>Full GC</code>。</p>
+<h3 id="Stop-The-World"><a href="#Stop-The-World" class="headerlink" title="Stop The World"></a>Stop The World</h3><p>发生<code>GC</code>(MinorGC或者FullGC)时，都会将用户线程停顿并进行垃圾收集，在<code>Minor GC</code>中，<code>STW</code>的时间较短，只涉及<code>Eden</code>和<code>survivor</code>区域的对象清除和复制操作，而<code>Full GC</code>则是对整个堆内存进行垃圾收集，对象的扫描、标记和清除操作工作量大大提高，所以<code>Full GC</code>会导致用户线程停顿较长时间，如果频繁地发生<code>Full GC</code>，那么用户线程将无法正常执行。</p>
+<p>或者通俗的理解：</p>
 <blockquote>
-<p>张三：李四你能听到吗？！！！<strong>（请记住这一条消息！风太大，李四暂时没有听到）</strong></p>
-<p>张三：李四你能听到吗？！！！<strong>（这次听到了）</strong></p>
-<p>李四：我听到啦！！可以讲话啦！！！</p>
-<p>张三：······（尬聊中）</p>
-<p>李四：······（尬聊中）</p>
-<p><strong>张三：聊完啦！拜拜！（四次挥手过程，一笔代过）</strong></p>
-<p><strong>李四：拜拜！</strong></p>
-<p>——–过了1.2.3.4秒后，张三的第一次喊话，被风吹回来了，李四又听到张三的喊话</p>
-<p>李四：我又听到啦！！！你可以说啦，有什么事吗！！！</p>
-<p>张三（没人在）：······（根本没说话）</p>
-<p>李四（有人在）：（一直在等张三说话）</p>
+<p>你给你妈妈打扫房间时，你是希望她坐在一旁静静等你扫完地再继续活动，还是想你一边扫地，她一边丢垃圾呢？</p>
 </blockquote>
-<p>发现问题了吧？或许现在你有些眉目，但是还不太清楚怎么正确的表述出来，别担心，看下面：</p>
+<h4 id="Safe-Points"><a href="#Safe-Points" class="headerlink" title="Safe Points"></a>Safe Points</h4><p>既然要<strong>用户线程停顿下来</strong>，那么要在什么地方停顿呢？JVM采用<strong>主动式中断方式</strong>告诉Java线程需要停顿了，JVM在特定的位置设置了这些安全点（Safe point），让线程可以在这些安全点主动挂起。</p>
 <blockquote>
-<p>假设只有两次握手，如果<strong>第一次握手服务器A发送的SYN报文如果因为网络拥塞的原因，服务器B没有在限定的时间内收到</strong>，那么服务器A会<strong>再次发送一个SYN报文</strong>给服务器B，此时服务器B接收到服务器A的SYN报文后，<strong>第一次建立连接</strong>；</p>
-<p>第一次连接释放后，客户端A与服务器B已经不需要通信了，但是<strong>此时最开始的SYN报文又传到了服务器B中</strong>，服务器B以为客户端A需要建立连接，于是又确立了一次连接，<strong>第二次建立连接</strong>，<strong>但是此时客户端A并没有真正发起连接请求，所以导致服务器B一直等到客户端A发送数据，但A一直都不发送数据，迟迟不释放连接，占用网络资源</strong>。</p>
+<p>方法调用、循环跳转、异常跳转</p>
 </blockquote>
-<h2 id="为什么是四次分手，不能是三次吗？"><a href="#为什么是四次分手，不能是三次吗？" class="headerlink" title="为什么是四次分手，不能是三次吗？"></a>为什么是四次分手，不能是三次吗？</h2><img src="//smallpineapp1e.github.io/2020/03/23/三分钟计算机网络-三次握手和四次挥手/image-20200323162610183.png" alt="image-20200323162610183" style="zoom:67%;">
-
-<p>我们再来看张三和李四聊天的例子啊，很好理解！假设我们现在是三次分手。</p>
+<p>这些安全点的特征是<strong>令程序有可能进行某一段长时间执行的特征</strong>。</p>
+<p>在这些安全点上存有对象引用信息的<code>OopMap</code>数据结构，这种数据结构你可以理解为<code>HashMap</code>这种数据结构，它内部存储了什么位置上存储了对象引用信息，这些信息在类加载完成时就确定下来了。所以JVM在垃圾收集时不需要从一个个方法的<code>GC Roots</code>去扫描，从<code>OopMap</code>中可以快速准确地定位到这些<code>GC Roots</code>。</p>
 <blockquote>
-<p>张三：李兄，我要去上班啦！！我走啦！！！</p>
-<p>李四：三兄，我知道你要去上班啦！！虽然我<strong>还有些很重要的数据要传送给你</strong>，不过既然你要走了，我也要走啦！不发啦！</p>
-<p>张三：好的！李兄你走吧！拜拜！（李兄断开连接）</p>
-<p>等待2MSL后</p>
-<p>张三：断开连接···</p>
+<p>如果用户线程本身处于停顿状态，例如阻塞（Blocked）、睡觉（Sleep），那么此时触发GC时，用户线程无法响应JVM的中断（我听不见你喊我，我睡着了~），用户线程无法主动地跑去安全点中断挂起，此时该怎么办呢？</p>
 </blockquote>
-<p>嘿嘿嘿，看到一个很关键的地方没，还有一些很重要很重要很重要的数据要传<del>(滑稽+坏笑.jpg)</del>，但是没发过去。</p>
-<p><strong>相信大家觉得能够三次分手的原因在于第二次和第三次的报文看起来结构一样，而不同的地方只是第三次分手多了一个FIN字段</strong>，其实，不能三次分手的原因很简单：</p>
+<p>对于这种情况，必须引入<strong>Safe Region</strong>来解决。</p>
+<h4 id="Safe-Region"><a href="#Safe-Region" class="headerlink" title="Safe Region"></a>Safe Region</h4><p>安全区域是指，用户线程进入某一段代码区域中时，引用关系不会发生变化，那么在这片代码区域的任何地方开始GC都不会受到影响。实现的方式是，用户线程进入安全区域时<strong>会标识自己已经进入安全区域</strong>，在JVM发起GC时<strong>不必理会那些已经标识为进入安全区域的线程</strong>，当用户线程<strong>需要离开安全区域时</strong>，会主动检查JVM是否已经完成了<strong>需要停顿线程的工作</strong>，如果已完成则可以离开，如果未完成则<strong>必须一直等待</strong>，直到JVM发送可以离开安全区域的信号为止。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p>垃圾收集器分为新生代收集器与老年代收集器，各种不同的收集器之间如果符合标准则可以相互搭配使用</p>
+<h3 id="新生代收集器"><a href="#新生代收集器" class="headerlink" title="新生代收集器"></a>新生代收集器</h3><h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407161158.png" alt="Serial/Serial Old收集器"></p>
+<p>Serial收集器是一款单线程的垃圾收集器，“单线程”的<strong>意义</strong>不仅仅是指它只能用一条线程或占用一个处理器去完成垃圾收集操作，更重要的是它进行垃圾收集时，<strong>需要暂停其它所有线程，直到垃圾收集结束。</strong>它身为最古老的一款垃圾收集器，在当今依旧广泛受用，它有以下优点：</p>
 <blockquote>
-<p>服务器在接收到客户端的FIN报文时只是说明了客户端A没有数据需要发送到服务器端，<strong>不代表服务器端没有数据发送到客户端A</strong>，在第二次挥手时，服务器的目的在于确认接收到客户端A的释放报文，<strong>即客户端A没有数据发送到服务器B了</strong>，<strong>而服务器可能还有一些数据需要发送给客户端A以保证数据完整性等等</strong>，所以<strong>服务器不能被动地让客户端去决定什么时候关闭连接</strong>；</p>
-<p>什么是<strong>“被动”</strong>：即关闭连接的时刻完全取决于客户端发送释放报文的时刻，而不是根据服务器自身的需要去决定什么时候发出释放报文。</p>
-<p>所以，在第二次挥手确定客户端A的释放报文后，服务器还可以继续向客户端A发送数据<del>（坏笑.jpg）</del>，直到服务器没有数据发送给客户端A了，此时服务器可以主动发出释放报文给客户端A，客户端A接收到释放报文后发出一个确认接收报文，等待2MSL时间后就确认断开。</p>
+<p>对于内存受限的环境，它是所有收集器里额外内存消耗最小的</p>
+<p>没有线程交互的开销，Serial收集器可以很好地专注于收集垃圾，把用户线程都停掉</p>
 </blockquote>
+<p>在用户桌面的应用场景和近年来流行的部分微服务应用中，分配给虚拟机管理的内存一般不会特别大，收集几十兆、一两百兆的新生代（桌面应用的新生代甚至少于这个容量），垃圾收集完全可以控制在十几、几十毫秒，最多一百毫秒，这点停顿时间对用户来说是十分友好的。</p>
+<h4 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407200749.png" alt="parNew收集器"></p>
+<p>ParNew是一款<strong>并行新生代收集器</strong>，parNew收集器除了支持多线程并行收集以外，<strong>其余的行为与Serial收集器完全一致</strong>，包括收集算法、STW（Stop The World）、对象分配规则、回收策略等等。</p>
+<p>parNew是不少运行在服务器端模式下的HotSpot虚拟机中首选的新生代收集器，其中一个与性能、功能无关但很重要的原因是：<strong>除了Serial收集器，只有ParNew能够与CMS收集器配合工作。</strong></p>
+<p>CMS收集器与Parallel Scavenge收集器不能配合工作的一个原因是：Parallel Scavenge收集器内部并<strong>没有按照分代收集的框架进行设计垃圾回收</strong>，在之后的<strong>G1收集器</strong>也同样没有按照分代回收的框架设计。</p>
+<h4 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h4><p>Parallel Scavenge收集器同样是基于标记-复制算法实现的收集器，也是能够并行收集的一款新生代收集器，那它与ParNew收集器的<strong>差别在哪里呢？</strong></p>
+<p>Parallel Scavenge收集器的特别之处在于它与其它收集器的关注点不一样，其它垃圾收集器关注如何<strong>最大限度地减少STW的时间</strong>，而Parrel Scavenge关注的是<strong>如何达到一个可控制的吞吐量（Throughput）</strong>，由于与吞吐量关系密切，所以也被称作“吞吐量优先收集器”。</p>
+<p>Parallel Scavenge收集器可以实现<strong>自适应策略</strong>，这是另外一个与ParNew收集器的差别，可以通过指定<code>-XX:UseAdaptiveSizePolicy</code>参数，虚拟机就会根据系统当前的运行情况收集监控信息，并且<strong>自动调整系统的相关JVM参数以提供最高的吞吐量和最合适的停顿时间</strong>。</p>
+<h3 id="老年代收集器"><a href="#老年代收集器" class="headerlink" title="老年代收集器"></a>老年代收集器</h3><h4 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407161158.png" alt="Serial/Serial Old收集器"></p>
+<p>使用<code>标记-整理</code>算法，是一个单线程收集器，它有另外两个用途：</p>
+<blockquote>
+<p>它作为CMS收集器发生失败后的后备预案，在CMS收集器并发收集发生Concurrent Mode Failure使用</p>
+<p>作为Parallel Scavenge的老年代收集器</p>
+</blockquote>
+<p>这个时候就有疑惑了，<code>Parallel Scavenge</code>收集器不是没有按分代收集框架实现吗，为什么能够搭配<code>Serial Old</code>收集器使用</p>
+<p>《深入理解Java虚拟机》：<code>Parallel Scavenge</code>收集器架构中含有<code>PS MarkSweep</code>收集器进行老年代收集，并非直接调用<code>Serial Old</code>收集器，但是<code>PS MarkSweep</code>与<code>Serial Old</code>的实现几乎是一样的，所以官方很多地方用<code>Serial Old</code>代替它进行讲解。</p>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407204521.png" alt="Parallel Scavenge/Parallel Old"></p>
+<p><code>Parallel Old</code>是<code>Parallel Scavenge</code>的老年代版本，支持多线程并发收集，基于<code>标记-整理</code>算法设计，自从JDK6以后，<code>Parallel Old</code>和<code>Parallel Scavenge</code>成为了最好的搭档，在<strong>注重吞吐量或者处理器资源比较紧缺</strong>的情况下，都可以采用这个组合。</p>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><p>CMS收集器是基于获取<strong>最短回收停顿时间</strong>为目标的收集器，CMS收集器适合追求服务的响应速度的应用，例如基于浏览器的B/S系统的服务端上。</p>
+<p>CMS是基于<code>标记-清除</code>算法设计的，它支持用户线程与GC线程并发执行，如下图所示</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407210114.png" alt="CMS收集器"></p>
+<p>运作过程分为4个阶段：</p>
+<blockquote>
+<p>初始标记、并发标记、重新标记、并发清除</p>
+</blockquote>
+<p>初始标记的过程就是扫描GC Roots；</p>
+<p>并发标记是扫描GC Roots链上所有的对象，此时会出现一些对象标记的变动，因为用户线程仍然在执行；</p>
+<p>重新标记的过程是修正并发标记期间产生引用变动的那一部分对象的标记记录</p>
+<p>并发清除是删除掉标记阶段判断已经死亡的对象，由于不用移动存活对象，此时也是可以并发执行的。</p>
+<p>CMS收集器有三个缺点：</p>
+<ol>
+<li><p>对处理器资源特别敏感，由于是并发执行，所以CMS收集器工作时会占用一部分CPU资源而导致用户程序变慢，降低总吞吐量，建议具有四核处理器以上的服务器使用CMS收集器</p>
+</li>
+<li><p>CMS无法清除浮动垃圾，有可能出现<code>Concurrent Mode Failure</code>失败而导致另一次<code>STW</code>的<code>Full GC</code>产生。由于并发清理过程中用户线程与GC线程并发执行，就一定会产生新的垃圾对象，但是无法在本次GC中处理这些垃圾对象，不得不推迟到下一次GC中处理，这些垃圾对象就称为“浮动垃圾”，到JDK6的时候，CMS收集器启动阈值达到<code>92%</code>，也就是老年代占了<code>92%</code>的空间后会触发GC，但是如果剩余的内存<code>8%</code>不足以分配新对象时，就会发生“并发失败”，进而冻结用户线程，使用<code>Serial Old</code>收集器进行一次<code>Full GC</code>，所以触发CMS收集器的阈值还是根据实际场景来设置，参数为<code>-XX:CMSInitiatingOccu-pancyFraction</code>。</p>
+</li>
+<li><p>基于<code>标记-清除</code>算法会导致内存碎片不断增多，在分配大对象时有可能会提前触发一次<code>Full GC</code>。所以CMS提供两个参数可供开发者指定在每次<code>Full GC</code>时进行<strong>碎片整理</strong>，由于碎片整理需要移动对象，所以是无法并发收集的，<code>-XX:+UseCMSCompactAtFullCollection</code>(JDK9开始废弃)，<code>-XX:CMSFullGCsBeforeCompaction</code>(JDK9开始废弃，默认值是0，每次Full GC都进行碎片整理)。</p>
+</li>
+</ol>
+<h4 id="Garbage-First收集器"><a href="#Garbage-First收集器" class="headerlink" title="Garbage First收集器"></a>Garbage First收集器</h4><p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407222353.png" alt="G1堆内存布局"></p>
+<p>这是一个在垃圾收集器技术发展历史上的里程碑式的成果，它取代了<code>Parallel Scavenge + Parallel Old</code>的组合，并取代了<code>CMS</code>，作为它们的继承者和替代者，G1到底有什么魔力呢？</p>
+<blockquote>
+<p>G1是一种“<strong>停顿时间模型</strong>”收集器，也就是说可以指定在时间片段为<code>M</code>毫秒时，垃圾收集所占用的时间不会超过<code>N</code>毫秒。</p>
+<p>G1颠覆了之前的所有垃圾收集器的垃圾收集行为：要么新生代收集（Minor GC）、要么老年代收集（Major GC）、要么整堆收集（Full GC），而G1可以面向<strong>堆内存任何部分组成回收集</strong>（Collection Set , CSet），衡量标准不再是它属于哪个分代，而是<strong>哪块内存存放的垃圾数量较多</strong>，这就是G1所特有的Mixed GC模式。</p>
+</blockquote>
+<p>可以看到上图中每一个方块就是一个Region，每个Region可以存放1~32MB大小的对象，使用参数<code>-XX:G1HeapRegionSize</code>指定，Region中可以存放<code>Eden</code>/<code>Survivor</code>/<code>Humongous</code>/<code>Old</code>，G1中新生代和老年代并不是连续存放的，而是一个动态的集合。</p>
+<p>注意在G1中专门用<code>Region</code>存放一个<code>Humongous</code>大对象，当对象容量大于Region的一半时就认为它是大对象，按照“大对象优先在老年代中分配”，<code>Humongous</code>也是老年代的一部分对象。</p>
+<p>G1收集器将<code>Region</code>单元看出是最小的内存回收单元，每次发生GC时，G1收集器都会评估各个<code>Region</code>的<strong>价值大小</strong>，根据用户所指定的收集停顿时间来优先处理那些回收价值最大的<code>Region</code>，这也是<code>Garbage First</code>的由来。</p>
+<p><img src="http://q8bnm1ux1.bkt.clouddn.com/20200407230126.png" alt="G1收集器垃圾收集"></p>
+<p>G1收集器的运作过程可以分为4个步骤：</p>
+<blockquote>
+<p><strong>初始标记</strong>：仅记录GC Roots对象，需要停顿用户线程，但时间很短，借助<code>Minor GC</code>同步完成。</p>
+<p><strong>并发标记</strong>：从GC Roots开始遍历扫描所有的对象进行可达性分析，找出要回收的对象，由于是并发标记，有可能在扫描过程中出现引用变动。</p>
+<p><strong>最终标记</strong>：将并发标记过程中出现变动的对象引用给纠正过来。</p>
+<p><strong>筛选回收</strong>：对各个Region的回收价值和成本进行排序，根据用户所希望的停顿时间来制定回收计划，选取任意多个Region区域进行回收，把回收的Region区域中的存活对象复制到空的Region区域中，然后清空掉原来的Region区域，涉及对象的移动，所以需要暂停用户线程，由多条GC线程并行完成。</p>
+</blockquote>
+<p>如何设置G1的停顿时间？</p>
+<p>G1的停顿时间不能过短，如果停顿时间过短，那么每次GC收集都只会回收占用Region内存区域很小的一部分，而随着内存不断分配，堆上的垃圾越来越多，GC的速度低于分配的速度，就会触发<code>Full GC</code>，所以，只要我们把停顿时间设置后的效果为<strong>垃圾回收的速度与内存分配的速度大致相同</strong>，那么在理论上来说就永远不会发生<code>Full GC</code>，<strong>这也是G1被称为很牛逼的一个地方。</strong></p>
+<h3 id="G1和CMS的比较"><a href="#G1和CMS的比较" class="headerlink" title="G1和CMS的比较"></a>G1和CMS的比较</h3><blockquote>
+<p>G1从整体上看是“标记-整理”算法，从局部（两个Region之间）上看是“标记-复制”算法，不会产生内存碎片，而CMS基于“标记-清除”算法会产生内存碎片。</p>
+<p>G1在垃圾收集时产生的内存占用和程勋运行时的额外负载都比CMS高</p>
+<p>G1支持动态指定停顿时间，而CMS无法指定</p>
+<p>两者都利用了并发标记这个技术</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文主要介绍了各种垃圾收集算法以及当前较为成熟的垃圾收集器，其中G1和CMS这两款垃圾收集器是最受关注的，解释了为什么在垃圾收集时需要<code>Stop The World</code>，本文篇幅较长，能读到这里是非常不容易的，之后也要多加复习！</p>
+<p>参考资料：</p>
+<p>《深入理解Java虚拟机》</p>
+<p><a href="https://www.infoq.com/articles/G1-One-Garbage-Collector-To-Rule-Them-All/" target="_blank" rel="noopener">https://www.infoq.com/articles/G1-One-Garbage-Collector-To-Rule-Them-All/</a></p>
+<p><a href="https://www.cnblogs.com/yangchunchun/p/7405502.html" target="_blank" rel="noopener">https://www.cnblogs.com/yangchunchun/p/7405502.html</a></p>
+<p><a href="https://blog.csdn.net/ladymorgana/article/details/82352100" target="_blank" rel="noopener">https://blog.csdn.net/ladymorgana/article/details/82352100</a></p>
 
       
     </div>
@@ -545,7 +597,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/三次握手和四次挥手/" rel="tag"># 三次握手和四次挥手</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -558,8 +610,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/17/三分钟源码分析-ArrayList/" rel="next" title="三分钟源码分析-ArrayList">
-                <i class="fa fa-chevron-left"></i> 三分钟源码分析-ArrayList
+              <a href="/2020/04/07/瓦解JVM-我辛辛苦苦创建的“对象”被回收了/" rel="next" title="瓦解JVM-我辛辛苦苦创建的“对象”被回收了">
+                <i class="fa fa-chevron-left"></i> 瓦解JVM-我辛辛苦苦创建的“对象”被回收了
               </a>
             
           </div>
@@ -567,10 +619,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/23/三分钟计算机网络-OSI七层模型及各层的作用/" rel="prev" title="三分钟计算机网络-OSI七层模型及各层的作用">
-                三分钟计算机网络-OSI七层模型及各层的作用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -747,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#白话讲明白三次握手和四次握手"><span class="nav-number">1.</span> <span class="nav-text">白话讲明白三次握手和四次握手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#答应我，这次真的要懂！白话讲明白三次握手和四次握手"><span class="nav-number">2.</span> <span class="nav-text">答应我，这次真的要懂！白话讲明白三次握手和四次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三次握手"><span class="nav-number">2.1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四次挥手"><span class="nav-number">2.2.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2MSL的意义"><span class="nav-number">2.2.1.</span> <span class="nav-text">2MSL的意义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见面试题"><span class="nav-number">3.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么是三次握手，不能是两次吗？"><span class="nav-number">3.1.</span> <span class="nav-text">为什么是三次握手，不能是两次吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么是四次分手，不能是三次吗？"><span class="nav-number">3.2.</span> <span class="nav-text">为什么是四次分手，不能是三次吗？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#看完这篇，我再也不怕面试官问垃圾收集了"><span class="nav-number">1.</span> <span class="nav-text">看完这篇，我再也不怕面试官问垃圾收集了</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">1.1.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清除算法（Mark-Sweep）"><span class="nav-number">1.1.1.</span> <span class="nav-text">标记-清除算法（Mark-Sweep）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-复制算法（Mark-Copying）"><span class="nav-number">1.1.2.</span> <span class="nav-text">标记-复制算法（Mark-Copying）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-整理算法（Mark-Compact）"><span class="nav-number">1.1.3.</span> <span class="nav-text">标记-整理算法（Mark-Compact）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集"><span class="nav-number">1.1.4.</span> <span class="nav-text">分代收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代垃圾收集及内存分配"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">新生代垃圾收集及内存分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#晋升老年代"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">晋升老年代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间分配担保"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">空间分配担保</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-The-World"><span class="nav-number">1.1.5.</span> <span class="nav-text">Stop The World</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Safe-Points"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Safe Points</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Safe-Region"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Safe Region</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">1.2.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新生代收集器"><span class="nav-number">1.2.1.</span> <span class="nav-text">新生代收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Serial收集器"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Serial收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">ParNew收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Scavenge收集器"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Parallel Scavenge收集器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#老年代收集器"><span class="nav-number">1.2.2.</span> <span class="nav-text">老年代收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Serial-Old收集器"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Serial Old收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Old收集器"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Parallel Old收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMS收集器"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">CMS收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Garbage-First收集器"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Garbage First收集器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1和CMS的比较"><span class="nav-number">1.2.3.</span> <span class="nav-text">G1和CMS的比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
